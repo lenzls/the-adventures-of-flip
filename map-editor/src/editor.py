@@ -122,7 +122,7 @@ class MapEditor():
     
     def loadMap(self):
         
-        xmlMap = dom.parse('./data/save.xml')
+        xmlMap = dom.parse('../data/save.xml')
         for node in xmlMap.firstChild.childNodes:
             #--------mapName--------
             if node.nodeName == 'name':
@@ -230,7 +230,7 @@ class MapEditor():
     def initNewMap(self,tilesFromIni=True): #arg ob ini oder xml!
         if tilesFromIni == True:
             self.tiles.clear()
-            file = open('./tiles.ini',"r")
+            file = open('../data/tiles.ini',"r")
             
             tileIndex = 0
             tileName = ""
@@ -266,7 +266,7 @@ class MapEditor():
                     tileDangerousness = dan
                     self.tiles[tileIndex][4] = tileDangerousness
                 else:
-                    print 'ERROR:Fehler in der Highscore-Datei'
+                    print('ERROR:Fehler in der Highscore-Datei')
                     sys.exit()
             file.close()
             
@@ -340,7 +340,7 @@ class MapEditor():
         self.initNewMap()
         
     def BUTTONsaveMap(self,arg):
-        print "saveMap!!"
+        print("saveMap!!")
         
         # Dokument erzeugen
         implement = dom.getDOMImplementation()
@@ -478,16 +478,16 @@ class MapEditor():
 
     def renderMap(self):   
         if self.layerVis[0] == True:
-            for y in range(max(self.camera[1] / constants.TILESIZE, 0), min(self.dimensions[1], (self.camera[1] + constants.RESOLUTION[1]) / constants.TILESIZE + 1)):
-                for x in range(max(self.camera[0] / constants.TILESIZE, 0), min(self.dimensions[0], (self.camera[0] + constants.RESOLUTION[0]) / constants.TILESIZE + 1)):
+            for y in range(max(self.camera[1] // constants.TILESIZE, 0), min(self.dimensions[1], (self.camera[1] + constants.RESOLUTION[1]) // constants.TILESIZE + 1)):
+                for x in range(max(self.camera[0] // constants.TILESIZE, 0), min(self.dimensions[0], (self.camera[0] + constants.RESOLUTION[0]) // constants.TILESIZE + 1)):
                     #print 'dim X: ',self.dimensions[0],'=',len(self.grid[0])
                     #print 'dim Y: ',self.dimensions[1],'=',len(self.grid[0][0])
                     #print 'x: ',x,'y: ',y
                     if self.grid[0][x][y] != 0:
                         self.mapSurface.blit(util.load_image(self.tiles[self.grid[0][x][y]][2]), (x*constants.TILESIZE - self.camera[0],y*constants.TILESIZE - self.camera[1]))
         if self.layerVis[1] == True:
-            for y in range(max(self.camera[1] / constants.TILESIZE, 0), min(self.dimensions[1], (self.camera[1] + constants.RESOLUTION[1]) / constants.TILESIZE + 1)):
-                for x in range(max(self.camera[0] / constants.TILESIZE, 0), min(self.dimensions[0], (self.camera[0] + constants.RESOLUTION[0]) / constants.TILESIZE + 1)):
+            for y in range(max(self.camera[1] // constants.TILESIZE, 0), min(self.dimensions[1], (self.camera[1] + constants.RESOLUTION[1]) // constants.TILESIZE + 1)):
+                for x in range(max(self.camera[0] // constants.TILESIZE, 0), min(self.dimensions[0], (self.camera[0] + constants.RESOLUTION[0]) // constants.TILESIZE + 1)):
                     if self.grid[1][x][y] != 0:
                         self.mapSurface.blit(util.load_image(self.tiles[self.grid[1][x][y]][2]), (x*constants.TILESIZE - self.camera[0],y*constants.TILESIZE - self.camera[1]))
         
@@ -507,15 +507,15 @@ class MapEditor():
                             topLayer = 1
                         elif not self.layerVis[0] and not self.layerVis[1]:
                             return
-                        print 'prev: ',self.grid[topLayer][tilePosition[0]][tilePosition[1]]
+                        print('prev: ',self.grid[topLayer][tilePosition[0]][tilePosition[1]])
                         self.grid[topLayer][tilePosition[0]][tilePosition[1]] = self.cur_Tile
-                        print 'replace at: ',topLayer,' ',tilePosition[0],' ',tilePosition[1]
-                        print 'after: ',self.grid[topLayer][tilePosition[0]][tilePosition[1]]
-                        print self.grid[0]
-                        print self.grid[1]
+                        print('replace at: ',topLayer,' ',tilePosition[0],' ',tilePosition[1])
+                        print('after: ',self.grid[topLayer][tilePosition[0]][tilePosition[1]])
+                        print(self.grid[0])
+                        print(self.grid[1])
                
     def getCurTilePos(self, surfacePos):    #returns current Tile after click
-        curTilePos = (surfacePos[0]/constants.TILESIZE,surfacePos[1]/constants.TILESIZE)
+        curTilePos = (surfacePos[0]//constants.TILESIZE,surfacePos[1]//constants.TILESIZE)
         return curTilePos
 
     def start(self):
@@ -546,7 +546,7 @@ class MapEditor():
             self.tilesTable.td(self.Lb_curT_type,0,3)
             self.tilesTable.td(gui.Label(self.tiles[self.cur_Tile][1]),1,3)
             self.tilesTable.td(self.Lb_curT_image,0,4)
-            self.tilesTable.td(gui.Image(os.path.join('.', 'data',  self.tiles[self.cur_Tile][2])),1,4)
+            self.tilesTable.td(gui.Image(os.path.join('..', 'data',  self.tiles[self.cur_Tile][2])),1,4)
             self.tilesTable.td(self.Lb_curT_access,0,5)
             self.tilesTable.td(gui.Label(self.tiles[self.cur_Tile][3]),1,5)
             self.tilesTable.td(self.Lb_curT_danger,0,6)

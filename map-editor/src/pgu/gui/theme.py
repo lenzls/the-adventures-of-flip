@@ -5,10 +5,10 @@
 import os, re
 import pygame
 
-from const import *
-import widget
-import surface
-from basic import parse_color, is_color
+from .const import *
+from . import widget
+from . import surface
+from .basic import parse_color, is_color
 
 __file__ = os.path.abspath(__file__)
 
@@ -63,8 +63,7 @@ class Theme:
         
         #if the package isn't installed and people are just
         #trying out the scripts or examples
-        dnames.append(os.path.join(os.path.dirname(__file__),"..","..","data","themes",name))
-        
+        dnames.append(os.path.join(os.path.dirname(__file__),"..","..","..","data","themes",name))
         #if the package is installed, and the package is installed
         #in /usr/lib/python2.3/site-packages/pgu/
         #or c:\python23\lib\site-packages\pgu\
@@ -75,7 +74,8 @@ class Theme:
         for dname in dnames:
             if os.path.isdir(dname): break
         if not os.path.isdir(dname): 
-            raise 'could not find theme '+name
+            print('could not find theme' + name)
+            #raise ('could not find theme '+name)
             
         fname = os.path.join(dname,"config.txt")
         if os.path.isfile(fname):
@@ -417,40 +417,40 @@ class Theme:
             return
         
         x,y,w,h=r.x,r.y,r.w,r.h
-        ww,hh=box.get_width()/3,box.get_height()/3
+        ww,hh=box.get_width()//3,box.get_height()//3
         xx,yy=x+w,y+h
         src = pygame.rect.Rect(0,0,ww,hh)
         dest = pygame.rect.Rect(0,0,ww,hh)
         
         s.set_clip(pygame.Rect(x+ww,y+hh,w-ww*2,h-hh*2))
         src.x,src.y = ww,hh
-        for dest.y in xrange(y+hh,yy-hh,hh): 
-            for dest.x in xrange(x+ww,xx-ww,ww): s.blit(box,dest,src)
+        for dest.y in range(y+hh,yy-hh,hh): 
+            for dest.x in range(x+ww,xx-ww,ww): s.blit(box,dest,src)
         
         s.set_clip(pygame.Rect(x+ww,y,w-ww*3,hh))
         src.x,src.y,dest.y = ww,0,y
-        for dest.x in xrange(x+ww,xx-ww*2,ww): s.blit(box,dest,src)
+        for dest.x in range(x+ww,xx-ww*2,ww): s.blit(box,dest,src)
         dest.x = xx-ww*2
         s.set_clip(pygame.Rect(x+ww,y,w-ww*2,hh))
         s.blit(box,dest,src)
         
         s.set_clip(pygame.Rect(x+ww,yy-hh,w-ww*3,hh))
         src.x,src.y,dest.y = ww,hh*2,yy-hh
-        for dest.x in xrange(x+ww,xx-ww*2,ww): s.blit(box,dest,src)
+        for dest.x in range(x+ww,xx-ww*2,ww): s.blit(box,dest,src)
         dest.x = xx-ww*2
         s.set_clip(pygame.Rect(x+ww,yy-hh,w-ww*2,hh))
         s.blit(box,dest,src)
     
         s.set_clip(pygame.Rect(x,y+hh,xx,h-hh*3))
         src.y,src.x,dest.x = hh,0,x
-        for dest.y in xrange(y+hh,yy-hh*2,hh): s.blit(box,dest,src)
+        for dest.y in range(y+hh,yy-hh*2,hh): s.blit(box,dest,src)
         dest.y = yy-hh*2
         s.set_clip(pygame.Rect(x,y+hh,xx,h-hh*2))
         s.blit(box,dest,src)
     
         s.set_clip(pygame.Rect(xx-ww,y+hh,xx,h-hh*3))
         src.y,src.x,dest.x=hh,ww*2,xx-ww
-        for dest.y in xrange(y+hh,yy-hh*2,hh): s.blit(box,dest,src)
+        for dest.y in range(y+hh,yy-hh*2,hh): s.blit(box,dest,src)
         dest.y = yy-hh*2
         s.set_clip(pygame.Rect(xx-ww,y+hh,xx,h-hh*2))
         s.blit(box,dest,src)
