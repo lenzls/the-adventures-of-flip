@@ -1,6 +1,29 @@
-The Adventures of Flip!
+---- The Adventures of Flip! ----
+Verison: 0.5
+
+[German/Deutsch]:
+
+Zum Spiel:
+"The Adventures of Flip" ist ein klassisches Jump 'n' Run Spiel in der Tradition von "Super Mario Bros."
+und ähnlichem. 
+
+Geschichte:
+"The Adventures of Flip" ist mein erstes (größeres) Projekt. Der Entwicklungsprozess 
+startete im jahre 2008. Allerdings gab es wärend der nunmehr 2 Jahre öfters mal 
+"etwas größere" (5-7Monate ;-) Pausen, also die Arbeitszeit ist doch deutlich unter den 2 Jahren.
+Anfang 2009 wurde aus dem Hobby-projekt dann etwas mehr. Ich entschied mich das Spiel als Stoff
+meiner Facharbeit zu nutzten. Das ganze kam auch anscheinend ziemlich gut an und wurde mit der 
+Höchstpunktzahl belohnt (yeha).
+Da der Code mitlerweile allerdings nurnoch eine Flickenteppich geworden ist, entschied ich mich
+das ganze noch einmal neu zu schreiben, neu zu strukturieren und zu verbessern.
+In diesem Stadium befinden wir uns gerade!
+
+Fortsetzung folgt...
 
 
 TODO: 
-- make sourcecode python 3 conform..
-- .. 
+-
+
+changelog:
+### 0.5 ###
+- initial version of the rewrite
