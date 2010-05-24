@@ -21,7 +21,7 @@ class Interface(object):
         self.bar.fill((0,0,0))
         
     def update(self, score):
-        self.score = score
+        self.score = score  #TODO: score auf levelebene!!!!
         
     def render(self, screen):
         screen.blit(self.bar,(0,600))

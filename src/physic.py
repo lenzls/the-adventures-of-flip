@@ -50,10 +50,10 @@ class PhysicManager(object):
         for colShape in self.colShapeList:            
             
             #werdne nurnoch die mitten der Seiten getestet
-            top       = util.Vector( (colShape.entity.position[0] + (colShape.entity.dimensions[0] / 2) ) / constants.TILESIZE , (colShape.entity.position[1]                                       ) / constants.TILESIZE )
-            bottom    = util.Vector( (colShape.entity.position[0] + (colShape.entity.dimensions[0] / 2) ) / constants.TILESIZE , (colShape.entity.position[1] + (colShape.entity.dimensions[1]    ) ) / constants.TILESIZE )
-            rightSide = util.Vector( (colShape.entity.position[0] + (colShape.entity.dimensions[0]    ) ) / constants.TILESIZE , (colShape.entity.position[1] + (colShape.entity.dimensions[1] / 2) ) / constants.TILESIZE )
-            leftSide  = util.Vector( (colShape.entity.position[0]                                       ) / constants.TILESIZE , (colShape.entity.position[1] + (colShape.entity.dimensions[1] / 2) ) / constants.TILESIZE )
+            top       = util.Vector( (colShape.entity.position[0] + (colShape.entity.dimensions[0] // 2) ) // constants.TILESIZE , (colShape.entity.position[1]                                       ) // constants.TILESIZE )
+            bottom    = util.Vector( (colShape.entity.position[0] + (colShape.entity.dimensions[0] // 2) ) // constants.TILESIZE , (colShape.entity.position[1] + (colShape.entity.dimensions[1]    ) ) // constants.TILESIZE )
+            rightSide = util.Vector( (colShape.entity.position[0] + (colShape.entity.dimensions[0]    ) ) // constants.TILESIZE , (colShape.entity.position[1] + (colShape.entity.dimensions[1] // 2) ) // constants.TILESIZE )
+            leftSide  = util.Vector( (colShape.entity.position[0]                                       ) // constants.TILESIZE , (colShape.entity.position[1] + (colShape.entity.dimensions[1] // 2) ) // constants.TILESIZE )
             
             if colShape.entity.velocity[1] < 0:                     #bewegt sich nach oben
                 if map.getTileDangerousness(0, top[0] , top[1]) == True:

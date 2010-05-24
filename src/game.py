@@ -4,16 +4,16 @@ Created on 07.07.2009
 @author: CaptnLenz
 '''
 
-import pygame
-
-import intro
-import interface
-import renderer
-import physic
-import levelManager
 import constants
-import util
+import interface
+import intro
+import levelManager
 import map
+import physic
+import pygame
+import renderer
+import util
+
 
 pygame.init()
 
@@ -78,7 +78,7 @@ class StateManager(object):
                 self.curState.handleInput()
                 self.curState.update()
                 
-                nextTickMilliseconds += (1000 / constants.LOGIC_FPS)
+                nextTickMilliseconds += (1000 // constants.LOGIC_FPS)
             '''------'''
             
             '''only the rendering'''       
@@ -87,7 +87,7 @@ class StateManager(object):
                     
                     self.curState.render()
                     
-                    nextRenderMilliseconds += (1000 / constants.RENDER_FPS)
+                    nextRenderMilliseconds += (1000 // constants.RENDER_FPS)
             '''------------------'''
             pygame.time.wait(min(nextTickMilliseconds, nextRenderMilliseconds) - curMilliseconds) #let the process sleep until the next sheduled update
             curMilliseconds = pygame.time.get_ticks()
@@ -126,7 +126,7 @@ class GameState(object):
         self.stateManager.physicManager.update(self.stateManager.levelManager.curLevel.map)
         self.stateManager.renderManager.update(self.stateManager.levelManager.curLevel.map)
         self.stateManager.levelManager.update()
-        #print self.stateManager.levelManager.curLevel.player.position
+        #print(self.stateManager.levelManager.curLevel.player.position)
     
     def render(self):
         self.stateManager.renderManager.renderBg(self.stateManager.levelManager.curLevel.map)

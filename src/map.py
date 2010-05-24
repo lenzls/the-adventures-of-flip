@@ -38,7 +38,7 @@ class Map(object):
             #--------mapName--------
             if node.nodeName == 'name':
                 self.mapTitle = node.firstChild.data.strip()        #mapTitle
-                print self.mapTitle
+                print(self.mapTitle)
             #--------mapDimensions--------
             elif node.nodeName == 'dimensions':
                 for childNode in node.childNodes:
@@ -128,13 +128,13 @@ class Map(object):
             elif node.nodeName == 'nextLevel':
                 self.nextLevel = node.firstChild.data.strip()          #next Map 
                 
-        print self.mapTitle
-        print self.dimensions
-        print self.tiles
-        print self.bgLayers
-        print self.bgMusic
-        print self.mapGrid
-        print self.nextLevel
+        print(self.mapTitle)
+        print(self.dimensions)
+        print(self.tiles)
+        print(self.bgLayers)
+        print(self.bgMusic)
+        print(self.mapGrid)
+        print(self.nextLevel)
         
     def getDimensions(self):
         return self.dimensions
@@ -161,9 +161,9 @@ class Map(object):
             return 'blank'
     
     def getTileAccessibility(self, layer, x, y):
-        #print 'tileTest bei x:',x,'/',self.dimensions[0],' y:',y,'/',self.dimensions[1]
-        #print 'tileIndex:',self.mapGrid[layer][y][x]
-        #print 'tileType:',self.getTileType(layer, x, y)
+        #print('tileTest bei x:',x,'/',self.dimensions[0],' y:',y,'/',self.dimensions[1])
+        #print('tileIndex:',self.mapGrid[layer][y][x])
+        #print('tileType:',self.getTileType(layer, x, y))
         if x < 0 or x >= self.dimensions[0] or y < 0 or y >= self.dimensions[1]:
             return True
         elif self.mapGrid[layer][x][y] != 0:

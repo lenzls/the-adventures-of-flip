@@ -47,15 +47,15 @@ class RenderManager(object):
         for sprite in self.spriteList:
             self.screen.blit(sprite.getCurFrameGraphic(), sprite.entity.position.getTuple())
     
-    def renderMapLayer1(self, map):  
-        for y in range(max(self.camera[1] / constants.TILESIZE, 0), min(map.getDimensions()[1], (self.camera[1] + constants.RESOLUTION[1]) / constants.TILESIZE + 1)):
-            for x in range(max(self.camera[0] / constants.TILESIZE, 0), min(map.getDimensions()[0], (self.camera[0] + constants.RESOLUTION[0]) / constants.TILESIZE + 1)):
+    def renderMapLayer1(self, map):
+        for y in range(max(self.camera[1] // constants.TILESIZE, 0), min(map.getDimensions()[1], (self.camera[1] + constants.RESOLUTION[1]) // constants.TILESIZE + 1)):
+            for x in range(max(self.camera[0] // constants.TILESIZE, 0), min(map.getDimensions()[0], (self.camera[0] + constants.RESOLUTION[0]) // constants.TILESIZE + 1)):
                 if map.getMapGrid()[0][x][y] != 0:
                     self.screen.blit(map.tiles[map.getMapGrid()[0][x][y]][2], (x*constants.TILESIZE - self.camera[0],y*constants.TILESIZE - self.camera[1]))
     
     def renderMapLayer2(self, map):
-        for y in range(max(self.camera[1] / constants.TILESIZE, 0), min(map.getDimensions()[1], (self.camera[1] + constants.RESOLUTION[1]) / constants.TILESIZE + 1)):
-            for x in range(max(self.camera[0] / constants.TILESIZE, 0), min(map.getDimensions()[0], (self.camera[0] + constants.RESOLUTION[0]) / constants.TILESIZE + 1)):
+        for y in range(max(self.camera[1] // constants.TILESIZE, 0), min(map.getDimensions()[1], (self.camera[1] + constants.RESOLUTION[1]) // constants.TILESIZE + 1)):
+            for x in range(max(self.camera[0] // constants.TILESIZE, 0), min(map.getDimensions()[0], (self.camera[0] + constants.RESOLUTION[0]) // constants.TILESIZE + 1)):
                 if map.getMapGrid()[1][x][y] != 0:
                     self.screen.blit(map.tiles[map.getMapGrid()[1][x][y]][2], (x*constants.TILESIZE - self.camera[0],y*constants.TILESIZE - self.camera[1]))
     
@@ -89,7 +89,7 @@ class Sprite(object):
         #self.spriteList.append([])
         self.spriteList[aniType] = []
         for graphicPath in graphicPaths:
-            if not self.renderer.imageList.has_key(graphicPath):    #if the image doesn't exist in the imageDict, it gets added
+            if not graphicPath in self.renderer.imageList:    #if the image doesn't exist in the imageDict, it gets added
                 self.renderer.imageList[graphicPath] = util.load_image(graphicPath)
             #self.spriteList[-1].append(self.renderer.imageList[graphicPath])
             self.spriteList[aniType].append(self.renderer.imageList[graphicPath])
