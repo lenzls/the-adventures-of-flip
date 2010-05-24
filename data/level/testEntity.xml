@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EntityFile><EntitiesInfo>
+	<Entity type="player" name="player">
+		<points></points>
+		<life>1</life>
+		<movespeed>3</movespeed>
+		<jumpspeed>-13</jumpspeed>
+		<dimensions>
+			<horizontal>18</horizontal>
+			<vertical>31</vertical></dimensions>
+		<jumpSound>jump.wav</jumpSound>
+		<sprites>
+			<animation index="0" type="idle">
+				<sprite index="0">
+					<image>hero_normal_idle.png</image></sprite></animation>
+			<animation index="1" type="walkLeft">
+				<sprite index="0">
+					<image>hero_normal_left1.png</image></sprite>
+				<sprite index="1">
+					<image>hero_normal_left2.png</image>
+				</sprite>
+				<sprite index="2">
+					<image>hero_normal_left3.png</image>
+				</sprite>
+				<sprite index="3">
+					<image>hero_normal_left4.png</image></sprite></animation>
+			<animation index="2" type="walkRight">
+				<sprite index="0">
+					<image>hero_normal_right1.png</image></sprite>
+				<sprite index="1">
+					<image>hero_normal_right2.png</image></sprite>
+				<sprite index="2">
+					<image>hero_normal_right3.png</image></sprite>
+				<sprite index="3">
+					<image>hero_normal_right4.png</image></sprite>
+			</animation></sprites>
+		<colShape>
+			<colRect index="0">
+				<posUpperLeft><horizontal>4</horizontal>
+					<vertical>-25</vertical></posUpperLeft>
+				<dimensions>
+					<horizontal>10</horizontal>
+					<vertical>6</vertical></dimensions>
+				<isBody>False</isBody>
+				<isSpike>True</isSpike></colRect>
+			<colRect index="1">
+				<posUpperLeft>
+					<horizontal>0</horizontal>
+					<vertical>0</vertical>
+				</posUpperLeft>
+				<dimensions>
+					<horizontal>18</horizontal>
+					<vertical>24</vertical>
+				</dimensions>
+				<isBody>True</isBody>
+				<isSpike>False</isSpike></colRect></colShape></Entity></EntitiesInfo>
+	<Entities>
+	<absEntity name="player">
+		<position>
+			<horizontal>50</horizontal>
+			<vertical>50</vertical>
+		</position>
+	</absEntity>
+	</Entities>
+	<mapFile>testLevel.xml</mapFile>
+	
+	</EntityFile>
