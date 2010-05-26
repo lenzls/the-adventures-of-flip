@@ -103,26 +103,20 @@ class MapEditor():
         self.tilesTable = gui.Table(width=200,height=720,align= 1)
         self.topTable = gui.Table(width=30)
         
-        
-        
-        
-        
         self.container.add(self.layerTable, 0, 0)
         self.container.add(self.tilesTable, 1080,0)
         self.container.add(self.topTable, 150,0)
-        
-        
         
         self.editApp.init(self.container, self.screen)
         self.running = True
         
         self.initNewMap()
 
-        self.loadMap()
     
-    def loadMap(self):
+    def loadMap(self, mapPath):
+        ''' parses the map file '''
         
-        xmlMap = dom.parse('../data/save.xml')
+        xmlMap = dom.parse(mapPath)
         for node in xmlMap.firstChild.childNodes:
             #--------mapName--------
             if node.nodeName == 'name':
@@ -137,9 +131,6 @@ class MapEditor():
                         self.dimensions[1] = int(childNode.firstChild.data.strip())     #vert dimension
             #--------mapTiles--------
             elif node.nodeName == 'tiles':
-                #tileCount = len([cNode for cNode in node.childNodes if cNode.nodeName == 'tile']) + 1       #Anzahl der tile-nodes  (+1)wegen leerem Teil auf Platz0
-                #for i in range(tileCount):       #laenge der tile-liste wird festgelegt
-                #    tiles.append(None)
                 self.tiles.clear()
                 self.tiles[0] = ["blank","blank","blank.png","false","false"]
                 for childNode in node.childNodes:
@@ -158,7 +149,6 @@ class MapEditor():
                                 tileDangerousness = childChildNode.firstChild.data.strip()
                         
                         self.tiles[tileIndex] = (tileName, tileType, tileImage, tileAccessibility, tileDangerousness)
-
             #--------mapBackground--------
             #elif node.nodeName == 'background':
             #    self.bgLayerCount = len([cNode for cNode in node.childNodes if cNode.nodeName == 'bgLayer'])      #Anzahl der bgLayer-nodes
@@ -184,15 +174,13 @@ class MapEditor():
             #--------mapGrid--------
             elif node.nodeName == 'grid':
                 self.grid = []
-                gridLayerCount = len([cNode for cNode in node.childNodes if cNode.nodeName == 'gridLayer'])      #Anzahl der bgLayer-nodes
-                for i in range(gridLayerCount):       #laenge der bgLayer-liste wird festgelegt
+                gridLayerCount = len([cNode for cNode in node.childNodes if cNode.nodeName == 'gridLayer'])      #Anzahl der Layer-nodes
+                for i in range(gridLayerCount):       #laenge der Layer-liste wird festgelegt
                     self.grid.append([])
                     for j in range(self.dimensions[0]):
                         self.grid[-1].append([])
                         for k in range(self.dimensions[1]):
                             self.grid[-1][-1].append(None)
-                
-                
                 for childNode in node.childNodes:
                     if childNode.nodeName == 'gridLayer':
                         gridLayerIndex    =   int(childNode.getAttribute('index'))
@@ -227,93 +215,94 @@ class MapEditor():
         self.Inp_map_entityFile = gui.Input(value=self.entityFile,size=8)
         self.Inp_map_nextLevel = gui.Input(value=self.nextLevel,size=8)
             
-    def initNewMap(self,tilesFromIni=True): #arg ob ini oder xml!
-        if tilesFromIni == True:
-            self.tiles.clear()
-            file = open('../data/tiles.ini',"r")
-            
-            tileIndex = 0
-            tileName = ""
-            tileType = ""
-            tileImage = ""
-            tileAccessibility = True
-            tileDangerousness = True
-            
-            self.tiles[0] = ["blank","blank","blank.png","false","false"]
-            for line in file:
-                if line.strip().startswith('index') == True:
-                    (category,ind) = line.strip().split('=')
-                    tileIndex = int(ind)
-                    self.tiles[tileIndex] = [tileName,tileType,tileImage,tileAccessibility,tileDangerousness]
-                elif line.strip().startswith('name') == True:
-                    (category,nam) = line.strip().split('=')
-                    tileName = nam
-                    self.tiles[tileIndex][0] = tileName            
-                elif line.strip().startswith('type') == True:
-                    (category,typ) = line.strip().split('=')
-                    tileType = typ
-                    self.tiles[tileIndex][1] = tileType
-                elif line.strip().startswith('image') == True:
-                    (category,img) = line.strip().split('=')
-                    tileImage = img
-                    self.tiles[tileIndex][2] = tileImage
-                elif line.strip().startswith('accessibility') == True:
-                    (category,acc) = line.strip().split('=')
-                    tileAccessibility = acc
-                    self.tiles[tileIndex][3] = tileAccessibility
-                elif line.strip().startswith('dangerousness') == True:
-                    (category,dan) = line.strip().split('=')
-                    tileDangerousness = dan
-                    self.tiles[tileIndex][4] = tileDangerousness
-                else:
-                    print('ERROR:Fehler in der Highscore-Datei')
-                    sys.exit()
-            file.close()
-            
-            self.name = "NewMap"
-            self.dimensions = [10,10]
-            #background (wird manuell eingefuegt erstmal
-            self.music = ""
-            self.grid = []
-            self.entityFile = ""
-            self.nextLevel = ""
-            
-            self.Se_Tile_Select.clear()
-            self.Se_Tile_Select = gui.Select(value=1)
-            #Selectbos Tilelabels
+    def initNewMap(self): #arg ob ini oder xml!
+        self.tiles.clear()
+        file = open('../data/tiles.ini',"r")
+        
+        tileIndex = 0
+        tileName = ""
+        tileType = ""
+        tileImage = ""
+        tileAccessibility = True
+        tileDangerousness = True
+        
+        self.tiles[0] = ["blank","blank","blank.png","false","false"]
+        for line in file:
+            if line.strip().startswith('index') == True:
+                (category,ind) = line.strip().split('=')
+                tileIndex = int(ind)
+                self.tiles[tileIndex] = [tileName,tileType,tileImage,tileAccessibility,tileDangerousness]
+            elif line.strip().startswith('name') == True:
+                (category,nam) = line.strip().split('=')
+                tileName = nam
+                self.tiles[tileIndex][0] = tileName            
+            elif line.strip().startswith('type') == True:
+                (category,typ) = line.strip().split('=')
+                tileType = typ
+                self.tiles[tileIndex][1] = tileType
+            elif line.strip().startswith('image') == True:
+                (category,img) = line.strip().split('=')
+                tileImage = img
+                self.tiles[tileIndex][2] = tileImage
+            elif line.strip().startswith('accessibility') == True:
+                (category,acc) = line.strip().split('=')
+                tileAccessibility = acc
+                self.tiles[tileIndex][3] = tileAccessibility
+            elif line.strip().startswith('dangerousness') == True:
+                (category,dan) = line.strip().split('=')
+                tileDangerousness = dan
+                self.tiles[tileIndex][4] = tileDangerousness
+            else:
+                print('ERROR:Fehler in der Tiles.ini')
+                sys.exit()
+        file.close()
+        
+        self.name = "NewMap"
+        self.dimensions = [0,0]
+        #background (wird manuell eingefuegt erstmal
+        self.music = ""
+        self.grid = []
+        self.entityFile = ""
+        self.nextLevel = ""
+        
+        self.Se_Tile_Select.clear()
+        self.Se_Tile_Select = gui.Select(value=1)
+        #Selectbos Tilelabels
 
-            for i in range(len(self.tiles)):
-                self.Se_Tile_Select.add(gui.Label(self.tiles[i][0]),value=i)
-            
-            self.Inp_map_name = gui.Input(value=self.name,size=8)    
-            self.Inp_map_dimH = gui.Input(value=self.dimensions[0],size=8)
-            self.Inp_map_dimV = gui.Input(value=self.dimensions[1],size=8)
-            self.Inp_map_bgMusic = gui.Input(value=self.music,size=8)
-            self.Inp_map_entityFile = gui.Input(value=self.entityFile,size=8)
-            self.Inp_map_nextLevel = gui.Input(value=self.nextLevel,size=8)
+        for i in range(len(self.tiles)):
+            self.Se_Tile_Select.add(gui.Label(self.tiles[i][0]),value=i)
+        
+        self.Inp_map_name = gui.Input(value=self.name,size=8)    
+        self.Inp_map_dimH = gui.Input(value=self.dimensions[0],size=8)
+        self.Inp_map_dimV = gui.Input(value=self.dimensions[1],size=8)
+        self.Inp_map_bgMusic = gui.Input(value=self.music,size=8)
+        self.Inp_map_entityFile = gui.Input(value=self.entityFile,size=8)
+        self.Inp_map_nextLevel = gui.Input(value=self.nextLevel,size=8)
 
     def BUTTONloadMap(self,arg):
-        self.loadMap()
+        self.loadMap('../data/load.xml')
 
     def BUTTONapplyOpt(self,arg):
         '''sollte alles gehn bis auf zuerst x erhoehen und dann y verringern'''
-
         self.name = self.Inp_map_name.value
         newDimensions = (int(self.Inp_map_dimH.value), int(self.Inp_map_dimV.value))
         
         #x Richtung
         if newDimensions[0] > self.dimensions[0]:   #neue koords groesser alte koords            
+            standardCol = []
+            for j in range(0,self.dimensions[1]):
+                standardCol.append(0)
+                
             for i in range(0,newDimensions[0]-self.dimensions[0]):
-                standardCol = []
-                for j in range(0,self.dimensions[1]):
-                    standardCol.append(0)
-                self.grid[0].append(standardCol)
-                self.grid[1].append(standardCol)
+                    
+                self.grid[0].append(standardCol[:])
+                self.grid[1].append(standardCol[:])
 
         elif newDimensions[0] < self.dimensions[0]: #neue koords kleiner alte koords
             for i in range(self.dimensions[0]-1, newDimensions[0]-1,-1):
-                self.grid[0].pop(i)
-                self.grid[1].pop(i)
+                self.grid[0].pop()
+                self.grid[1].pop()
+                
         self.dimensions[0] = newDimensions[0]
         
         #y-Richtung
@@ -323,13 +312,11 @@ class MapEditor():
                     self.grid[0][x].append(0)
                     self.grid[1][x].append(0)
         elif newDimensions[1] < self.dimensions[1]: #neue koords kleiner alte koords
-            for x in range(0,self.dimensions[0]):
-                for i in range(self.dimensions[1]-1, newDimensions[1]-1, -1):
-                    self.grid[0][x].pop(i)
-                    self.grid[1][x].pop(i)
+            for x in range(0, self.dimensions[0]):
+                for i in range(newDimensions[1], self.dimensions[1]):
+                    self.grid[0][x].pop()
+                    self.grid[1][x].pop()
 
-   
-        
         self.dimensions[1] = newDimensions[1]
         
         self.music = str(self.Inp_map_bgMusic.value)
@@ -476,21 +463,36 @@ class MapEditor():
         doc.writexml(datei, "\n", "  ")
         datei.close()
 
+    #def renderMap(self):   
+    #    if self.layerVis[0] == True:
+    #        for y in range(max(self.camera[1] // constants.TILESIZE, 0), min(self.dimensions[1], (self.camera[1] + constants.RESOLUTION[1]) // constants.TILESIZE + 1)):
+    #            for x in range(max(self.camera[0] // constants.TILESIZE, 0), min(self.dimensions[0], (self.camera[0] + constants.RESOLUTION[0]) // constants.TILESIZE + 1)):
+    #                if self.grid[0][x][y] != 0:
+    #                    self.mapSurface.blit(util.load_image(self.tiles[self.grid[0][x][y]][2]), (x*constants.TILESIZE - self.camera[0],y*constants.TILESIZE - self.camera[1]))
+    #    if self.layerVis[1] == True:
+    #        for y in range(max(self.camera[1] // constants.TILESIZE, 0), min(self.dimensions[1], (self.camera[1] + constants.RESOLUTION[1]) // constants.TILESIZE + 1)):
+    #            for x in range(max(self.camera[0] // constants.TILESIZE, 0), min(self.dimensions[0], (self.camera[0] + constants.RESOLUTION[0]) // constants.TILESIZE + 1)):
+    #                if self.grid[1][x][y] != 0:
+    #                    self.mapSurface.blit(util.load_image(self.tiles[self.grid[1][x][y]][2]), (x*constants.TILESIZE - self.camera[0],y*constants.TILESIZE - self.camera[1]))
+        
+        
+    
     def renderMap(self):   
         if self.layerVis[0] == True:
-            for y in range(max(self.camera[1] // constants.TILESIZE, 0), min(self.dimensions[1], (self.camera[1] + constants.RESOLUTION[1]) // constants.TILESIZE + 1)):
-                for x in range(max(self.camera[0] // constants.TILESIZE, 0), min(self.dimensions[0], (self.camera[0] + constants.RESOLUTION[0]) // constants.TILESIZE + 1)):
-                    #print 'dim X: ',self.dimensions[0],'=',len(self.grid[0])
-                    #print 'dim Y: ',self.dimensions[1],'=',len(self.grid[0][0])
-                    #print 'x: ',x,'y: ',y
+            for y in range( 0, self.dimensions[1]):
+                for x in range( 0, self.dimensions[0]):
                     if self.grid[0][x][y] != 0:
-                        self.mapSurface.blit(util.load_image(self.tiles[self.grid[0][x][y]][2]), (x*constants.TILESIZE - self.camera[0],y*constants.TILESIZE - self.camera[1]))
+                        self.mapSurface.blit(util.load_image(self.tiles[self.grid[0][x][y]][2]), (x*constants.TILESIZE, y*constants.TILESIZE))
         if self.layerVis[1] == True:
-            for y in range(max(self.camera[1] // constants.TILESIZE, 0), min(self.dimensions[1], (self.camera[1] + constants.RESOLUTION[1]) // constants.TILESIZE + 1)):
-                for x in range(max(self.camera[0] // constants.TILESIZE, 0), min(self.dimensions[0], (self.camera[0] + constants.RESOLUTION[0]) // constants.TILESIZE + 1)):
+            for y in range( 0, self.dimensions[1]):
+                for x in range( 0, self.dimensions[0]):
                     if self.grid[1][x][y] != 0:
-                        self.mapSurface.blit(util.load_image(self.tiles[self.grid[1][x][y]][2]), (x*constants.TILESIZE - self.camera[0],y*constants.TILESIZE - self.camera[1]))
+                        self.mapSurface.blit(util.load_image(self.tiles[self.grid[1][x][y]][2]), (x*constants.TILESIZE, y*constants.TILESIZE))
         
+    def renderMapBg(self):
+        pygame.draw.rect(self.mapSurface, (255,0,255) , pygame.Rect(0,0,self.dimensions[0]*constants.TILESIZE,self.dimensions[1]*constants.TILESIZE))    
+    
+    
     def replaceTile(self, screenPos):
         if screenPos[0] >= 150 and screenPos[0] <= 1080:
             if screenPos[1] >= 150 and screenPos[1] <= 720:
@@ -580,6 +582,7 @@ class MapEditor():
             
             #render
             self.mapSurface.fill((0,0,0))
+            self.renderMapBg()
             self.renderMap()
             self.screen.blit(self.mapSurface,(150,150))
             self.screen.blit(self.layerMenuBG,(0,0))
@@ -615,10 +618,3 @@ class MapEditor():
                     self.editApp.event(event)
             
             pygame.display.update()
-
-    
-MapEditor().start()
-
-
-
-

@@ -9,8 +9,6 @@ import os
 
 def load_image(filename):
     path = os.path.join('..', 'data',  filename)
-    #path = os.path.join('.',filename)
-    surface = None
     try:
         surface = pygame.image.load(path)
     except:

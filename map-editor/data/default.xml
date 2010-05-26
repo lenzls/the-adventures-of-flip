@@ -1,0 +1,49 @@
+<?xml version="1.0" ?>
+<Map>
+  <name>default</name>
+  <dimensions>
+    <horizontal>0</horizontal>
+    <vertical>0</vertical>
+  </dimensions>
+  <tiles>
+  </tiles>
+  <background>
+    <bgLayer index="0">
+      <speed>
+        0
+      </speed>
+      <image>
+        bg_test_0.png
+      </image>
+    </bgLayer>
+    <bgLayer index="1">
+      <speed>
+        3
+      </speed>
+      <image>
+        bg_test_1.png
+      </image>
+    </bgLayer>
+    <bgLayer index="2">
+      <speed>
+        2
+      </speed>
+      <image>
+        bg_test_2.png
+      </image>
+    </bgLayer>
+  </background>
+  <music>
+    <backgroundTheme>
+      <soundFile>null</soundFile>
+    </backgroundTheme>
+  </music>
+  <grid>
+    <gridLayer index="0">
+    </gridLayer>
+    <gridLayer index="1">
+    </gridLayer>
+  </grid>
+  <entityFile>null</entityFile>
+  <nextLevel>null</nextLevel>
+</Map>
