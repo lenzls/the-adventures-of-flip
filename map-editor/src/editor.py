@@ -459,7 +459,7 @@ class MapEditor():
         doc.documentElement.appendChild(nextLevelElement)
 
         # Ausgeben
-        datei = open(os.path.join('.','data',"save.xml"), "w")
+        datei = open(os.path.join('..','data',"save.xml"), "w")
         doc.writexml(datei, "\n", "  ")
         datei.close()
 
@@ -482,25 +482,24 @@ class MapEditor():
             for y in range( 0, self.dimensions[1]):
                 for x in range( 0, self.dimensions[0]):
                     if self.grid[0][x][y] != 0:
-                        self.mapSurface.blit(util.load_image(self.tiles[self.grid[0][x][y]][2]), (x*constants.TILESIZE, y*constants.TILESIZE))
+                        self.mapSurface.blit(util.load_tile(self.tiles[self.grid[0][x][y]][2]), (x*constants.TILESIZE, y*constants.TILESIZE))
         if self.layerVis[1] == True:
             for y in range( 0, self.dimensions[1]):
                 for x in range( 0, self.dimensions[0]):
                     if self.grid[1][x][y] != 0:
-                        self.mapSurface.blit(util.load_image(self.tiles[self.grid[1][x][y]][2]), (x*constants.TILESIZE, y*constants.TILESIZE))
+                        self.mapSurface.blit(util.load_tile(self.tiles[self.grid[1][x][y]][2]), (x*constants.TILESIZE, y*constants.TILESIZE))
         
     def renderMapBg(self):
         pygame.draw.rect(self.mapSurface, (255,0,255) , pygame.Rect(0,0,self.dimensions[0]*constants.TILESIZE,self.dimensions[1]*constants.TILESIZE))    
     
     
     def replaceTile(self, screenPos):
-        if screenPos[0] >= 150 and screenPos[0] <= 1080:
-            if screenPos[1] >= 150 and screenPos[1] <= 720:
-                mapSurfacePos = ((screenPos[0]-150)-self.camera[0],(screenPos[1]-150)-self.camera[1])
-                if mapSurfacePos[0] >= 0 and mapSurfacePos[0] <= self.dimensions[0]*constants.TILESIZE:
-                    if mapSurfacePos[1] >= 0 and mapSurfacePos[1] <= self.dimensions[1]*constants.TILESIZE:
+        if screenPos[0] > 150 and screenPos[0] < 1080:
+            if screenPos[1] > 150 and screenPos[1] < 720:
+                mapSurfacePos = ((screenPos[0]-150),(screenPos[1]-150))
+                if mapSurfacePos[0] > 0 and mapSurfacePos[0] < self.dimensions[0]*constants.TILESIZE:
+                    if mapSurfacePos[1] > 0 and mapSurfacePos[1] < self.dimensions[1]*constants.TILESIZE:
                         tilePosition = self.getCurTilePos(mapSurfacePos)
-                        
                         if self.layerVis[0] and self.layerVis[1]:
                             topLayer = 1
                         elif self.layerVis[0] and not self.layerVis[1]:
@@ -509,14 +508,10 @@ class MapEditor():
                             topLayer = 1
                         elif not self.layerVis[0] and not self.layerVis[1]:
                             return
-                        print('prev: ',self.grid[topLayer][tilePosition[0]][tilePosition[1]])
                         self.grid[topLayer][tilePosition[0]][tilePosition[1]] = self.cur_Tile
-                        print('replace at: ',topLayer,' ',tilePosition[0],' ',tilePosition[1])
-                        print('after: ',self.grid[topLayer][tilePosition[0]][tilePosition[1]])
-                        print(self.grid[0])
-                        print(self.grid[1])
+
                
-    def getCurTilePos(self, surfacePos):    #returns current Tile after click
+    def getCurTilePos(self, surfacePos):    #returns Tile on pos: surfacePos 
         curTilePos = (surfacePos[0]//constants.TILESIZE,surfacePos[1]//constants.TILESIZE)
         return curTilePos
 
@@ -548,7 +543,7 @@ class MapEditor():
             self.tilesTable.td(self.Lb_curT_type,0,3)
             self.tilesTable.td(gui.Label(self.tiles[self.cur_Tile][1]),1,3)
             self.tilesTable.td(self.Lb_curT_image,0,4)
-            self.tilesTable.td(gui.Image(os.path.join('..', 'data',  self.tiles[self.cur_Tile][2])),1,4)
+            self.tilesTable.td(gui.Image(os.path.join('..', 'data', 'tiles', self.tiles[self.cur_Tile][2])),1,4)
             self.tilesTable.td(self.Lb_curT_access,0,5)
             self.tilesTable.td(gui.Label(self.tiles[self.cur_Tile][3]),1,5)
             self.tilesTable.td(self.Lb_curT_danger,0,6)
@@ -578,8 +573,6 @@ class MapEditor():
             self.topTable.td(self.Bt_saveMap,4,2)
             #-----------
         
-            
-            
             #render
             self.mapSurface.fill((0,0,0))
             self.renderMapBg()

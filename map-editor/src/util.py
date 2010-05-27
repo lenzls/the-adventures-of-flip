@@ -7,8 +7,8 @@ Created on 07.07.2009
 import pygame
 import os
 
-def load_image(filename):
-    path = os.path.join('..', 'data',  filename)
+def load_tile(filename):
+    path = os.path.join('..', 'data', 'tiles',  filename)
     try:
         surface = pygame.image.load(path)
     except:
