@@ -12,13 +12,7 @@ from pgu import tilevid
 
 
 class MapEditor():
-    def __init__(self):
-        self.firstPress = False
-        self.secPress = False
-        
-        self.firstVar = ()
-        self.secVar = ()
-                            
+    def __init__(self):                      
         #map Vars
         self.name = "iii"
         self.dimensions = [0,0]
@@ -33,6 +27,9 @@ class MapEditor():
         self.cur_Tile = 1
         self.camera = util.Vector(0,0)
      
+        self.rightMouseDown = False
+        self.firstKoord = util.Vector(0,0)
+        
         
         self.screen = pygame.display.set_mode((1280,720))
         
@@ -58,6 +55,8 @@ class MapEditor():
         self.Bt_loadMap.connect(gui.CLICK, self.BUTTONloadMap, None)
         self.Bt_saveMap = gui.Button("Save Map")
         self.Bt_saveMap.connect(gui.CLICK, self.BUTTONsaveMap, None)
+        self.Bt_resetCam = gui.Button("reset Cam")
+        self.Bt_resetCam.connect(gui.CLICK, self.BUTTONresetCam, None)
         
         
         self.Lb_Layer_Topic = gui.Label("Layer-Menu")
@@ -463,18 +462,8 @@ class MapEditor():
         doc.writexml(datei, "\n", "  ")
         datei.close()
 
-    #def renderMap(self):   
-    #    if self.layerVis[0] == True:
-    #        for y in range(max(self.camera[1] // constants.TILESIZE, 0), min(self.dimensions[1], (self.camera[1] + constants.RESOLUTION[1]) // constants.TILESIZE + 1)):
-    #            for x in range(max(self.camera[0] // constants.TILESIZE, 0), min(self.dimensions[0], (self.camera[0] + constants.RESOLUTION[0]) // constants.TILESIZE + 1)):
-    #                if self.grid[0][x][y] != 0:
-    #                    self.mapSurface.blit(util.load_image(self.tiles[self.grid[0][x][y]][2]), (x*constants.TILESIZE - self.camera[0],y*constants.TILESIZE - self.camera[1]))
-    #    if self.layerVis[1] == True:
-    #        for y in range(max(self.camera[1] // constants.TILESIZE, 0), min(self.dimensions[1], (self.camera[1] + constants.RESOLUTION[1]) // constants.TILESIZE + 1)):
-    #            for x in range(max(self.camera[0] // constants.TILESIZE, 0), min(self.dimensions[0], (self.camera[0] + constants.RESOLUTION[0]) // constants.TILESIZE + 1)):
-    #                if self.grid[1][x][y] != 0:
-    #                    self.mapSurface.blit(util.load_image(self.tiles[self.grid[1][x][y]][2]), (x*constants.TILESIZE - self.camera[0],y*constants.TILESIZE - self.camera[1]))
-        
+    def BUTTONresetCam(self, arg):
+        self.camera = util.Vector(0,0)
         
     
     def renderMap(self):   
@@ -482,21 +471,21 @@ class MapEditor():
             for y in range( 0, self.dimensions[1]):
                 for x in range( 0, self.dimensions[0]):
                     if self.grid[0][x][y] != 0:
-                        self.mapSurface.blit(util.load_tile(self.tiles[self.grid[0][x][y]][2]), (x*constants.TILESIZE, y*constants.TILESIZE))
+                        self.mapSurface.blit(util.load_tile(self.tiles[self.grid[0][x][y]][2]), (x*constants.TILESIZE-self.camera[0], y*constants.TILESIZE-self.camera[1]))
         if self.layerVis[1] == True:
             for y in range( 0, self.dimensions[1]):
                 for x in range( 0, self.dimensions[0]):
                     if self.grid[1][x][y] != 0:
-                        self.mapSurface.blit(util.load_tile(self.tiles[self.grid[1][x][y]][2]), (x*constants.TILESIZE, y*constants.TILESIZE))
+                        self.mapSurface.blit(util.load_tile(self.tiles[self.grid[1][x][y]][2]), (x*constants.TILESIZE-self.camera[0], y*constants.TILESIZE-self.camera[1]))
         
     def renderMapBg(self):
-        pygame.draw.rect(self.mapSurface, (255,0,255) , pygame.Rect(0,0,self.dimensions[0]*constants.TILESIZE,self.dimensions[1]*constants.TILESIZE))    
+        pygame.draw.rect(self.mapSurface, (255,0,255) , pygame.Rect(-self.camera[0],-self.camera[1],self.dimensions[0]*constants.TILESIZE,self.dimensions[1]*constants.TILESIZE))    
     
     
     def replaceTile(self, screenPos):
         if screenPos[0] > 150 and screenPos[0] < 1080:
             if screenPos[1] > 150 and screenPos[1] < 720:
-                mapSurfacePos = ((screenPos[0]-150),(screenPos[1]-150))
+                mapSurfacePos = ((screenPos[0]-150)+self.camera[0],(screenPos[1]-150)+self.camera[1])
                 if mapSurfacePos[0] > 0 and mapSurfacePos[0] < self.dimensions[0]*constants.TILESIZE:
                     if mapSurfacePos[1] > 0 and mapSurfacePos[1] < self.dimensions[1]*constants.TILESIZE:
                         tilePosition = self.getCurTilePos(mapSurfacePos)
@@ -561,6 +550,7 @@ class MapEditor():
             self.topTable.td(self.Inp_map_dimH,1,1)
             self.topTable.td(self.Lb_map_dimV,0,2)
             self.topTable.td(self.Bt_applyOpt,0,3)
+            self.topTable.td(self.Bt_resetCam,1,3)
             self.topTable.td(self.Inp_map_dimV,1,2)
             self.topTable.td(self.Lb_map_bgMusic,2,0)
             self.topTable.td(self.Inp_map_bgMusic,3,0)
@@ -583,6 +573,7 @@ class MapEditor():
             self.screen.blit(self.topMenuBG,(150,0))
             self.editApp.paint(self.screen)
             
+
             for event in pygame.event.get():
                     if event.type == pygame.QUIT:
                         self.running = False
@@ -590,24 +581,25 @@ class MapEditor():
                         if event.key == pygame.K_ESCAPE:
                             self.running = False
                     elif event.type == pygame.MOUSEBUTTONDOWN:
-                        if pygame.mouse.get_pressed()[0] == 1:      #Linke Maustaste
+                        if event.button == 1:       #Linke Maustaste
                             self.replaceTile(pygame.mouse.get_pos())
-                            
-                        elif pygame.mouse.get_pressed()[2] == 1:    #Rechte Maustaste
-
-                            if self.firstPress == False:
-                                self.firstVar = pygame.mouse.get_pos()
-                                self.firstPress = True
-                            elif self.firstPress == True:
-                                self.secVar = pygame.mouse.get_pos()
-                                self.secPress = True
-                            
-                            if self.secPress == True:
-                                self.camera += util.Vector(self.secVar[0] - self.firstVar[0], self.secVar[1] - self.firstVar[1])
-                                self.firstPress = False
-                                self.secPress = False
-                            
-                                
+                        elif event.button == 3:     #Rechte Maustaste
+                            self.rightMouseDown = True
+                    elif event.type == pygame.MOUSEBUTTONUP:
+                        if event.button == 3:
+                            self.rightMouseDown = False
+                            self.camera += (mouseCoordsOnMap - self.firstKoord) 
+                            self.firstKoord = util.Vector(0,0)
+                    elif event.type == pygame.MOUSEMOTION:
+                        mouseCoords = util.Vector(pygame.mouse.get_pos()[0], pygame.mouse.get_pos()[1])
+                        if self.rightMouseDown:
+                            if mouseCoords[0] > 150 and mouseCoords[0] < 1080:
+                                if mouseCoords[1] > 150 and mouseCoords[1] < 720:
+                                    mouseCoordsOnMap = mouseCoords + util.Vector(-150,-150)
+                                                                        
+                                    if self.firstKoord == util.Vector(0,0):
+                                        self.firstKoord = mouseCoordsOnMap
+                                    
                     self.editApp.event(event)
             
             pygame.display.update()

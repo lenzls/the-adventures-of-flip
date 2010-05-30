@@ -172,29 +172,29 @@
       <column index="0">
         <row index="0">
           <tileIndex>
-            2
+            1
           </tileIndex>
         </row>
         <row index="1">
           <tileIndex>
-            2
+            1
           </tileIndex>
         </row>
         <row index="2">
           <tileIndex>
-            2
+            1
           </tileIndex>
         </row>
       </column>
       <column index="1">
         <row index="0">
           <tileIndex>
-            2
+            1
           </tileIndex>
         </row>
         <row index="1">
           <tileIndex>
-            2
+            1
           </tileIndex>
         </row>
         <row index="2">
@@ -206,17 +206,17 @@
       <column index="2">
         <row index="0">
           <tileIndex>
-            2
+            1
           </tileIndex>
         </row>
         <row index="1">
           <tileIndex>
-            2
+            1
           </tileIndex>
         </row>
         <row index="2">
           <tileIndex>
-            2
+            1
           </tileIndex>
         </row>
       </column>
@@ -233,14 +233,14 @@
         </row>
         <row index="2">
           <tileIndex>
-            0
+            1
           </tileIndex>
         </row>
       </column>
       <column index="4">
         <row index="0">
           <tileIndex>
-            0
+            1
           </tileIndex>
         </row>
         <row index="1">

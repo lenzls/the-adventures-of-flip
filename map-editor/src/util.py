@@ -66,6 +66,20 @@ class Vector():
         else:
             raise Exception('Invalid Key!') 
         
+    def __setitem__(self, index, other):
+        if index == 0:
+            self.x = other
+        elif index == 1:
+            self.y = other
+        else:
+            raise Exception('Invalid Key!') 
+    
+    def __eq__(self, other):
+        if self.x == other.x and self.y == other.y:
+            return True
+        else:
+            return False
+        
     def getTuple(self):
         return (self.x, self.y)
     
