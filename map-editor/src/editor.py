@@ -14,7 +14,7 @@ from pgu import tilevid
 class MapEditor():
     def __init__(self):                      
         #map Vars
-        self.name = "iii"
+        self.name = ""
         self.dimensions = [0,0]
         self.tiles = {}
         #background (wird manuell eingefuegt erstmal

@@ -22,8 +22,10 @@ Fortsetzung folgt...
 
 
 TODO: 
--
+- nearly everything
 
 changelog:
-### 0.5 ###
+### 0.5.1 ###
+-first stable verison of the map-editor
+### 0.5.0 ###
 - initial version of the rewrite
