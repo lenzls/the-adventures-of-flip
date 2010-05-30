@@ -72,15 +72,6 @@ class StateManager(object):
         
         '''main loop:'''
         while self.run:
-            '''update everything'''
-            while nextTickMilliseconds <= curMilliseconds:
-                
-                self.curState.handleInput()
-                self.curState.update()
-                
-                nextTickMilliseconds += (1000 // constants.LOGIC_FPS)
-            '''------'''
-            
             '''only the rendering'''       
             if nextRenderMilliseconds <= curMilliseconds:
                 while nextRenderMilliseconds <= curMilliseconds:
@@ -89,6 +80,14 @@ class StateManager(object):
                     
                     nextRenderMilliseconds += (1000 // constants.RENDER_FPS)
             '''------------------'''
+            '''update everything'''
+            while nextTickMilliseconds <= curMilliseconds:
+                
+                self.curState.handleInput()
+                self.curState.update()
+                
+                nextTickMilliseconds += (1000 // constants.LOGIC_FPS)
+            '''------'''
             pygame.time.wait(min(nextTickMilliseconds, nextRenderMilliseconds) - curMilliseconds) #let the process sleep until the next sheduled update
             curMilliseconds = pygame.time.get_ticks()
             pygame.display.update()
