@@ -2,10 +2,10 @@
 """
 import os
 
-from .const import *
-from . import table, area
-from . import basic, input, button
-from . import pguglobals
+from const import *
+import table, area
+import basic, input, button
+import pguglobals
 
 class Dialog(table.Table):
     """A dialog window with a title bar and an "close" button on the bar.
@@ -153,5 +153,5 @@ class FileDialog(Dialog):
                 self._list_dir_()
         else:
             self.value = os.path.join(self.curdir, self.input_file.value)
-            self.send(CHANGE)
+	    self.send(CHANGE)
             self.close()

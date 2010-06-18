@@ -2,8 +2,8 @@
 """
 import pygame
 
-from . import container
-from . import layout
+import container
+import layout
 
 class _document_widget:
     def __init__(self,w,align=None):
@@ -108,5 +108,5 @@ class Document(container.Container):
         
         #self.rect.w = _max_w #self.layout.rect.w
         #self.rect.h = self.layout.rect.h
-        #print('document',_max_w,self.layout.rect.)
+        #print 'document',_max_w,self.layout.rect.h
         return _max_w,self.layout.rect.h

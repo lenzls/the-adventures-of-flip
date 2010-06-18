@@ -3,9 +3,9 @@
 
 from pygame.locals import *
 
-from .const import *
-from . import widget, surface
-from . import basic
+from const import *
+import widget, surface
+import basic
 
 class _button(widget.Widget):
     def __init__(self,**params):

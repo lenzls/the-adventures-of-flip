@@ -252,7 +252,7 @@ class MapEditor():
                 tileDangerousness = dan
                 self.tiles[tileIndex][4] = tileDangerousness
             else:
-                print('ERROR:Fehler in der Tiles.ini')
+                print 'ERROR:Fehler in der Tiles.ini'
                 sys.exit()
         file.close()
         
@@ -326,7 +326,7 @@ class MapEditor():
         self.initNewMap()
         
     def BUTTONsaveMap(self,arg):
-        print("saveMap!!")
+        print "saveMap!!"
         
         # Dokument erzeugen
         implement = dom.getDOMImplementation()

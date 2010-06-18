@@ -8,5 +8,6 @@ import constants
 import game
 
 if __name__ == '__main__':
+
     curGame = game.StateManager(constants.RESOLUTION)
     curGame.startGame()

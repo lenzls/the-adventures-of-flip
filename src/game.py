@@ -123,7 +123,7 @@ class GameState(object):
         self.stateManager.physicManager.update(self.stateManager.levelManager.curLevel.map)
         self.stateManager.renderManager.update(self.stateManager.levelManager.curLevel.map)
         self.stateManager.levelManager.update()
-        #print(self.stateManager.levelManager.curLevel.player.position)
+        #print self.stateManager.levelManager.curLevel.player.position
     
     def render(self):
         self.stateManager.renderManager.renderBg(self.stateManager.levelManager.curLevel.map)
