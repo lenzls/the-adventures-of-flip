@@ -27,8 +27,7 @@ class Map(object):
         self.bgMusic = None
         self.mapGrid = []
         self.nextLevel = ''
-        
-         
+
         
         self._loadMapFile(self.mapFilePath)
         

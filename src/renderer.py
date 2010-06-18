@@ -31,11 +31,12 @@ class RenderManager(object):
         self.spriteList.append(sprite)
     
     def cleanSpriteList(self):
-        ''' deletes the old spriteList and creates a new one(e.g.: 2 start a new level)''' 
+        ''' deletes the old spriteList and creates a new one (e.g.: 2 start a new level)''' 
         
         self.spriteList = []
         
     def update(self, map):
+        
         self.updateSpriteList()
         self.updateBg(map)
         
@@ -64,12 +65,13 @@ class RenderManager(object):
             self.screen.blit(bgLayer[1], (bgLayer[2] - self.camera[0], 0))
     
     def updateBg(self, map):
+        '''update method for paralax scrolling'''
         pass
     
 class Sprite(object):
     '''respresents all sprites(animation(s)) of an entity '''
     
-    def __init__(self, entity, renderer):   #spriteList: [animation][graphics]
+    def __init__(self, entity, renderer):
         self.entity = entity
         self.renderer = renderer
         
@@ -86,12 +88,10 @@ class Sprite(object):
         This animation could be a single image or a sequence of images.
         graphicPaths: list of strings(Paths)"""
         
-        #self.spriteList.append([])
         self.spriteList[aniType] = []
         for graphicPath in graphicPaths:
             if not graphicPath in self.renderer.imageList:    #if the image doesn't exist in the imageDict, it gets added
                 self.renderer.imageList[graphicPath] = util.load_image(graphicPath)
-            #self.spriteList[-1].append(self.renderer.imageList[graphicPath])
             self.spriteList[aniType].append(self.renderer.imageList[graphicPath])
     
     def setAni(self, aniType):

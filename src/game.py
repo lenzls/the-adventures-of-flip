@@ -51,12 +51,10 @@ class StateManager(object):
         self.stateList.append(PauseState(self))
         '''---------------------'''
         
-        self.isSound = True
-        self.curState = self.stateList[0]
+        self.curState = self.stateList[0]   # direct into the game
         
         self.run = True
-    
-        
+
         intro.Opening().play()
         
     def endGame(self):
@@ -72,7 +70,7 @@ class StateManager(object):
         
         '''main loop:'''
         while self.run:
-            '''only the rendering'''       
+            '''only the rendering'''
             if nextRenderMilliseconds <= curMilliseconds:
                 while nextRenderMilliseconds <= curMilliseconds:
                     
