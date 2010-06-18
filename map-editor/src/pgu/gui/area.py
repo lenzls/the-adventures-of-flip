@@ -2,12 +2,12 @@
 """
 import os
 
-from . import pguglobals
-from .const import *
-from . import surface
-from . import container, table
-from . import group
-from . import basic, button, slider
+import pguglobals
+from const import *
+import surface
+import container, table
+import group
+import basic, button, slider
 
 class SlideBox(container.Container):
     """A scrollable area with no scrollbars.
@@ -392,8 +392,8 @@ class List(ScrollArea):
         g.connect(CHANGE,self._change,None)
         self.value = self.group.value = None
 	
-        self.add = self._add
-        self.remove = self._remove
+	self.add = self._add
+	self.remove = self._remove
         
     def clear(self):
         """Clear the list.
@@ -431,7 +431,7 @@ class List(ScrollArea):
             """
         
     def _add(self, label, image = None, value=None):
-        item = _List_Item(label,image=image,value=value)
+    	item = _List_Item(label,image=image,value=value)
         self.table.tr()
         self.table.add(item)
         self.items.append(item)
@@ -439,8 +439,8 @@ class List(ScrollArea):
         item.group.add(item)
         
     def _remove(self, item):
-        for i in self.items:
-            if i.value == item: item = i
+    	for i in self.items:
+		if i.value == item: item = i
         if item not in self.items: return
         item.blur()
         self.items.remove(item)

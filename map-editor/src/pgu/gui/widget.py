@@ -2,8 +2,8 @@
 """
 import pygame
 
-from . import pguglobals
-from . import style
+import pguglobals
+import style
 
 class SignalCallback:
     # The function to call
@@ -91,7 +91,7 @@ class Widget:
             if (not pguglobals.app):
                 # TODO - fix this somehow
                 import app
-                print('gui.widget: creating an App')
+                print 'gui.widget: creating an App'
                 app.App()
             pguglobals.app.theme.decorate(self,params['decorate'])
 
@@ -326,8 +326,9 @@ class Widget:
         for cb in self.connects[code]:
             func = cb.func
             values = list(cb.params)
-            nargs = func.__code__.co_argcount
-            names = list(func.__code__.co_varnames)[:nargs]
+
+            nargs = func.func_code.co_argcount
+            names = list(func.func_code.co_varnames)[:nargs]
             if hasattr(func,'im_class'): names.pop(0)
             
             args = []

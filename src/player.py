@@ -70,7 +70,7 @@ class Player():
                                     if imageNode.nodeName == 'image':
                                         animation.append(str(imageNode.firstChild.data))
                         self.sprite.addAnimation(animationType, animation)
-                print('ani Added')
+                print 'ani Added'
             elif infoNode.nodeName == 'colShape':
                 for colRectNode in infoNode.childNodes:
                     if colRectNode.nodeName == 'colRect':
@@ -97,15 +97,15 @@ class Player():
                                 isSpike =   bool(colRectInfoNode.firstChild.data)
                         self.colShape.addRect(posUpperLeft, dimensions, isBody, isSpike)
                         
-        print(self.sprite.spriteList)
+        print self.sprite.spriteList
         
     def update(self):
         if self.velocity[1] < 15:
             self.velocity += self.physics.gravity
         self.position += self.velocity
         self.sprite.update()
-        #print('playerAbsPos: ',self.position)
-        #print('playerVel: ',self.velocity)
+        #print 'playerAbsPos: ',self.position
+        #print 'playerVel: ',self.velocity
         
     def getIsAlive(self):
         return self.isAlive
@@ -143,18 +143,18 @@ class Player():
         self.velocity = util.Vector(oldVelocity[0], 1)
     
     def mapColWhileMoveRight(self, x, y):
-        print('collision while right on: ',x,' ',y)
+        print 'collision while right on: ',x,' ',y
         oldPosition = self.position
         oldVelocity = self.velocity
         self.position = util.Vector(((x * constants.TILESIZE) - 1) - self.dimensions[0],oldPosition[1])
     
     def mapColWhileMoveLeft(self, x, y):
-        print('collision while left on: ',x,' ',y)
+        print 'collision while left on: ',x,' ',y
         oldPosition = self.position
         oldVelocity = self.velocity
-        print('old position: ',oldPosition)
+        print 'old position: ',oldPosition
         self.position = util.Vector((((x + 1) * constants.TILESIZE) + 1), oldPosition[1])
-        print('new position: ',self.position)
+        print 'new position: ',self.position
         
     def colWin(self, enemy):
         pass
@@ -163,7 +163,7 @@ class Player():
         pass
     
     def setDead(self):
-        print('TOoooooooooooooooooooooooooooT')
+        print 'TOoooooooooooooooooooooooooooT'
         self.isAlive = False
         
         

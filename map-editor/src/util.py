@@ -12,8 +12,8 @@ def load_tile(filename):
     try:
         surface = pygame.image.load(path)
     except:
-        print(path)
-        print("Grafik: ",path," kann nicht geladen werden!")
+        print path
+        print "Grafik: ",path," kann nicht geladen werden!"
     return surface.convert_alpha()
 
 def load_sound(filename):
@@ -21,7 +21,7 @@ def load_sound(filename):
     try:
         sound_object = pygame.mixer.Sound(path)
     except:
-        print("Sound: ",path," kann nicht geladen werden!")
+        print "Sound: ",path," kann nicht geladen werden!"
     return sound_object
 
 class Vector():

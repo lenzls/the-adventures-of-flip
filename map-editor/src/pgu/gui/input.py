@@ -3,8 +3,8 @@
 import pygame
 from pygame.locals import *
 
-from .const import *
-from . import widget
+from const import *
+import widget
 
 class Input(widget.Widget):
     """A single line text input.
@@ -88,9 +88,9 @@ class Input(widget.Widget):
             elif e.key == K_TAB:
                 pass
             else:
-                
+                #c = str(e.unicode)
                 try:
-                    c = str(e.unicode)
+                    c = (e.unicode).encode('latin-1')
                     if c:
                         self._setvalue(self.value[:self.pos] + c + self.value[self.pos:])
                         self.pos += 1

@@ -1,7 +1,7 @@
 """
 """
 
-from . import pguglobals
+import pguglobals
 
 class Style:
     """The class used by widget for the widget.style
