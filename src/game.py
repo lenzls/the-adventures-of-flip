@@ -25,31 +25,28 @@ class StateManager(object):
 
     def __init__(self, resolution):
         '''
-        Constructor
+        
+        @param resolution: screen resolution
         '''
         
-        '''parameter2attribute'''
         self.resolution = resolution
-        '''-------------------'''
-        '''initialize screen'''
         
         pygame.display.set_caption("The Adventures of Flip")  
         pygame.display.set_icon(pygame.image.load('../data/icon.png'))
-        self.screen = pygame.display.set_mode(self.resolution)
-        #self.screen = pygame.display.set_mode(self.resolution, pygame.FULLSCREEN)   #For Fullscreen!!
-        '''-----------------'''
-        
+        if constants.FULLSCREEN:
+            self.screen = pygame.display.set_mode(self.resolution, pygame.FULLSCREEN)
+        else:
+            self.screen = pygame.display.set_mode(self.resolution)
+
         self.renderManager = renderer.RenderManager(self.screen)
         self.physicManager = physic.PhysicManager()
         self.levelManager = levelManager.LevelManager(self.physicManager, self.renderManager)
         self.interface = interface.Interface()
         
-        '''initialize Gamestates'''
         self.stateList = []
         self.stateList.append(GameState(self))
         self.stateList.append(MenuState(self))
         self.stateList.append(PauseState(self))
-        '''---------------------'''
         
         self.curState = self.stateList[0]   # direct into the game
         
@@ -58,11 +55,14 @@ class StateManager(object):
         intro.Opening().play()
         
     def endGame(self):
+        '''
+            ends the game after quit events
+        '''
         self.run = False
         
-    def startGame(self):
-        
+    def startGame(self):        
         '''set the starting time; set the first update times'''
+        
         curMilliseconds = pygame.time.get_ticks()
         nextRenderMilliseconds = curMilliseconds
         nextTickMilliseconds = curMilliseconds

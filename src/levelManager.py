@@ -12,6 +12,11 @@ import player
 
 class LevelManager(object):
     def __init__(self, physics, renderer):
+        '''
+        
+        @param physics: current physicManager
+        @param renderer: current renderManager
+        '''
         self.physics = physics
         self.renderer = renderer
         self.levelPathList = []
