@@ -127,13 +127,13 @@ class Map(object):
             elif node.nodeName == 'nextLevel':
                 self.nextLevel = node.firstChild.data.strip()          #next Map 
                 
-        print self.mapTitle
-        print self.dimensions
-        print self.tiles
-        print self.bgLayers
-        print self.bgMusic
-        print self.mapGrid
-        print self.nextLevel
+        #print self.mapTitle
+        #print self.dimensions
+        #print self.tiles
+        #print self.bgLayers
+        #print self.bgMusic
+        #print self.mapGrid
+        #print self.nextLevel
         
     def getDimensions(self):
         return self.dimensions

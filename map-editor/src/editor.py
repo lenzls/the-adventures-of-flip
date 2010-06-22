@@ -31,15 +31,15 @@ class MapEditor():
         self.firstKoord = util.Vector(0,0)
         
         
-        self.screen = pygame.display.set_mode((1280,720))
+        self.screen = pygame.display.set_mode((1150,630))
         
-        self.mapSurface = pygame.Surface((930,570))
+        self.mapSurface = pygame.Surface((800,480))
 
-        self.layerMenuBG = pygame.Surface((150,720))
+        self.layerMenuBG = pygame.Surface((150,630))
         self.layerMenuBG.fill((0,200,200))
-        self.tilesMenuBG = pygame.Surface((200,720))
+        self.tilesMenuBG = pygame.Surface((200,630))
         self.tilesMenuBG.fill((200,200,0))
-        self.topMenuBG = pygame.Surface((930,150))
+        self.topMenuBG = pygame.Surface((800,150))
         self.topMenuBG.fill((155,0,155))
         
         
@@ -95,15 +95,15 @@ class MapEditor():
         self.Sw_layer2_vis = gui.Switch(True)
         
         
-        self.container = gui.Container(width=1280, height=720)   #muss man schauen ob in der mitte dann noch pygame fenster aktiv ist
+        self.container = gui.Container(width=1150, height=630)   #muss man schauen ob in der mitte dann noch pygame fenster aktiv ist
         
         
-        self.layerTable = gui.Table(width=150,height=720,align=-1)
-        self.tilesTable = gui.Table(width=200,height=720,align= 1)
+        self.layerTable = gui.Table(width=150,height=630,align=-1)
+        self.tilesTable = gui.Table(width=200,height=630,align= 1)
         self.topTable = gui.Table(width=30)
         
         self.container.add(self.layerTable, 0, 0)
-        self.container.add(self.tilesTable, 1080,0)
+        self.container.add(self.tilesTable, 950,0)
         self.container.add(self.topTable, 150,0)
         
         self.editApp.init(self.container, self.screen)
@@ -279,7 +279,7 @@ class MapEditor():
         self.Inp_map_nextLevel = gui.Input(value=self.nextLevel,size=8)
 
     def BUTTONloadMap(self,arg):
-        self.loadMap('../data/load.xml')
+        self.loadMap('../data/save.xml')
 
     def BUTTONapplyOpt(self,arg):
         '''sollte alles gehn bis auf zuerst x erhoehen und dann y verringern'''
@@ -569,7 +569,7 @@ class MapEditor():
             self.renderMap()
             self.screen.blit(self.mapSurface,(150,150))
             self.screen.blit(self.layerMenuBG,(0,0))
-            self.screen.blit(self.tilesMenuBG,(1080,0))
+            self.screen.blit(self.tilesMenuBG,(950,0))
             self.screen.blit(self.topMenuBG,(150,0))
             self.editApp.paint(self.screen)
             

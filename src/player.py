@@ -37,7 +37,7 @@ class Player():
         self.sprite     = self.renderer.createSprite(self)
         self.colShape   = self.physics.createColShape(self)
         
-        self._loadInfo(infoTree)        
+        self._loadInfo(infoTree)
         
         self.sprite.setAni('idle')
 
@@ -104,6 +104,9 @@ class Player():
             self.velocity += self.physics.gravity
         self.position += self.velocity
         self.sprite.update()
+        
+        self.renderer.updateCamera(self)
+        
         #print 'playerAbsPos: ',self.position
         #print 'playerVel: ',self.velocity
         

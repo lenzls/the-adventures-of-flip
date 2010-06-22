@@ -35,10 +35,10 @@ class RenderManager(object):
         
         self.spriteList = []
         
-    def update(self, map):
-        
+    def update(self, level):
+        self.updateCamera(level.player)
         self.updateSpriteList()
-        self.updateBg(map)
+        self.updateBg(level.map)
         
     def updateSpriteList(self):
         ''' deletes dead entities from the spriteList'''
@@ -61,6 +61,7 @@ class RenderManager(object):
                     self.screen.blit(map.tiles[map.getMapGrid()[1][x][y]][2], (x*constants.TILESIZE - self.camera[0],y*constants.TILESIZE - self.camera[1]))
     
     def renderBg(self, map):
+        self.screen.fill((0,0,0));
         for bgLayer in map.bgLayers:
             self.screen.blit(bgLayer[1], (bgLayer[2] - self.camera[0], 0))
     
@@ -68,6 +69,34 @@ class RenderManager(object):
         '''update method for paralax scrolling'''
         pass
     
+    def getCamera(self):
+        return self.camera
+    
+    def updateCamera(self, playerInstance): #TODO:bad name
+        '''
+        
+        @param playerInstance: instance of the current player object
+        '''
+        cameraOffset = util.Vector(0,0)
+        
+        #if (playerInstance.position[0] > (constants.RESOLUTION[0] - 100)) or (playerInstance.position[1] > (constants.RESOLUTION[1] - 100)):
+        #    cameraOffset = util.Vector(playerInstance.position[0]-(constants.RESOLUTION[0] - 100),playerInstance.position[1]-(constants.RESOLUTION[1] - 100))
+        #elif  (playerInstance.position[0] < (100)) or (playerInstance.position[1] < (100)):
+        #    cameraOffset = util.Vector(100-playerInstance.position[0],100-playerInstance.position[1])
+        if (playerInstance.position[0]-self.camera[0] > (constants.RESOLUTION[0] - 100)):
+            print "rechts draussen", (playerInstance.position[0]-self.camera[0])-(constants.RESOLUTION[0] - 100), 0
+            cameraOffset = util.Vector((playerInstance.position[0]-self.camera[0])-(constants.RESOLUTION[0] - 100), 0)
+        #if (playerInstance.position[1]-self.camera[0] > (constants.RESOLUTION[1] - 100)):
+        #    print "unten draussen", 0, (playerInstance.position[1]-self.camera[1])-(constants.RESOLUTION[1] - 100)
+        #    cameraOffset = util.Vector(0, (playerInstance.position[1]-self.camera[1])-(constants.RESOLUTION[1] - 100))
+
+            
+            
+        
+        
+        self.camera += cameraOffset
+        print self.camera
+     
 class Sprite(object):
     '''respresents all sprites(animation(s)) of an entity '''
     

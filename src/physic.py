@@ -34,8 +34,8 @@ class PhysicManager(object):
         
         self.colShapeList = []
         
-    def update(self, map):
-        self.checkCols(map)
+    def update(self, level):
+        self.checkCols(level.map)
         self.updateColShapeList()
     
     def checkCols(self, map):

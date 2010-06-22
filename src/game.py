@@ -31,7 +31,7 @@ class StateManager(object):
         
         self.resolution = resolution
         
-        pygame.display.set_caption("The Adventures of Flip")  
+        pygame.display.set_caption("The Adventures of Flip")
         pygame.display.set_icon(pygame.image.load('../data/icon.png'))
         if constants.FULLSCREEN:
             self.screen = pygame.display.set_mode(self.resolution, pygame.FULLSCREEN)
@@ -120,8 +120,8 @@ class GameState(object):
                     self.stateManager.levelManager.curLevel.player.walkStop()
 
     def update(self):
-        self.stateManager.physicManager.update(self.stateManager.levelManager.curLevel.map)
-        self.stateManager.renderManager.update(self.stateManager.levelManager.curLevel.map)
+        self.stateManager.physicManager.update(self.stateManager.levelManager.curLevel)
+        self.stateManager.renderManager.update(self.stateManager.levelManager.curLevel)
         self.stateManager.levelManager.update()
         #print self.stateManager.levelManager.curLevel.player.position
     
@@ -138,7 +138,6 @@ class MenuState(object):
         
         
     def handleInput(self):
-        
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.stateManager.endGame()

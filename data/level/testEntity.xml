@@ -62,6 +62,6 @@
 		</position>
 	</absEntity>
 	</Entities>
-	<mapFile>testLevel.xml</mapFile>
+	<mapFile>save.xml</mapFile>
 	
 	</EntityFile>
