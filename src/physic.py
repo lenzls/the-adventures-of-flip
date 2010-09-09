@@ -50,6 +50,8 @@ class PhysicManager(object):
         for colShape in self.colShapeList:            
             
             #werdne nurnoch die mitten der Seiten getestet
+            
+
             top       = util.Vector( (colShape.entity.position[0] + (colShape.entity.dimensions[0] // 2) ) // constants.TILESIZE , (colShape.entity.position[1]                                       ) // constants.TILESIZE )
             bottom    = util.Vector( (colShape.entity.position[0] + (colShape.entity.dimensions[0] // 2) ) // constants.TILESIZE , (colShape.entity.position[1] + (colShape.entity.dimensions[1]    ) ) // constants.TILESIZE )
             rightSide = util.Vector( (colShape.entity.position[0] + (colShape.entity.dimensions[0]    ) ) // constants.TILESIZE , (colShape.entity.position[1] + (colShape.entity.dimensions[1] // 2) ) // constants.TILESIZE )
@@ -62,10 +64,12 @@ class PhysicManager(object):
                     colShape.entity.mapColWhileMoveUp(top[0],top[1])
                     
             elif colShape.entity.velocity[1] > 0:                   #bewegt sich nach unten
-                if map.getTileDangerousness(0, bottom[0], bottom[1]) == True:
-                    colShape.entity.setDead()
-                if map.getTileAccessibility(0, bottom[0], bottom[1]) == True:
-                    colShape.entity.mapColWhileMoveDown(bottom[0], bottom[1])
+                for x in range(max(0, bottom[0]), min(map.getDimensions()[0], (colShape.entity.position[0] + (colShape.entity.dimensions[0] // 2 - 1) / constants.TILESIZE + 1))):
+                    y = (colShape.entity.position[1] + (colShape.entity.dimensions[1]    ) ) // constants.TILESIZE -1 / constants.TILESIZE
+                    if map.getTileDangerousness(0, bottom[0], bottom[1]) == True:
+                        colShape.entity.setDead()
+                    if map.getTileAccessibility(0, x, y) == True:
+                        colShape.entity.mapColWhileMoveDown(x, y)
             
             if colShape.entity.velocity[0] > 0:                     #Bewegung nach rechts
                 if map.getTileDangerousness(0, rightSide[0], rightSide[1]) == True:
@@ -130,14 +134,12 @@ class ColShape(object):
     def __init__(self, entity, physics):
         self.entity = entity
         self.physics = physics
-        self.rectList = []
-    
+        self.outerRect = None
+        self.innerRectsDict = {}
     
     def addRect(self, posUpperLeft, dimensions, isBody, isSpike):
         self.rectList.append(ColRect(self, posUpperLeft, dimensions, isBody, isSpike))
-    
-   # def getAbsoluteColRectList(self):
-    #    return (rect.getAbsoluteRect(self.entity.position) for rect in self.rectList)
+
     def getAbsoluteColRectList(self):
         return (rect for rect in self.rectList)
     

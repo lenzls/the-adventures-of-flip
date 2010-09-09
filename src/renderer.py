@@ -79,23 +79,19 @@ class RenderManager(object):
         '''
         cameraOffset = util.Vector(0,0)
         
-        #if (playerInstance.position[0] > (constants.RESOLUTION[0] - 100)) or (playerInstance.position[1] > (constants.RESOLUTION[1] - 100)):
-        #    cameraOffset = util.Vector(playerInstance.position[0]-(constants.RESOLUTION[0] - 100),playerInstance.position[1]-(constants.RESOLUTION[1] - 100))
-        #elif  (playerInstance.position[0] < (100)) or (playerInstance.position[1] < (100)):
-        #    cameraOffset = util.Vector(100-playerInstance.position[0],100-playerInstance.position[1])
-        if (playerInstance.position[0]-self.camera[0] > (constants.RESOLUTION[0] - 100)):
-            print "rechts draussen", (playerInstance.position[0]-self.camera[0])-(constants.RESOLUTION[0] - 100), 0
-            cameraOffset = util.Vector((playerInstance.position[0]-self.camera[0])-(constants.RESOLUTION[0] - 100), 0)
-        #if (playerInstance.position[1]-self.camera[0] > (constants.RESOLUTION[1] - 100)):
-        #    print "unten draussen", 0, (playerInstance.position[1]-self.camera[1])-(constants.RESOLUTION[1] - 100)
-        #    cameraOffset = util.Vector(0, (playerInstance.position[1]-self.camera[1])-(constants.RESOLUTION[1] - 100))
+        if (playerInstance.position[0]-self.camera[0] > (constants.RESOLUTION[0] )):
+            cameraOffset = util.Vector((playerInstance.position[0]-self.camera[0])-(constants.RESOLUTION[0] ), 0)
+        
+        #if playerInstance.position[0] - constants.RESOLUTION[0]/2 > 0:
+        #    self.camera = util.Vector(playerInstance.position[0] - constants.RESOLUTION[0]/2 , 0)
+
 
             
             
         
         
         self.camera += cameraOffset
-        print self.camera
+        #print self.camera
      
 class Sprite(object):
     '''respresents all sprites(animation(s)) of an entity '''
@@ -139,3 +135,7 @@ class Sprite(object):
     
     def getCurFrameGraphic(self):
         return self.curAni[self.curFrame]
+    
+    def renderGrid(self):
+        for i in range(5):
+            None

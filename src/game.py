@@ -60,36 +60,54 @@ class StateManager(object):
         '''
         self.run = False
         
-    def startGame(self):        
-        '''set the starting time; set the first update times'''
+    def startGame(self):
+        timer = pygame.time.Clock()
+        
+        a = 0
+        b = 0
+        
+        while self.run:
+            if timer.get_fps() != 0:
+                a += timer.get_fps()
+                b += 1
+                #print a/b
+            self.curState.render()
+            self.curState.handleInput()
+            self.curState.update()
+            pygame.display.update()
+            
+            timer.tick(constants.FPS)
+            
+           
+        
+    def altStartGame(self): # NOT working correctly
         
         curMilliseconds = pygame.time.get_ticks()
         nextRenderMilliseconds = curMilliseconds
         nextTickMilliseconds = curMilliseconds
-        '''-------------------------------------------------'''
-        
-        '''main loop:'''
+
         while self.run:
-            '''only the rendering'''
+            clock.tick()
+            print clock.get_fps()
+        
             if nextRenderMilliseconds <= curMilliseconds:
                 while nextRenderMilliseconds <= curMilliseconds:
-                    
+        
                     self.curState.render()
-                    
+        
                     nextRenderMilliseconds += (1000 // constants.RENDER_FPS)
-            '''------------------'''
-            '''update everything'''
+
             while nextTickMilliseconds <= curMilliseconds:
-                
+        
                 self.curState.handleInput()
                 self.curState.update()
-                
-                nextTickMilliseconds += (1000 // constants.LOGIC_FPS)
-            '''------'''
-            pygame.time.wait(min(nextTickMilliseconds, nextRenderMilliseconds) - curMilliseconds) #let the process sleep until the next sheduled update
+        
+                nextTickMilliseconds += (1000 // constants.LOGIC_FPS)##
+
+            pygame.time.wait(min(nextTickMilliseconds, nextRenderMilliseconds) - curMilliseconds)
             curMilliseconds = pygame.time.get_ticks()
             pygame.display.update()
-        '''----------'''
+
         
 class GameState(object):
     def __init__(self, stateManager):

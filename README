@@ -22,7 +22,7 @@ Fortsetzung folgt...
 
 
 TODO: 
-- nearly everything
+- rewrite physics class. especially colRect and the whole col detection
 
 changelog:
 ### 0.5.2 ###

@@ -38,6 +38,7 @@ class Player():
         self.colShape   = self.physics.createColShape(self)
         
         self._loadInfo(infoTree)
+        self.colShape.loadInfo()
         
         self.sprite.setAni('idle')
 
@@ -84,7 +85,7 @@ class Player():
                                     if posUpperLeftNode.nodeName == 'horizontal':
                                         posUpperLeft[0] = int(posUpperLeftNode.firstChild.data)
                                     elif posUpperLeftNode.nodeName == 'vertical':
-                                        posUpperLeft[1] = int(posUpperLeftNode.firstChild.data)      
+                                        posUpperLeft[1] = int(posUpperLeftNode.firstChild.data)
                             elif colRectInfoNode.nodeName == 'dimensions':
                                 for dimensionsNode in colRectInfoNode.childNodes:
                                     if dimensionsNode.nodeName == 'horizontal':
@@ -107,7 +108,8 @@ class Player():
         
         self.renderer.updateCamera(self)
         
-        #print 'playerAbsPos: ',self.position
+        print 'playerAbsPos: ',self.position
+        print "cam", self.renderer.camera
         #print 'playerVel: ',self.velocity
         
     def getIsAlive(self):
