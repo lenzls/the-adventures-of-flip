@@ -1,0 +1,9 @@
+collision-ideas
+
+collision-rect:
+- one 'full-body'-rect (as big as the sprite as the entity)
+	- used for a quick test if there are more test (with body-part-rect) necessary
+- smaller 'body-part'-rects inside this rect
+	- position: relative to upperleft-corner of the full-body rect
+	- dimensions: fixed px
+	- position+dimensions has to be <= full-body-rect and >= 0
