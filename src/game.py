@@ -26,7 +26,7 @@ class StateManager(object):
     def __init__(self, resolution):
         '''
         
-        @param resolution: screen resolution
+        @param resolution: screen resolutio
         '''
         
         self.resolution = resolution
