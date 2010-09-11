@@ -23,6 +23,7 @@ Fortsetzung folgt...
 
 TODO: 
 - rewrite physics class. especially colRect and the whole col detection
+- create new xml specification (look whether attributes or childElements)
 
 changelog:
 ### 0.5.5 ###
