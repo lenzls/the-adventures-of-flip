@@ -6,8 +6,8 @@ map-file:
 - 'nextLvl'-information not in the mapFile. should be a separate(xml)-document
 
 entity-file'
--  rename entitiesInfo and entities nodes
+- rename entitiesInfo and entities nodes
 - rename 'points' to something better
 - 'life' is it relly life or only hp?
-- dimensions are redundant: calculate from image/colrects?
+- dimensions are redundant: calculate from colrects?
 - mapFie information is not needed?

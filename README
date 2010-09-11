@@ -1,5 +1,5 @@
 ---- The Adventures of Flip! ----
-Verison: 0.5.2
+Verison: 0.5.5
 
 [German/Deutsch]:
 
@@ -25,6 +25,8 @@ TODO:
 - rewrite physics class. especially colRect and the whole col detection
 
 changelog:
+### 0.5.5 ###
+- base version of rewrite(!)
 ### 0.5.2 ###
 - back to python 2.6.4
 ### 0.5.1 ###
