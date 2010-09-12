@@ -24,7 +24,7 @@ class Player():
         self.map = map
         self.type = 'player'
         self.life = 0
-        self.isAlive = True
+        self.alive = True
         self.position = util.Vector(position[0],position[1])
         self.dimensions = [0,0]
         self.velocity = util.Vector(0,0)
@@ -112,8 +112,8 @@ class Player():
         print "cam", self.renderer.camera
         #print 'playerVel: ',self.velocity
         
-    def getIsAlive(self):
-        return self.isAlive
+    def isAlive(self):
+        return self.alive
         
     def walkRight(self):
         self.velocity += self.movespeed
@@ -169,6 +169,6 @@ class Player():
     
     def setDead(self):
         print 'TOoooooooooooooooooooooooooooT'
-        self.isAlive = False
+        self.alive = False
         
         

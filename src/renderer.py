@@ -31,7 +31,7 @@ class RenderManager(object):
         self.spriteList.append(sprite)
     
     def cleanSpriteList(self):
-        ''' deletes the old spriteList and creates a new one (e.g.: 2 start a new level)''' 
+        ''' deletes the old spriteList and creates a new one (e.g.: to start a new level)''' 
         
         self.spriteList = []
         
@@ -42,25 +42,27 @@ class RenderManager(object):
         
     def updateSpriteList(self):
         ''' deletes dead entities from the spriteList'''
-        self.spriteList = [sprite for sprite in self.spriteList if sprite.entity.getIsAlive()]
+        self.spriteList = [sprite for sprite in self.spriteList if sprite.entity.isAlive()]
         
     def renderSprites(self):
         for sprite in self.spriteList:
-            self.screen.blit(sprite.getCurFrameGraphic(), sprite.entity.position.getTuple())
+            self.screen.blit(sprite.getCurFrame().getGraphic(), sprite.entity.position.getTuple())
     
-    def renderMapLayer1(self, map):
-        for y in range(max(self.camera[1] // constants.TILESIZE, 0), min(map.getDimensions()[1], (self.camera[1] + constants.RESOLUTION[1]) // constants.TILESIZE + 1)):
-            for x in range(max(self.camera[0] // constants.TILESIZE, 0), min(map.getDimensions()[0], (self.camera[0] + constants.RESOLUTION[0]) // constants.TILESIZE + 1)):
+    #TODO: check rendering methods
+    def renderMapLayer(self, mapIndex, map):
+        ''' renders map Layer
+            @param mapIndex: 0 => Layer1
+                   map     : 1 => Layer2
+        '''
+        for y in range( max(self.camera[1] // constants.TILESIZE, 0), 
+                        min(map.getDimensions()[1], (self.camera[1] + constants.RESOLUTION[1]) // constants.TILESIZE + 1)):
+            for x in range(max(self.camera[0] // constants.TILESIZE, 0), 
+                           min(map.getDimensions()[0], (self.camera[0] + constants.RESOLUTION[0]) // constants.TILESIZE + 1)):
                 if map.getMapGrid()[0][x][y] != 0:
                     self.screen.blit(map.tiles[map.getMapGrid()[0][x][y]][2], (x*constants.TILESIZE - self.camera[0],y*constants.TILESIZE - self.camera[1]))
-    
-    def renderMapLayer2(self, map):
-        for y in range(max(self.camera[1] // constants.TILESIZE, 0), min(map.getDimensions()[1], (self.camera[1] + constants.RESOLUTION[1]) // constants.TILESIZE + 1)):
-            for x in range(max(self.camera[0] // constants.TILESIZE, 0), min(map.getDimensions()[0], (self.camera[0] + constants.RESOLUTION[0]) // constants.TILESIZE + 1)):
-                if map.getMapGrid()[1][x][y] != 0:
-                    self.screen.blit(map.tiles[map.getMapGrid()[1][x][y]][2], (x*constants.TILESIZE - self.camera[0],y*constants.TILESIZE - self.camera[1]))
-    
+
     def renderBg(self, map):
+        #TODO: change bgLayer data (new class?!)
         self.screen.fill((0,0,0));
         for bgLayer in map.bgLayers:
             self.screen.blit(bgLayer[1], (bgLayer[2] - self.camera[0], 0))

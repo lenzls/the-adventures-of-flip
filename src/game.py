@@ -154,9 +154,9 @@ class GameState(State):
     
     def render(self):
         self.stateManager.renderManager.renderBg(self.stateManager.levelManager.curLevel.map)
-        self.stateManager.renderManager.renderMapLayer1(self.stateManager.levelManager.curLevel.map)
+        self.stateManager.renderManager.renderMapLayer(0, self.stateManager.levelManager.curLevel.map)
         self.stateManager.renderManager.renderSprites()
-        self.stateManager.renderManager.renderMapLayer2(self.stateManager.levelManager.curLevel.map)
+        self.stateManager.renderManager.renderMapLayer(1, self.stateManager.levelManager.curLevel.map)
     
 class MenuState(State):
     def __init__(self, stateManager):

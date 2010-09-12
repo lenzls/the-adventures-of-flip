@@ -44,7 +44,7 @@ class PhysicManager(object):
 
     def updateColShapeList(self):
         ''' deletes dead entities from the colShapeList'''
-        self.colShapeList = [colShape for colShape in self.colShapeList if colShape.entity.getIsAlive()]
+        self.colShapeList = [colShape for colShape in self.colShapeList if colShape.entity.isAlive()]
               
     def checkEntityMapCollision(self, map):
         for colShape in self.colShapeList:            

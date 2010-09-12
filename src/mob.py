@@ -21,7 +21,7 @@ class Mob(object):
         self.renderer = renderer
         self.physics = physics
         self.map = map
-        self.isAlive = True
+        self.alive = True
         
         self.jumplock = False
         
@@ -42,7 +42,7 @@ class Mob(object):
         pass
         #geschwindigkeiten
         
-    def getIsAlive(self):
+    def isAlive(self):
         return self.isAlive     
 
 class Grob(Mob):
