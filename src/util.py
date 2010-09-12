@@ -12,7 +12,6 @@ def load_image(filename):
     try:
         surface = pygame.image.load(path)
     except:
-        print path
         print "Grafik: ",path," kann nicht geladen werden!"
     return surface.convert_alpha()
 

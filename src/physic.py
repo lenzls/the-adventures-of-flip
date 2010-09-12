@@ -136,6 +136,7 @@ class ColShape(object):
         self.physics = physics
         self.outerRect = None
         self.innerRectsDict = {}
+        self.rectList = []
     
     def addRect(self, posUpperLeft, dimensions, isBody, isSpike):
         self.rectList.append(ColRect(self, posUpperLeft, dimensions, isBody, isSpike))

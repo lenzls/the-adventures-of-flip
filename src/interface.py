@@ -5,6 +5,7 @@ Created on 09.07.2009
 '''
 
 import pygame
+import constants
 
 class Interface(object):
     '''
@@ -17,7 +18,7 @@ class Interface(object):
         Constructor
         '''
         self.schriftart = pygame.font.Font('../data/courier_new.ttf',15)
-        self.bar = pygame.Surface((800,17))
+        self.bar = pygame.Surface((constants.RESOLUTION[0],17))
         self.bar.fill((0,0,0))
         
     def update(self, score):

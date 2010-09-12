@@ -26,11 +26,11 @@ class StateManager(object):
     def __init__(self, resolution):
         '''
         
-        @param resolution: screen resolutio
+        @param resolution: screen resolution
         '''
         
         self.resolution = resolution
-        
+
         pygame.display.set_caption("The Adventures of Flip")
         pygame.display.set_icon(pygame.image.load('../data/icon.png'))
         if constants.FULLSCREEN:
@@ -108,16 +108,25 @@ class StateManager(object):
             curMilliseconds = pygame.time.get_ticks()
             pygame.display.update()
 
-        
-class GameState(object):
+class State():
     def __init__(self, stateManager):
-        
         self.stateManager = stateManager
+    def handleInput(self):
+        print("parent class")
+    def update(self):
+        pass
+    def render(self):
+        pass
         
+class GameState(State):
+    def __init__(self, stateManager):
+        State.__init__(self, stateManager)
+        
+
         self.stateManager.levelManager.loadLevel(0)
         
     def handleInput(self):
-        
+        print("child class")
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.stateManager.endGame()
@@ -149,10 +158,9 @@ class GameState(object):
         self.stateManager.renderManager.renderSprites()
         self.stateManager.renderManager.renderMapLayer2(self.stateManager.levelManager.curLevel.map)
     
-class MenuState(object):
+class MenuState(State):
     def __init__(self, stateManager):
-        
-        self.stateManager = stateManager
+        State.__init__(self, stateManager)
         
         
     def handleInput(self):
@@ -169,10 +177,9 @@ class MenuState(object):
     def render(self):
         pass
     
-class PauseState(object):
+class PauseState(State):
     def __init__(self, stateManager):
-        
-        self.stateManager = stateManager
+        State.__init__(self, stateManager)
         
     def handleInput(self):
         
