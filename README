@@ -23,6 +23,7 @@ Fortsetzung folgt...
 
 TODO: 
 - rewrite physics class. especially colRect and the whole col detection
+- change rest of project to new sprite class
 
 changelog:
 ### 0.5.5 ###

@@ -92,50 +92,90 @@ class RenderManager(object):
         
         self.camera += cameraOffset
         #print self.camera
-     
+
 class Sprite(object):
-    '''respresents all sprites(animation(s)) of an entity '''
+    ''' respresents the graphical reprentation of one entity '''
     
     def __init__(self, entity, renderer):
         self.entity = entity
         self.renderer = renderer
         
-        self.spriteList = {}
-        
-        self.curFrame = 0
+        self.animationDict = {} #{type,Animation}
+
         self.curAni = None
-        self.aniDelay = 3   #to switch less often(more realistic)
-        self.aniDelayCounter = 0
-        
-    def addAnimation(self, aniType, graphicPaths):
-        """ Add an animation to the animation list.
-        
-        This animation could be a single image or a sequence of images.
-        graphicPaths: list of strings(Paths)"""
-        
-        self.spriteList[aniType] = []
-        for graphicPath in graphicPaths:
-            if not graphicPath in self.renderer.imageList:    #if the image doesn't exist in the imageDict, it gets added
-                self.renderer.imageList[graphicPath] = util.load_image(graphicPath)
-            self.spriteList[aniType].append(self.renderer.imageList[graphicPath])
+
+    def addAnimation(self, aniType):
+        self.animationDict[aniType] = Animation(aniType, self.renderer)
+    
+    def addImage(self, aniType, index, path):
+        self.animationDict[aniType].addImage(index, path)
     
     def setAni(self, aniType):
-        self.curAni = self.spriteList[aniType]
-        self.curFrame = 0
-        
-    def update(self):
-        if self.aniDelayCounter < self.aniDelay:
-            self.aniDelayCounter += 1
-        else:
-            if self.curFrame + 1 == len(self.curAni) :
-                self.curFrame = 0
-            else:
-                self.curFrame += 1
-            self.aniDelayCounter = 0
+        self.curAni = self.animationDict[aniType]
+        self.curAni.reset()
     
-    def getCurFrameGraphic(self):
-        return self.curAni[self.curFrame]
+    def getCurFrame(self):
+        ''' @return: image-object of the current frame in the current animation '''
+        return self.curAni.getCurFrame()
+
     
     def renderGrid(self):
-        for i in range(5):
-            None
+        ''' needed?! '''
+        pass
+            
+    class Animation():
+        ''' respresents on animation of an entity '''
+        
+        def __init__(self, type, renderer):
+            self.type = ""
+            self.imageDict = {} #{index,Image}
+            self.curFrame = 0
+            self.aniDelay = 3   #to switch less often(more realistic)
+            self.aniDelayCounter = 0
+            self.renderer = renderer
+        
+        def addImage(self, index, path):
+            ''' adds image object to animation '''
+            
+            self.imageDict[index] = Image(path, self.renderer)
+            
+        def reset(self):
+            ''' resets the Animation '''
+            
+            self.curFrame = 0;
+            self.aniDelayCounter = 0
+            
+        def update(self):
+            if self.aniDelayCounter < self.aniDelay:
+                self.aniDelayCounter += 1
+            else:
+                if self.curFrame + 1 == len(self.imageDict): #TODO: check if len(dict) works as intended
+                    self.curFrame = 0
+                else:
+                    self.curFrame += 1
+                self.aniDelayCounter = 0
+
+        def getCurFrame(self):
+            ''' @return: image-object of the current frame '''
+            return self.imageDict[curFrame]
+            
+        class Image():
+            ''' respresents one Image of a animation '''
+            
+            def __init__(self, path, renderer):
+                self.dimensions = [0,0];
+                self.renderer = renderer
+
+                if not path in self.renderer.imageList:    #if the image doesn't exist in the imageDict, it gets added
+                    self.renderer.imageList[path] = util.load_image(graphicPath)
+
+                self.image = self.renderer.imageList[path];
+            
+                #TODO: get dimensions from image
+            
+            def getGraphic(self):
+                ''' 
+                @return: the real grafic(pygame surface)
+                '''
+                
+                return self.image
