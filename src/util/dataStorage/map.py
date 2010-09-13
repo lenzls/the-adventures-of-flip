@@ -1,6 +1,8 @@
 '''
 Created on 13.09.2010
 
+should be only classes with members and getter/setters pure data storage
+
 @author: simon
 '''
 from util.vector import Vector
@@ -35,3 +37,12 @@ class BgLayer(object):
         self.speed = speed
         self.graphic = graphic
         self.position = Vector(0,0)
+        
+    def getSpeed(self):
+        return self.speed
+    
+    def getGraphic(self):
+        return self.graphic
+
+    def getPosition(self):
+        return self.position

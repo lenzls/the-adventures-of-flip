@@ -69,6 +69,8 @@ class Player():
                         for cNode in animationNode.childNodes:
                             if cNode.nodeName == 'type':
                                 animationType = str(cNode.firstChild.data)
+
+
                             elif cNode.nodeName == "image":
                                 for ccNode in cNode.childNodes:
                                     if ccNode.nodeName  == "graphic":

@@ -52,20 +52,20 @@ class RenderManager(object):
     def renderMapLayer(self, mapIndex, map):
         ''' renders map Layer
             @param mapIndex: 0 => Layer1
-                   map     : 1 => Layer2
+                           : 1 => Layer2
         '''
         for y in range( max(self.camera[1] // constants.TILESIZE, 0), 
                         min(map.getDimensions()[1], (self.camera[1] + constants.RESOLUTION[1]) // constants.TILESIZE + 1)):
             for x in range(max(self.camera[0] // constants.TILESIZE, 0), 
                            min(map.getDimensions()[0], (self.camera[0] + constants.RESOLUTION[0]) // constants.TILESIZE + 1)):
-                if map.getMapGrid()[0][x][y] != 0:
-                    self.screen.blit(map.tiles[map.getMapGrid()[0][x][y]][2], (x*constants.TILESIZE - self.camera[0],y*constants.TILESIZE - self.camera[1]))
+                if map.getMapGrid()[mapIndex][x][y] != 0:
+                    self.screen.blit(map.tiles[map.getMapGrid()[mapIndex][x][y]][2], (x*constants.TILESIZE - self.camera[0],y*constants.TILESIZE - self.camera[1]))
 
     def renderBg(self, map):
-        #TODO: change bgLayer data (new class?!)
+
         self.screen.fill((0,0,0));
         for bgLayer in map.bgLayers:
-            self.screen.blit(bgLayer[1], (bgLayer[2] - self.camera[0], 0))
+            self.screen.blit(bgLayer.getGraphic(), (bgLayer.getPosition()[0] - self.camera[0], 0))
     
     def updateBg(self, map):
         '''update method for paralax scrolling'''
@@ -79,6 +79,7 @@ class RenderManager(object):
         
         @param playerInstance: instance of the current player object
         '''
+        #FIXME: fix whole method
         cameraOffset = Vector(0,0)
         
         if (playerInstance.position[0]-self.camera[0] > (constants.RESOLUTION[0] )):
@@ -98,6 +99,8 @@ class RenderManager(object):
 class Sprite(object):
     ''' respresents the graphical reprentation of one entity '''
     
+    #FIXME: restructure whole class and child classes
+    
     def __init__(self, entity, renderer):
         self.entity = entity
         self.renderer = renderer
@@ -106,8 +109,8 @@ class Sprite(object):
 
         self.curAni = None
 
-    def addAnimation(self, aniType):
-        self.animationDict[aniType] = self.Animation(aniType, self.renderer)
+    def addAnimation(self, aniType, graphics):
+        self.animationDict[aniType] = self.Animation(aniType, self.renderer, graphics)
     
     def addImage(self, aniType, index, path):
         self.animationDict[aniType].addImage(index, path)
@@ -128,13 +131,16 @@ class Sprite(object):
     class Animation():
         ''' respresents on animation of an entity '''
         
-        def __init__(self, type, renderer):
+        def __init__(self, type, renderer, initGraphics):
             self.type = ""
             self.imageDict = {} #{index,Image}
             self.curFrame = 0
             self.aniDelay = 3   #to switch less often(more realistic)
             self.aniDelayCounter = 0
             self.renderer = renderer
+            
+            for graphic in initGraphics:
+                self.addImage(index, graphic)
         
         def addImage(self, index, path):
             ''' adds image object to animation '''
@@ -167,17 +173,24 @@ class Sprite(object):
             def __init__(self, path, renderer):
                 self.dimensions = [0,0];
                 self.renderer = renderer
+                
+                self.graphic = util.load_image(path)
 
                 if not path in self.renderer.imageList:    #if the image doesn't exist in the imageDict, it gets added
-                    self.renderer.imageList[path] = util.load_image(path)
+                    self.renderer.imageList[path] = self.graphic
 
-                self.image = self.renderer.imageList[path];
             
-                #TODO: get dimensions from image
+                self._calcDimensions()
+
+            def _calcDimensions(self):
+                self.dimensions = self.graphic.getSize()
             
             def getGraphic(self):
                 ''' 
                 @return: the real grafic(pygame surface)
                 '''
                 
-                return self.image
+                return self.graphic
+
+            def getDimensions(self):
+                return self.dimensions

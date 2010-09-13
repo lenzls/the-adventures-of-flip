@@ -24,6 +24,7 @@ Fortsetzung folgt...
 TODO: 
 - rewrite physics class. especially colRect and the whole col detection
 - create xsd schema files
+- restructure sprite handling
 
 changelog:
 ###       ###
