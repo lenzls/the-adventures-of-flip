@@ -23,10 +23,11 @@ Fortsetzung folgt...
 
 TODO: 
 - rewrite physics class. especially colRect and the whole col detection
-- create new xml specification (look whether attributes or childElements)
 - create xsd schema files
 
 changelog:
+###       ###
+- added new xml spec
 ### 0.5.5 ###
 - base version of rewrite(!)
 ### 0.5.2 ###
