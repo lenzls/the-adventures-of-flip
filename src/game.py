@@ -41,7 +41,9 @@ class StateManager(object):
         self.levelManager = levelManager.LevelManager(self.physicManager, self.renderManager)
         self.interface = interface.Interface()
         
-        self.clock 
+        #=======================================================================
+        # self.clock 
+        #=======================================================================
         
         self.stateList = []
         self.stateList.append(GameState(self))
