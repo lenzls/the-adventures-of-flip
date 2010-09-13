@@ -5,7 +5,7 @@ Created on 25.07.2009
 '''
 
 import entities.mob as mob
-import entities.player as player
+from entities.player import Player
 import map
 import xml.dom.minidom as dom
 
@@ -56,35 +56,32 @@ class Level(object):
         
         self._loadEntityFile(self.map.entityFilePath)
         
-        
-        
-    
+
     def _loadEntityFile(self, entityFile):
         #durchsucht nur den "Entities"-teil der xml und gibt dann an die entity klasse den "entities-info" baum als parameter mit
         xmlEntityMap = dom.parse('../data/level/'+entityFile)
-        entityInfoTrees = {}
+        entityInfoTrees = {}    #{name, infoTreeNode}
         for node in xmlEntityMap.firstChild.childNodes:
-            if node.nodeName == 'EntitiesInfo':
-                for childNode in node.childNodes:
-                    if childNode.nodeName == 'Entity':
-                        entityInfoTrees[childNode.getAttribute('name')] = childNode
-            elif node.nodeName == 'Entities':
-                for childNode in node.childNodes:
-                    if childNode.nodeName == 'absEntity':
-                        
+            if node.nodeName == 'entitySpecification':
+                for cNode in node.childNodes:
+                    if cNode.nodeName == 'entitySpec':
+                        entityInfoTrees[cNode.getAttribute('name')] = cNode
+            elif node.nodeName == 'entities':
+                for cNode in node.childNodes:
+                    if cNode.nodeName == 'absEntity':
                         entityPos = [0,0]
-                        for childChildNode in childNode.childNodes:
-                            if childChildNode.nodeName == 'position':
-                                for childChildChildNode in childChildNode.childNodes:
-                                    if childChildChildNode.nodeName == 'horizontal':
-                                        entityPos[0] = int(childChildChildNode.firstChild.data)
-                                    elif childChildChildNode.nodeName == 'vertical':
-                                        entityPos[1] = int(childChildChildNode.firstChild.data)
+                        for ccNode in cNode.childNodes:
+                            if ccNode.nodeName == 'position':
+                                for cccNode in ccNode.childNodes:
+                                    if cccNode.nodeName == 'horizontal':
+                                        entityPos[0] = int(cccNode.firstChild.data)
+                                    elif cccNode.nodeName == 'vertical':
+                                        entityPos[1] = int(cccNode.firstChild.data)
                         
-                        if childNode.getAttribute('name') == 'player':
-                            self.player = player.Player(entityPos, self.map, entityInfoTrees['player'], self.physics, self.renderer)
+                        if cNode.getAttribute('name') == 'player':
+                            self.player = Player(entityPos, self.map, entityInfoTrees['player'], self.physics, self.renderer)
                             self.entities.append(self.player)
-                        elif childNode.getAttribute('name') == 'grob':
+                        elif cNode.getAttribute('name') == 'grob':
                             self.entities.append(mob.Grob(entityPos, self.map, entityInfoTrees['grob'], self.physics, self.renderer))
         
     def updateEntities(self):

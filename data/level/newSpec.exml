@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <entityFile>
 	<entitiySpecification>
-		<entitySpec>
+		<entitySpec name="player">
 			<type>player</type>
-			<name>player</name>
 			<points>0</points>
 			<life>100</life>
 			<movespeed>3</movespeed>

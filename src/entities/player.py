@@ -23,7 +23,7 @@ class Player():
         self.physics = physics
         self.map = map
         self.type = 'player'
-        self.life = 0
+        self.life = 0   # 0-100?!
         self.isAlive = True
         self.position = vector.Vector(position[0],position[1])
         self.dimensions = [0,0]
@@ -44,34 +44,38 @@ class Player():
 
         
     def _loadInfo(self, infoTree):
-        #animations
         for infoNode in infoTree.childNodes:
-            if infoNode.nodeName == 'life':
+            if infoNode.nodeName == 'type':
+                pass
+            elif infoNode.nodeName == "points":
+                pass
+            elif infoNode.nodeName == "life":
                 self.life = int(infoNode.firstChild.data)
             elif infoNode.nodeName == 'movespeed':
                 self.movespeed = vector.Vector(int(infoNode.firstChild.data),0)
             elif infoNode.nodeName == 'jumpspeed':
                 self.jumpspeed = vector.Vector(0,int(infoNode.firstChild.data))
-            elif infoNode.nodeName == 'dimensions':
-                for childNode in infoNode.childNodes:
-                    if childNode.nodeName == 'horizontal':
-                        self.dimensions[0] = int(childNode.firstChild.data)
-                    elif childNode.nodeName == 'vertical':
-                        self.dimensions[1] = int(childNode.firstChild.data)
             elif infoNode.nodeName == 'jumpSound':
-                self.jumpSound = util.load_sound(str(infoNode.firstChild.data))
-            elif infoNode.nodeName == 'sprites':
+                for cNode in infoNode.childNodes:
+                    if cNode.nodeName == "soundFile":
+                        self.jumpSound = util.load_sound(str(cNode.firstChild.data))
+
+
+            elif infoNode.nodeName == 'sprite':
                 for animationNode in infoNode.childNodes:
                     if animationNode.nodeName == 'animation':
-                        animationType = animationNode.getAttribute('type')
-                        animation = []
-                        for spriteNode in animationNode.childNodes:
-                            if spriteNode.nodeName == 'sprite':
-                                for imageNode in spriteNode.childNodes:
-                                    if imageNode.nodeName == 'image':
-                                        animation.append(str(imageNode.firstChild.data))
-                        self.sprite.addAnimation(animationType, animation)
-                print 'ani Added'
+                        animationIndex = animationNode.getAttribute('index')
+                        animationGraphics = []
+                        for cNode in animationNode.childNodes:
+                            if cNode.nodeName == 'type':
+                                animationType = str(cNode.firstChild.data)
+                            elif cNode.nodeName == "image":
+                                for ccNode in cNode.childNodes:
+                                    if ccNode.nodeName  == "graphic":
+                                        animationGraphics.append(str(ccNode.firstChild.data))
+
+                        self.sprite.addAnimation(animationType, animationGraphics)
+
             elif infoNode.nodeName == 'colShape':
                 for colRectNode in infoNode.childNodes:
                     if colRectNode.nodeName == 'colRect':
@@ -80,6 +84,7 @@ class Player():
                         isSpike      = None
                         isBody       = None
                         for colRectInfoNode in colRectNode.childNodes:
+                            colRectIndex = int(colRectInfoNode.getAttribute("index"))
                             if colRectInfoNode.nodeName == 'posUpperLeft':
                                 for posUpperLeftNode in colRectInfoNode.childNodes:
                                     if posUpperLeftNode.nodeName == 'horizontal':
@@ -97,9 +102,12 @@ class Player():
                             elif colRectInfoNode.nodeName == 'isSpike':
                                 isSpike =   bool(colRectInfoNode.firstChild.data)
                         self.colShape.addRect(posUpperLeft, dimensions, isBody, isSpike)
-                        
-        print self.sprite.spriteList
-        
+
+            self._calcDimensions()
+
+    def _calcDimensions(self):
+        pass
+    
     def update(self):
         if self.velocity[1] < 15:
             self.velocity += self.physics.gravity
