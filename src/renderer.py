@@ -4,9 +4,9 @@ Created on 07.07.2009
 @author: CaptnLenz
 '''
 
-import pygame
-import util
-import constants
+from util.vector import Vector
+import util.constants as constants
+import util.util as util
 
 class RenderManager(object):
     '''
@@ -20,7 +20,7 @@ class RenderManager(object):
         self.screen = screen
         self.spriteList = []
         self.imageList = {} #list where all images stored(to avoid loading 2 times the same picture)
-        self.camera = util.Vector(0,0)
+        self.camera = Vector(0,0)
         
     def createSprite(self, entity):
         sprite = Sprite(entity, self)
@@ -77,10 +77,10 @@ class RenderManager(object):
         
         @param playerInstance: instance of the current player object
         '''
-        cameraOffset = util.Vector(0,0)
+        cameraOffset = Vector(0,0)
         
         if (playerInstance.position[0]-self.camera[0] > (constants.RESOLUTION[0] )):
-            cameraOffset = util.Vector((playerInstance.position[0]-self.camera[0])-(constants.RESOLUTION[0] ), 0)
+            cameraOffset = Vector((playerInstance.position[0]-self.camera[0])-(constants.RESOLUTION[0] ), 0)
         
         #if playerInstance.position[0] - constants.RESOLUTION[0]/2 > 0:
         #    self.camera = util.Vector(playerInstance.position[0] - constants.RESOLUTION[0]/2 , 0)

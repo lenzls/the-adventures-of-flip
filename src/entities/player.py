@@ -4,10 +4,10 @@ Created on 07.07.2009
 @author: CaptnLenz
 '''
 
-import pygame
+import util.constants as constants
+import util.util as util
+from util.vector import Vector
 
-import constants
-import util
 
 class Player():
     '''
@@ -23,11 +23,11 @@ class Player():
         self.physics = physics
         self.map = map
         self.type = 'player'
-        self.life = 0
+        self.life = 0   # 0-100?!
         self.isAlive = True
-        self.position = util.Vector(position[0],position[1])
+        self.position = Vector(position[0],position[1])
         self.dimensions = [0,0]
-        self.velocity = util.Vector(0,0)
+        self.velocity = Vector(0,0)
         self.movespeed = None   #util.Vector(3,0)
         self.jumpspeed = None   #util.Vector(0,-13)
         
@@ -44,34 +44,38 @@ class Player():
 
         
     def _loadInfo(self, infoTree):
-        #animations
         for infoNode in infoTree.childNodes:
-            if infoNode.nodeName == 'life':
+            if infoNode.nodeName == 'type':
+                pass
+            elif infoNode.nodeName == "points":
+                pass
+            elif infoNode.nodeName == "life":
                 self.life = int(infoNode.firstChild.data)
             elif infoNode.nodeName == 'movespeed':
-                self.movespeed = util.Vector(int(infoNode.firstChild.data),0)
+                self.movespeed = Vector(int(infoNode.firstChild.data),0)
             elif infoNode.nodeName == 'jumpspeed':
-                self.jumpspeed = util.Vector(0,int(infoNode.firstChild.data))
-            elif infoNode.nodeName == 'dimensions':
-                for childNode in infoNode.childNodes:
-                    if childNode.nodeName == 'horizontal':
-                        self.dimensions[0] = int(childNode.firstChild.data)
-                    elif childNode.nodeName == 'vertical':
-                        self.dimensions[1] = int(childNode.firstChild.data)
+                self.jumpspeed = Vector(0,int(infoNode.firstChild.data))
             elif infoNode.nodeName == 'jumpSound':
-                self.jumpSound = util.load_sound(str(infoNode.firstChild.data))
-            elif infoNode.nodeName == 'sprites':
+                for cNode in infoNode.childNodes:
+                    if cNode.nodeName == "soundFile":
+                        self.jumpSound = util.load_sound(str(cNode.firstChild.data))
+
+
+            elif infoNode.nodeName == 'sprite':
                 for animationNode in infoNode.childNodes:
                     if animationNode.nodeName == 'animation':
-                        animationType = animationNode.getAttribute('type')
-                        animation = []
-                        for spriteNode in animationNode.childNodes:
-                            if spriteNode.nodeName == 'sprite':
-                                for imageNode in spriteNode.childNodes:
-                                    if imageNode.nodeName == 'image':
-                                        animation.append(str(imageNode.firstChild.data))
-                        self.sprite.addAnimation(animationType, animation)
-                print 'ani Added'
+                        animationIndex = animationNode.getAttribute('index')
+                        animationGraphics = []
+                        for cNode in animationNode.childNodes:
+                            if cNode.nodeName == 'type':
+                                animationType = str(cNode.firstChild.data)
+                            elif cNode.nodeName == "image":
+                                for ccNode in cNode.childNodes:
+                                    if ccNode.nodeName  == "graphic":
+                                        animationGraphics.append(str(ccNode.firstChild.data))
+
+                        self.sprite.addAnimation(animationType, animationGraphics)
+
             elif infoNode.nodeName == 'colShape':
                 for colRectNode in infoNode.childNodes:
                     if colRectNode.nodeName == 'colRect':
@@ -80,6 +84,7 @@ class Player():
                         isSpike      = None
                         isBody       = None
                         for colRectInfoNode in colRectNode.childNodes:
+                            colRectIndex = int(colRectInfoNode.getAttribute("index"))
                             if colRectInfoNode.nodeName == 'posUpperLeft':
                                 for posUpperLeftNode in colRectInfoNode.childNodes:
                                     if posUpperLeftNode.nodeName == 'horizontal':
@@ -97,9 +102,12 @@ class Player():
                             elif colRectInfoNode.nodeName == 'isSpike':
                                 isSpike =   bool(colRectInfoNode.firstChild.data)
                         self.colShape.addRect(posUpperLeft, dimensions, isBody, isSpike)
-                        
-        print self.sprite.spriteList
-        
+
+            self._calcDimensions()
+
+    def _calcDimensions(self):
+        pass
+    
     def update(self):
         if self.velocity[1] < 15:
             self.velocity += self.physics.gravity
@@ -138,27 +146,27 @@ class Player():
     def mapColWhileMoveUp(self, x, y):
         oldPosition = self.position
         oldVelocity = self.velocity
-        self.position = util.Vector(oldPosition[0],((y + 1) * constants.TILESIZE) + 1)
+        self.position = Vector(oldPosition[0],((y + 1) * constants.TILESIZE) + 1)
     
     def mapColWhileMoveDown(self, x, y):
         oldPosition = self.position
         oldVelocity = self.velocity
         self.jumplock = False
-        self.position = util.Vector(oldPosition[0], (((y * constants.TILESIZE)-1) - self.dimensions[1]))
-        self.velocity = util.Vector(oldVelocity[0], 1)
+        self.position = Vector(oldPosition[0], (((y * constants.TILESIZE)-1) - self.dimensions[1]))
+        self.velocity = Vector(oldVelocity[0], 1)
     
     def mapColWhileMoveRight(self, x, y):
         print 'collision while right on: ',x,' ',y
         oldPosition = self.position
         oldVelocity = self.velocity
-        self.position = util.Vector(((x * constants.TILESIZE) - 1) - self.dimensions[0],oldPosition[1])
+        self.position = Vector(((x * constants.TILESIZE) - 1) - self.dimensions[0],oldPosition[1])
     
     def mapColWhileMoveLeft(self, x, y):
         print 'collision while left on: ',x,' ',y
         oldPosition = self.position
         oldVelocity = self.velocity
         print 'old position: ',oldPosition
-        self.position = util.Vector((((x + 1) * constants.TILESIZE) + 1), oldPosition[1])
+        self.position = Vector((((x + 1) * constants.TILESIZE) + 1), oldPosition[1])
         print 'new position: ',self.position
         
     def colWin(self, enemy):
