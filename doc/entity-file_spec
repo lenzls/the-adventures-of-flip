@@ -1,0 +1,44 @@
+EntityFile
+	entitySpecification
+		entitySpec (name)
+			type
+			points	#0 for player
+			life	#100 maybe?
+			movespeed
+			jumpspeed
+			jumpSound
+				soundFile
+			sprite
+				animation	(index)
+					type
+					image	(index)
+						graphic
+					image	(index)
+						graphic
+				animation	(index)
+					type
+					image	(index)
+						graphic
+					image	(index)
+						graphic
+			colShape
+				colRect	(index)
+					position
+					dimensions
+					isBody
+					isWeapon
+				colRect	(index)
+					position
+					dimensions
+					isBody
+					isWeapon
+	entities
+		absEntity (name)
+			position
+				hori
+				verti
+		absEntity (name)
+			position
+				hori
+				verti
+					

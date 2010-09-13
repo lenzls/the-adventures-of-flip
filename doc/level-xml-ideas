@@ -8,6 +8,6 @@ map-file:
 entity-file'
 - rename entitiesInfo and entities nodes
 - rename 'points' to something better
-- 'life' is it relly life or only hp?
+- 'life' is it really life or only hp?
 - dimensions are redundant: calculate from colrects?
 - mapFie information is not needed?

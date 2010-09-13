@@ -1,0 +1,59 @@
+file ending level-file:  *.lxml
+file ending entity-file: *.exml
+
+elemt centric!
+
+Map
+	name
+	tiles
+		tile	(index)
+			name
+			type
+			graphic
+			accessibility
+			dangerousness
+		tile	(index)
+			name
+			type
+			graphic
+			accessibility
+			dangerousness
+	background
+		bgLayer	(index)
+			speed
+			graphic
+		bgLayer	(index)
+			speed
+			graphic
+	music
+		backgroundTheme
+			soundFile
+			repeat
+	grid
+		gridLayer	(index)
+			column	(index)
+				row	(index)
+					tileIndex
+				row	(index)
+					tileIndex
+			column	(index)
+				row	(index)
+					tileIndex
+				row	(index)
+					tileIndex
+		gridLayer	(index)
+			column	(index)
+				row	(index)
+					tileIndex
+				row	(index)
+					tileIndex
+			column	(index)
+				row	(index)
+					tileIndex
+				row	(index)
+					tileIndex
+	entityFile
+	
+		
+		
+				

@@ -4,9 +4,9 @@ Created on 07.07.2009
 @author: CaptnLenz
 '''
 
-import pygame
-import util
-import constants
+from util.vector import Vector
+import util.constants as constants
+import util.util as util
 
 class RenderManager(object):
     '''
@@ -20,7 +20,7 @@ class RenderManager(object):
         self.screen = screen
         self.spriteList = []
         self.imageList = {} #list where all images stored(to avoid loading 2 times the same picture)
-        self.camera = util.Vector(0,0)
+        self.camera = Vector(0,0)
         
     def createSprite(self, entity):
         sprite = Sprite(entity, self)
@@ -79,10 +79,10 @@ class RenderManager(object):
         
         @param playerInstance: instance of the current player object
         '''
-        cameraOffset = util.Vector(0,0)
+        cameraOffset = Vector(0,0)
         
         if (playerInstance.position[0]-self.camera[0] > (constants.RESOLUTION[0] )):
-            cameraOffset = util.Vector((playerInstance.position[0]-self.camera[0])-(constants.RESOLUTION[0] ), 0)
+            cameraOffset = Vector((playerInstance.position[0]-self.camera[0])-(constants.RESOLUTION[0] ), 0)
         
         #if playerInstance.position[0] - constants.RESOLUTION[0]/2 > 0:
         #    self.camera = util.Vector(playerInstance.position[0] - constants.RESOLUTION[0]/2 , 0)
@@ -107,7 +107,7 @@ class Sprite(object):
         self.curAni = None
 
     def addAnimation(self, aniType):
-        self.animationDict[aniType] = Animation(aniType, self.renderer)
+        self.animationDict[aniType] = self.Animation(aniType, self.renderer)
     
     def addImage(self, aniType, index, path):
         self.animationDict[aniType].addImage(index, path)
@@ -139,7 +139,7 @@ class Sprite(object):
         def addImage(self, index, path):
             ''' adds image object to animation '''
             
-            self.imageDict[index] = Image(path, self.renderer)
+            self.imageDict[index] = self.Image(path, self.renderer)
             
         def reset(self):
             ''' resets the Animation '''
@@ -159,7 +159,7 @@ class Sprite(object):
 
         def getCurFrame(self):
             ''' @return: image-object of the current frame '''
-            return self.imageDict[curFrame]
+            return self.imageDict[self.curFrame]
             
         class Image():
             ''' respresents one Image of a animation '''
@@ -169,7 +169,7 @@ class Sprite(object):
                 self.renderer = renderer
 
                 if not path in self.renderer.imageList:    #if the image doesn't exist in the imageDict, it gets added
-                    self.renderer.imageList[path] = util.load_image(graphicPath)
+                    self.renderer.imageList[path] = util.load_image(path)
 
                 self.image = self.renderer.imageList[path];
             

@@ -4,15 +4,13 @@ Created on 07.07.2009
 @author: CaptnLenz
 '''
 
-import constants
 import interface
 import intro
 import levelManager
-import map
 import physic
 import pygame
 import renderer
-import util
+import util.constants as constants
 
 
 pygame.init()
@@ -42,6 +40,10 @@ class StateManager(object):
         self.physicManager = physic.PhysicManager()
         self.levelManager = levelManager.LevelManager(self.physicManager, self.renderManager)
         self.interface = interface.Interface()
+        
+        #=======================================================================
+        # self.clock 
+        #=======================================================================
         
         self.stateList = []
         self.stateList.append(GameState(self))
@@ -87,8 +89,9 @@ class StateManager(object):
         nextTickMilliseconds = curMilliseconds
 
         while self.run:
-            clock.tick()
-            print clock.get_fps()
+            #TODO: clock was not imported 
+            #clock.tick()
+            #print clock.get_fps()
         
             if nextRenderMilliseconds <= curMilliseconds:
                 while nextRenderMilliseconds <= curMilliseconds:

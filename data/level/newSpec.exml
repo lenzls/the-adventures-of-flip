@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entityFile>
+	<entitiySpecification>
+		<entitySpec name="player">
+			<type>player</type>
+			<points>0</points>
+			<life>100</life>
+			<movespeed>3</movespeed>
+			<jumpspeed>-13</jumpspeed>
+			<jumpSound>
+				<soundFile>jump.wav</soundFile>
+			</jumpSound>
+			<sprite>
+				<animation index="0">
+					<type>idle</type>
+					<image index="0">
+						<graphic>hero_normal_idle.png</graphic>
+					</image>
+				</animation>
+				<animation index="1">
+					<type>walkLeft</type>
+					<image index="0">
+						<graphic>hero_normal_left1.png</graphic>
+					</image>
+					<image index="1">
+						<graphic>hero_normal_left2.png</graphic>
+					</image>
+					<image index="2">
+						<graphic>hero_normal_left3.png</graphic>
+					</image>
+					<image index="3">
+						<graphic>hero_normal_left4.png</graphic>
+					</image>
+				</animation>
+				<animation index="2">
+					<type>walkRight</type>
+					<image index="0">
+						<graphic>hero_normal_right1.png</graphic>
+					</image>
+					<image index="1">
+						<graphic>hero_normal_right2.png</graphic>
+					</image>
+					<image index="2">
+						<graphic>hero_normal_right3.png</graphic>
+					</image>
+					<image index="3">
+						<graphic>hero_normal_right4.png</graphic>
+					</image>
+				</animation>
+			</sprite>
+			<colShape>
+				<colRect index="0">
+					<posUpperLeft>
+						<horizontal>4</horizontal>
+						<vertical>-25</vertical>
+					</posUpperLeft>
+					<dimensions>
+						<horizontal>10</horizontal>
+						<vertical>6</vertical>
+					</dimensions>
+					<isBody>False</isBody>
+					<isSpike>True</isSpike>
+				</colRect>
+				<colRect index="1">
+					<posUpperLeft>
+						<horizontal>0</horizontal>
+						<vertical>0</vertical>
+					</posUpperLeft>
+					<dimensions>
+						<horizontal>18</horizontal>
+						<vertical>24</vertical>
+					</dimensions>
+					<isBody>True</isBody>
+					<isSpike>False</isSpike>
+				</colRect>
+			</colShape>
+		</entitySpec>
+	</entitiySpecification>
+	<entities>
+		<absEntity name="player">
+			<position>
+				<horizontal>50</horizontal>
+				<vertical>50</vertical>
+			</position>
+		</absEntity>
+	</entities>
+</entityFile>

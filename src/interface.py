@@ -5,7 +5,7 @@ Created on 09.07.2009
 '''
 
 import pygame
-import constants
+import util.constants as constants
 
 class Interface(object):
     '''
@@ -27,4 +27,3 @@ class Interface(object):
     def render(self, screen):
         screen.blit(self.bar,(0,600))
         screen.blit(self.schriftart.render('Score:' + str(self.score),1,[255,0,0]),(screen.get_width()-100,224))
-        
