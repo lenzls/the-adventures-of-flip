@@ -4,9 +4,9 @@ Created on 07.07.2009
 @author: CaptnLenz
 '''
 
+import util.util as util
 import xml.dom.minidom as dom
 
-import util
 
 class Map(object):
     '''

@@ -4,7 +4,7 @@ Created on 09.07.2009
 @author: CaptnLenz
 '''
 import pygame
-import util
+import util.util as util
 
 
 

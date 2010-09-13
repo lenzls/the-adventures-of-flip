@@ -4,10 +4,10 @@ Created on 07.07.2009
 @author: CaptnLenz
 '''
 
-import pygame
+import util.constants as constants
+import util.util as util
+import util.vector as vector
 
-import constants
-import util
 
 class Player():
     '''
@@ -25,9 +25,9 @@ class Player():
         self.type = 'player'
         self.life = 0
         self.isAlive = True
-        self.position = util.Vector(position[0],position[1])
+        self.position = vector.Vector(position[0],position[1])
         self.dimensions = [0,0]
-        self.velocity = util.Vector(0,0)
+        self.velocity = vector.Vector(0,0)
         self.movespeed = None   #util.Vector(3,0)
         self.jumpspeed = None   #util.Vector(0,-13)
         
@@ -49,9 +49,9 @@ class Player():
             if infoNode.nodeName == 'life':
                 self.life = int(infoNode.firstChild.data)
             elif infoNode.nodeName == 'movespeed':
-                self.movespeed = util.Vector(int(infoNode.firstChild.data),0)
+                self.movespeed = vector.Vector(int(infoNode.firstChild.data),0)
             elif infoNode.nodeName == 'jumpspeed':
-                self.jumpspeed = util.Vector(0,int(infoNode.firstChild.data))
+                self.jumpspeed = vector.Vector(0,int(infoNode.firstChild.data))
             elif infoNode.nodeName == 'dimensions':
                 for childNode in infoNode.childNodes:
                     if childNode.nodeName == 'horizontal':
@@ -138,27 +138,27 @@ class Player():
     def mapColWhileMoveUp(self, x, y):
         oldPosition = self.position
         oldVelocity = self.velocity
-        self.position = util.Vector(oldPosition[0],((y + 1) * constants.TILESIZE) + 1)
+        self.position = vector.Vector(oldPosition[0],((y + 1) * constants.TILESIZE) + 1)
     
     def mapColWhileMoveDown(self, x, y):
         oldPosition = self.position
         oldVelocity = self.velocity
         self.jumplock = False
-        self.position = util.Vector(oldPosition[0], (((y * constants.TILESIZE)-1) - self.dimensions[1]))
-        self.velocity = util.Vector(oldVelocity[0], 1)
+        self.position = vector.Vector(oldPosition[0], (((y * constants.TILESIZE)-1) - self.dimensions[1]))
+        self.velocity = vector.Vector(oldVelocity[0], 1)
     
     def mapColWhileMoveRight(self, x, y):
         print 'collision while right on: ',x,' ',y
         oldPosition = self.position
         oldVelocity = self.velocity
-        self.position = util.Vector(((x * constants.TILESIZE) - 1) - self.dimensions[0],oldPosition[1])
+        self.position = vector.Vector(((x * constants.TILESIZE) - 1) - self.dimensions[0],oldPosition[1])
     
     def mapColWhileMoveLeft(self, x, y):
         print 'collision while left on: ',x,' ',y
         oldPosition = self.position
         oldVelocity = self.velocity
         print 'old position: ',oldPosition
-        self.position = util.Vector((((x + 1) * constants.TILESIZE) + 1), oldPosition[1])
+        self.position = vector.Vector((((x + 1) * constants.TILESIZE) + 1), oldPosition[1])
         print 'new position: ',self.position
         
     def colWin(self, enemy):

@@ -4,8 +4,9 @@ Created on 07.07.2009
 @author: CaptnLenz
 '''
 
-import util
-import constants
+from util.vector import Vector
+import util.constants as constants
+
 
 class PhysicManager(object):
     '''
@@ -17,8 +18,10 @@ class PhysicManager(object):
         '''
         Constructor
         '''
-        self.gravity = util.Vector(0,1)
+        self.gravity = Vector(0,1)
         self.colShapeList = []
+        constants
+        
         
     def createColShape(self, entity):
         colShape = ColShape(entity, self)
@@ -52,10 +55,10 @@ class PhysicManager(object):
             #werdne nurnoch die mitten der Seiten getestet
             
 
-            top       = util.Vector( (colShape.entity.position[0] + (colShape.entity.dimensions[0] // 2) ) // constants.TILESIZE , (colShape.entity.position[1]                                       ) // constants.TILESIZE )
-            bottom    = util.Vector( (colShape.entity.position[0] + (colShape.entity.dimensions[0] // 2) ) // constants.TILESIZE , (colShape.entity.position[1] + (colShape.entity.dimensions[1]    ) ) // constants.TILESIZE )
-            rightSide = util.Vector( (colShape.entity.position[0] + (colShape.entity.dimensions[0]    ) ) // constants.TILESIZE , (colShape.entity.position[1] + (colShape.entity.dimensions[1] // 2) ) // constants.TILESIZE )
-            leftSide  = util.Vector( (colShape.entity.position[0]                                       ) // constants.TILESIZE , (colShape.entity.position[1] + (colShape.entity.dimensions[1] // 2) ) // constants.TILESIZE )
+            top       = Vector( (colShape.entity.position[0] + (colShape.entity.dimensions[0] // 2) ) // constants.TILESIZE , (colShape.entity.position[1]                                       ) // constants.TILESIZE )
+            bottom    = Vector( (colShape.entity.position[0] + (colShape.entity.dimensions[0] // 2) ) // constants.TILESIZE , (colShape.entity.position[1] + (colShape.entity.dimensions[1]    ) ) // constants.TILESIZE )
+            rightSide = Vector( (colShape.entity.position[0] + (colShape.entity.dimensions[0]    ) ) // constants.TILESIZE , (colShape.entity.position[1] + (colShape.entity.dimensions[1] // 2) ) // constants.TILESIZE )
+            leftSide  = Vector( (colShape.entity.position[0]                                       ) // constants.TILESIZE , (colShape.entity.position[1] + (colShape.entity.dimensions[1] // 2) ) // constants.TILESIZE )
             
             if colShape.entity.velocity[1] < 0:                     #bewegt sich nach oben
                 if map.getTileDangerousness(0, top[0] , top[1]) == True:
@@ -147,7 +150,7 @@ class ColRect(object):
     
     def __init__(self, colShape, posUpperLeft, dimensions, isBody, isSpike):
         self.colShape = colShape
-        self.posUpperLeft = util.Vector(posUpperLeft[0], posUpperLeft[1])    #pos from the upperLeft corner of the rect referring to the position of the entity(it's upperLeft corner
+        self.posUpperLeft = Vector(posUpperLeft[0], posUpperLeft[1])    #pos from the upperLeft corner of the rect referring to the position of the entity(it's upperLeft corner
         self.dimensions = dimensions
         self.isBody = isBody    #if true, the entity is dead when it collides with the player
         self.isSpike = isSpike    #if true, the player is dead when it collides with the player

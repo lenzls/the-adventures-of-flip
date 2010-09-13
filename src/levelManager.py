@@ -4,11 +4,11 @@ Created on 25.07.2009
 @author: CaptnLenz
 '''
 
+import entities.mob as mob
+import entities.player as player
+import map
 import xml.dom.minidom as dom
 
-import map
-import mob
-import player
 
 class LevelManager(object):
     def __init__(self, physics, renderer):

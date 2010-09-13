@@ -4,9 +4,9 @@ Created on 10.07.2009
 @author: CaptnLenz
 '''
 
+import util.vector as vector
 import xml.dom.minidom as dom
 
-import util
 
 class Mob(object):
     '''
@@ -25,7 +25,7 @@ class Mob(object):
         
         self.jumplock = False
         
-        self.position = util.Vector(0,0)
+        self.position = vector.Vector(0,0)
         self.dimensions = (0,0)
         
         self._loadInfo(infoTree)

@@ -4,8 +4,8 @@ Created on 07.07.2009
 @author: CaptnLenz
 '''
 
-import constants
 import game
+import util.constants as constants
 
 if __name__ == '__main__':
 
