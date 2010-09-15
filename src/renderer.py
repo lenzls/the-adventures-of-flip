@@ -6,7 +6,6 @@ Created on 07.07.2009
 
 from util.vector import Vector
 import util.constants as constants
-import util.util as util
 
 
 class RenderManager(object):
@@ -14,14 +13,13 @@ class RenderManager(object):
     classdocs
     '''
 
-    def __init__(self, screen; ressourceLoader):
+    def __init__(self, screen, ressourceLoader):
         '''
         Constructor
         '''
-	self.ressourceLoader = ressourceLoader
+        self.ressourceLoader = ressourceLoader
         self.screen = screen
         self.spriteList = []
-        self.imageList = {} #list where all images stored(to avoid loading 2 times the same picture)
         self.camera = Vector(0,0)
         
     def createSprite(self, entity):
@@ -61,12 +59,12 @@ class RenderManager(object):
             for x in range(max(self.camera[0] // constants.TILESIZE, 0), 
                            min(map.getDimensions()[0], (self.camera[0] + constants.RESOLUTION[0]) // constants.TILESIZE + 1)):
                 if map.getMapGrid()[mapIndex][x][y] != 0:
-                    self.screen.blit(map.tiles[map.getMapGrid()[mapIndex][x][y]][2], (x*constants.TILESIZE - self.camera[0],y*constants.TILESIZE - self.camera[1]))
+                    self.screen.blit(map.tiles[map.getMapGrid()[mapIndex][x][y]].getGraphic(), (x*constants.TILESIZE - self.camera[0],y*constants.TILESIZE - self.camera[1]))
 
     def renderBg(self, map):
 
         self.screen.fill((0,0,0));
-        for bgLayer in map.bgLayers:
+        for bgLayer in map.bgLayers.values():
             self.screen.blit(bgLayer.getGraphic(), (bgLayer.getPosition()[0] - self.camera[0], 0))
     
     def updateBg(self, map):
@@ -90,17 +88,13 @@ class RenderManager(object):
         #if playerInstance.position[0] - constants.RESOLUTION[0]/2 > 0:
         #    self.camera = util.Vector(playerInstance.position[0] - constants.RESOLUTION[0]/2 , 0)
 
-
-            
-            
-        
         
         self.camera += cameraOffset
         #print self.camera
 
-	def checkGraphicSizes():
-		for sprite in self.spriteList:
-			sprite.checkimageSizes()
+    def checkGraphicSizes(self):
+        for sprite in self.spriteList:
+            sprite.checkimageSizes()
 
 class Sprite(object):
     ''' respresents the graphical reprentation of one entity '''
@@ -119,29 +113,27 @@ class Sprite(object):
 
     def setAni(self, aniType):
         self.curAni = aniType
-        self.animationDict[curAni].reset()
+        self.animationDict[self.curAni].reset()
     
     def getCurFrame(self):
         ''' @return: image-object of the current frame in the current animation '''
-        return self.animationDict[curAni].getCurFrame()
+        return self.animationDict[self.curAni].getCurFrame()
 
     def renderGrid(self):
         ''' needed?! '''
         pass
 
     def checkImageSizes(self):
-	#TODO: smarter cecking and error handling
-	graphicSize = None
-	for ani in self.animationDict:
-		for image in ani.getImageDict():
-			if graphicSize == None:
-				graphicSize = image.getDimension()
-			else:
-				if graphicSize != image.getDimensions()
-					raise BasException
+        #TODO: smarter cecking and error handling
+        graphicSize = None
+        for ani in self.animationDict:
+            for image in ani.getImageDict():
+                if graphicSize == None:
+                    graphicSize = image.getDimension()
+                else:
+                    if graphicSize != image.getDimensions():
+                        print("inconsistent graphic dimensions in Sprite of: ", self.entity)
 
-		
-#TODO consistenz check every image in every animation of one sprite has got the same size?
             
     class Animation():
         ''' respresents on animation of an entity '''
@@ -154,13 +146,13 @@ class Sprite(object):
             self.aniDelayCounter = 0
             self.renderer = renderer
             
-	    index = 0
-            for filename in initGraphicsFilenames:
+            index = 0
+            for filename in initGraphicFilenames:
                 self.addImage(index, filename)
-		index++
+                index += 1
 
-	def getImageDict(self):
-		return self.imageDict
+        def getImageDict(self):
+            return self.imageDict
         
         def addImage(self, index, path):
             ''' adds image object to animation '''
@@ -193,14 +185,14 @@ class Sprite(object):
             def __init__(self, filename, renderer):
                 self.dimensions = [0,0];
                 self.renderer = renderer
-         	
+         
 
                 self.graphic = self.renderer.ressourceLoader.load_graphic(filename)
 
                 self._calcDimensions()
 
             def _calcDimensions(self):
-                self.dimensions = self.graphic.getSize()
+                self.dimensions = self.graphic.get_size()
             
             def getGraphic(self):
                 ''' 

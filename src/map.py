@@ -15,10 +15,13 @@ class Map(object):
     '''
 
 
-    def __init__(self, mapFilePath):
+    def __init__(self, mapFilePath, renderer):
         '''
         Constructor
         '''
+        
+        #TODO: maybe there is another possibility to access the ressLoader. In order not to pass the renderer to the map class(no real relationship)
+        self.renderer = renderer
         self.mapFilePath = mapFilePath
         self.entityFilePath = ''
         self.mapTitle = ''
@@ -52,7 +55,7 @@ class Map(object):
                             elif ccNode.nodeName == 'type':
                                 tileType    =   str(ccNode.firstChild.data.strip())  #tileType
                             elif ccNode.nodeName == 'graphic':
-                                tileGraphic    =   util.load_image(str(ccNode.firstChild.data.strip()))  #tileImage
+                                tileGraphic    =   self.renderer.ressourceLoader.load_graphic(str(ccNode.firstChild.data.strip()))  #tileImage
                             elif ccNode.nodeName == 'accessibility':                #tileAccessibility
                                 if ccNode.firstChild.data.strip() == 'true':
                                     tileAccessibility = True
@@ -76,7 +79,7 @@ class Map(object):
                             if ccNode.nodeName == 'speed':
                                 bgLayerSpeed    =   int(ccNode.firstChild.data.strip())  #bgLayerSpeed
                             elif ccNode.nodeName == 'graphic':
-                                bgLayerGraphic    =   util.load_image(str(ccNode.firstChild.data.strip()))  #bgLayerImage
+                                bgLayerGraphic    =   self.renderer.ressourceLoader.load_graphic(str(ccNode.firstChild.data.strip()))  #bgLayerImage
 
                         self.bgLayers[bgLayerIndex] = BgLayer(bgLayerSpeed, bgLayerGraphic)   #0=position in px
             

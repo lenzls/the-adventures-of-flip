@@ -7,14 +7,17 @@ Created on 07.07.2009
 import pygame
 import os
 
-def load_image(filename):
-    path = os.path.join('..', 'data', 'gfx',  filename)
-    try:
-        surface = pygame.image.load(path)
-    except:
-        print path
-        print "Grafik: ",path," kann nicht geladen werden!"
-    return surface.convert_alpha()
+#moved to ressourceLoader
+#===============================================================================
+# def load_image(filename):
+#    path = os.path.join('..', 'data', 'gfx',  filename)
+#    try:
+#        surface = pygame.image.load(path)
+#    except:
+#        print path
+#        print "Grafik: ",path," kann nicht geladen werden!"
+#    return surface.convert_alpha()
+#===============================================================================
 
 def load_sound(filename):
     path = os.path.join('..', 'data', 'sfx', filename)

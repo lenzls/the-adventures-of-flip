@@ -50,7 +50,7 @@ class Level(object):
         self.levelFilePath = levelFilePath
         self.player = None
 
-        self.map = map.Map(self.levelFilePath).getMapInstance()
+        self.map = map.Map(self.levelFilePath, self.renderer).getMapInstance()
         
         self.entities = []
         
@@ -62,7 +62,7 @@ class Level(object):
         xmlEntityMap = dom.parse('../data/level/'+entityFile)
         entityInfoTrees = {}    #{name, infoTreeNode}
         for node in xmlEntityMap.firstChild.childNodes:
-            if node.nodeName == 'entitySpecification':
+            if node.nodeName == 'entitiySpecification':
                 for cNode in node.childNodes:
                     if cNode.nodeName == 'entitySpec':
                         entityInfoTrees[cNode.getAttribute('name')] = cNode

@@ -38,7 +38,6 @@ class Player():
         self.colShape   = self.physics.createColShape(self)
         
         self._loadInfo(infoTree)
-        self.colShape.loadInfo()
         
         self.sprite.setAni('idle')
 
@@ -69,8 +68,6 @@ class Player():
                         for cNode in animationNode.childNodes:
                             if cNode.nodeName == 'type':
                                 animationType = str(cNode.firstChild.data)
-
-
                             elif cNode.nodeName == "image":
                                 for ccNode in cNode.childNodes:
                                     if ccNode.nodeName  == "graphic":
@@ -85,8 +82,8 @@ class Player():
                         dimensions   = [0,0]
                         isSpike      = None
                         isBody       = None
+                        colRectIndex = int(colRectNode.getAttribute("index"))
                         for colRectInfoNode in colRectNode.childNodes:
-                            colRectIndex = int(colRectInfoNode.getAttribute("index"))
                             if colRectInfoNode.nodeName == 'posUpperLeft':
                                 for posUpperLeftNode in colRectInfoNode.childNodes:
                                     if posUpperLeftNode.nodeName == 'horizontal':
