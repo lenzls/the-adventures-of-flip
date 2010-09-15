@@ -24,7 +24,7 @@ class Player():
         self.map = map
         self.type = 'player'
         self.life = 0   # 0-100?!
-        self.isAlive = True
+        self.alive = True
         self.position = Vector(position[0],position[1])
         self.dimensions = [0,0]
         self.velocity = Vector(0,0)
@@ -41,6 +41,8 @@ class Player():
         
         self.sprite.setAni('idle')
 
+    def getPosition(self):
+        return self.position
         
     def _loadInfo(self, infoTree):
         for infoNode in infoTree.childNodes:
@@ -115,8 +117,8 @@ class Player():
         
         self.renderer.updateCamera(self)
         
-        print 'playerAbsPos: ',self.position
-        print "cam", self.renderer.camera
+#        print 'playerAbsPos: ',self.position
+#        print "cam", self.renderer.camera
         #print 'playerVel: ',self.velocity
         
     def isAlive(self):

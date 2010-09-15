@@ -117,7 +117,7 @@ class State():
     def __init__(self, stateManager):
         self.stateManager = stateManager
     def handleInput(self):
-        print("parent class")
+        pass
     def update(self):
         pass
     def render(self):
@@ -131,7 +131,6 @@ class GameState(State):
         self.stateManager.levelManager.loadLevel(0)
         
     def handleInput(self):
-        print("child class")
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.stateManager.endGame()

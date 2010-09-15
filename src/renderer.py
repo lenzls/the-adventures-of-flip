@@ -46,7 +46,7 @@ class RenderManager(object):
         
     def renderSprites(self):
         for sprite in self.spriteList:
-            self.screen.blit(sprite.getCurFrame().getGraphic(), sprite.entity.position.getTuple())
+            self.screen.blit(sprite.getCurFrame().getGraphic(), sprite.entity.getPosition().getTuple())
     
     #TODO: check rendering methods
     def renderMapLayer(self, mapIndex, map):
@@ -80,17 +80,19 @@ class RenderManager(object):
         @param playerInstance: instance of the current player object
         '''
         #FIXME: fix whole method
-        cameraOffset = Vector(0,0)
-        
-        if (playerInstance.position[0]-self.camera[0] > (constants.RESOLUTION[0] )):
-            cameraOffset = Vector((playerInstance.position[0]-self.camera[0])-(constants.RESOLUTION[0] ), 0)
-        
-        #if playerInstance.position[0] - constants.RESOLUTION[0]/2 > 0:
-        #    self.camera = util.Vector(playerInstance.position[0] - constants.RESOLUTION[0]/2 , 0)
-
-        
-        self.camera += cameraOffset
+#        cameraOffset = Vector(0,0)
+#        
+#        if (playerInstance.position[0]-self.camera[0] > (constants.RESOLUTION[0] )):
+#            cameraOffset = Vector((playerInstance.position[0]-self.camera[0])-(constants.RESOLUTION[0] ), 0)
+#        
+#        #if playerInstance.position[0] - constants.RESOLUTION[0]/2 > 0:
+#        #    self.camera = util.Vector(playerInstance.position[0] - constants.RESOLUTION[0]/2 , 0)
+#
+#        
+#        self.camera += cameraOffset
         #print self.camera
+        
+        pass
 
     def checkGraphicSizes(self):
         for sprite in self.spriteList:
@@ -118,6 +120,9 @@ class Sprite(object):
     def getCurFrame(self):
         ''' @return: image-object of the current frame in the current animation '''
         return self.animationDict[self.curAni].getCurFrame()
+    
+    def update(self):
+        self.animationDict[self.curAni].update()
 
     def renderGrid(self):
         ''' needed?! '''
