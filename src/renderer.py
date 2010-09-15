@@ -128,16 +128,18 @@ class Sprite(object):
         ''' needed?! '''
         pass
 
-    def checkImageSizes(self):
+    def getImageSize(self):
         #TODO: smarter cecking and error handling
         graphicSize = None
-        for ani in self.animationDict:
-            for image in ani.getImageDict():
+        for ani in self.animationDict.values():
+            for image in ani.getImageDict().values():
                 if graphicSize == None:
-                    graphicSize = image.getDimension()
+                    graphicSize = image.getDimensions()
                 else:
                     if graphicSize != image.getDimensions():
                         print("inconsistent graphic dimensions in Sprite of: ", self.entity)
+                        return "error"
+        return graphicSize
 
             
     class Animation():

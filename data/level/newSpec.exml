@@ -52,7 +52,7 @@
 				<colRect index="0">
 					<posUpperLeft>
 						<horizontal>4</horizontal>
-						<vertical>-25</vertical>
+						<vertical>25</vertical>
 					</posUpperLeft>
 					<dimensions>
 						<horizontal>10</horizontal>

@@ -47,6 +47,7 @@ class Player():
     def _loadInfo(self, infoTree):
         for infoNode in infoTree.childNodes:
             if infoNode.nodeName == 'type':
+
                 pass
             elif infoNode.nodeName == "points":
                 pass
@@ -74,7 +75,6 @@ class Player():
                                 for ccNode in cNode.childNodes:
                                     if ccNode.nodeName  == "graphic":
                                         animationGraphics.append(str(ccNode.firstChild.data))
-
                         self.sprite.addAnimation(animationType, animationGraphics)
 
             elif infoNode.nodeName == 'colShape':
@@ -104,10 +104,20 @@ class Player():
                                 isSpike =   bool(colRectInfoNode.firstChild.data)
                         self.colShape.addRect(posUpperLeft, dimensions, isBody, isSpike)
 
-            self._calcDimensions()
+        self._calcDimensions()
 
     def _calcDimensions(self):
-        pass
+        if self.sprite.getImageSize() == self.colShape.getOuterDimensions():
+            self.dimensions = self.sprite.getImageSize()
+        elif self.sprite.getImageSize() > self.colShape.getOuterDimensions():
+            print"colRects of:%s are not big enough" % self
+            print"colRects: %s graphics: %s" % (self.colShape.getOuterDimensions(),self.sprite.getImageSize())
+            self.dimensions = self.sprite.getImageSize()
+        elif self.sprite.getImageSize() < self.colShape.getOuterDimensions():
+            print "colRects of:%s are too big" % self
+            print"colRects: %s graphics: %s" % (self.colShape.getOuterDimensions(),self.sprite.getImageSize())
+
+            self.dimensions = self.colShape.getOuterDimensions()
     
     def update(self):
         if self.velocity[1] < 15:

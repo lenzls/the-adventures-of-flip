@@ -22,8 +22,9 @@ Fortsetzung folgt...
 
 
 TODO: 
-- rewrite physics class. especially colRect and the whole col detection
+- rewrite physics class. especially colRect and the whole col detection [partly done]
 - create xsd schema files
+- update map editor
 
 changelog:
 ###       ###
