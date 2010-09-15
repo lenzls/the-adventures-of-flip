@@ -8,15 +8,17 @@ from util.vector import Vector
 import util.constants as constants
 import util.util as util
 
+
 class RenderManager(object):
     '''
     classdocs
     '''
 
-    def __init__(self, screen):
+    def __init__(self, screen; ressourceLoader):
         '''
         Constructor
         '''
+	self.ressourceLoader = ressourceLoader
         self.screen = screen
         self.spriteList = []
         self.imageList = {} #list where all images stored(to avoid loading 2 times the same picture)
@@ -96,10 +98,13 @@ class RenderManager(object):
         self.camera += cameraOffset
         #print self.camera
 
+	def checkGraphicSizes():
+		for sprite in self.spriteList:
+			sprite.checkimageSizes()
+
 class Sprite(object):
     ''' respresents the graphical reprentation of one entity '''
     
-    #FIXME: restructure whole class and child classes
     
     def __init__(self, entity, renderer):
         self.entity = entity
@@ -107,40 +112,55 @@ class Sprite(object):
         
         self.animationDict = {} #{type,Animation}
 
-        self.curAni = None
+        self.curAni = "idle" #type of the cur ani
 
-    def addAnimation(self, aniType, graphics):
-        self.animationDict[aniType] = self.Animation(aniType, self.renderer, graphics)
-    
-    def addImage(self, aniType, index, path):
-        self.animationDict[aniType].addImage(index, path)
-    
+    def addAnimation(self, aniType, graphicFilenames):
+        self.animationDict[aniType] = self.Animation(aniType, self.renderer, graphicFilenames)
+
     def setAni(self, aniType):
-        self.curAni = self.animationDict[aniType]
-        self.curAni.reset()
+        self.curAni = aniType
+        self.animationDict[curAni].reset()
     
     def getCurFrame(self):
         ''' @return: image-object of the current frame in the current animation '''
-        return self.curAni.getCurFrame()
+        return self.animationDict[curAni].getCurFrame()
 
-    
     def renderGrid(self):
         ''' needed?! '''
         pass
+
+    def checkImageSizes(self):
+	#TODO: smarter cecking and error handling
+	graphicSize = None
+	for ani in self.animationDict:
+		for image in ani.getImageDict():
+			if graphicSize == None:
+				graphicSize = image.getDimension()
+			else:
+				if graphicSize != image.getDimensions()
+					raise BasException
+
+		
+#TODO consistenz check every image in every animation of one sprite has got the same size?
             
     class Animation():
         ''' respresents on animation of an entity '''
         
-        def __init__(self, type, renderer, initGraphics):
+        def __init__(self, type, renderer, initGraphicFilenames):
             self.type = ""
-            self.imageDict = {} #{index,Image}
-            self.curFrame = 0
+            self.imageDict = {} #{index,ImageObject}
+            self.curFrameIndex = 0
             self.aniDelay = 3   #to switch less often(more realistic)
             self.aniDelayCounter = 0
             self.renderer = renderer
             
-            for graphic in initGraphics:
-                self.addImage(index, graphic)
+	    index = 0
+            for filename in initGraphicsFilenames:
+                self.addImage(index, filename)
+		index++
+
+	def getImageDict(self):
+		return self.imageDict
         
         def addImage(self, index, path):
             ''' adds image object to animation '''
@@ -150,36 +170,33 @@ class Sprite(object):
         def reset(self):
             ''' resets the Animation '''
             
-            self.curFrame = 0;
+            self.curFrameIndex = 0;
             self.aniDelayCounter = 0
             
         def update(self):
             if self.aniDelayCounter < self.aniDelay:
                 self.aniDelayCounter += 1
             else:
-                if self.curFrame + 1 == len(self.imageDict): #TODO: check if len(dict) works as intended
-                    self.curFrame = 0
+                if self.curFrameIndex + 1 == len(self.imageDict): #TODO: check if len(dict) works as intended
+                    self.curFrameIndex = 0
                 else:
-                    self.curFrame += 1
+                    self.curFrameIndex += 1
                 self.aniDelayCounter = 0
 
         def getCurFrame(self):
             ''' @return: image-object of the current frame '''
-            return self.imageDict[self.curFrame]
+            return self.imageDict[self.curFrameIndex]
             
         class Image():
             ''' respresents one Image of a animation '''
             
-            def __init__(self, path, renderer):
+            def __init__(self, filename, renderer):
                 self.dimensions = [0,0];
                 self.renderer = renderer
-                
-                self.graphic = util.load_image(path)
+         	
 
-                if not path in self.renderer.imageList:    #if the image doesn't exist in the imageDict, it gets added
-                    self.renderer.imageList[path] = self.graphic
+                self.graphic = self.renderer.ressourceLoader.load_graphic(filename)
 
-            
                 self._calcDimensions()
 
             def _calcDimensions(self):
