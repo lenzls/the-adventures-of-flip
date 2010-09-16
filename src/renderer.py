@@ -49,17 +49,18 @@ class RenderManager(object):
             self.screen.blit(sprite.getCurFrame().getGraphic(), sprite.entity.getPosition().getTuple())
     
     #TODO: check rendering methods
-    def renderMapLayer(self, mapIndex, map):
+    def renderMapLayer(self, layerIndex, map):
         ''' renders map Layer
-            @param mapIndex: 0 => Layer1
+            @param layerIndex: 0 => Layer1
                            : 1 => Layer2
         '''
+        print map.getDimensions()
         for y in range( max(self.camera[1] // constants.TILESIZE, 0), 
                         min(map.getDimensions()[1], (self.camera[1] + constants.RESOLUTION[1]) // constants.TILESIZE + 1)):
             for x in range(max(self.camera[0] // constants.TILESIZE, 0), 
                            min(map.getDimensions()[0], (self.camera[0] + constants.RESOLUTION[0]) // constants.TILESIZE + 1)):
-                if map.getMapGrid()[mapIndex][x][y] != 0:
-                    self.screen.blit(map.tiles[map.getMapGrid()[mapIndex][x][y]].getGraphic(), (x*constants.TILESIZE - self.camera[0],y*constants.TILESIZE - self.camera[1]))
+                if map.getMapGrid()[layerIndex][x][y] != 0:
+                    self.screen.blit(map.getTileGraphic(layerIndex,x,y), (x*constants.TILESIZE - self.camera[0],y*constants.TILESIZE - self.camera[1]))
 
     def renderBg(self, map):
 

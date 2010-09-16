@@ -95,7 +95,7 @@ class Map(object):
             elif node.nodeName == 'grid':
                 self.gridLayerCount = len([cNode for cNode in node.childNodes if cNode.nodeName == 'gridLayer'])      #Anzahl der gridlayer-nodes                
                 
-                self.dimensions = [0,0]
+                self.dimensions = [0,0] #start counting from 1 not 0!!
                 #TODO: filter NOT rectangular grids and raise exception!
                 
                 for cNode in node.childNodes:
@@ -108,7 +108,7 @@ class Map(object):
                             if colNode.nodeName == 'column':
                                 columnIndex = int(colNode.getAttribute('index'))
                                 
-                                if columnIndex > self.dimensions[0]: self.dimensions[0] = columnIndex
+                                if columnIndex+1 > self.dimensions[0]: self.dimensions[0] = columnIndex+1
                                 
                                 self.mapGrid[gridLayerIndex].append([])
                                 
@@ -116,7 +116,7 @@ class Map(object):
                                     if rowNode.nodeName == 'row':
                                         rowIndex = int(rowNode.getAttribute('index'))
                                         
-                                        if rowIndex > self.dimensions[1]: self.dimensions[1] = rowIndex
+                                        if rowIndex+1 > self.dimensions[1]: self.dimensions[1] = rowIndex+1
                                         
                                         self.mapGrid[gridLayerIndex][columnIndex].append(None)                
                                         for tileIndex in rowNode.childNodes:
@@ -139,29 +139,31 @@ class Map(object):
             return 'blank'
     
     def getTileType(self, layer, x, y):
-        if self.mapGrid[layer][y][x] != 0:
-            return self.tiles[self.mapGrid[layer][y][x]].getType()
+        if self.mapGrid[layer][x][y] != 0:
+            return self.tiles[self.mapGrid[layer][x][y]].getType()
         else:
             return 'blank'
     
     def getTileGraphic(self, layer, x, y):
-        if self.mapGrid[layer][y][x] != 0:
-            return self.tiles[self.mapGrid[layer][y][x]].getGraphic()
+        if self.mapGrid[layer][x][y] != 0:
+            return self.tiles[self.mapGrid[layer][x][y]].getGraphic()
         else:
             return 'blank'
     
     def getTileAccessibility(self, layer, x, y):
-
+        print "cur: tileindex: ",self.mapGrid[layer][x][y]
         if x < 0 or x >= self.dimensions[0] or y < 0 or y >= self.dimensions[1]:
             return True
         elif self.mapGrid[layer][x][y] != 0:
+            print self.mapGrid[layer][x][y]
             return self.tiles[self.mapGrid[layer][x][y]].getAccessibility()
         else:
+            print "false!"
             return False
         
-    def getTileDangerousness(self, layer, x, y):        
-        
+    def getTileDangerousness(self, layer, x, y):
         if x < 0 or x >= self.dimensions[0] or y < 0 or y >= self.dimensions[1]:
+            print "Entity falls out of the map!"
             return True
         elif self.mapGrid[layer][x][y] != 0: 
             return self.tiles[self.mapGrid[layer][x][y]].getDangerousness

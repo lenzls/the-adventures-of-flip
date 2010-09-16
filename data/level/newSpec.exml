@@ -79,7 +79,7 @@
 	<entities>
 		<absEntity name="player">
 			<position>
-				<horizontal>50</horizontal>
+				<horizontal>60</horizontal>
 				<vertical>50</vertical>
 			</position>
 		</absEntity>
