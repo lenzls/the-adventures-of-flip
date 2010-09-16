@@ -122,12 +122,14 @@ class MapEditor():
                 self.name = node.firstChild.data.strip()        #mapTitle
 
             #--------mapDimensions--------
-            elif node.nodeName == 'dimensions':
-                for childNode in node.childNodes:
-                    if childNode.nodeName == 'horizontal':
-                        self.dimensions[0] = int(childNode.firstChild.data.strip())     #horiz dimension
-                    elif childNode.nodeName == 'vertical':
-                        self.dimensions[1] = int(childNode.firstChild.data.strip())     #vert dimension
+            #===================================================================
+            # elif node.nodeName == 'dimensions':
+            #    for childNode in node.childNodes:
+            #        if childNode.nodeName == 'horizontal':
+            #            self.dimensions[0] = int(childNode.firstChild.data.strip())     #horiz dimension
+            #        elif childNode.nodeName == 'vertical':
+            #            self.dimensions[1] = int(childNode.firstChild.data.strip())     #vert dimension
+            #===================================================================
             #--------mapTiles--------
             elif node.nodeName == 'tiles':
                 self.tiles.clear()
@@ -140,14 +142,14 @@ class MapEditor():
                                 tileName    =   str(childChildNode.firstChild.data.strip())  #tileName
                             elif childChildNode.nodeName == 'type':
                                 tileType    =   str(childChildNode.firstChild.data.strip())  #tileType
-                            elif childChildNode.nodeName == 'image':
-                                tileImage    =   str(childChildNode.firstChild.data.strip())  #tileImage
+                            elif childChildNode.nodeName == 'graphic':
+                                tileGraphic    =   str(childChildNode.firstChild.data.strip())  #tileImage
                             elif childChildNode.nodeName == 'accessibility':
                                 tileAccessibility = childChildNode.firstChild.data.strip()
                             elif childChildNode.nodeName == 'dangerousness':
                                 tileDangerousness = childChildNode.firstChild.data.strip()
                         
-                        self.tiles[tileIndex] = (tileName, tileType, tileImage, tileAccessibility, tileDangerousness)
+                        self.tiles[tileIndex] = (tileName, tileType, tileGraphic, tileAccessibility, tileDangerousness)
             #--------mapBackground--------
             #elif node.nodeName == 'background':
             #    self.bgLayerCount = len([cNode for cNode in node.childNodes if cNode.nodeName == 'bgLayer'])      #Anzahl der bgLayer-nodes
@@ -172,6 +174,23 @@ class MapEditor():
                                 self.music = str(childChildNode.firstChild.data.strip())
             #--------mapGrid--------
             elif node.nodeName == 'grid':
+                self.dimensions = [0,0]
+                
+                #calc dimensions
+                for childNode in node.childNodes:
+                    if childNode.nodeName == 'gridLayer':
+                        for childChildNode in childNode.childNodes:
+                            if childChildNode.nodeName == 'column':
+                                columnIndex = int(childChildNode.getAttribute('index'))
+                                
+                                if columnIndex+1 > self.dimensions[0]: self.dimensions[0] = columnIndex+1
+
+                                for childChildChildNode in childChildNode.childNodes:
+                                    if childChildChildNode.nodeName == 'row':
+                                        rowIndex = int(childChildChildNode.getAttribute('index'))
+                                        
+                                        if rowIndex+1 > self.dimensions[1]: self.dimensions[1] = rowIndex+1
+
                 self.grid = []
                 gridLayerCount = len([cNode for cNode in node.childNodes if cNode.nodeName == 'gridLayer'])      #Anzahl der Layer-nodes
                 for i in range(gridLayerCount):       #laenge der Layer-liste wird festgelegt
@@ -188,7 +207,7 @@ class MapEditor():
                                 columnIndex = int(childChildNode.getAttribute('index'))
                                 for childChildChildNode in childChildNode.childNodes:
                                     if childChildChildNode.nodeName == 'row':
-                                        rowIndex = int(childChildChildNode.getAttribute('index'))                
+                                        rowIndex = int(childChildChildNode.getAttribute('index'))                                           
                                         for childChildChildChildNode in childChildChildNode.childNodes:
                                             if childChildChildChildNode.nodeName == 'tileIndex':
                                                 self.grid[gridLayerIndex][columnIndex][rowIndex] = int(childChildChildChildNode.firstChild.data.strip())     #mapGrid
@@ -196,9 +215,11 @@ class MapEditor():
             elif node.nodeName == 'entityFile':
                 self.entityFile = node.firstChild.data.strip()      #entityFile Path
             #--------mapNextLevel--------
-            
-            elif node.nodeName == 'nextLevel':
-                self.nextLevel = node.firstChild.data.strip()           #next Map 
+            #===================================================================
+            # 
+            # elif node.nodeName == 'nextLevel':
+            #    self.nextLevel = node.firstChild.data.strip()           #next Map 
+            #===================================================================
 
         self.Se_Tile_Select.clear()
         self.Se_Tile_Select = gui.Select(value=1)
@@ -279,7 +300,7 @@ class MapEditor():
         self.Inp_map_nextLevel = gui.Input(value=self.nextLevel,size=8)
 
     def BUTTONloadMap(self,arg):
-        self.loadMap('../data/save.xml')
+        self.loadMap('../data/newspec.lxml')
 
     def BUTTONapplyOpt(self,arg):
         '''sollte alles gehn bis auf zuerst x erhoehen und dann y verringern'''
@@ -337,16 +358,18 @@ class MapEditor():
         nameText = doc.createTextNode(self.name)
         nameElement.appendChild(nameText)
         
-        #Dimensionen
-        dimensionsElement = doc.createElement("dimensions")
-        dimensionsHorizontalElement = doc.createElement("horizontal")
-        dimensionsVerticalElement = doc.createElement("vertical")
-        dimensionsHorizontalText = doc.createTextNode(str(self.dimensions[0]))
-        dimensionsVerticalText = doc.createTextNode(str(self.dimensions[1]))
-        dimensionsHorizontalElement.appendChild(dimensionsHorizontalText)
-        dimensionsVerticalElement.appendChild(dimensionsVerticalText)
-        dimensionsElement.appendChild(dimensionsHorizontalElement)
-        dimensionsElement.appendChild(dimensionsVerticalElement)
+        #=======================================================================
+        # #Dimensionen
+        # dimensionsElement = doc.createElement("dimensions")
+        # dimensionsHorizontalElement = doc.createElement("horizontal")
+        # dimensionsVerticalElement = doc.createElement("vertical")
+        # dimensionsHorizontalText = doc.createTextNode(str(self.dimensions[0]))
+        # dimensionsVerticalText = doc.createTextNode(str(self.dimensions[1]))
+        # dimensionsHorizontalElement.appendChild(dimensionsHorizontalText)
+        # dimensionsVerticalElement.appendChild(dimensionsVerticalText)
+        # dimensionsElement.appendChild(dimensionsHorizontalElement)
+        # dimensionsElement.appendChild(dimensionsVerticalElement)
+        #=======================================================================
         
         #Tiles
         tilesElement = doc.createElement("tiles")
@@ -356,7 +379,7 @@ class MapEditor():
             
             tileNameElement = doc.createElement("name")
             tileTypeElement = doc.createElement("type")
-            tileImageElement = doc.createElement("image")
+            tileImageElement = doc.createElement("graphic")
             tileAccessibilityElement = doc.createElement("accessibility")
             tileDangerousnessElement = doc.createElement("dangerousness")
             
@@ -387,7 +410,7 @@ class MapEditor():
             bgLayerElement.setAttribute('index',str(i))
             
             bgLayerSpeedElement = doc.createElement("speed")
-            bgLayerImageElement = doc.createElement("image")
+            bgLayerImageElement = doc.createElement("graphic")
             
             if i == 0:
                 bgLayerSpeedText = doc.createTextNode('0')
@@ -442,23 +465,29 @@ class MapEditor():
         entityFileText = doc.createTextNode(self.entityFile)
         entityFileElement.appendChild(entityFileText)
         
-        #nextLvl
-        nextLevelElement = doc.createElement("nextLevel")
-        nextLevelText = doc.createTextNode(self.nextLevel)
-        nextLevelElement.appendChild(nextLevelText)
+        #=======================================================================
+        # #nextLvl
+        # nextLevelElement = doc.createElement("nextLevel")
+        # nextLevelText = doc.createTextNode(self.nextLevel)
+        # nextLevelElement.appendChild(nextLevelText)
+        #=======================================================================
         
         # Child an Dokument anhaengen
         doc.documentElement.appendChild(nameElement)
-        doc.documentElement.appendChild(dimensionsElement)
+        #=======================================================================
+        # doc.documentElement.appendChild(dimensionsElement)
+        #=======================================================================
         doc.documentElement.appendChild(tilesElement)
         doc.documentElement.appendChild(backgroundElement)
         doc.documentElement.appendChild(musicElement)
         doc.documentElement.appendChild(gridElement)
         doc.documentElement.appendChild(entityFileElement)
-        doc.documentElement.appendChild(nextLevelElement)
+        #=======================================================================
+        # doc.documentElement.appendChild(nextLevelElement)
+        #=======================================================================
 
         # Ausgeben
-        datei = open(os.path.join('..','data',"save.xml"), "w")
+        datei = open(os.path.join('..','data',"save.lxml"), "w")
         doc.writexml(datei, "\n", "  ")
         datei.close()
 
