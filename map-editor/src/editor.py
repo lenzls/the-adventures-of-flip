@@ -7,6 +7,7 @@ import constants
 import util
 import os
 import xml.dom.minidom as dom
+from time import time
 from pgu import gui
 from pgu import tilevid
 
@@ -487,9 +488,10 @@ class MapEditor():
         #=======================================================================
 
         # Ausgeben
-        datei = open(os.path.join('..','data',"save.lxml"), "w")
+        datei = open(os.path.join('..','data',str(time())+".lxml"), "w")
         doc.writexml(datei, "\n", "  ")
         datei.close()
+        print "save successfully"
 
     def BUTTONresetCam(self, arg):
         self.camera = util.Vector(0,0)

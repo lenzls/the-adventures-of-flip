@@ -57,17 +57,17 @@ class PhysicManager(object):
         for colShape in self.colShapeList:            
             #only the outer rect is getting checked
             
-            midTop       = Vector( (colShape.entity.position[0] + (colShape.getOuterDimensions()[0] // 2) ) // constants.TILESIZE , (colShape.entity.position[1]                                           ) // constants.TILESIZE )
-            midBottom    = Vector( (colShape.entity.position[0] + (colShape.getOuterDimensions()[0] // 2) ) // constants.TILESIZE , (colShape.entity.position[1] + (colShape.getOuterDimensions()[1]     ) ) // constants.TILESIZE )
-            midRightSide = Vector( (colShape.entity.position[0] + (colShape.getOuterDimensions()[0]    )  ) // constants.TILESIZE , (colShape.entity.position[1] + (colShape.getOuterDimensions()[1] // 2) ) // constants.TILESIZE )
-            midLeftSide  = Vector( (colShape.entity.position[0]                                           ) // constants.TILESIZE , (colShape.entity.position[1] + (colShape.getOuterDimensions()[1] // 2) ) // constants.TILESIZE )
+            midTop       = Vector( (colShape.entity.position[0] + (colShape.getOuterDimensions()[0] // 2) ) // constants.TILESIZE , (colShape.entity.position[1]                                            ) // constants.TILESIZE )
+            midBottom    = Vector( (colShape.entity.position[0] + (colShape.getOuterDimensions()[0] // 2) ) // constants.TILESIZE , (colShape.entity.position[1]  + (colShape.getOuterDimensions()[1]     ) ) // constants.TILESIZE )
+            midRightSide = Vector( (colShape.entity.position[0] + (colShape.getOuterDimensions()[0]     ) ) // constants.TILESIZE , (colShape.entity.position[1]  + (colShape.getOuterDimensions()[1] // 2) ) // constants.TILESIZE )
+            midLeftSide  = Vector( (colShape.entity.position[0]                                           ) // constants.TILESIZE , (colShape.entity.position[1]  + (colShape.getOuterDimensions()[1] // 2) ) // constants.TILESIZE )
 
             if colShape.entity.velocity[1] < 0:                     #bewegt sich nach oben
                 if map.getTileDangerousness(0, midTop[0] , midTop[1]) == True:
                     colShape.entity.setDead()
                 if map.getTileAccessibility(0, midTop[0] , midTop[1]) == True:
                     colShape.entity.mapColWhileMoveUp(midTop[0], midTop[1])
-                    
+
             elif colShape.entity.velocity[1] > 0:                   #bewegt sich nach unten
                 if map.getTileDangerousness(0, midBottom[0] , midBottom[1]) == True:
                     colShape.entity.setDead()

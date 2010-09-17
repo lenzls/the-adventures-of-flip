@@ -46,17 +46,17 @@ class RenderManager(object):
         
     def renderSprites(self):
         for sprite in self.spriteList:
-            self.screen.blit(sprite.getCurFrame().getGraphic(), sprite.entity.getPosition().getTuple())
+            print (sprite.entity.getPosition() - self.camera)
+            self.screen.blit(sprite.getCurFrame().getGraphic(), (sprite.entity.getPosition() - self.camera).getTuple())
     
     #TODO: check rendering methods
     def renderMapLayer(self, layerIndex, map):
         ''' renders map Layer
             @param layerIndex: 0 => Layer1
-                           : 1 => Layer2
+                             : 1 => Layer2
         '''
-        print map.getDimensions()
-        for y in range( max(self.camera[1] // constants.TILESIZE, 0), 
-                        min(map.getDimensions()[1], (self.camera[1] + constants.RESOLUTION[1]) // constants.TILESIZE + 1)):
+        for y in range(max(self.camera[1] // constants.TILESIZE, 0), 
+                       min(map.getDimensions()[1], (self.camera[1] + constants.RESOLUTION[1]) // constants.TILESIZE + 1)):
             for x in range(max(self.camera[0] // constants.TILESIZE, 0), 
                            min(map.getDimensions()[0], (self.camera[0] + constants.RESOLUTION[0]) // constants.TILESIZE + 1)):
                 if map.getMapGrid()[layerIndex][x][y] != 0:
@@ -80,20 +80,34 @@ class RenderManager(object):
         
         @param playerInstance: instance of the current player object
         '''
-        #FIXME: fix whole method
-#        cameraOffset = Vector(0,0)
-#        
-#        if (playerInstance.position[0]-self.camera[0] > (constants.RESOLUTION[0] )):
-#            cameraOffset = Vector((playerInstance.position[0]-self.camera[0])-(constants.RESOLUTION[0] ), 0)
-#        
-#        #if playerInstance.position[0] - constants.RESOLUTION[0]/2 > 0:
-#        #    self.camera = util.Vector(playerInstance.position[0] - constants.RESOLUTION[0]/2 , 0)
-#
-#        
-#        self.camera += cameraOffset
-        #print self.camera
+#        print "vorher", self.camera
+        cameraOffset = Vector(0,0)
+
+        horiBorder = constants.RESOLUTION[0] // 5
+        vertiBorder = constants.RESOLUTION[1] // 5
+
+        playerPos = playerInstance.getPosition()
+
+        if (playerPos[0] - self.camera[0]) > (constants.RESOLUTION[0] - horiBorder):
+            cameraOffset +=  Vector((playerPos[0] - self.camera[0]) - (constants.RESOLUTION[0] - horiBorder),cameraOffset[1])
+        elif (playerPos[0] - self.camera[0]) < (horiBorder):
+            cameraOffset -=  Vector((horiBorder) - (playerPos[0] - self.camera[0]),cameraOffset[1])
+            
+        if (playerPos[1] - self.camera[1]) < (vertiBorder):
+            cameraOffset -=  Vector(cameraOffset[0],(horiBorder) - (playerPos[1] - self.camera[1]))
+        elif (playerPos[1] - self.camera[1]) > (constants.RESOLUTION[1] - vertiBorder):
+            cameraOffset +=  Vector(cameraOffset[0],(playerPos[1] - self.camera[1]) - (constants.RESOLUTION[1] - vertiBorder))
+        self.camera += cameraOffset
+
+        if playerPos[0] < horiBorder:
+            self.camera = Vector(0, self.camera[1])
+        elif playerPos[0] > playerInstance.map.getDimensions()[0]*constants.TILESIZE-horiBorder:
+            self.camera = Vector(playerInstance.map.getDimensions()[0]*constants.TILESIZE-constants.RESOLUTION[0], self.camera[1])
         
-        pass
+        if playerPos[1] < vertiBorder:
+            self.camera = Vector(self.camera[0], 0)
+        elif playerPos[1] > playerInstance.map.getDimensions()[1]*constants.TILESIZE-vertiBorder:
+            self.camera = Vector(self.camera[0], playerInstance.map.getDimensions()[1]*constants.TILESIZE-constants.RESOLUTION[1])
 
     def checkGraphicSizes(self):
         for sprite in self.spriteList:

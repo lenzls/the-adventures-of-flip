@@ -25,9 +25,12 @@ TODO:
 - rewrite physics class. especially colRect and the whole col detection [partly done]
 - create xsd schema files
 - map editor needs further improvement
+- ideas for background size (vertical scrolling?)
 
 changelog:
 ###       ###
+- fixed scrolling thing
+- camera update
 - added new xml spec
 - restructured sprite handling
 - updated map-editor for new spec

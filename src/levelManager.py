@@ -21,7 +21,7 @@ class LevelManager(object):
         self.renderer = renderer
         self.levelPathList = []
         self.curLevel = None
-        self._addLevelPath('save.lxml')
+        self._addLevelPath('1284743568.37.lxml')
         
     def _addLevelPath(self, mapPath):       #to the levelList
         self.levelPathList.append(mapPath)

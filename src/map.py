@@ -151,14 +151,11 @@ class Map(object):
             return 'blank'
     
     def getTileAccessibility(self, layer, x, y):
-        print "cur: tileindex: ",self.mapGrid[layer][x][y]
         if x < 0 or x >= self.dimensions[0] or y < 0 or y >= self.dimensions[1]:
             return True
         elif self.mapGrid[layer][x][y] != 0:
-            print self.mapGrid[layer][x][y]
             return self.tiles[self.mapGrid[layer][x][y]].getAccessibility()
         else:
-            print "false!"
             return False
         
     def getTileDangerousness(self, layer, x, y):
