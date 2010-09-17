@@ -37,7 +37,10 @@ class BgLayer(object):
         self.speed = speed
         self.graphic = graphic
         self.position = Vector(0,0)
-        
+    
+    def getGraphicSize(self):
+        return self.graphic.size()
+    
     def getSpeed(self):
         return self.speed
     
