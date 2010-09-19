@@ -34,6 +34,7 @@ changelog:
 - added new xml spec
 - restructured sprite handling
 - updated map-editor for new spec
+- background parallax scrolling works now
 ### 0.5.5 ###
 - base version of rewrite(!)
 ### 0.5.2 ###

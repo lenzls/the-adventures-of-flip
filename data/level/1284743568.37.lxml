@@ -50,7 +50,7 @@
     </bgLayer>
     <bgLayer index="1">
       <speed>
-        3
+        -1
       </speed>
       <graphic>
         bg_test_1.png
@@ -58,7 +58,7 @@
     </bgLayer>
     <bgLayer index="2">
       <speed>
-        2
+        -2
       </speed>
       <graphic>
         bg_test_2.png

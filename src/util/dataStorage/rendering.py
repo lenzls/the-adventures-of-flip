@@ -3,21 +3,22 @@ Created on 17.09.2010
 
 @author: simon
 '''
+from util import ressourceLoader
+
 
 class Sprite(object):
     ''' respresents the graphical reprentation of one entity '''
     
     
-    def __init__(self, entity, renderer):
+    def __init__(self, entity):
         self.entity = entity
-        self.renderer = renderer
         
         self.animationDict = {} #{type,Animation}
 
         self.curAni = "idle" #type of the cur ani
 
     def addAnimation(self, aniType, graphicFilenames):
-        self.animationDict[aniType] = self.Animation(aniType, self.renderer, graphicFilenames)
+        self.animationDict[aniType] = self.Animation(aniType, graphicFilenames)
 
     def setAni(self, aniType):
         self.curAni = aniType
@@ -51,13 +52,12 @@ class Sprite(object):
     class Animation():
         ''' respresents on animation of an entity '''
         
-        def __init__(self, type, renderer, initGraphicFilenames):
+        def __init__(self, type, initGraphicFilenames):
             self.type = ""
             self.imageDict = {} #{index,ImageObject}
             self.curFrameIndex = 0
             self.aniDelay = 3   #to switch less often(more realistic)
             self.aniDelayCounter = 0
-            self.renderer = renderer
             
             index = 0
             for filename in initGraphicFilenames:
@@ -70,7 +70,7 @@ class Sprite(object):
         def addImage(self, index, path):
             ''' adds image object to animation '''
             
-            self.imageDict[index] = Image(path, self.renderer)
+            self.imageDict[index] = Image(path)
             
         def reset(self):
             ''' resets the Animation '''
@@ -95,12 +95,11 @@ class Sprite(object):
 class Image():
     ''' respresents a graphic '''
     
-    def __init__(self, filename, renderer):
+    def __init__(self, filename):
+        
         self.dimensions = [0,0];
-        self.renderer = renderer
  
-
-        self.graphic = self.renderer.ressourceLoader.load_graphic(filename)
+        self.graphic = ressourceLoader.RessourceLoader().load_graphic(filename)
 
         self._calcDimensions()
 

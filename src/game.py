@@ -11,7 +11,6 @@ import physic
 import pygame
 import renderer
 import util.constants as constants
-from util.ressourceLoader import RessourceLoader
 
 
 pygame.init()
@@ -37,8 +36,7 @@ class StateManager(object):
         else:
             self.screen = pygame.display.set_mode(self.resolution)
 
-        self.ressLoader = RessourceLoader()
-        self.renderManager = renderer.RenderManager(self.screen, self.ressLoader)
+        self.renderManager = renderer.RenderManager(self.screen)
         self.physicManager = physic.PhysicManager()
         self.levelManager = levelManager.LevelManager(self.physicManager, self.renderManager)
         self.interface = interface.Interface()

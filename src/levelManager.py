@@ -50,7 +50,7 @@ class Level(object):
         self.levelFilePath = levelFilePath
         self.player = None
 
-        self.map = map.Map(self.levelFilePath, self.renderer).getMapInstance()
+        self.map = map.Map(self.levelFilePath).getMapInstance()
         
         self.entities = []
         

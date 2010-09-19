@@ -7,6 +7,7 @@ Created on 07.07.2009
 from util.vector import Vector
 from util.dataStorage.rendering import Sprite
 import util.constants as constants
+import pygame
 
 
 class RenderManager(object):
@@ -14,17 +15,16 @@ class RenderManager(object):
     classdocs
     '''
 
-    def __init__(self, screen, ressourceLoader):
+    def __init__(self, screen):
         '''
         Constructor
         '''
-        self.ressourceLoader = ressourceLoader
         self.screen = screen
         self.spriteList = []
         self.camera = Vector(0,0)
         
     def createSprite(self, entity):
-        sprite = Sprite(entity, self)
+        sprite = Sprite(entity)
         self.appendSpriteList(sprite)
         return sprite
         
@@ -39,7 +39,7 @@ class RenderManager(object):
     def update(self, level):
         self.updateCamera(level.player)
         self.updateSpriteList()
-        self.updateBg(level.map)
+        self.updateBg(level)
         
     def updateSpriteList(self):
         ''' deletes dead entities from the spriteList'''
@@ -47,7 +47,6 @@ class RenderManager(object):
         
     def renderSprites(self):
         for sprite in self.spriteList:
-            print (sprite.entity.getPosition() - self.camera)
             self.screen.blit(sprite.getCurFrame().getGraphic(), (sprite.entity.getPosition() - self.camera).getTuple())
     
     #TODO: check rendering methods
@@ -67,11 +66,22 @@ class RenderManager(object):
 
         self.screen.fill((0,0,0));
         for bgLayer in map.bgLayers.values():
-            self.screen.blit(bgLayer.getGraphic(), (bgLayer.getPosition()[0] - self.camera[0], 0))
-    
-    def updateBg(self, map):
+                        
+            # scrolling offset
+            self.screen.blit(bgLayer.getGraphic(), 
+                             (0, ((map.getDimensions()[1]*constants.TILESIZE) - bgLayer.getDimensions()[1]) - self.camera[1]), 
+                             area=pygame.Rect(bgLayer.getDimensions()[0]-bgLayer.getScrollPosition()[0],0,bgLayer.getDimensions()[0],bgLayer.getDimensions()[1]))
+
+            for i in range(bgLayer.getNeededGraphics()):
+                self.screen.blit(bgLayer.getGraphic(), 
+                             (bgLayer.getScrollPosition()[0] + i*bgLayer.getDimensions()[0], ((map.getDimensions()[1]*constants.TILESIZE) - bgLayer.getDimensions()[1]) - self.camera[1]), 
+                             area=pygame.Rect(0,0,bgLayer.getDimensions()[0],bgLayer.getDimensions()[1]))
+
+    def updateBg(self, level):
         '''update method for paralax scrolling'''
-        pass
+
+        for bgLayer in level.map.bgLayers.values():
+            bgLayer.update(level.player.getPosition())
     
     def getCamera(self):
         return self.camera
@@ -81,7 +91,7 @@ class RenderManager(object):
         
         @param playerInstance: instance of the current player object
         '''
-#        print "vorher", self.camera
+
         cameraOffset = Vector(0,0)
 
         horiBorder = constants.RESOLUTION[0] // 5

@@ -5,8 +5,8 @@ Created on 07.07.2009
 '''
 
 import util.constants as constants
-import util.util as util
 from util.vector import Vector
+from util import ressourceLoader
 
 
 class Player():
@@ -60,7 +60,7 @@ class Player():
             elif infoNode.nodeName == 'jumpSound':
                 for cNode in infoNode.childNodes:
                     if cNode.nodeName == "soundFile":
-                        self.jumpSound = util.load_sound(str(cNode.firstChild.data))
+                        self.jumpSound = ressourceLoader.RessourceLoader().load_sound(str(cNode.firstChild.data))
 
 
             elif infoNode.nodeName == 'sprite':
@@ -145,7 +145,10 @@ class Player():
     def walkStop(self):
         self.velocity.x = 0
         self.sprite.setAni('idle')
-        
+
+    def getVelocity(self):
+        return self.velocity
+
     def jump(self):
         """ What to do, if the space-key gets pressed """
         

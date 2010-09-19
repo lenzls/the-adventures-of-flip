@@ -5,8 +5,8 @@ Created on 07.07.2009
 '''
 
 from util.dataStorage.map import Tile, BgLayer
-import util.util as util
 import xml.dom.minidom as minidom
+from util import ressourceLoader
 
 
 class Map(object):
@@ -15,13 +15,11 @@ class Map(object):
     '''
 
 
-    def __init__(self, mapFilePath, renderer):
+    def __init__(self, mapFilePath):
         '''
         Constructor
         '''
         
-        #TODO: maybe there is another possibility to access the ressLoader. In order not to pass the renderer to the map class(no real relationship)
-        self.renderer = renderer
         self.mapFilePath = mapFilePath
         self.entityFilePath = ''
         self.mapTitle = ''
@@ -55,7 +53,7 @@ class Map(object):
                             elif ccNode.nodeName == 'type':
                                 tileType    =   str(ccNode.firstChild.data.strip())  #tileType
                             elif ccNode.nodeName == 'graphic':
-                                tileGraphic    =   self.renderer.ressourceLoader.load_graphic(str(ccNode.firstChild.data.strip()))  #tileImage
+                                tileGraphic    =   str(ccNode.firstChild.data.strip())  #tileImage
                             elif ccNode.nodeName == 'accessibility':                #tileAccessibility
                                 if ccNode.firstChild.data.strip() == 'true':
                                     tileAccessibility = True
@@ -79,7 +77,7 @@ class Map(object):
                             if ccNode.nodeName == 'speed':
                                 bgLayerSpeed    =   int(ccNode.firstChild.data.strip())  #bgLayerSpeed
                             elif ccNode.nodeName == 'graphic':
-                                bgLayerGraphic    =   self.renderer.ressourceLoader.load_graphic(str(ccNode.firstChild.data.strip()))  #bgLayerImage
+                                bgLayerGraphic    =   str(ccNode.firstChild.data.strip())  #bgLayerImage
 
                         self.bgLayers[bgLayerIndex] = BgLayer(bgLayerSpeed, bgLayerGraphic)   #0=position in px
             
@@ -89,7 +87,7 @@ class Map(object):
                     if cNode.nodeName == 'backgroundTheme':
                         for ccNode in cNode.childNodes:
                             if ccNode.nodeName == 'soundFile':
-                                self.bgMusic = util.load_sound(str(ccNode.firstChild.data.strip()))
+                                self.bgMusic = ressourceLoader.RessourceLoader().load_sound(str(ccNode.firstChild.data.strip()))
             
             #--------mapGrid--------
             elif node.nodeName == 'grid':

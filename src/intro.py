@@ -4,7 +4,7 @@ Created on 09.07.2009
 @author: CaptnLenz
 '''
 import pygame
-import util.util as util
+from util import ressourceLoader
 
 
 
@@ -20,7 +20,7 @@ class Opening(object):
         '''
         pygame.mixer.init()
 
-        letterPlop = util.load_sound('letter-plop.wav')
+        letterPlop = ressourceLoader.RessourceLoader().load_sound('letter-plop.wav')
         
     def play(self):
         pass
