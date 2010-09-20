@@ -3,7 +3,7 @@ import os
 
 class RessourceLoader():
 	graphicDict = {}
-	
+
 	def __init__(self):
 		pass
 

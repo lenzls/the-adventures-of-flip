@@ -9,11 +9,11 @@ from entities.player import Player
 import map
 import xml.dom.minidom as dom
 
-
 class LevelManager(object):
+
     def __init__(self, physics, renderer):
         '''
-        
+
         @param physics: current physicManager
         @param renderer: current renderManager
         '''
@@ -22,40 +22,32 @@ class LevelManager(object):
         self.levelPathList = []
         self.curLevel = None
         self._addLevelPath('1284743568.37.lxml')
-        
-    def _addLevelPath(self, mapPath):       #to the levelList
+
+    def _addLevelPath(self, mapPath):
         self.levelPathList.append(mapPath)
-        
+
     def loadLevel(self, levelIndex):
         self.curLevel = Level(self.physics, self.renderer, self.levelPathList[levelIndex])
-        
+
     def update(self):
         self.updateEntities()
-    
+
     def updateEntities(self):
         self.curLevel.updateEntities()
-    
-class Level(object):
-    '''
-    classdocs
-    '''
 
+class Level(object):
 
     def __init__(self, physics, renderer, levelFilePath):
-        '''
-        Constructor
-        '''
         self.physics = physics
         self.renderer = renderer
         self.levelFilePath = levelFilePath
         self.player = None
 
         self.map = map.Map(self.levelFilePath).getMapInstance()
-        
+
         self.entities = []
-        
+
         self._loadEntityFile(self.map.entityFilePath)
-        
 
     def _loadEntityFile(self, entityFile):
         #durchsucht nur den "Entities"-teil der xml und gibt dann an die entity klasse den "entities-info" baum als parameter mit
@@ -77,14 +69,12 @@ class Level(object):
                                         entityPos[0] = int(cccNode.firstChild.data)
                                     elif cccNode.nodeName == 'vertical':
                                         entityPos[1] = int(cccNode.firstChild.data)
-                        
                         if cNode.getAttribute('name') == 'player':
                             self.player = Player(entityPos, self.map, entityInfoTrees['player'], self.physics, self.renderer)
                             self.entities.append(self.player)
                         elif cNode.getAttribute('name') == 'grob':
                             self.entities.append(mob.Grob(entityPos, self.map, entityInfoTrees['grob'], self.physics, self.renderer))
-        
+
     def updateEntities(self):
         for entity in self.entities:
             entity.update()
-        

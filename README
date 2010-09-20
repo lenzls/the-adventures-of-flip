@@ -1,5 +1,5 @@
 ---- The Adventures of Flip! ----
-Verison: 0.5.5
+Verison: 0.5.6
 
 [German/Deutsch]:
 
@@ -21,14 +21,19 @@ In diesem Stadium befinden wir uns gerade!
 Fortsetzung folgt...
 
 
-TODO: 
+TODO:
+- new main loop concept
+- add new entity classes
+- package renaming (dataStorage)
+- add pyDoc
 - rewrite physics class. especially colRect and the whole col detection [partly done]
 - create xsd schema files
 - map editor needs further improvement
 - ideas for background size (vertical scrolling?)
 
 changelog:
-###       ###
+### 0.5.6 ###
+basics are working:
 - fixed scrolling thing
 - camera update
 - added new xml spec

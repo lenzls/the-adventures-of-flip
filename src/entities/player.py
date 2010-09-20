@@ -8,17 +8,10 @@ import util.constants as constants
 from util.vector import Vector
 from util import ressourceLoader
 
-
 class Player():
-    '''
-    classdocs
-    '''
-
 
     def __init__(self, position, map, infoTree, physics, renderer):
-        '''
-        Constructor
-        '''        
+
         self.renderer = renderer
         self.physics = physics
         self.map = map
@@ -30,24 +23,23 @@ class Player():
         self.velocity = Vector(0,0)
         self.movespeed = None   #util.Vector(3,0)
         self.jumpspeed = None   #util.Vector(0,-13)
-        
+
         self.jumplock = False
         self.jumpSound = None   #util.load_sound('jump.wav')
-        
+
         self.sprite     = self.renderer.createSprite(self)
         self.colShape   = self.physics.createColShape(self)
-        
+
         self._loadInfo(infoTree)
-        
+
         self.sprite.setAni('idle')
 
     def getPosition(self):
         return self.position
-        
+
     def _loadInfo(self, infoTree):
         for infoNode in infoTree.childNodes:
             if infoNode.nodeName == 'type':
-
                 pass
             elif infoNode.nodeName == "points":
                 pass
@@ -61,7 +53,6 @@ class Player():
                 for cNode in infoNode.childNodes:
                     if cNode.nodeName == "soundFile":
                         self.jumpSound = ressourceLoader.RessourceLoader().load_sound(str(cNode.firstChild.data))
-
 
             elif infoNode.nodeName == 'sprite':
                 for animationNode in infoNode.childNodes:
@@ -124,24 +115,19 @@ class Player():
             self.velocity += self.physics.gravity
         self.position += self.velocity
         self.sprite.update()
-        
         self.renderer.updateCamera(self)
-        
-#        print 'playerAbsPos: ',self.position
-#        print "cam", self.renderer.camera
-        #print 'playerVel: ',self.velocity
-        
+
     def isAlive(self):
         return self.alive
-        
+
     def walkRight(self):
         self.velocity += self.movespeed
         self.sprite.setAni('walkRight')
-        
+
     def walkLeft(self):
         self.velocity -= self.movespeed
         self.sprite.setAni('walkLeft')
-    
+
     def walkStop(self):
         self.velocity.x = 0
         self.sprite.setAni('idle')
@@ -150,47 +136,41 @@ class Player():
         return self.velocity
 
     def jump(self):
-        """ What to do, if the space-key gets pressed """
-        
         if not self.jumplock:
             self.jumpSound.play()
             self.jumplock = True
             self.velocity += self.jumpspeed
-            
+
     def mapColWhileMoveUp(self, x, y):
         oldPosition = self.position
         oldVelocity = self.velocity
         self.position = Vector(oldPosition[0],((y + 1) * constants.TILESIZE) + 1)
-    
+
     def mapColWhileMoveDown(self, x, y):
         oldPosition = self.position
         oldVelocity = self.velocity
         self.jumplock = False
         self.position = Vector(oldPosition[0], (((y * constants.TILESIZE)-1) - self.dimensions[1]))
         self.velocity = Vector(oldVelocity[0], 1)
-    
+
     def mapColWhileMoveRight(self, x, y):
         print 'collision while right on: ',x,' ',y
         oldPosition = self.position
         oldVelocity = self.velocity
         self.position = Vector(((x * constants.TILESIZE) - 1) - self.dimensions[0],oldPosition[1])
-    
+
     def mapColWhileMoveLeft(self, x, y):
         print 'collision while left on: ',x,' ',y
         oldPosition = self.position
         oldVelocity = self.velocity
-        print 'old position: ',oldPosition
         self.position = Vector((((x + 1) * constants.TILESIZE) + 1), oldPosition[1])
-        print 'new position: ',self.position
-        
+
     def colWin(self, enemy):
         pass
-    
+
     def colLose(self, enemy):
         pass
-    
+
     def setDead(self):
         print 'TOoooooooooooooooooooooooooooT'
         self.alive = False
-        
-        
