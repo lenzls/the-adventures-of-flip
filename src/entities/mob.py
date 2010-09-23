@@ -5,6 +5,7 @@ Created on 10.07.2009
 '''
 
 from util.vector import Vector 
+import util.util as util
 import util.constants as constants
 from util import ressourceLoader
 
@@ -91,9 +92,9 @@ class Mob(object):
                                     elif dimensionsNode.nodeName == 'vertical':
                                         dimensions[1] = int(dimensionsNode.firstChild.data)
                             elif colRectInfoNode.nodeName == 'isBody':
-                                isBody  =   bool(colRectInfoNode.firstChild.data)
+                                isBody  =   util.string2bool(colRectInfoNode.firstChild.data)
                             elif colRectInfoNode.nodeName == 'isSpike':
-                                isSpike =   bool(colRectInfoNode.firstChild.data)
+                                isSpike =   util.string2bool(colRectInfoNode.firstChild.data)
                         self.colShape.addRect(posUpperLeft, dimensions, isBody, isSpike)
 
         self._calcDimensions()
@@ -127,7 +128,7 @@ class Mob(object):
         pass
 
     def isAlive(self):
-        return self.isAlive
+        return self.alive
 
     def walkRight(self):
         self.velocity += self.movespeed
@@ -172,13 +173,13 @@ class Mob(object):
         self.position = Vector((((x + 1) * constants.TILESIZE) + 1), oldPosition[1])
 
     def colWin(self, enemy):
-        pass
+        print "Enemy win against:", enemy.type
 
     def colLose(self, enemy):
-        pass
+        print "Enemy loses against:", enemy.type
+        self.setDead()
 
     def setDead(self):
-        print 'TOoooooooooooooooooooooooooooT'
         self.alive = False
 
     def getVelocity(self):

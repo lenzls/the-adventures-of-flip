@@ -4,6 +4,7 @@ Created on 17.09.2010
 @author: simon
 '''
 from util.vector import Vector
+import pygame
 
 class ColShape(object):
 
@@ -12,37 +13,38 @@ class ColShape(object):
         self.physics = physics
         self.outerRect = None
         self.innerRectsDict = {}
-        self.rectList = []
+        self.colRectList = []
 
     def calcOuterRect(self):
         width = 0
         height = 0
-        for rect in self.rectList:
-            if (rect.posUpperLeft[0] + rect.dimensions[0]) > width:
-                width = (rect.posUpperLeft[0] + rect.dimensions[0])
-            if (rect.posUpperLeft[1] + rect.dimensions[1]) > height:
-                height = (rect.posUpperLeft[1] + rect.dimensions[1])
-        self.outerRect = (self.entity.getPosition()[0], self.entity.getPosition()[1], width, height)
+        for colRect in self.colRectList:
+            if colRect.posUpperLeft[0] + colRect.getRect().width > width:
+                width = colRect.posUpperLeft[0] + colRect.getRect().width
+            if colRect.posUpperLeft[1] + colRect.getRect().height > height:
+                height = colRect.posUpperLeft[1] + colRect.getRect().height
+        self.outerRect = pygame.Rect(self.entity.getPosition().getTuple(), (width, height))
 
     def addRect(self, posUpperLeft, dimensions, isBody, isSpike):
-        self.rectList.append(self.ColRect(self, posUpperLeft, dimensions, isBody, isSpike))
+        self.colRectList.append(self.ColRect(self, posUpperLeft, dimensions, isBody, isSpike))
         self.calcOuterRect()
 
     def getAbsoluteColRectList(self):
-        return [rect.getAbsoluteRect() for rect in self.rectList]
+        return [colRect for colRect in self.colRectList]
 
     def getEntity(self):
         return self.entity
 
     def update(self):
-        for rect in self.rectList:
-            rect.calcAbsPos();
+        self.outerRect.topleft = self.entity.getPosition().getTuple()
+        for colRect in self.colRectList:
+            colRect.update();
 
     def getOuterDimensions(self):
-        return (self.outerRect[2], self.outerRect[3])
+        return (self.outerRect.width, self.outerRect.height)
         
     def getOuterRect(self):
-		return self.outerRect
+        return self.outerRect
 
     class ColRect(object):
 
@@ -58,8 +60,14 @@ class ColShape(object):
             #absolute position in the whole level
             self.absPos = self.colShape.entity.getPosition() + self.posUpperLeft
 
-        def getAbsoluteRect(self):
-            return (self.absPos[0], self.absPos[1], self.dimensions[0], self.dimensions[1])
+            self.rect = pygame.Rect(self.absPos.getTuple(), self.dimensions)
+
+        def update(self):
+            self.calcAbsPos()
+            self.rect.topleft = self.absPos.getTuple()
+
+        def getRect(self):
+            return self.rect
 
         def calcAbsPos(self):
             self.absPos = self.colShape.entity.getPosition() + self.posUpperLeft

@@ -51,11 +51,11 @@
 			<colShape>
 				<colRect index="0">
 					<posUpperLeft>
-						<horizontal>4</horizontal>
+						<horizontal>2</horizontal>
 						<vertical>25</vertical>
 					</posUpperLeft>
 					<dimensions>
-						<horizontal>10</horizontal>
+						<horizontal>14</horizontal>
 						<vertical>6</vertical>
 					</dimensions>
 					<isBody>False</isBody>
@@ -204,7 +204,7 @@
 		</absEntity>
 		<absEntity type="grob" name="grob-1">
 			<position>
-				<horizontal>150</horizontal>
+				<horizontal>350</horizontal>
 				<vertical>50</vertical>
 			</position>
 		</absEntity>

@@ -32,10 +32,6 @@ class Sprite(object):
     def update(self):
         self.animationDict[self.curAni].update()
 
-    def renderGrid(self):
-        #TODO: implement method (for easier entity positioning)
-        pass
-
     def getImageSize(self):
         #TODO: smarter cecking and error handling
         graphicSize = None

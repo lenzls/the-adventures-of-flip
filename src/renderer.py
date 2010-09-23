@@ -44,6 +44,20 @@ class RenderManager(object):
         for sprite in self.spriteList:
             self.screen.blit(sprite.getCurFrame().getGraphic(), (sprite.entity.getPosition() - self.camera).getTuple())
 
+            #TODO show only in debug mode (and move maybe in another class)
+            pygame.draw.rect(self.screen, (0,0,255), sprite.entity.colShape.getOuterRect().move(-self.camera[0],-self.camera[1]), 1)
+            for colRect in sprite.entity.colShape.getAbsoluteColRectList():
+                if colRect.isSpike:
+                    color = (255,255,255)
+                else:
+                    color = (255,0,255)
+                pygame.draw.rect(self.screen, color, colRect.getRect().move(-self.camera[0], -self.camera[1]), 1)
+
+
+    def renderGrid(self):
+        #TODO: implement method (for easier entity positioning)
+        pass
+
     def renderMapLayer(self, layerIndex, map):
         ''' renders map Layer
             @param layerIndex: 0 => Layer1
@@ -79,7 +93,7 @@ class RenderManager(object):
     def getCamera(self):
         return self.camera
 
-    def updateCamera(self, playerInstance): #TODO:bad name
+    def updateCamera(self, playerInstance):
         '''
         @param playerInstance: instance of the current player object
         '''

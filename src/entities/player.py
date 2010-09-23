@@ -6,6 +6,7 @@ Created on 07.07.2009
 
 import util.constants as constants
 from util.vector import Vector
+import util.util as util
 from util import ressourceLoader
 
 class Player():
@@ -90,9 +91,9 @@ class Player():
                                     elif dimensionsNode.nodeName == 'vertical':
                                         dimensions[1] = int(dimensionsNode.firstChild.data)
                             elif colRectInfoNode.nodeName == 'isBody':
-                                isBody  =   bool(colRectInfoNode.firstChild.data)
+                                isBody  =   util.string2bool(colRectInfoNode.firstChild.data)
                             elif colRectInfoNode.nodeName == 'isSpike':
-                                isSpike =   bool(colRectInfoNode.firstChild.data)
+                                isSpike =   util.string2bool(colRectInfoNode.firstChild.data)
                         self.colShape.addRect(posUpperLeft, dimensions, isBody, isSpike)
 
         self._calcDimensions()
@@ -167,10 +168,10 @@ class Player():
         self.position = Vector((((x + 1) * constants.TILESIZE) + 1), oldPosition[1])
 
     def colWin(self, enemy):
-        pass
+        print "Player win against:", enemy.type
 
     def colLose(self, enemy):
-        pass
+        print "Player loses against:", enemy.type
 
     def setDead(self):
         print 'TOoooooooooooooooooooooooooooT'

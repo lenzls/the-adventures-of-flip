@@ -23,16 +23,19 @@ Fortsetzung folgt...
 
 TODO:
 - new main loop concept
-- add new entity classes
+- add new entity classes [partly done(ki needed)]
 - package renaming (dataStorage)
 - add pyDoc
-- rewrite physics class. especially colRect and the whole col detection [partly done]
+- rewrite physics class. especially colRect and the whole col detection [partly done]  {finished!}
 	- rewritten entity collision, tests needed
 - create xsd schema files
 - map editor needs further improvement
+- add new mob ki
 - ideas for background size (vertical scrolling?)
 
 changelog:
+###	      ###
+- rewritten collision thing(with pygame.Rects)
 ### 0.5.6 ###
 basics are working:
 - fixed scrolling thing

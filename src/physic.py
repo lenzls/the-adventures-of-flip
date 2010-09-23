@@ -85,22 +85,12 @@ class PhysicManager(object):
         for shapeA in self.colShapeList:
             if shapeA.entity.type == 'player':
                 for shapeB in self.colShapeList:
-                    if self.collisionBetween2OuterRects(shapeA, shapeB):
-						self.collisionBetween2ColShapes(shapeA, shapeB)
+                    if shapeB.entity.type != 'player':
+                        if shapeA.getOuterRect().colliderect(shapeB.getOuterRect()):
+                            self.collisionBetween2ColShapes(shapeA, shapeB)
                 return
 
-	def collisionBetween2OuterRects(self, a, b):
-	    if a.getOuterRect[0] > b.getOuterRect[0] + b.getOuterRect[2]:      #nothing collides: nothing happens
-            return false
-        elif a.getOuterRect[0] + a.getOuterRect[3] < b.getOuterRect[0]:    #nothing collides: nothing happens
-            return false
-        if a.getOuterRect[1] > b.getOuterRect[1] + b.getOuterRect[3]:      #nothing collides: nothing happens
-            return false
-        elif a.getOuterRect[1] + a.getOuterRect[3] < b.getOuterRect[1]:    #nothing collides: nothing happens
-            return false
-        return true
-
-    def collisionBetween2ColShapes(self, a ,b): #a=player b=enemy
+    def collisionBetween2ColShapes(self, a ,b): #a=player b=enemy        
         for absColRectA in a.getAbsoluteColRectList():
             for absColRectB in b.getAbsoluteColRectList():
                 eventCode = self.collisionBetween2ColRects(absColRectA, absColRectB)
@@ -116,14 +106,8 @@ class PhysicManager(object):
                     b.entity.colWin(a.entity)
 
     def collisionBetween2ColRects(self, a, b):
-        if a.absPos[0] > b.absPos[0] + b.dimensions[0]:      #nothing collides: nothing happens
-            return 0
-        elif a.absPos[0] + a.dimensions[0] < b.absPos[0]:    #nothing collides: nothing happens
-            return 0
-        if a.absPos[1] > b.absPos[1] + b.dimensions[1]:      #nothing collides: nothing happens
-            return 0
-        elif a.absPos[1] + a.dimensions[1] < b.absPos[1]:    #nothing collides: nothing happens
-            return 0                    
+        if not a.getRect().colliderect(b.getRect()):
+            return 0 
 
         if a.isSpike and b.isBody:      #collides the player-weapon with the enemy-body: player wins
             return 1
