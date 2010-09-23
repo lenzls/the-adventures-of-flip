@@ -40,6 +40,9 @@ class ColShape(object):
 
     def getOuterDimensions(self):
         return (self.outerRect[2], self.outerRect[3])
+        
+    def getOuterRect(self):
+		return self.outerRect
 
     class ColRect(object):
 

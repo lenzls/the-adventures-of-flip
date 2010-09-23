@@ -42,7 +42,7 @@ class PhysicManager(object):
 
     def checkCols(self, map):
         self.checkEntityMapCollision(map)
-#        self.checkPlayerEntityCollision()
+        self.checkPlayerEntityCollision()
 
     def checkEntityMapCollision(self, map):
         for colShape in self.colShapeList:            
@@ -85,18 +85,32 @@ class PhysicManager(object):
         for shapeA in self.colShapeList:
             if shapeA.entity.type == 'player':
                 for shapeB in self.colShapeList:
-                    self.collisionBetween2ColShapes(shapeA, shapeB)
+                    if self.collisionBetween2OuterRects(shapeA, shapeB):
+						self.collisionBetween2ColShapes(shapeA, shapeB)
                 return
+
+	def collisionBetween2OuterRects(self, a, b):
+	    if a.getOuterRect[0] > b.getOuterRect[0] + b.getOuterRect[2]:      #nothing collides: nothing happens
+            return false
+        elif a.getOuterRect[0] + a.getOuterRect[3] < b.getOuterRect[0]:    #nothing collides: nothing happens
+            return false
+        if a.getOuterRect[1] > b.getOuterRect[1] + b.getOuterRect[3]:      #nothing collides: nothing happens
+            return false
+        elif a.getOuterRect[1] + a.getOuterRect[3] < b.getOuterRect[1]:    #nothing collides: nothing happens
+            return false
+        return true
 
     def collisionBetween2ColShapes(self, a ,b): #a=player b=enemy
         for absColRectA in a.getAbsoluteColRectList():
             for absColRectB in b.getAbsoluteColRectList():
                 eventCode = self.collisionBetween2ColRects(absColRectA, absColRectB)
                 if eventCode == 0:
-                    pass
+                    continue
+                #player win
                 elif eventCode == 1:
                     a.entity.colWin(b.entity)
                     b.entity.colLose(a.entity)
+                #enemy win
                 elif eventCode == 2:
                     a.entity.colLose(b.entity)
                     b.entity.colWin(a.entity)
