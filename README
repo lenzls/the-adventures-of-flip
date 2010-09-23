@@ -27,6 +27,7 @@ TODO:
 - package renaming (dataStorage)
 - add pyDoc
 - rewrite physics class. especially colRect and the whole col detection [partly done]
+	- rewritten entity collision, tests needed
 - create xsd schema files
 - map editor needs further improvement
 - ideas for background size (vertical scrolling?)
