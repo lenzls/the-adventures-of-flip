@@ -114,7 +114,8 @@ class Player():
         if self.velocity[1] < 15:
             self.velocity += self.physics.gravity
         self.position += self.velocity
-        self.sprite.update()
+        #check if better here or in renderer class
+#        self.sprite.update()
         self.renderer.updateCamera(self)
 
     def isAlive(self):

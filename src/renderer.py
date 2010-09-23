@@ -37,6 +37,8 @@ class RenderManager(object):
     def updateSpriteList(self):
         ''' deletes dead entities from the spriteList'''
         self.spriteList = [sprite for sprite in self.spriteList if sprite.entity.isAlive()]
+        for sprite in self.spriteList:
+            sprite.update()
 
     def renderSprites(self):
         for sprite in self.spriteList:

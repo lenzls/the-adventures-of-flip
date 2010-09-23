@@ -69,10 +69,10 @@ class Level(object):
                                         entityPos[0] = int(cccNode.firstChild.data)
                                     elif cccNode.nodeName == 'vertical':
                                         entityPos[1] = int(cccNode.firstChild.data)
-                        if cNode.getAttribute('name') == 'player':
+                        if cNode.getAttribute('type') == 'player':
                             self.player = Player(entityPos, self.map, entityInfoTrees['player'], self.physics, self.renderer)
                             self.entities.append(self.player)
-                        elif cNode.getAttribute('name') == 'grob':
+                        elif cNode.getAttribute('type') == 'grob':
                             self.entities.append(mob.Grob(entityPos, self.map, entityInfoTrees['grob'], self.physics, self.renderer))
 
     def updateEntities(self):
