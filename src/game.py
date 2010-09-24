@@ -3,7 +3,7 @@ Created on 07.07.2009
 
 @author: CaptnLenz
 '''
-
+import os
 import interface
 import intro
 import levelManager
@@ -25,7 +25,7 @@ class StateManager(object):
         self.resolution = resolution
 
         pygame.display.set_caption("The Adventures of Flip")
-        pygame.display.set_icon(pygame.image.load('../data/icon.png'))
+        pygame.display.set_icon(pygame.image.load(os.path.join('..','data','icon.png')))
         if constants.FULLSCREEN:
             self.screen = pygame.display.set_mode(self.resolution, pygame.FULLSCREEN)
         else:

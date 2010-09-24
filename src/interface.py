@@ -4,13 +4,14 @@ Created on 09.07.2009
 @author: CaptnLenz
 '''
 
+import os
 import pygame
 import util.constants as constants
 
 class Interface(object):
 
     def __init__(self):
-        self.schriftart = pygame.font.Font('../data/courier_new.ttf',15)
+        self.schriftart = pygame.font.Font(os.path.join('..','data','courier_new.ttf'),15)
         self.bar = pygame.Surface((constants.RESOLUTION[0],17))
         self.bar.fill((0,0,0))
 

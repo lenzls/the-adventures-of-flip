@@ -68,7 +68,7 @@ class RenderManager(object):
             for x in range(max(self.camera[0] // constants.TILESIZE, 0), 
                            min(map.getDimensions()[0], (self.camera[0] + constants.RESOLUTION[0]) // constants.TILESIZE + 1)):
                 if map.getMapGrid()[layerIndex][x][y] != 0:
-                    self.screen.blit(map.getTileGraphic(layerIndex,x,y), (x*constants.TILESIZE - self.camera[0],y*constants.TILESIZE - self.camera[1]))
+                    self.screen.blit(map.getTileGraphic(layerIndex,Vector(x,y)), (x*constants.TILESIZE - self.camera[0],y*constants.TILESIZE - self.camera[1]))
 
     def renderBg(self, map):
         self.screen.fill((0,0,0));
