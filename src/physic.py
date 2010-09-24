@@ -48,10 +48,11 @@ class PhysicManager(object):
         for colShape in self.colShapeList:            
             #only the outer rect is getting checked
             
-            midTop       = Vector( (colShape.entity.position[0] + (colShape.getOuterDimensions()[0] // 2) ) // constants.TILESIZE , (colShape.entity.position[1]                                            ) // constants.TILESIZE )
-            midBottom    = Vector( (colShape.entity.position[0] + (colShape.getOuterDimensions()[0] // 2) ) // constants.TILESIZE , (colShape.entity.position[1]  + (colShape.getOuterDimensions()[1]     ) ) // constants.TILESIZE )
-            midRightSide = Vector( (colShape.entity.position[0] + (colShape.getOuterDimensions()[0]     ) ) // constants.TILESIZE , (colShape.entity.position[1]  + (colShape.getOuterDimensions()[1] // 2) ) // constants.TILESIZE )
-            midLeftSide  = Vector( (colShape.entity.position[0]                                           ) // constants.TILESIZE , (colShape.entity.position[1]  + (colShape.getOuterDimensions()[1] // 2) ) // constants.TILESIZE )
+            #TODDO: check if rect.x or rect.left is the right
+            midTop       = Vector( (colShape.getOuterRect().x + (colShape.getOuterDimensions()[0] // 2) ) // constants.TILESIZE , (colShape.getOuterRect().y                                            ) // constants.TILESIZE )
+            midBottom    = Vector( (colShape.getOuterRect().x + (colShape.getOuterDimensions()[0] // 2) ) // constants.TILESIZE , (colShape.getOuterRect().y  + (colShape.getOuterDimensions()[1]     ) ) // constants.TILESIZE )
+            midRightSide = Vector( (colShape.getOuterRect().x + (colShape.getOuterDimensions()[0]     ) ) // constants.TILESIZE , (colShape.getOuterRect().y  + (colShape.getOuterDimensions()[1] // 2) ) // constants.TILESIZE )
+            midLeftSide  = Vector( (colShape.getOuterRect().x                                           ) // constants.TILESIZE , (colShape.getOuterRect().y  + (colShape.getOuterDimensions()[1] // 2) ) // constants.TILESIZE )
 
             #bewegt sich nach oben
             if colShape.entity.velocity[1] < 0:
@@ -87,6 +88,8 @@ class PhysicManager(object):
                 for shapeB in self.colShapeList:
                     if shapeB.entity.type != 'player':
                         if shapeA.getOuterRect().colliderect(shapeB.getOuterRect()):
+                            #TODO: translate
+                            # both outer rects overlap -> check "genauer"
                             self.collisionBetween2ColShapes(shapeA, shapeB)
                 return
 
