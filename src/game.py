@@ -73,7 +73,20 @@ class StateManager(object):
             self.curState.update()
             pygame.display.update()
 
-            timer.tick(constants.FPS)
+            timer.tick(5000)
+            print timer.get_fps()
+
+    def newMainLoop(self):
+        clock = pygame.time.Clock()
+        while self.run:
+            time_passed = clock.tick(constants.FPS)
+
+            self.curState.handleInput()
+            
+            self.curState.update()
+            self.curState.render()
+            pygame.display.update()
+
 
     # NOT working correctly
     def altStartGame(self):
