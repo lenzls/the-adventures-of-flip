@@ -49,10 +49,10 @@ class PhysicManager(object):
             #only the outer rect is getting checked
             
             #TODDO: check if rect.x or rect.left is the right
-            midTop       = Vector( (colShape.getOuterRect().midTop[0]		// constants.TILESIZE) , (colShape.getOuterRect().midTop[1]		// constants.TILESIZE) )
-            midBottom    = Vector( (colShape.getOuterRect().midBottom[0]	// constants.TILESIZE) , (colShape.getOuterRect().midBottom[1]	// constants.TILESIZE) )
-            midRightSide = Vector( (colShape.getOuterRect().midRight[0]		// constants.TILESIZE) , (colShape.getOuterRect().midRight[1]	// constants.TILESIZE) )
-            midLeftSide  = Vector( (colShape.getOuterRect().midLeft[0]		// constants.TILESIZE) , (colShape.getOuterRect().midLeft[1]	// constants.TILESIZE) )
+            midTop       = Vector( (colShape.getOuterRect().midtop[0]		// constants.TILESIZE) , (colShape.getOuterRect().midtop[1]		// constants.TILESIZE) )
+            midBottom    = Vector( (colShape.getOuterRect().midbottom[0]	// constants.TILESIZE) , (colShape.getOuterRect().midbottom[1]	// constants.TILESIZE) )
+            midRightSide = Vector( (colShape.getOuterRect().midright[0]		// constants.TILESIZE) , (colShape.getOuterRect().midright[1]	// constants.TILESIZE) )
+            midLeftSide  = Vector( (colShape.getOuterRect().midleft[0]		// constants.TILESIZE) , (colShape.getOuterRect().midleft[1]	// constants.TILESIZE) )
 
             #bewegt sich nach oben
             if colShape.entity.velocity[1] < 0:
