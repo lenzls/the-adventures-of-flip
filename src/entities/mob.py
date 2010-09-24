@@ -148,29 +148,27 @@ class Mob(object):
             self.jumplock = True
             self.velocity += self.jumpspeed
 
-    def mapColWhileMoveUp(self, x, y):
+    def mapColWhileMoveUp(self, tilePos):
         oldPosition = self.position
         oldVelocity = self.velocity
-        self.position = Vector(oldPosition[0],((y + 1) * constants.TILESIZE) + 1)
+        self.position = Vector(oldPosition[0],((tilePos.y + 1) * constants.TILESIZE) + 1)
 
-    def mapColWhileMoveDown(self, x, y):
+    def mapColWhileMoveDown(self, tilePos):
         oldPosition = self.position
         oldVelocity = self.velocity
         self.jumplock = False
-        self.position = Vector(oldPosition[0], (((y * constants.TILESIZE)-1) - self.dimensions[1]))
+        self.position = Vector(oldPosition[0], (((tilePos.y * constants.TILESIZE)-1) - self.dimensions[1]))
         self.velocity = Vector(oldVelocity[0], 1)
 
-    def mapColWhileMoveRight(self, x, y):
-        print 'collision while right on: ',x,' ',y
+    def mapColWhileMoveRight(self, tilePos):
         oldPosition = self.position
         oldVelocity = self.velocity
-        self.position = Vector(((x * constants.TILESIZE) - 1) - self.dimensions[0],oldPosition[1])
+        self.position = Vector(((tilePos.x * constants.TILESIZE) - 1) - self.dimensions[0],oldPosition[1])
 
-    def mapColWhileMoveLeft(self, x, y):
-        print 'collision while left on: ',x,' ',y
+    def mapColWhileMoveLeft(self, tilePos):
         oldPosition = self.position
         oldVelocity = self.velocity
-        self.position = Vector((((x + 1) * constants.TILESIZE) + 1), oldPosition[1])
+        self.position = Vector((((tilePos.x + 1) * constants.TILESIZE) + 1), oldPosition[1])
 
     def colWin(self, enemy):
         print "Enemy win against:", enemy.type

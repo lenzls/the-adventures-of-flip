@@ -121,38 +121,38 @@ class Map(object):
     def getMapGrid(self):
         return self.mapGrid
 
-    def getTileName(self, layer, x, y):
-        if self.mapGrid[layer][x][y] != 0:
-            return self.tiles[self.mapGrid[layer][x][y]].getName()
+    def getTileName(self, layer, tilePos):
+        if self.mapGrid[layer][tilePos.x][tilePos.y] != 0:
+            return self.tiles[self.mapGrid[layer][tilePos.x][tilePos.y]].getName()
         else:
             return 'blank'
 
-    def getTileType(self, layer, x, y):
-        if self.mapGrid[layer][x][y] != 0:
-            return self.tiles[self.mapGrid[layer][x][y]].getType()
+    def getTileType(self, layer, tilePos):
+        if self.mapGrid[layer][tilePos.x][tilePos.y] != 0:
+            return self.tiles[self.mapGrid[layer][tilePos.x][tilePos.y]].getType()
         else:
             return 'blank'
 
-    def getTileGraphic(self, layer, x, y):
-        if self.mapGrid[layer][x][y] != 0:
-            return self.tiles[self.mapGrid[layer][x][y]].getGraphic()
+    def getTileGraphic(self, layer, tilePos):
+        if self.mapGrid[layer][tilePos.x][tilePos.y] != 0:
+            return self.tiles[self.mapGrid[layer][tilePos.x][tilePos.y]].getGraphic()
         else:
             return 'blank'
 
-    def getTileAccessibility(self, layer, x, y):
-        if x < 0 or x >= self.dimensions[0] or y < 0 or y >= self.dimensions[1]:
+    def getTileAccessibility(self, layer, tilePos):
+        if tilePos.x < 0 or tilePos.x >= self.dimensions[0] or tilePos.y < 0 or tilePos.y >= self.dimensions[1]:
             return True
-        elif self.mapGrid[layer][x][y] != 0:
-            return self.tiles[self.mapGrid[layer][x][y]].getAccessibility()
+        elif self.mapGrid[layer][tilePos.x][tilePos.y] != 0:
+            return self.tiles[self.mapGrid[layer][tilePos.x][tilePos.y]].getAccessibility()
         else:
             return False
 
-    def getTileDangerousness(self, layer, x, y):
-        if x < 0 or x >= self.dimensions[0] or y < 0 or y >= self.dimensions[1]:
+    def getTileDangerousness(self, layer, tilePos):
+        if tilePos.x < 0 or tilePos.x >= self.dimensions[0] or tilePos.y < 0 or tilePos.y >= self.dimensions[1]:
             print "Entity falls out of the map!"
             return True
-        elif self.mapGrid[layer][x][y] != 0: 
-            return self.tiles[self.mapGrid[layer][x][y]].getDangerousness
+        elif self.mapGrid[layer][tilePos.x][tilePos.y] != 0: 
+            return self.tiles[self.mapGrid[layer][tilePos.x][tilePos.y]].getDangerousness
         else:
             return False
 

@@ -49,38 +49,38 @@ class PhysicManager(object):
             #only the outer rect is getting checked
             
             #TODDO: check if rect.x or rect.left is the right
-            midTop       = Vector( (colShape.getOuterRect().x + (colShape.getOuterDimensions()[0] // 2) ) // constants.TILESIZE , (colShape.getOuterRect().y                                            ) // constants.TILESIZE )
-            midBottom    = Vector( (colShape.getOuterRect().x + (colShape.getOuterDimensions()[0] // 2) ) // constants.TILESIZE , (colShape.getOuterRect().y  + (colShape.getOuterDimensions()[1]     ) ) // constants.TILESIZE )
-            midRightSide = Vector( (colShape.getOuterRect().x + (colShape.getOuterDimensions()[0]     ) ) // constants.TILESIZE , (colShape.getOuterRect().y  + (colShape.getOuterDimensions()[1] // 2) ) // constants.TILESIZE )
-            midLeftSide  = Vector( (colShape.getOuterRect().x                                           ) // constants.TILESIZE , (colShape.getOuterRect().y  + (colShape.getOuterDimensions()[1] // 2) ) // constants.TILESIZE )
+            midTop       = Vector( (colShape.getOuterRect().midTop[0]		// constants.TILESIZE) , (colShape.getOuterRect().midTop[1]		// constants.TILESIZE) )
+            midBottom    = Vector( (colShape.getOuterRect().midBottom[0]	// constants.TILESIZE) , (colShape.getOuterRect().midBottom[1]	// constants.TILESIZE) )
+            midRightSide = Vector( (colShape.getOuterRect().midRight[0]		// constants.TILESIZE) , (colShape.getOuterRect().midRight[1]	// constants.TILESIZE) )
+            midLeftSide  = Vector( (colShape.getOuterRect().midLeft[0]		// constants.TILESIZE) , (colShape.getOuterRect().midLeft[1]	// constants.TILESIZE) )
 
             #bewegt sich nach oben
             if colShape.entity.velocity[1] < 0:
-                if map.getTileDangerousness(0, midTop[0] , midTop[1]) == True:
+                if map.getTileDangerousness(0, midTop) == True:
                     colShape.entity.setDead()
-                if map.getTileAccessibility(0, midTop[0] , midTop[1]) == True:
-                    colShape.entity.mapColWhileMoveUp(midTop[0], midTop[1])
+                if map.getTileAccessibility(0, midTop) == True:
+                    colShape.entity.mapColWhileMoveUp(midTop)
 
             #bewegt sich nach unten
             elif colShape.entity.velocity[1] > 0:
-                if map.getTileDangerousness(0, midBottom[0] , midBottom[1]) == True:
+                if map.getTileDangerousness(0, midBottom) == True:
                     colShape.entity.setDead()
-                if map.getTileAccessibility(0, midBottom[0] , midBottom[1]) == True:
-                    colShape.entity.mapColWhileMoveDown(midBottom[0], midBottom[1])
+                if map.getTileAccessibility(0, midBottom) == True:
+                    colShape.entity.mapColWhileMoveDown(midBottom)
 
             #Bewegung nach rechts
             if colShape.entity.velocity[0] > 0:
-                if map.getTileDangerousness(0, midRightSide[0], midRightSide[1]) == True:
+                if map.getTileDangerousness(0, midRightSide) == True:
                     colShape.entity.setDead()
-                if map.getTileAccessibility(0, midRightSide[0], midRightSide[1]) == True:
-                    colShape.entity.mapColWhileMoveRight(midRightSide[0], midRightSide[1])                      
+                if map.getTileAccessibility(0, midRightSide) == True:
+                    colShape.entity.mapColWhileMoveRight(midRightSide)                      
         
             #Bewegung nach links
             elif colShape.entity.velocity[0] < 0:
-                if map.getTileDangerousness(0, midLeftSide[0], midLeftSide[1]) == True:
+                if map.getTileDangerousness(0, midLeftSide) == True:
                     colShape.entity.setDead()
-                if map.getTileAccessibility(0, midLeftSide[0], midLeftSide[1]) == True:
-                    colShape.entity.mapColWhileMoveLeft(midLeftSide[0], midLeftSide[1])
+                if map.getTileAccessibility(0, midLeftSide) == True:
+                    colShape.entity.mapColWhileMoveLeft(midLeftSide)
 
     def checkPlayerEntityCollision(self):
         for shapeA in self.colShapeList:
