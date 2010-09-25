@@ -10,6 +10,7 @@ import levelManager
 import physic
 import pygame
 import renderer
+import menu
 import util.constants as constants
 
 pygame.init()
@@ -45,13 +46,22 @@ class StateManager(object):
         self.stateList.append(MenuState(self))
         self.stateList.append(PauseState(self))
 
-        self.curState = self.stateList[0]   # direct into the game
+        self.switchToGameState()
 
         self.run = True
 
         self.clock = pygame.time.Clock()
         
         intro.Opening().play()
+
+    def switchToGameState(self):
+        self.curState = self.stateList[0]
+        
+    def switchToMenuState(self):
+        self.curState = self.stateList[1]
+        
+    def switchToPauseState(self):
+        self.curState = self.stateList[2]
 
     def endGame(self):
         '''
@@ -128,6 +138,9 @@ class MenuState(State):
 
     def __init__(self, stateManager):
         State.__init__(self, stateManager)
+
+        self.menuList = []
+        self.menuList.append(menu.MainMenu())
 
     def handleInput(self):
         for event in pygame.event.get():
