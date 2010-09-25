@@ -12,6 +12,7 @@ import pygame
 import renderer
 import menu.menu as menu
 import util.constants as constants
+from util.events import Event
 
 pygame.init()
 
@@ -46,7 +47,7 @@ class StateManager(object):
         self.stateList.append(MenuState(self))
         self.stateList.append(PauseState(self))
 
-        self.switchToGameState()
+        self.switchToMenuState()
 
         self.run = True
 
@@ -141,6 +142,8 @@ class MenuState(State):
 
         self.menuList = []
         self.menuList.append(menu.MainMenu())
+        
+        self.curMenu = self.menuList[0]
 
     def handleInput(self):
         for event in pygame.event.get():
@@ -149,9 +152,17 @@ class MenuState(State):
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     self.stateManager.endGame()
+                elif event.key == pygame.K_UP:
+                    self.curMenu.moveUp()
+                elif event.key == pygame.K_DOWN:
+                    self.curMenu.moveDown()
+                elif event.key == pygame.K_RETURN:
+                    self.curMenu.select()
+            elif event.type == Event().NEWGAME:
+                self.stateManager.switchToGameState()
 
     def update(self):
-        pass
+        print "curItem: %i" %self.curMenu.curIndex
 
     def render(self):
         pass

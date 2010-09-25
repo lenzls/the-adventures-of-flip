@@ -11,7 +11,7 @@ class MenuItem():
         self.eventType = eventType
         
     def onClick(self):
-        Event.raiseCstmEvent(self.eventType)
+        Event().raiseCstmEvent(self.eventType)
 
 class TextItem(MenuItem):
     '''
