@@ -14,3 +14,6 @@ class Event(object):
     def raiseNewGameEvent(self, argDict={}):
         pygame.event.post(pygame.event.Event(self.NEWGAME, argDict))
         
+    def raiseCstmEvent(self, type, argDict={}):
+        pygame.event.post(pygame.event.Event(type, argDict))
+        

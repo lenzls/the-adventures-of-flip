@@ -10,7 +10,7 @@ import levelManager
 import physic
 import pygame
 import renderer
-import menu
+import menu.menu as menu
 import util.constants as constants
 
 pygame.init()
