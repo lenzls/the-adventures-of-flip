@@ -58,64 +58,14 @@ class StateManager(object):
         self.run = False
 
     def startGame(self):
-        timer = pygame.time.Clock()
-
-        a = 0
-        b = 0
-
-        while self.run:
-            if timer.get_fps() != 0:
-                a += timer.get_fps()
-                b += 1
-
-            self.curState.render()
-            self.curState.handleInput()
-            self.curState.update()
-            pygame.display.update()
-
-            timer.tick(5000)
-            print timer.get_fps()
-
-    def newMainLoop(self):
         clock = pygame.time.Clock()
         while self.run:
+            pygame.display.set_caption("The Adventures of Flip -- FPS: %f" %clock.get_fps())
             time_passed = clock.tick(constants.FPS)
 
             self.curState.handleInput()
-            
             self.curState.update()
             self.curState.render()
-            pygame.display.update()
-
-
-    # NOT working correctly
-    def altStartGame(self):
-
-        curMilliseconds = pygame.time.get_ticks()
-        nextRenderMilliseconds = curMilliseconds
-        nextTickMilliseconds = curMilliseconds
-
-        while self.run:
-            #TODO: clock was not imported 
-            #clock.tick()
-            #print clock.get_fps()
-
-            if nextRenderMilliseconds <= curMilliseconds:
-                while nextRenderMilliseconds <= curMilliseconds:
-
-                    self.curState.render()  
-
-                    nextRenderMilliseconds += (1000 // constants.RENDER_FPS)
-
-            while nextTickMilliseconds <= curMilliseconds:
-
-                self.curState.handleInput()
-                self.curState.update()
-
-                nextTickMilliseconds += (1000 // constants.LOGIC_FPS)##
-
-            pygame.time.wait(min(nextTickMilliseconds, nextRenderMilliseconds) - curMilliseconds)
-            curMilliseconds = pygame.time.get_ticks()
             pygame.display.update()
 
 class State():

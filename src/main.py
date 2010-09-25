@@ -10,4 +10,4 @@ import util.constants as constants
 if __name__ == '__main__':
 
     curGame = game.StateManager(constants.RESOLUTION)
-    curGame.newMainLoop()
+    curGame.startGame()
