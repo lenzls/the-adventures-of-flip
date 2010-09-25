@@ -29,11 +29,11 @@ class LevelManager(object):
     def loadLevel(self, levelIndex):
         self.curLevel = Level(self.physics, self.renderer, self.levelPathList[levelIndex])
 
-    def update(self):
-        self.updateEntities()
+    def update(self, time_passed):
+        self.updateEntities(time_passed)
 
-    def updateEntities(self):
-        self.curLevel.updateEntities()
+    def updateEntities(self, time_passed):
+        self.curLevel.updateEntities(time_passed)
 
 class Level(object):
 
@@ -75,6 +75,6 @@ class Level(object):
                         elif cNode.getAttribute('type') == 'grob':
                             self.entities.append(mob.Grob(entityPos, self.map, entityInfoTrees['grob'], self.physics, self.renderer))
 
-    def updateEntities(self):
+    def updateEntities(self, time_passed):
         for entity in self.entities:
-            entity.update()
+            entity.update(time_passed)

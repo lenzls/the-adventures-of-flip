@@ -5,8 +5,8 @@
 			<type>player</type>
 			<points>0</points>
 			<life>100</life>
-			<movespeed>3</movespeed>
-			<jumpspeed>-13</jumpspeed>
+			<movespeed>0.05</movespeed>
+			<jumpspeed>-0.05</jumpspeed>
 			<jumpSound>
 				<soundFile>jump.wav</soundFile>
 			</jumpSound>

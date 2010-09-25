@@ -104,6 +104,8 @@ class RenderManager(object):
         vertiBorder = constants.RESOLUTION[1] // 5
 
         playerPos = playerInstance.getPosition()
+        playerPos[0] = int(playerPos[0])
+        playerPos[1] = int(playerPos[1])
 
         if (playerPos[0] - self.camera[0]) > (constants.RESOLUTION[0] - horiBorder):
             cameraOffset +=  Vector((playerPos[0] - self.camera[0]) - (constants.RESOLUTION[0] - horiBorder),cameraOffset[1])

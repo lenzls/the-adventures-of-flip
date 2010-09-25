@@ -80,10 +80,9 @@ class StateManager(object):
         clock = pygame.time.Clock()
         while self.run:
             time_passed = clock.tick(constants.FPS)
-
             self.curState.handleInput()
             
-            self.curState.update()
+            self.curState.update(time_passed)
             self.curState.render()
             pygame.display.update()
 
@@ -159,10 +158,10 @@ class GameState(State):
                 elif event.key == pygame.K_RIGHT:
                     self.stateManager.levelManager.curLevel.player.walkStop()
 
-    def update(self):
+    def update(self, time_passed):
         self.stateManager.physicManager.update(self.stateManager.levelManager.curLevel)
         self.stateManager.renderManager.update(self.stateManager.levelManager.curLevel)
-        self.stateManager.levelManager.update()
+        self.stateManager.levelManager.update(time_passed)
 
     def render(self):
         self.stateManager.renderManager.renderBg(self.stateManager.levelManager.curLevel.map)

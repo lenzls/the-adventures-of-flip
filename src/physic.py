@@ -11,7 +11,7 @@ from util.dataStorage.collision import ColShape
 class PhysicManager(object):
 
     def __init__(self):
-        self.gravity = Vector(0,1)
+        self.gravity = Vector(0,0.02)
         self.colShapeList = []
 
     def createColShape(self, entity):

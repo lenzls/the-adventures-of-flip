@@ -22,7 +22,7 @@ class Player():
         self.position = Vector(position[0],position[1])
         self.dimensions = [0,0]
         self.velocity = Vector(0,0)
-        self.movespeed = None   #util.Vector(3,0)
+        self.movespeed = None   #pixel per ms
         self.jumpspeed = None   #util.Vector(0,-13)
 
         self.jumplock = False
@@ -47,9 +47,9 @@ class Player():
             elif infoNode.nodeName == "life":
                 self.life = int(infoNode.firstChild.data)
             elif infoNode.nodeName == 'movespeed':
-                self.movespeed = Vector(int(infoNode.firstChild.data),0)
+                self.movespeed = Vector(float(infoNode.firstChild.data),0)
             elif infoNode.nodeName == 'jumpspeed':
-                self.jumpspeed = Vector(0,int(infoNode.firstChild.data))
+                self.jumpspeed = Vector(0,float(infoNode.firstChild.data))
             elif infoNode.nodeName == 'jumpSound':
                 for cNode in infoNode.childNodes:
                     if cNode.nodeName == "soundFile":
@@ -111,10 +111,12 @@ class Player():
 
             self.dimensions = self.colShape.getOuterDimensions()
     
-    def update(self):
-        if self.velocity[1] < 15:
-            self.velocity += self.physics.gravity
-        self.position += self.velocity
+    def update(self, time_passed):
+        if self.velocity[1] < 0.1:
+            self.velocity += self.physics.gravity * time_passed
+        print self.position, " + ", self.velocity , " * ",  time_passed
+        self.position += self.velocity * time_passed
+        self.position.toInt()
         #check if better here or in renderer class
 #        self.sprite.update()
         self.renderer.updateCamera(self)
@@ -153,7 +155,7 @@ class Player():
         oldVelocity = self.velocity
         self.jumplock = False
         self.position = Vector(oldPosition[0], (((tilePos.y * constants.TILESIZE)-1) - self.dimensions[1]))
-        self.velocity = Vector(oldVelocity[0], 1)
+        self.velocity = Vector(oldVelocity[0], self.physics.gravity[1])
 
     def mapColWhileMoveRight(self, tilePos):
         oldPosition = self.position

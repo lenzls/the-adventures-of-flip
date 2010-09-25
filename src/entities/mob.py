@@ -48,7 +48,7 @@ class Mob(object):
             elif infoNode.nodeName == "life":
                 self.life = int(infoNode.firstChild.data)
             elif infoNode.nodeName == 'movespeed':
-                self.movespeed = Vector(int(infoNode.firstChild.data),0)
+                self.movespeed = Vector(float(infoNode.firstChild.data),0)
             elif infoNode.nodeName == 'jumpspeed':
                 self.jumpspeed = Vector(0,int(infoNode.firstChild.data))
             elif infoNode.nodeName == 'jumpSound':
@@ -115,11 +115,11 @@ class Mob(object):
     def getPosition(self):
         return self.position
 
-    def update(self):
+    def update(self, time_passed):
 
         if self.velocity[1] < 15:
-            self.velocity += self.physics.gravity
-        self.position += self.velocity
+            self.velocity += self.physics.gravity * time_passed
+        self.position += self.velocity * time_passed
         
         self.ki()
 #        self.sprite.update()
@@ -158,7 +158,7 @@ class Mob(object):
         oldVelocity = self.velocity
         self.jumplock = False
         self.position = Vector(oldPosition[0], (((tilePos.y * constants.TILESIZE)-1) - self.dimensions[1]))
-        self.velocity = Vector(oldVelocity[0], 1)
+        self.velocity = Vector(oldVelocity[0], self.physics.gravity[1])
 
     def mapColWhileMoveRight(self, tilePos):
         oldPosition = self.position
