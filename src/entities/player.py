@@ -18,6 +18,7 @@ class Player():
         self.map = map
         self.type = 'player'
         self.life = 0   # 0-100?!
+        self.score = 0
         self.alive = True
         self.position = Vector(position[0],position[1])
         self.dimensions = [0,0]
@@ -167,6 +168,7 @@ class Player():
 
     def colWin(self, enemy):
         print "Player win against:", enemy.type
+        self.score += enemy.getPoints()
 
     def colLose(self, enemy):
         print "Player loses against:", enemy.type
@@ -174,3 +176,6 @@ class Player():
     def setDead(self):
         print 'TOoooooooooooooooooooooooooooT'
         self.alive = False
+        
+    def getScore(self):
+        return self.score

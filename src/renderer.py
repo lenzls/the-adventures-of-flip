@@ -129,3 +129,6 @@ class RenderManager(object):
     def checkGraphicSizes(self):
         for sprite in self.spriteList:
             sprite.checkimageSizes()
+
+    def renderInterface(self, interface):
+        interface.render(self.screen)

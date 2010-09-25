@@ -78,3 +78,6 @@ class Level(object):
     def updateEntities(self):
         for entity in self.entities:
             entity.update()
+    
+    def getPlayer(self):
+        return self.player

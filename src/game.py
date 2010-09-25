@@ -49,6 +49,8 @@ class StateManager(object):
 
         self.run = True
 
+        self.clock = pygame.time.Clock()
+        
         intro.Opening().play()
 
     def endGame(self):
@@ -58,10 +60,10 @@ class StateManager(object):
         self.run = False
 
     def startGame(self):
-        clock = pygame.time.Clock()
+        
         while self.run:
-            pygame.display.set_caption("The Adventures of Flip -- FPS: %f" %clock.get_fps())
-            time_passed = clock.tick(constants.FPS)
+            pygame.display.set_caption("The Adventures of Flip -- FPS: %f" %self.clock.get_fps())
+            time_passed = self.clock.tick(constants.FPS)
 
             self.curState.handleInput()
             self.curState.update()
@@ -112,6 +114,7 @@ class GameState(State):
     def update(self):
         self.stateManager.physicManager.update(self.stateManager.levelManager.curLevel)
         self.stateManager.renderManager.update(self.stateManager.levelManager.curLevel)
+        self.stateManager.interface.update(self.stateManager.levelManager.curLevel.getPlayer().getScore(), self.stateManager.clock.get_fps())
         self.stateManager.levelManager.update()
 
     def render(self):
@@ -119,6 +122,7 @@ class GameState(State):
         self.stateManager.renderManager.renderMapLayer(0, self.stateManager.levelManager.curLevel.map)
         self.stateManager.renderManager.renderSprites()
         self.stateManager.renderManager.renderMapLayer(1, self.stateManager.levelManager.curLevel.map)
+        self.stateManager.renderManager.renderInterface(self.stateManager.interface)
 
 class MenuState(State):
 

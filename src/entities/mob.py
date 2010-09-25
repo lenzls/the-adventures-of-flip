@@ -182,7 +182,9 @@ class Mob(object):
 
     def getVelocity(self):
         return self.velocity
-
+    
+    def getPoints(self):
+        return self.points
 class Grob(Mob):
     def __init__(self, position, map, infoTree, physics, renderer):   #infoTree = xmlBaum
         Mob.__init__(self, position, map, infoTree, physics, renderer)
