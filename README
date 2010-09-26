@@ -23,7 +23,6 @@ Fortsetzung folgt...
 
 TODO:
 - new main loop concept
-- add new entity classes [partly done(ki needed)]
 - package renaming (dataStorage)
 - add pyDoc
 - rewrite physics class. especially colRect and the whole col detection [partly done]  {finished!}
@@ -38,6 +37,7 @@ changelog:
 - added basic menu things
 - rewritten collision thing(with pygame.Rects)
 - first menu things
+- added new enntity
 ### 0.5.6 ###
 basics are working:
 - fixed scrolling thing
