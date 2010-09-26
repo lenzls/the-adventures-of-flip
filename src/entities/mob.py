@@ -186,7 +186,13 @@ class Mob(object):
 class Grob(Mob):
     def __init__(self, position, map, infoTree, physics, renderer):   #infoTree = xmlBaum
         Mob.__init__(self, position, map, infoTree, physics, renderer)
-        
+        self.velocity = self.movespeed
+
     def ki(self):
         pass
-        
+
+    def mapColWhileMoveRight(self, tilePos):
+        self.velocity = Vector(-self.velocity[0], self.velocity[1])
+
+    def mapColWhileMoveLeft(self, tilePos):
+        self.velocity = Vector(-self.velocity[0], self.velocity[1])
