@@ -9,10 +9,16 @@ from util.dataStorage.rendering import Sprite
 import util.constants as constants
 import pygame
 
-class RenderManager(object):
+class Renderer(object):
 
     def __init__(self, screen):
         self.screen = screen
+
+    
+
+class GameRenderer(Renderer):
+    def __init__(self, screen):
+        Renderer.__init__(self, screen)
         self.spriteList = []
         self.camera = Vector(0,0)
 
@@ -28,7 +34,7 @@ class RenderManager(object):
         ''' deletes the old spriteList and creates a new one (e.g.: to start a new level)''' 
 
         self.spriteList = []
-
+        
     def update(self, level):
         self.updateCamera(level.player)
         self.updateSpriteList()
@@ -132,3 +138,7 @@ class RenderManager(object):
 
     def renderInterface(self, interface):
         interface.render(self.screen)
+
+class MenuRenderer(Renderer):
+    def __init__(self, screen):
+        Renderer.__init__(self, screen)

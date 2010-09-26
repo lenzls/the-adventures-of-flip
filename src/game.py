@@ -33,21 +33,12 @@ class StateManager(object):
         else:
             self.screen = pygame.display.set_mode(self.resolution)
 
-        self.renderManager = renderer.RenderManager(self.screen)
-        self.physicManager = physic.PhysicManager()
-        self.levelManager = levelManager.LevelManager(self.physicManager, self.renderManager)
-        self.interface = interface.Interface()
-
-        #=======================================================================
-        # self.clock 
-        #=======================================================================
-
         self.stateList = []
         self.stateList.append(GameState(self))
         self.stateList.append(MenuState(self))
         self.stateList.append(PauseState(self))
 
-        self.switchToMenuState()
+        self.switchToGameState()
 
         self.run = True
 
@@ -100,7 +91,12 @@ class GameState(State):
     def __init__(self, stateManager):
         State.__init__(self, stateManager)
 
-        self.stateManager.levelManager.loadLevel(0)
+        self.gameRenderer = renderer.GameRenderer(self.stateManager.screen)
+        self.physicManager = physic.PhysicManager()
+        self.levelManager = levelManager.LevelManager(self.physicManager, self.gameRenderer)
+        self.interface = interface.Interface()
+        
+        self.levelManager.loadLevel(0)
 
     def handleInput(self):
         for event in pygame.event.get():
@@ -111,34 +107,36 @@ class GameState(State):
                     self.stateManager.endGame()
 
                 elif event.key == pygame.K_SPACE:
-                    self.stateManager.levelManager.curLevel.player.jump()
+                    self.levelManager.curLevel.player.jump()
                 elif event.key == pygame.K_LEFT:
-                    self.stateManager.levelManager.curLevel.player.walkLeft()
+                    self.levelManager.curLevel.player.walkLeft()
                 elif event.key == pygame.K_RIGHT:
-                    self.stateManager.levelManager.curLevel.player.walkRight()
+                    self.levelManager.curLevel.player.walkRight()
             elif event.type == pygame.KEYUP:
                 if event.key == pygame.K_LEFT:
-                    self.stateManager.levelManager.curLevel.player.walkStop()
+                    self.levelManager.curLevel.player.walkStop()
                 elif event.key == pygame.K_RIGHT:
-                    self.stateManager.levelManager.curLevel.player.walkStop()
+                    self.levelManager.curLevel.player.walkStop()
 
     def update(self):
-        self.stateManager.physicManager.update(self.stateManager.levelManager.curLevel)
-        self.stateManager.renderManager.update(self.stateManager.levelManager.curLevel)
-        self.stateManager.interface.update(self.stateManager.levelManager.curLevel.getPlayer().getScore(), self.stateManager.clock.get_fps())
-        self.stateManager.levelManager.update()
+        self.physicManager.update(self.levelManager.curLevel)
+        self.gameRenderer.update(self.levelManager.curLevel)
+        self.interface.update(self.levelManager.curLevel.getPlayer().getScore(), self.stateManager.clock.get_fps())
+        self.levelManager.update()
 
     def render(self):
-        self.stateManager.renderManager.renderBg(self.stateManager.levelManager.curLevel.map)
-        self.stateManager.renderManager.renderMapLayer(0, self.stateManager.levelManager.curLevel.map)
-        self.stateManager.renderManager.renderSprites()
-        self.stateManager.renderManager.renderMapLayer(1, self.stateManager.levelManager.curLevel.map)
-        self.stateManager.renderManager.renderInterface(self.stateManager.interface)
+        self.gameRenderer.renderBg(self.levelManager.curLevel.map)
+        self.gameRenderer.renderMapLayer(0, self.levelManager.curLevel.map)
+        self.gameRenderer.renderSprites()
+        self.gameRenderer.renderMapLayer(1, self.levelManager.curLevel.map)
+        self.gameRenderer.renderInterface(self.interface)
 
 class MenuState(State):
 
     def __init__(self, stateManager):
         State.__init__(self, stateManager)
+
+        self.menuRenderer = renderer.MenuRenderer(self.stateManager.screen)
 
         self.menuList = []
         self.menuList.append(menu.MainMenu())
