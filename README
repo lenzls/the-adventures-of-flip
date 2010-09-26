@@ -35,6 +35,7 @@ TODO:
 
 changelog:
 ###	      ###
+- added basic menu things
 - rewritten collision thing(with pygame.Rects)
 - first menu things
 ### 0.5.6 ###

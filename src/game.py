@@ -38,7 +38,7 @@ class StateManager(object):
         self.stateList.append(MenuState(self))
         self.stateList.append(PauseState(self))
 
-        self.switchToGameState()
+        self.switchToMenuState()
 
         self.run = True
 
@@ -155,15 +155,15 @@ class MenuState(State):
                 elif event.key == pygame.K_DOWN:
                     self.curMenu.moveDown()
                 elif event.key == pygame.K_RETURN:
-                    self.curMenu.select()
+                    self.curMenu.execute()
             elif event.type == Event().NEWGAME:
                 self.stateManager.switchToGameState()
 
     def update(self):
-        print "curItem: %i" %self.curMenu.curIndex
+        self.curMenu.update()
 
     def render(self):
-        pass
+        self.menuRenderer.renderMenu(self.curMenu)
 
 class PauseState(State):
 

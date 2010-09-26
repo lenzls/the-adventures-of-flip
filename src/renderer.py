@@ -142,3 +142,10 @@ class GameRenderer(Renderer):
 class MenuRenderer(Renderer):
     def __init__(self, screen):
         Renderer.__init__(self, screen)
+        
+    def renderMenu(self, menu):
+        self.screen.blit(menu.getBackground(),(0,0))
+        y = 150
+        for mItem in menu.getMenuItems():
+            self.screen.blit(mItem.getSurface(),((constants.RESOLUTION[0]//2)-100, y))
+            y += 50

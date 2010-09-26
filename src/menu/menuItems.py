@@ -19,12 +19,25 @@ class MenuItem():
     def onClick(self):
         Event().raiseCstmEvent(self.eventType)
         
+    def markSelected(self):
+        self.color = [255,0,0]
+        
+    def markUnSelected(self):
+        self.color = [0,0,255]
+        
     def getSurface(self):
-        return self.surface
+        return self.buttonFont.render(self.caption,1,self.color)
 
 class TextItem(MenuItem):
     '''
-        basic Text item (works like a button)
+        basic Text item
+    '''
+    def __init__(self, caption):
+        MenuItem.__init__(self, caption, pygame.NOEVENT)
+        
+class ButtonItem(MenuItem):
+    '''
+       (works like a button)
     '''
     def __init__(self, caption, eventType):
         MenuItem.__init__(self, caption, eventType)
