@@ -12,6 +12,7 @@ class MenuItem():
         self.caption = caption
         self.eventType = eventType
 
+        # TODO: move font to renderer class
         self.color = [0,0,255]
         self.buttonFont = pygame.font.Font(os.path.join('..','data','courier_new.ttf'),20)
         self.surface = self.buttonFont.render(self.caption,1,self.color)

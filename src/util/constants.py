@@ -14,5 +14,4 @@ FPS        = 50
 TILESIZE   = 32
 FULLSCREEN = False
 ISSOUND    = False
-#TODO: implement debug mode
-DEBUG      = False
+DEBUG      = True

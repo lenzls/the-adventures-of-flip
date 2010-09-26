@@ -129,6 +129,7 @@ class GameState(State):
         self.gameRenderer.renderMapLayer(0, self.levelManager.curLevel.map)
         self.gameRenderer.renderSprites()
         self.gameRenderer.renderMapLayer(1, self.levelManager.curLevel.map)
+        if constants.DEBUG: self.gameRenderer.renderGrid(self.levelManager.curLevel.map)
         self.gameRenderer.renderInterface(self.interface)
 
 class MenuState(State):

@@ -8,11 +8,14 @@ from util.vector import Vector
 from util.dataStorage.rendering import Sprite
 import util.constants as constants
 import pygame
+import os
 
 class Renderer(object):
 
     def __init__(self, screen):
         self.screen = screen
+        
+        self.gridFont = pygame.font.Font(os.path.join('..','data','courier_new.ttf'),15)
 
     
 
@@ -60,9 +63,17 @@ class GameRenderer(Renderer):
                 pygame.draw.rect(self.screen, color, colRect.getRect().move(-self.camera[0], -self.camera[1]), 1)
 
 
-    def renderGrid(self):
-        #TODO: implement method (for easier entity positioning)
-        pass
+    def renderGrid(self, map):
+        # To show the "tilegrid" change the step to 32
+        for x in range(0, map.getDimensions()[0]*constants.TILESIZE,50):
+            pygame.draw.aaline(self.screen,[255,0,255],(x-self.camera[0],0),(x-self.camera[0],constants.RESOLUTION[1]))
+            surface = self.gridFont.render(str(x),1,[255,0,255])
+            self.screen.blit(surface,((x+2)-self.camera[0],20))
+        
+        for y in range(0, map.getDimensions()[1]*constants.TILESIZE,50):
+            pygame.draw.aaline(self.screen,[255,0,255],(0,y-self.camera[1]),(constants.RESOLUTION[0],y-self.camera[1]))
+            surface = self.gridFont.render(str(y),1,[255,0,255])
+            self.screen.blit(surface,(20,(y+2)-self.camera[1]))
 
     def renderMapLayer(self, layerIndex, map):
         ''' renders map Layer
