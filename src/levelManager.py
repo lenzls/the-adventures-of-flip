@@ -8,6 +8,7 @@ import entities.mob as mob
 from entities.player import Player
 import map
 import xml.dom.minidom as dom
+from entities import trigger
 
 class LevelManager(object):
 
@@ -40,6 +41,7 @@ class Level(object):
     def __init__(self, physics, renderer, levelFilePath):
         self.physics = physics
         self.renderer = renderer
+        self.triggerManager = trigger.TriggerManager()
         self.levelFilePath = levelFilePath
         self.player = None
 
@@ -57,7 +59,7 @@ class Level(object):
             if node.nodeName == 'entitiySpecification':
                 for cNode in node.childNodes:
                     if cNode.nodeName == 'entitySpec':
-                        entityInfoTrees[cNode.getAttribute('name')] = cNode
+                        entityInfoTrees[cNode.getAttribute('type')] = cNode
             elif node.nodeName == 'entities':
                 for cNode in node.childNodes:
                     if cNode.nodeName == 'absEntity':
@@ -69,11 +71,18 @@ class Level(object):
                                         entityPos[0] = int(cccNode.firstChild.data)
                                     elif cccNode.nodeName == 'vertical':
                                         entityPos[1] = int(cccNode.firstChild.data)
+                            
+                            elif ccNode.nodeName == 'msg':          
+                                msg = ccNode.firstChild.data
                         if cNode.getAttribute('type') == 'player':
                             self.player = Player(entityPos, self.map, entityInfoTrees['player'], self.physics, self.renderer)
                             self.entities.append(self.player)
                         elif cNode.getAttribute('type') == 'grob':
                             self.entities.append(mob.Grob(entityPos, self.map, entityInfoTrees['grob'], self.physics, self.renderer))
+                        elif cNode.getAttribute('type') == 't_moveLeft':
+                            self.entities.append(trigger.TmoveLeft(entityPos, self.map, entityInfoTrees['t_moveLeft'], self.physics, {"player" : self.player}))
+                        elif cNode.getAttribute('type') == 't_printer':
+                            self.entities.append(trigger.Tprinter(entityPos, self.map, entityInfoTrees['t_moveLeft'], self.physics, {"msg" : msg}))
 
     def updateEntities(self):
         for entity in self.entities:

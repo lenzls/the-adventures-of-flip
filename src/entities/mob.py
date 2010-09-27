@@ -41,9 +41,7 @@ class Mob(object):
 
     def _loadInfo(self, infoTree):
         for infoNode in infoTree.childNodes:
-            if infoNode.nodeName == 'type':
-                self.type = str(infoNode.firstChild.data)
-            elif infoNode.nodeName == "points":
+            if infoNode.nodeName == "points":
                 self.points = int(infoNode.firstChild.data)
             elif infoNode.nodeName == "life":
                 self.life = int(infoNode.firstChild.data)
@@ -122,7 +120,6 @@ class Mob(object):
         self.position += self.velocity
         
         self.ki()
-#        self.sprite.update()
 
     def ki(self):
         pass

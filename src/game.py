@@ -117,6 +117,14 @@ class GameState(State):
                     self.levelManager.curLevel.player.walkStop()
                 elif event.key == pygame.K_RIGHT:
                     self.levelManager.curLevel.player.walkStop()
+            
+            #custom events:
+            elif event.type == Event().NEWTRIGGER:
+                self.levelManager.curLevel.triggerManager.addTrigger(event.tObject)
+
+        #Trigger input:
+        if self.levelManager.curLevel.triggerManager.isNewEvents():
+            self.levelManager.curLevel.triggerManager.next().action()
 
     def update(self):
         self.physicManager.update(self.levelManager.curLevel)
@@ -157,6 +165,8 @@ class MenuState(State):
                     self.curMenu.moveDown()
                 elif event.key == pygame.K_RETURN:
                     self.curMenu.execute()
+            
+            #custom events
             elif event.type == Event().NEWGAME:
                 self.stateManager.switchToGameState()
 

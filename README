@@ -1,5 +1,5 @@
 ---- The Adventures of Flip! ----
-Verison: 0.5.6
+Verison: 0.5.7
 
 [German/Deutsch]:
 
@@ -33,11 +33,12 @@ TODO:
 - ideas for background size (vertical scrolling?)
 
 changelog:
-###	      ###
+###	0.5.7 ###
+- minor changes in map spec
+- added trigger management
 - added basic menu things
 - rewritten collision thing(with pygame.Rects)
-- first menu things
-- added new enntity
+- added new entity
 ### 0.5.6 ###
 basics are working:
 - fixed scrolling thing

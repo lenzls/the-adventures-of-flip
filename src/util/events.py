@@ -10,6 +10,7 @@ class Event(object):
     classdocs
     '''
     NEWGAME = 24
+    NEWTRIGGER = 25
 
     def raiseNewGameEvent(self, argDict={}):
         pygame.event.post(pygame.event.Event(self.NEWGAME, argDict))
