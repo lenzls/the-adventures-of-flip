@@ -33,11 +33,12 @@ class Trigger(object):
     '''
 
 
-    def __init__(self, position, map, infoTree, physics):
+    def __init__(self, position, map, infoTree, physics, activated):
 
         self.physics = physics
         self.map = map
         self.type = None
+        self.activated = activated
         self.life = 0   # 0-100?!
         self.points = 0 #for highscore
         self.alive = True
@@ -52,7 +53,13 @@ class Trigger(object):
 
         self.colShape   = self.physics.createColShape(self)
 
+        if self.activated:
+            self.activate()
+
         self._loadInfo(infoTree)
+
+    def activate(self):
+        self.physics.addToColShapeList(self.colShape)
 
     def _loadInfo(self, infoTree):
         for infoNode in infoTree.childNodes:
@@ -172,16 +179,34 @@ class Trigger(object):
         pass
     
 class TmoveLeft(Trigger):
-    def __init__(self, position, map, infoTree, physics, argDict):
-        Trigger.__init__(self, position, map, infoTree, physics)
+    def __init__(self, position, map, infoTree, physics, activated, argDict):
+        Trigger.__init__(self, position, map, infoTree, physics, activated)
         self.player = argDict["player"]
         
     def action(self):
         self.player.walkLeft()
+
+class TmoveRight(Trigger):
+    def __init__(self, position, map, infoTree, physics, activated, argDict):
+        Trigger.__init__(self, position, map, infoTree, physics, activated)
+        self.player = argDict["player"]
+        
+    def action(self):
+        self.player.walkRight()
+        
+class TcreateEntity(Trigger):
+    def __init__(self, position, map, infoTree, physics, activated, argDict):
+        Trigger.__init__(self, position, map, infoTree, physics, activated)
+        self.newEntity = argDict["newEntityObj"]
+        self.lvlEntityList = argDict["entityList"]
+
+    def action(self):
+        self.lvlEntityList.append(self.newEntity)
+        self.newEntity.activate()
         
 class Tprinter(Trigger):
-    def __init__(self, position, map, infoTree, physics, argDict):
-        Trigger.__init__(self, position, map, infoTree, physics)
+    def __init__(self, position, map, infoTree, physics, activated, argDict):
+        Trigger.__init__(self, position, map, infoTree, physics, activated)
         self.msg = argDict["msg"]
 
     def action(self):

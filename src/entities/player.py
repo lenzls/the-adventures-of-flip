@@ -11,11 +11,12 @@ from util import ressourceLoader
 
 class Player():
 
-    def __init__(self, position, map, infoTree, physics, renderer):
+    def __init__(self, position, map, infoTree, physics, renderer, activated):
 
         self.renderer = renderer
         self.physics = physics
         self.map = map
+        self.activated = activated
         self.type = 'player'
         self.life = 0   # 0-100?!
         self.score = 0
@@ -32,12 +33,19 @@ class Player():
         self.sprite     = self.renderer.createSprite(self)
         self.colShape   = self.physics.createColShape(self)
 
+        if self.activated:
+            self.activate()
+
         self._loadInfo(infoTree)
 
         self.sprite.setAni('idle')
 
     def getPosition(self):
         return self.position
+    
+    def activate(self):
+        self.renderer.appendSpriteList(self.sprite)
+        self.physics.addToColShapeList(self.colShape)
 
     def _loadInfo(self, infoTree):
         for infoNode in infoTree.childNodes:

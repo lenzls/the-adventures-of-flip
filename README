@@ -35,7 +35,7 @@ TODO:
 
 changelog:
 ###	###
-
+- added some triggers(create entity)
 ###	0.5.7 ###
 - minor changes in map spec
 - added trigger management

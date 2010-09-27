@@ -16,7 +16,6 @@ class PhysicManager(object):
 
     def createColShape(self, entity):
         colShape = ColShape(entity, self)
-        self.addToColShapeList(colShape)
         return colShape
 
     def addToColShapeList(self, colShape):

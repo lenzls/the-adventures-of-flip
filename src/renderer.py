@@ -27,7 +27,6 @@ class GameRenderer(Renderer):
 
     def createSprite(self, entity):
         sprite = Sprite(entity)
-        self.appendSpriteList(sprite)
         return sprite
 
     def appendSpriteList(self, sprite):

@@ -232,6 +232,26 @@
 				</colRect>
 			</colShape>
 		</entitySpec>
+		<entitySpec type="t_createEntity">
+			<points>44</points>
+			<life>10</life>
+			<movespeed>0</movespeed>
+			<jumpspeed>0</jumpspeed>
+			<colShape>
+				<colRect index="0">
+					<posUpperLeft>
+						<horizontal>0</horizontal>
+						<vertical>0</vertical>
+					</posUpperLeft>
+					<dimensions>
+						<horizontal>13</horizontal>
+						<vertical>13</vertical>
+					</dimensions>
+					<isBody>True</isBody>
+					<isSpike>False</isSpike>
+				</colRect>
+			</colShape>
+		</entitySpec>
 	</entitiySpecification>
 	<entities>
 		<absEntity type="player" name="player">
@@ -258,6 +278,18 @@
 				<vertical>400</vertical>
 			</position>
 			<msg>So ein Tag so wunderschoen wie heute</msg>
+		</absEntity>
+		<absEntity type="t_createEntity" name="printer-1">
+			<position>
+				<horizontal>570</horizontal>
+				<vertical>400</vertical>
+			</position>
+			<newEntity type="grob" name="grob-2">
+				<position>
+					<horizontal>600</horizontal>
+					<vertical>250</vertical>
+				</position>
+			</newEntity>
 		</absEntity>
 	</entities>
 </entityFile>
