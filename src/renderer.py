@@ -153,10 +153,19 @@ class GameRenderer(Renderer):
 class MenuRenderer(Renderer):
     def __init__(self, screen):
         Renderer.__init__(self, screen)
-        
+
+        self.itemFont = pygame.font.Font(os.path.join('..','data','courier_new.ttf'),20)
+        self.headingFont = pygame.font.Font(os.path.join('..','data','courier_new.ttf'),20)
+
     def renderMenu(self, menu):
+        # render background
         self.screen.blit(menu.getBackground(),(0,0))
+
+        #render heading
+        self.screen.blit(self.headingFont.render(menu.getHeading(),1,[255,255,255]),(((constants.RESOLUTION[0]//2)-100),100))
+
+        # render Items
         y = 150
         for mItem in menu.getMenuItems():
-            self.screen.blit(mItem.getSurface(),((constants.RESOLUTION[0]//2)-100, y))
+            self.screen.blit(self.itemFont.render(mItem.getCaption(),1,mItem.getColor()),((constants.RESOLUTION[0]//2)-100, y))
             y += 50
