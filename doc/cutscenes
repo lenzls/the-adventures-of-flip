@@ -1,0 +1,2 @@
+- if 2 trigger have got exactly the same position and dimensions, they were both activated by a collision with the player
+	- eg: overlapping  cutsceneStart and moveRight and cutSceneEnd and moveStop
