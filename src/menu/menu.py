@@ -46,6 +46,9 @@ class Menu(object):
     
     def getMenuItems(self):
         return self.menuItems
+    
+    def getHeading(self):
+        return self.heading
 
 class MainMenu(Menu):
     
@@ -53,7 +56,8 @@ class MainMenu(Menu):
         Menu.__init__(self)
         self.background = RessourceLoader().load_graphic("menu_bg_mainMenu.png")
         self.menuItems = []
-        self.menuItems.append(menuItems.TextItem("main menu"))
+        self.heading = "main menu"
+
         self.menuItems.append(menuItems.ButtonItem("> start game", Event.NEWGAME))
         self.menuItems.append(menuItems.ButtonItem("> Quit Application", pygame.QUIT))
         self.curIndex = 0

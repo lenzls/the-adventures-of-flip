@@ -22,6 +22,8 @@ Fortsetzung folgt...
 
 
 TODO:
+- speech bubbles logic and trigger (first version done)
+- split game state events and menu state events
 - new main loop concept
 - package renaming (dataStorage)
 - add pyDoc
@@ -33,6 +35,8 @@ TODO:
 - ideas for background size (vertical scrolling?)
 
 changelog:
+###	###
+- added some triggers(create entity)
 ###	0.5.7 ###
 - minor changes in map spec
 - added trigger management

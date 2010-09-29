@@ -49,7 +49,16 @@ class Level(object):
 
         self.entities = []
 
+        self.cutSceneState = False
+
         self._loadEntityFile(self.map.entityFilePath)
+        
+    def startCutScene(self):
+
+        self.cutSceneState = True
+        
+    def endCutScene(self):
+        self.cutSceneState = False
 
     def _loadEntityFile(self, entityFile):
         #durchsucht nur den "Entities"-teil der xml und gibt dann an die entity klasse den "entities-info" baum als parameter mit
@@ -63,27 +72,49 @@ class Level(object):
             elif node.nodeName == 'entities':
                 for cNode in node.childNodes:
                     if cNode.nodeName == 'absEntity':
-                        entityPos = [0,0]
-                        for ccNode in cNode.childNodes:
-                            if ccNode.nodeName == 'position':
-                                for cccNode in ccNode.childNodes:
-                                    if cccNode.nodeName == 'horizontal':
-                                        entityPos[0] = int(cccNode.firstChild.data)
-                                    elif cccNode.nodeName == 'vertical':
-                                        entityPos[1] = int(cccNode.firstChild.data)
-                            
-                            elif ccNode.nodeName == 'msg':          
-                                msg = ccNode.firstChild.data
-                        if cNode.getAttribute('type') == 'player':
-                            self.player = Player(entityPos, self.map, entityInfoTrees['player'], self.physics, self.renderer)
-                            self.entities.append(self.player)
-                        elif cNode.getAttribute('type') == 'grob':
-                            self.entities.append(mob.Grob(entityPos, self.map, entityInfoTrees['grob'], self.physics, self.renderer))
-                        elif cNode.getAttribute('type') == 't_moveLeft':
-                            self.entities.append(trigger.TmoveLeft(entityPos, self.map, entityInfoTrees['t_moveLeft'], self.physics, {"player" : self.player}))
-                        elif cNode.getAttribute('type') == 't_printer':
-                            self.entities.append(trigger.Tprinter(entityPos, self.map, entityInfoTrees['t_moveLeft'], self.physics, {"msg" : msg}))
+                        absEntObj = self.loadAbsEntity(cNode, entityInfoTrees, True)
 
+                        if absEntObj.type == 'player':
+                            self.player = absEntObj
+                        self.entities.append(absEntObj)
+
+    def loadAbsEntity(self, absNode, entityInfoTrees, activated):
+        '''
+            method reads an absEntity Node and returns the entityObj
+            may be called from itself if a createEntity trigger occurs
+            
+            @return: entity obj
+        '''
+        entityPos = [0,0]
+        for cNode in absNode.childNodes:
+            if cNode.nodeName == 'position':
+                for ccNode in cNode.childNodes:
+                    if ccNode.nodeName == 'horizontal':
+                        entityPos[0] = int(ccNode.firstChild.data)
+                    elif ccNode.nodeName == 'vertical':
+                        entityPos[1] = int(ccNode.firstChild.data)
+            elif cNode.nodeName == 'msg':
+                msg = cNode.firstChild.data
+            elif cNode.nodeName == 'newEntity':
+                newEntObj = self.loadAbsEntity(cNode, entityInfoTrees, False)
+
+        if absNode.getAttribute('type') == 'player':
+            return Player(entityPos, self.map, entityInfoTrees['player'], self.physics, self.renderer, activated)
+        elif absNode.getAttribute('type') == 'grob':
+            return mob.Grob(entityPos, self.map, entityInfoTrees['grob'], self.physics, self.renderer, activated)
+        elif absNode.getAttribute('type') == 't_moveLeft':
+            return trigger.TmoveLeft(entityPos, self.map, entityInfoTrees['t_moveLeft'], self.physics, activated, {"player" : self.player})
+        elif absNode.getAttribute('type') == 't_moveRight':
+            return trigger.TmoveLeft(entityPos, self.map, entityInfoTrees['t_moveRight'], self.physics, activated, {"player" : self.player})
+        elif absNode.getAttribute('type') == 't_printer':
+            return trigger.Tprinter(entityPos, self.map, entityInfoTrees['t_moveLeft'], self.physics, activated, {"msg" : msg})
+        elif absNode.getAttribute('type') == 't_createEntity':
+            return trigger.TcreateEntity(entityPos, self.map, entityInfoTrees['t_createEntity'], self.physics, activated, {"newEntityObj" : newEntObj, "entityList" : self.entities})
+        elif absNode.getAttribute('type') == 't_cutSceneStart':
+            return trigger.TcutSceneStart(entityPos, self.map, entityInfoTrees['t_cutSceneStart'], self.physics, activated, {"level" : self})
+        elif absNode.getAttribute('type') == 't_cutSceneEnd':
+            return trigger.TcutSceneEnd(entityPos, self.map, entityInfoTrees['t_cutSceneEnd'], self.physics, activated, {"level" : self})
+        
     def updateEntities(self):
         for entity in self.entities:
             entity.update()

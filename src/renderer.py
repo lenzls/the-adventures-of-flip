@@ -27,7 +27,6 @@ class GameRenderer(Renderer):
 
     def createSprite(self, entity):
         sprite = Sprite(entity)
-        self.appendSpriteList(sprite)
         return sprite
 
     def appendSpriteList(self, sprite):
@@ -65,12 +64,12 @@ class GameRenderer(Renderer):
 
     def renderGrid(self, map):
         # To show the "tilegrid" change the step to 32
-        for x in range(0, map.getDimensions()[0]*constants.TILESIZE,50):
+        for x in range(0, map.getDimensions()[0]*constants.TILESIZE,32):
             pygame.draw.aaline(self.screen,[255,0,255],(x-self.camera[0],0),(x-self.camera[0],constants.RESOLUTION[1]))
             surface = self.gridFont.render(str(x),1,[255,0,255])
             self.screen.blit(surface,((x+2)-self.camera[0],20))
         
-        for y in range(0, map.getDimensions()[1]*constants.TILESIZE,50):
+        for y in range(0, map.getDimensions()[1]*constants.TILESIZE,32):
             pygame.draw.aaline(self.screen,[255,0,255],(0,y-self.camera[1]),(constants.RESOLUTION[0],y-self.camera[1]))
             surface = self.gridFont.render(str(y),1,[255,0,255])
             self.screen.blit(surface,(20,(y+2)-self.camera[1]))
@@ -153,10 +152,19 @@ class GameRenderer(Renderer):
 class MenuRenderer(Renderer):
     def __init__(self, screen):
         Renderer.__init__(self, screen)
-        
+
+        self.itemFont = pygame.font.Font(os.path.join('..','data','courier_new.ttf'),20)
+        self.headingFont = pygame.font.Font(os.path.join('..','data','courier_new.ttf'),20)
+
     def renderMenu(self, menu):
+        # render background
         self.screen.blit(menu.getBackground(),(0,0))
+
+        #render heading
+        self.screen.blit(self.headingFont.render(menu.getHeading(),1,[255,255,255]),(((constants.RESOLUTION[0]//2)-100),100))
+
+        # render Items
         y = 150
         for mItem in menu.getMenuItems():
-            self.screen.blit(mItem.getSurface(),((constants.RESOLUTION[0]//2)-100, y))
+            self.screen.blit(self.itemFont.render(mItem.getCaption(),1,mItem.getColor()),((constants.RESOLUTION[0]//2)-100, y))
             y += 50
