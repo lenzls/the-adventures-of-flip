@@ -332,6 +332,26 @@
 				</colRect>
 			</colShape>
 		</entitySpec>
+		<entitySpec type="t_createBubble">
+			<points>5</points>
+			<life>10</life>
+			<movespeed>0</movespeed>
+			<jumpspeed>0</jumpspeed>
+			<colShape>
+				<colRect index="0">
+					<posUpperLeft>
+						<horizontal>0</horizontal>
+						<vertical>0</vertical>
+					</posUpperLeft>
+					<dimensions>
+						<horizontal>13</horizontal>
+						<vertical>13</vertical>
+					</dimensions>
+					<isBody>True</isBody>
+					<isSpike>False</isSpike>
+				</colRect>
+			</colShape>
+		</entitySpec>
 	</entitiySpecification>
 	<entities>
 		<absEntity type="player" name="player">
@@ -382,6 +402,13 @@
 				<horizontal>300</horizontal>
 				<vertical>1235</vertical>
 			</position>
+		</absEntity>
+		<absEntity type="t_createBubble" name="bubble-1">
+			<position>
+				<horizontal>375</horizontal>
+				<vertical>1235</vertical>
+			</position>
+			<msg>TEST MESSGAE FOR BUBBLE</msg>
 		</absEntity>
 		<absEntity type="t_moveStop" name="stopper-1">
 			<position>

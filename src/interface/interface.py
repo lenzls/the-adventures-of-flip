@@ -7,10 +7,12 @@ Created on 09.07.2009
 import os
 import pygame
 import util.constants as constants
+from dialog import SpeechBubble 
 
 class Interface(object):
 
     def __init__(self):
+        self.dialogManager = self.DialogManager()
         self.schriftart = pygame.font.Font(os.path.join('..','data','courier_new.ttf'),15)
         self.bar = pygame.Surface((constants.RESOLUTION[0],17))
         self.bar.fill((130,130,130))
@@ -26,3 +28,19 @@ class Interface(object):
         screen.blit(self.bar,(0,0))
         screen.blit(self.schriftart.render('Score:' + str(self.score),1,[0,0,0]),(0+20,0))
         screen.blit(self.schriftart.render('FPS:' + str(round(self.fps,2)),1,[0,0,0]),(constants.RESOLUTION[0]-100,0))
+
+    class DialogManager(object):
+        def __init__(self):
+            self.dialogQueue = []
+        
+        def addDialog(self, msg, curGameState):
+            self.dialogQueue.append(SpeechBubble(msg, curGameState))
+
+        def isNewDialog(self):
+            if len(self.dialogQueue) > 0 : return True
+            else: return False
+            
+        def next(self):
+            next = self.dialogQueue[0]
+            del(self.dialogQueue[0])
+            return next

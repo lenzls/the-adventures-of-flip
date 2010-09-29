@@ -116,6 +116,8 @@ class Level(object):
             return trigger.TcutSceneStart(entityPos, self.map, entityInfoTrees['t_cutSceneStart'], self.physics, activated, {"level" : self})
         elif absNode.getAttribute('type') == 't_cutSceneEnd':
             return trigger.TcutSceneEnd(entityPos, self.map, entityInfoTrees['t_cutSceneEnd'], self.physics, activated, {"level" : self})
+        elif absNode.getAttribute('type') == 't_createBubble':
+            return trigger.TcreateBubble(entityPos, self.map, entityInfoTrees['t_createBubble'], self.physics, activated, {"msg" : msg})
         
     def updateEntities(self):
         for entity in self.entities:

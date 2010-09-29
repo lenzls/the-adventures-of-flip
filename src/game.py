@@ -121,6 +121,8 @@ class GameState(State):
             #custom events:
             elif event.type == Event().NEWTRIGGER:
                 self.levelManager.curLevel.triggerManager.addTrigger(event.tObject)
+            elif event.type == Event().NEWDIALOG:
+                self.interface.dialogManager.addDialog(event.msg, self)
 
         #Trigger input:
         if self.levelManager.curLevel.triggerManager.isNewEvents():
@@ -133,6 +135,10 @@ class GameState(State):
         self.levelManager.update()
 
     def render(self):
+        #TODO: maybe move other another place
+        if self.interface.dialogManager.isNewDialog():
+            self.interface.dialogManager.next().execute()
+        
         self.gameRenderer.renderBg(self.levelManager.curLevel.map)
         self.gameRenderer.renderMapLayer(0, self.levelManager.curLevel.map)
         self.gameRenderer.renderSprites()

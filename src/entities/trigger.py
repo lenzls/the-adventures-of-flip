@@ -6,6 +6,7 @@ Created on 27.09.2010
 from util.vector import Vector
 from util import ressourceLoader, events
 import util.util as util
+from interface.dialog import SpeechBubble
 
 class TriggerManager(object):
     # TODO:maybe move to another module
@@ -236,3 +237,11 @@ class TcutSceneEnd(Trigger):
 
     def action(self):
         self.level.endCutScene()
+        
+class TcreateBubble(Trigger):
+    def __init__(self, position, map, infoTree, physics, activated, argDict):
+        Trigger.__init__(self, position, map, infoTree, physics, activated)
+        self.msg = argDict["msg"]
+        
+    def action(self):
+        events.Event().raiseCstmEvent(events.Event.NEWDIALOG, {"msg" : self.msg})
