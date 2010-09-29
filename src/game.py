@@ -4,7 +4,7 @@ Created on 07.07.2009
 @author: CaptnLenz
 '''
 import os
-import interface
+import interface.interface as interface
 import intro
 import levelManager
 import physic
@@ -107,16 +107,16 @@ class GameState(State):
                     self.stateManager.endGame()
 
                 elif event.key == pygame.K_SPACE:
-                    self.levelManager.curLevel.player.jump()
+                    if not self.levelManager.curLevel.cutSceneState: self.levelManager.curLevel.player.jump()
                 elif event.key == pygame.K_LEFT:
-                    self.levelManager.curLevel.player.walkLeft()
+                    if not self.levelManager.curLevel.cutSceneState: self.levelManager.curLevel.player.walkLeft()
                 elif event.key == pygame.K_RIGHT:
-                    self.levelManager.curLevel.player.walkRight()
+                    if not self.levelManager.curLevel.cutSceneState: self.levelManager.curLevel.player.walkRight()
             elif event.type == pygame.KEYUP:
                 if event.key == pygame.K_LEFT:
-                    self.levelManager.curLevel.player.walkStop()
+                    if not self.levelManager.curLevel.cutSceneState: self.levelManager.curLevel.player.walkStop()
                 elif event.key == pygame.K_RIGHT:
-                    self.levelManager.curLevel.player.walkStop()
+                    if not self.levelManager.curLevel.cutSceneState: self.levelManager.curLevel.player.walkStop()
             
             #custom events:
             elif event.type == Event().NEWTRIGGER:

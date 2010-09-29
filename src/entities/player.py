@@ -148,7 +148,7 @@ class Player():
 
     def jump(self):
         if not self.jumplock:
-            self.jumpSound.play()
+            if constants.ISSOUND: self.jumpSound.play()
             self.jumplock = True
             self.velocity += self.jumpspeed
 

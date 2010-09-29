@@ -22,6 +22,7 @@ Fortsetzung folgt...
 
 
 TODO:
+- speech bubbles logic and trigger (first version done)
 - split game state events and menu state events
 - new main loop concept
 - package renaming (dataStorage)

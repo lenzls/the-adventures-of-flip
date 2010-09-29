@@ -49,7 +49,16 @@ class Level(object):
 
         self.entities = []
 
+        self.cutSceneState = False
+
         self._loadEntityFile(self.map.entityFilePath)
+        
+    def startCutScene(self):
+
+        self.cutSceneState = True
+        
+    def endCutScene(self):
+        self.cutSceneState = False
 
     def _loadEntityFile(self, entityFile):
         #durchsucht nur den "Entities"-teil der xml und gibt dann an die entity klasse den "entities-info" baum als parameter mit
@@ -101,7 +110,11 @@ class Level(object):
             return trigger.Tprinter(entityPos, self.map, entityInfoTrees['t_moveLeft'], self.physics, activated, {"msg" : msg})
         elif absNode.getAttribute('type') == 't_createEntity':
             return trigger.TcreateEntity(entityPos, self.map, entityInfoTrees['t_createEntity'], self.physics, activated, {"newEntityObj" : newEntObj, "entityList" : self.entities})
-
+        elif absNode.getAttribute('type') == 't_cutSceneStart':
+            return trigger.TcutSceneStart(entityPos, self.map, entityInfoTrees['t_cutSceneStart'], self.physics, activated, {"level" : self})
+        elif absNode.getAttribute('type') == 't_cutSceneEnd':
+            return trigger.TcutSceneEnd(entityPos, self.map, entityInfoTrees['t_cutSceneEnd'], self.physics, activated, {"level" : self})
+        
     def updateEntities(self):
         for entity in self.entities:
             entity.update()

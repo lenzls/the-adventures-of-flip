@@ -211,3 +211,19 @@ class Tprinter(Trigger):
 
     def action(self):
         print self.msg
+        
+class TcutSceneStart(Trigger):
+    def __init__(self, position, map, infoTree, physics, activated, argDict):
+        Trigger.__init__(self, position, map, infoTree, physics, activated)
+        self.level = argDict["level"]
+
+    def action(self):
+        self.level.startCutScene()
+        
+class TcutSceneEnd(Trigger):
+    def __init__(self, position, map, infoTree, physics, activated, argDict):
+        Trigger.__init__(self, position, map, infoTree, physics, activated)
+        self.level = argDict["level"]
+
+    def action(self):
+        self.level.endCutScene()
