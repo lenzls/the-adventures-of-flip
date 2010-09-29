@@ -138,8 +138,8 @@ class GameState(State):
         self.gameRenderer.renderSprites()
         self.gameRenderer.renderMapLayer(1, self.levelManager.curLevel.map)
         if constants.DEBUG: 
-			#self.gameRenderer.renderGrid(self.levelManager.curLevel.map)
-			self.gameRenderer.renderBoundingBoxes(self.physicManager.colShapeList)
+            self.gameRenderer.renderGrid(self.levelManager.curLevel.map)
+            self.gameRenderer.renderBoundingBoxes(self.physicManager.colShapeList)
         self.gameRenderer.renderInterface(self.interface)
 
 class MenuState(State):

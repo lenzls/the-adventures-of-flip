@@ -49,14 +49,14 @@ class GameRenderer(Renderer):
             sprite.update()
             
     def renderBoundingBoxes(self, colShapeList):
-		for cShape in colShapeList:
-			pygame.draw.rect(self.screen, (0,0,255), cShape.getOuterRect().move(-self.camera[0],-self.camera[1]), 1)
-			for cRect in cShape.getAbsoluteColRectList():
-				if cRect.isSpike:
-					color = (255,255,255)
-				else:
-					color = (255,0,255)
-				pygame.draw.rect(self.screen, color, cRect.getRect().move(-self.camera[0], -self.camera[1]), 1)
+        for cShape in colShapeList:
+            pygame.draw.rect(self.screen, (0,0,255), cShape.getOuterRect().move(-self.camera[0],-self.camera[1]), 1)
+            for cRect in cShape.getAbsoluteColRectList():
+                if cRect.isSpike:
+                    color = (255,255,255)
+                else:
+                    color = (255,0,255)
+                pygame.draw.rect(self.screen, color, cRect.getRect().move(-self.camera[0], -self.camera[1]), 1)
 
     def renderSprites(self):
         for sprite in self.spriteList:
