@@ -194,6 +194,14 @@ class TmoveRight(Trigger):
     def action(self):
         self.player.walkRight()
         
+class TmoveStop(Trigger):
+    def __init__(self, position, map, infoTree, physics, activated, argDict):
+        Trigger.__init__(self, position, map, infoTree, physics, activated)
+        self.player = argDict["player"]
+        
+    def action(self):
+        self.player.walkStop()
+        
 class TcreateEntity(Trigger):
     def __init__(self, position, map, infoTree, physics, activated, argDict):
         Trigger.__init__(self, position, map, infoTree, physics, activated)
@@ -218,6 +226,7 @@ class TcutSceneStart(Trigger):
         self.level = argDict["level"]
 
     def action(self):
+        self.level.player.walkStop()
         self.level.startCutScene()
         
 class TcutSceneEnd(Trigger):
