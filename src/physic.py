@@ -34,6 +34,10 @@ class PhysicManager(object):
         ''' deletes dead entities from the colShapeList'''
         self.colShapeList = [colShape for colShape in self.colShapeList if colShape.getEntity().isAlive()]
 
+	#TODO: check whats wrong
+	def getColShapeList(self):
+		return self.colShapeList
+
     def update(self, level):
         self.updateColShapes()
         self.checkCols(level.map)
