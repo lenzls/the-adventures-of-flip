@@ -48,20 +48,20 @@ class GameRenderer(Renderer):
         self.spriteList = [sprite for sprite in self.spriteList if sprite.entity.isAlive()]
         for sprite in self.spriteList:
             sprite.update()
+            
+    def renderBoundingBoxes(self, colShapeList):
+		for cShape in colShapeList:
+			pygame.draw.rect(self.screen, (0,0,255), cShape.getOuterRect().move(-self.camera[0],-self.camera[1]), 1)
+			for cRect in cShape.getAbsoluteColRectList():
+				if cRect.isSpike:
+					color = (255,255,255)
+				else:
+					color = (255,0,255)
+				pygame.draw.rect(self.screen, color, cRect.getRect().move(-self.camera[0], -self.camera[1]), 1)
 
     def renderSprites(self):
         for sprite in self.spriteList:
             self.screen.blit(sprite.getCurFrame().getGraphic(), (sprite.entity.getPosition() - self.camera).getTuple())
-
-            #TODO show only in debug mode (and move maybe in another class)
-            pygame.draw.rect(self.screen, (0,0,255), sprite.entity.colShape.getOuterRect().move(-self.camera[0],-self.camera[1]), 1)
-            for colRect in sprite.entity.colShape.getAbsoluteColRectList():
-                if colRect.isSpike:
-                    color = (255,255,255)
-                else:
-                    color = (255,0,255)
-                pygame.draw.rect(self.screen, color, colRect.getRect().move(-self.camera[0], -self.camera[1]), 1)
-
 
     def renderGrid(self, map):
         # To show the "tilegrid" change the step to 32
