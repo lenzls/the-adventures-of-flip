@@ -24,6 +24,8 @@ class GameRenderer(Renderer):
         Renderer.__init__(self, screen)
         self.spriteList = []
         self.camera = Vector(0,0)
+        
+        self.dialogFont = pygame.font.Font(os.path.join('..','data','courier_new.ttf'),15)
 
     def createSprite(self, entity):
         sprite = Sprite(entity)
@@ -65,12 +67,12 @@ class GameRenderer(Renderer):
     def renderGrid(self, map):
         # To show the "tilegrid" change the step to 32
         for x in range(0, map.getDimensions()[0]*constants.TILESIZE,32):
-            pygame.draw.aaline(self.screen,[255,0,255],(x-self.camera[0],0),(x-self.camera[0],constants.RESOLUTION[1]))
+            pygame.draw.line(self.screen,[255,0,255],(x-self.camera[0],0),(x-self.camera[0],constants.RESOLUTION[1]))
             surface = self.gridFont.render(str(x),1,[255,0,255])
             self.screen.blit(surface,((x+2)-self.camera[0],20))
         
         for y in range(0, map.getDimensions()[1]*constants.TILESIZE,32):
-            pygame.draw.aaline(self.screen,[255,0,255],(0,y-self.camera[1]),(constants.RESOLUTION[0],y-self.camera[1]))
+            pygame.draw.line(self.screen,[255,0,255],(0,y-self.camera[1]),(constants.RESOLUTION[0],y-self.camera[1]))
             surface = self.gridFont.render(str(y),1,[255,0,255])
             self.screen.blit(surface,(20,(y+2)-self.camera[1]))
 
@@ -148,6 +150,10 @@ class GameRenderer(Renderer):
 
     def renderInterface(self, interface):
         interface.render(self.screen)
+        
+    def renderBubble(self, bubble):
+		surface = self.dialogFont.render(bubble.curLineString,1,[255,0,255])
+		self.screen.blit(surface, (100,100))
 
 class MenuRenderer(Renderer):
     def __init__(self, screen):

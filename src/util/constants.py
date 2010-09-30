@@ -12,6 +12,6 @@ RENDER_FPS = 100
 LOGIC_FPS  = 100
 FPS        = 50
 TILESIZE   = 32
-FULLSCREEN = False
+FULLSCREEN = True
 ISSOUND    = False
 DEBUG      = True

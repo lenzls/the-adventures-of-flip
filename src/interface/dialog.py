@@ -8,8 +8,14 @@ import pygame
 class SpeechBubble(object):
     def __init__(self, msg, curGameState):
         self.msg = msg
+        self.lineStringList = self.calcLineString()
+        self.curLineC = 0
+        self.curLineString = self.lineStringList[self.curLineC]
         self.curGameState = curGameState
         self.isFinished = False
+
+	def calcLineString(self):
+		return self.msg.split(',')
 
     #TODO improve name
     def execute(self):
@@ -17,7 +23,7 @@ class SpeechBubble(object):
         while True:
             self.curGameState.render()
             self.update()
-            self.render(self.curGameState.gameRenderer.screen)
+            self.curGameState.gameRenderer.renderBubble(self)
             event = pygame.event.poll()
             if event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN:
                 self.next_row()
@@ -28,11 +34,10 @@ class SpeechBubble(object):
                 break
     
     def update(self):
-        pass
-    
-    def render(self, screen):
-        pass
-    
-    #TODO: check if needed
+		try:
+			self.curLineString = self.lineStringList[self.curLineC]
+		except:
+			self.isFinished = True
+
     def next_row(self):
-        pass
+        self.curLine += 1
