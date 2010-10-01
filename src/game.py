@@ -138,7 +138,7 @@ class GameState(State):
         #TODO: maybe move other another place
         if self.interface.dialogManager.isNewDialog():
             self.interface.dialogManager.next().execute()
-        
+
         self.gameRenderer.renderBg(self.levelManager.curLevel.map)
         self.gameRenderer.renderMapLayer(0, self.levelManager.curLevel.map)
         self.gameRenderer.renderSprites()
@@ -147,6 +147,8 @@ class GameState(State):
             self.gameRenderer.renderGrid(self.levelManager.curLevel.map)
             self.gameRenderer.renderBoundingBoxes(self.physicManager.colShapeList)
         self.gameRenderer.renderInterface(self.interface)
+        
+        if self.levelManager.curLevel.cutSceneState: self.gameRenderer.renderBlackBars()
 
 class MenuState(State):
 

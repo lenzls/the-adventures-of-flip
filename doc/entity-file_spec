@@ -1,3 +1,5 @@
+there are no tabs or linebreaks allowed in <msg> elements!
+
 EntityFile
 	entitySpecification
 		entitySpec (name)

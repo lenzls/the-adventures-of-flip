@@ -26,6 +26,10 @@ class GameRenderer(Renderer):
         self.camera = Vector(0,0)
         
         self.dialogFont = pygame.font.Font(os.path.join('..','data','courier_new.ttf'),15)
+        self.dialogBackground =  pygame.Surface((400, 100))
+        self.dialogBackground.fill((155,155,155))
+        
+        self.blackBar = pygame.Surface((constants.RESOLUTION[0], 25))
 
     def createSprite(self, entity):
         sprite = Sprite(entity)
@@ -59,6 +63,11 @@ class GameRenderer(Renderer):
                 else:
                     color = (255,0,255)
                 pygame.draw.rect(self.screen, color, cRect.getRect().move(-self.camera[0], -self.camera[1]), 1)
+
+    def renderBlackBars(self):
+        '''black bars for cutscenes'''
+        self.screen.blit(self.blackBar, (0,0))
+        self.screen.blit(self.blackBar, (0, constants.RESOLUTION[1]- self.blackBar.get_height()))
 
     def renderSprites(self):
         for sprite in self.spriteList:
@@ -152,8 +161,16 @@ class GameRenderer(Renderer):
         interface.render(self.screen)
         
     def renderBubble(self, bubble):
-		surface = self.dialogFont.render(bubble.curLineString,1,[255,0,255])
-		self.screen.blit(surface, (100,100))
+        bgRect = pygame.Rect( (constants.RESOLUTION[0]-self.dialogBackground.get_width())//2 , (constants.RESOLUTION[1]-self.dialogBackground.get_height())//2 , self.dialogBackground.get_width()  , self.dialogBackground.get_height() )
+        padding = [10,5]
+        
+        self.screen.blit(self.dialogBackground,(bgRect.topleft[0], bgRect.topleft[1]))
+        pygame.draw.rect(self.screen,[50,50,50], bgRect, 5)
+        iRow = 0
+        for line in bubble.curPageList:
+            surface = self.dialogFont.render(line,1,[0,0,0])
+            self.screen.blit(surface, ((bgRect.topleft[0]+padding[0], bgRect.topleft[1]+padding[1] + (iRow*25))))
+            iRow += 1
 
 class MenuRenderer(Renderer):
     def __init__(self, screen):
