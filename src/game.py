@@ -14,6 +14,8 @@ import menu.menu as menu
 import util.constants as constants
 from util.events import Event
 
+from util.vector import Vector
+
 pygame.init()
 
 class StateManager(object):
@@ -96,7 +98,7 @@ class GameState(State):
         self.levelManager = levelManager.LevelManager(self.physicManager, self.gameRenderer)
         self.interface = interface.Interface()
         
-        self.levelManager.loadLevel(0)
+        self.levelManager.loadLevel(1)
 
     def handleInput(self):
         for event in pygame.event.get():
@@ -117,7 +119,10 @@ class GameState(State):
                     if not self.levelManager.curLevel.cutSceneState: self.levelManager.curLevel.player.walkStop()
                 elif event.key == pygame.K_RIGHT:
                     if not self.levelManager.curLevel.cutSceneState: self.levelManager.curLevel.player.walkStop()
-            
+
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                if constants.DEBUG: print "The current cursor position is: ", Vector(event.pos[0],event.pos[1])+self.gameRenderer.getCamera()
+
             #custom events:
             elif event.type == Event().NEWTRIGGER:
                 self.levelManager.curLevel.triggerManager.addTrigger(event.tObject)

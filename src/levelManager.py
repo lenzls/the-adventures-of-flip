@@ -23,7 +23,7 @@ class LevelManager(object):
         self.levelPathList = []
         self.curLevel = None
         self._addLevelPath('1284743568.37.lxml')
-        self._addLevelPath('1285919675.78.lxml')
+        self._addLevelPath('1285970402.43.lxml')
 
     def _addLevelPath(self, mapPath):
         self.levelPathList.append(mapPath)
@@ -113,7 +113,7 @@ class Level(object):
         elif absNode.getAttribute('type') == 't_moveStop':
             return trigger.TmoveStop(entityPos, self.map, entityInfoTrees['t_moveStop'], self.physics, activated, {"player" : self.player})
         elif absNode.getAttribute('type') == 't_printer':
-            return trigger.Tprinter(entityPos, self.map, entityInfoTrees['t_moveLeft'], self.physics, activated, {"msg" : msg})
+            return trigger.Tprinter(entityPos, self.map, entityInfoTrees['t_printer'], self.physics, activated, {"msg" : msg})
         elif absNode.getAttribute('type') == 't_createEntity':
             return trigger.TcreateEntity(entityPos, self.map, entityInfoTrees['t_createEntity'], self.physics, activated, {"newEntityObj" : newEntObj, "entityList" : self.entities})
         elif absNode.getAttribute('type') == 't_cutSceneStart':
