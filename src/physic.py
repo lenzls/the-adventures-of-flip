@@ -13,6 +13,9 @@ class PhysicManager(object):
     def __init__(self):
         self.gravity = Vector(0,1)
         self.colShapeList = []
+    
+    def reset(self):
+        self.resetColShapeList()
 
     def createColShape(self, entity):
         colShape = ColShape(entity, self)
@@ -21,7 +24,7 @@ class PhysicManager(object):
     def addToColShapeList(self, colShape):
         self.colShapeList.append(colShape)
 
-    def clearColShapeList(self):
+    def resetColShapeList(self):
         ''' deletes the old colShapeList and creates a new one(e.g.: 2 start a new level)''' 
         
         self.colShapeList = []
@@ -33,10 +36,6 @@ class PhysicManager(object):
     def cleanColShapeList(self):
         ''' deletes dead entities from the colShapeList'''
         self.colShapeList = [colShape for colShape in self.colShapeList if colShape.getEntity().isAlive()]
-
-	#TODO: check whats wrong
-	def getColShapeList(self):
-		return self.colShapeList
 
     def update(self, level):
         self.updateColShapes()

@@ -26,8 +26,8 @@ class LevelManager(object):
         self.levelPathList = []
         self.curLevelC = 0
         self.curLevel = None
-        self._addLevelPath('1284743568.37.lxml')
         self._addLevelPath('1285970402.43.lxml')
+        self._addLevelPath('1284743568.37.lxml')
 
     def _addLevelPath(self, mapPath):
         self.levelPathList.append(mapPath)
@@ -56,7 +56,9 @@ class Level(object):
 
     def __init__(self, physics, renderer, levelFilePath):
         self.physics = physics
+        self.physics.reset()
         self.renderer = renderer
+        self.renderer.reset()
         self.triggerManager = trigger.TriggerManager()
         self.levelFilePath = levelFilePath
         self.player = None

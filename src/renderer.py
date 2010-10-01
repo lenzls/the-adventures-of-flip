@@ -31,6 +31,10 @@ class GameRenderer(Renderer):
         
         self.blackBar = pygame.Surface((constants.RESOLUTION[0], 25))
 
+    def reset(self):
+        self.resetSpriteList()
+        self.camera = Vector(0,0)
+
     def createSprite(self, entity):
         sprite = Sprite(entity)
         return sprite
@@ -38,10 +42,12 @@ class GameRenderer(Renderer):
     def appendSpriteList(self, sprite):
         self.spriteList.append(sprite)
 
-    def cleanSpriteList(self):
-        ''' deletes the old spriteList and creates a new one (e.g.: to start a new level)''' 
-
+    def resetSpriteList(self):
+        ''' deletes the old spriteList and creates a new one (e.g.: to start a new level)'''
         self.spriteList = []
+         
+    def cleanSpriteList(self):
+        self.spriteList = [sprite for sprite in self.spriteList if sprite.entity.isAlive()]
         
     def update(self, level):
         self.updateCamera(level.player)
@@ -50,7 +56,7 @@ class GameRenderer(Renderer):
 
     def updateSpriteList(self):
         ''' deletes dead entities from the spriteList'''
-        self.spriteList = [sprite for sprite in self.spriteList if sprite.entity.isAlive()]
+        self.cleanSpriteList()
         for sprite in self.spriteList:
             sprite.update()
             
