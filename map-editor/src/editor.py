@@ -256,6 +256,8 @@ class MapEditor():
         #background (wird manuell eingefuegt erstmal
         self.music = ""
         self.grid = []
+        self.grid.append([])
+        self.grid.append([])
         self.entityFile = ""
         self.nextLevel = ""
 
@@ -272,6 +274,8 @@ class MapEditor():
         self.Inp_map_entityFile = gui.Input(value=self.entityFile,size=8)
         self.Inp_map_nextLevel = gui.Input(value=self.nextLevel,size=8)
 
+        print "init new map"
+    
     def BUTTONloadMap(self,arg):
         self.loadMap('../data/newspec.lxml')
 
