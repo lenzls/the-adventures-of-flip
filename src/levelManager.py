@@ -5,6 +5,7 @@ Created on 25.07.2009
 '''
 
 import entities.mob as mob
+import entities.item as item
 from entities.player import Player
 import map
 import xml.dom.minidom as dom
@@ -102,10 +103,16 @@ class Level(object):
             elif cNode.nodeName == 'newEntity':
                 newEntObj = self.loadAbsEntity(cNode, entityInfoTrees, False)
 
+        #Player:
         if absNode.getAttribute('type') == 'player':
             return Player(entityPos, self.map, entityInfoTrees['player'], self.physics, self.renderer, activated)
+        #Enemies:
         elif absNode.getAttribute('type') == 'grob':
             return mob.Grob(entityPos, self.map, entityInfoTrees['grob'], self.physics, self.renderer, activated)
+        #Items:
+        elif absNode.getAttribute('type') == 'coin':
+            return item.Coin(entityPos, self.map, entityInfoTrees['coin'], self.physics, self.renderer, activated)
+        #Trigger:
         elif absNode.getAttribute('type') == 't_moveLeft':
             return trigger.TmoveLeft(entityPos, self.map, entityInfoTrees['t_moveLeft'], self.physics, activated, {"player" : self.player})
         elif absNode.getAttribute('type') == 't_moveRight':

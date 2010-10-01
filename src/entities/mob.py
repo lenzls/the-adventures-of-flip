@@ -48,6 +48,7 @@ class Mob(object):
         self.physics.addToColShapeList(self.colShape)
 
     def _loadInfo(self, infoTree):
+        self.type = str(infoTree.getAttribute("type"))
         for infoNode in infoTree.childNodes:
             if infoNode.nodeName == "points":
                 self.points = int(infoNode.firstChild.data)
@@ -190,6 +191,7 @@ class Mob(object):
     
     def getPoints(self):
         return self.points
+
 class Grob(Mob):
     def __init__(self, position, map, infoTree, physics, renderer, activated):   #infoTree = xmlBaum
         Mob.__init__(self, position, map, infoTree, physics, renderer, activated)

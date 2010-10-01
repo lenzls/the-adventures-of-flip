@@ -1,44 +1,24 @@
 '''
-Created on 27.09.2010
+Created on 02.10.2010
 
 @author: simon
 '''
 from util.vector import Vector
-from util import ressourceLoader, events
+from util import ressourceLoader
 import util.util as util
+import util.constants as constants
 
-class TriggerManager(object):
-    # TODO:maybe move to another module
-    def __init__(self):
-        self.triggerQueue = []
-        
-    def addTrigger(self, trigger):
-        print "add trigger: ", trigger
-        self.triggerQueue.append(trigger)
-
-    def isNewEvents(self):
-        if len(self.triggerQueue) > 0:
-            return True
-        else:
-            return False
-
-    def next(self):
-        next = self.triggerQueue[0]
-        del(self.triggerQueue[0])
-        return next
-
-class Trigger(object):
+class Item(object):
     '''
-    classdocs
+        represents items like coins etc.
     '''
+    def __init__(self, position, map, infoTree, physics, renderer, activated):
 
-
-    def __init__(self, position, map, infoTree, physics, activated):
-
+        self.renderer = renderer
         self.physics = physics
         self.map = map
-        self.type = None
         self.activated = activated
+        self.type = None
         self.life = 0   # 0-100?!
         self.points = 0 #for highscore
         self.alive = True
@@ -51,14 +31,18 @@ class Trigger(object):
         self.jumplock = False
         self.jumpSound = None   #util.load_sound('jump.wav')
 
+        self.sprite     = self.renderer.createSprite(self)
         self.colShape   = self.physics.createColShape(self)
-
+        
         if self.activated:
             self.activate()
 
         self._loadInfo(infoTree)
 
+        self.sprite.setAni('idle')
+        
     def activate(self):
+        self.renderer.appendSpriteList(self.sprite)
         self.physics.addToColShapeList(self.colShape)
 
     def _loadInfo(self, infoTree):
@@ -76,6 +60,20 @@ class Trigger(object):
                 for cNode in infoNode.childNodes:
                     if cNode.nodeName == "soundFile":
                         self.jumpSound = ressourceLoader.RessourceLoader().load_sound(str(cNode.firstChild.data))
+
+            elif infoNode.nodeName == 'sprite':
+                for animationNode in infoNode.childNodes:
+                    if animationNode.nodeName == 'animation':
+                        animationIndex = animationNode.getAttribute('index')
+                        animationGraphics = []
+                        for cNode in animationNode.childNodes:
+                            if cNode.nodeName == 'type':
+                                animationType = str(cNode.firstChild.data)
+                            elif cNode.nodeName == "image":
+                                for ccNode in cNode.childNodes:
+                                    if ccNode.nodeName  == "graphic":
+                                        animationGraphics.append(str(ccNode.firstChild.data))
+                        self.sprite.addAnimation(animationType, animationGraphics)
 
             elif infoNode.nodeName == 'colShape':
                 for colRectNode in infoNode.childNodes:
@@ -107,7 +105,17 @@ class Trigger(object):
         self._calcDimensions()
 
     def _calcDimensions(self):
-        self.dimensions = self.colShape.getOuterDimensions()
+        if self.sprite.getImageSize() == self.colShape.getOuterDimensions():
+            self.dimensions = self.sprite.getImageSize()
+        elif self.sprite.getImageSize() > self.colShape.getOuterDimensions():
+            print"colRects of:%s are not big enough" % self
+            print"colRects: %s graphics: %s" % (self.colShape.getOuterDimensions(),self.sprite.getImageSize())
+            self.dimensions = self.sprite.getImageSize()
+        elif self.sprite.getImageSize() < self.colShape.getOuterDimensions():
+            print "colRects of:%s are too big" % self
+            print"colRects: %s graphics: %s" % (self.colShape.getOuterDimensions(),self.sprite.getImageSize())
+
+            self.dimensions = self.colShape.getOuterDimensions()
 
     def getPosition(self):
         return self.position
@@ -143,23 +151,32 @@ class Trigger(object):
             self.velocity += self.jumpspeed
 
     def mapColWhileMoveUp(self, tilePos):
-        pass
+        oldPosition = self.position
+        oldVelocity = self.velocity
+        self.position = Vector(oldPosition[0],((tilePos.y + 1) * constants.TILESIZE) + 1)
 
     def mapColWhileMoveDown(self, tilePos):
-        pass
+        oldPosition = self.position
+        oldVelocity = self.velocity
+        self.jumplock = False
+        self.position = Vector(oldPosition[0], (((tilePos.y * constants.TILESIZE)-1) - self.dimensions[1]))
+        self.velocity = Vector(oldVelocity[0], 1)
 
     def mapColWhileMoveRight(self, tilePos):
-        pass
+        oldPosition = self.position
+        oldVelocity = self.velocity
+        self.position = Vector(((tilePos.x * constants.TILESIZE) - 1) - self.dimensions[0],oldPosition[1])
 
     def mapColWhileMoveLeft(self, tilePos):
-        pass
+        oldPosition = self.position
+        oldVelocity = self.velocity
+        self.position = Vector((((tilePos.x + 1) * constants.TILESIZE) + 1), oldPosition[1])
 
     def colWin(self, enemy):
         print "Enemy win against:", enemy.type
 
     def colLose(self, enemy):
         print "Enemy loses against:", enemy.type
-        events.Event().raiseCstmEvent(events.Event.NEWTRIGGER, {"tObject":self})
         self.setDead()
 
     def setDead(self):
@@ -171,90 +188,6 @@ class Trigger(object):
     def getPoints(self):
         return self.points
     
-    def action(self):
-        '''
-            should be overridden
-        '''
-        pass
-    
-class TmoveLeft(Trigger):
-    def __init__(self, position, map, infoTree, physics, activated, argDict):
-        Trigger.__init__(self, position, map, infoTree, physics, activated)
-        self.player = argDict["player"]
-        
-    def action(self):
-        self.player.walkLeft()
-
-class TmoveRight(Trigger):
-    def __init__(self, position, map, infoTree, physics, activated, argDict):
-        Trigger.__init__(self, position, map, infoTree, physics, activated)
-        self.player = argDict["player"]
-        
-    def action(self):
-        self.player.walkRight()
-        
-class TmoveStop(Trigger):
-    def __init__(self, position, map, infoTree, physics, activated, argDict):
-        Trigger.__init__(self, position, map, infoTree, physics, activated)
-        self.player = argDict["player"]
-        
-    def action(self):
-        self.player.walkStop()
-
-class TmoveJump(Trigger):
-    def __init__(self, position, map, infoTree, physics, activated, argDict):
-        Trigger.__init__(self, position, map, infoTree, physics, activated)
-        self.player = argDict["player"]
-        
-    def action(self):
-        self.player.jump()
-        
-class TcreateEntity(Trigger):
-    def __init__(self, position, map, infoTree, physics, activated, argDict):
-        Trigger.__init__(self, position, map, infoTree, physics, activated)
-        self.newEntity = argDict["newEntityObj"]
-        self.lvlEntityList = argDict["entityList"]
-
-    def action(self):
-        self.lvlEntityList.append(self.newEntity)
-        self.newEntity.activate()
-        
-class Tprinter(Trigger):
-    def __init__(self, position, map, infoTree, physics, activated, argDict):
-        Trigger.__init__(self, position, map, infoTree, physics, activated)
-        self.msg = argDict["msg"]
-
-    def action(self):
-        print self.msg
-        
-class TcutSceneStart(Trigger):
-    def __init__(self, position, map, infoTree, physics, activated, argDict):
-        Trigger.__init__(self, position, map, infoTree, physics, activated)
-        self.level = argDict["level"]
-
-    def action(self):
-        self.level.player.walkStop()
-        self.level.startCutScene()
-        
-class TcutSceneEnd(Trigger):
-    def __init__(self, position, map, infoTree, physics, activated, argDict):
-        Trigger.__init__(self, position, map, infoTree, physics, activated)
-        self.level = argDict["level"]
-
-    def action(self):
-        self.level.endCutScene()
-        
-class TcreateBubble(Trigger):
-    def __init__(self, position, map, infoTree, physics, activated, argDict):
-        Trigger.__init__(self, position, map, infoTree, physics, activated)
-        self.msg = argDict["msg"]
-        
-    def action(self):
-        events.Event().raiseCstmEvent(events.Event.NEWDIALOG, {"msg" : self.msg})
-        
-class TfinishLvl(Trigger):
-    def __init__(self, position, map, infoTree, physics, activated, argDict):
-        Trigger.__init__(self, position, map, infoTree, physics, activated)
-        
-    def action(self):
-        events.Event().raiseCstmEvent(events.Event.LEVELFINISHED, {})
+class Coin(Item):
+    def __init__(self, position, map, infoTree, physics, renderer, activated):   #infoTree = xmlBaum
+        Item.__init__(self, position, map, infoTree, physics, renderer, activated)

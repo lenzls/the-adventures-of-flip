@@ -51,11 +51,11 @@
 				<colRect index="0">
 					<posUpperLeft>
 						<horizontal>2</horizontal>
-						<vertical>25</vertical>
+						<vertical>23</vertical>
 					</posUpperLeft>
 					<dimensions>
 						<horizontal>14</horizontal>
-						<vertical>6</vertical>
+						<vertical>8</vertical>
 					</dimensions>
 					<isBody>False</isBody>
 					<isSpike>True</isSpike>
@@ -385,7 +385,35 @@
 					</posUpperLeft>
 					<dimensions>
 						<horizontal>13</horizontal>
-						<vertical>13</vertical>
+						<vertical>40</vertical>
+					</dimensions>
+					<isBody>True</isBody>
+					<isSpike>False</isSpike>
+				</colRect>
+			</colShape>
+		</entitySpec>
+		<entitySpec type="coin">
+			<points>25</points>
+			<life>10</life>
+			<movespeed>0</movespeed>
+			<jumpspeed>0</jumpspeed>
+			<sprite>
+				<animation index="0">
+					<type>idle</type>
+					<image index="0">
+						<graphic>item_coin.png</graphic>
+					</image>
+				</animation>
+			</sprite>
+			<colShape>
+				<colRect index="0">
+					<posUpperLeft>
+						<horizontal>0</horizontal>
+						<vertical>0</vertical>
+					</posUpperLeft>
+					<dimensions>
+						<horizontal>20</horizontal>
+						<vertical>20</vertical>
 					</dimensions>
 					<isBody>True</isBody>
 					<isSpike>False</isSpike>
@@ -453,6 +481,66 @@
 			<position>
 				<horizontal>787</horizontal>
 				<vertical>490</vertical>
+			</position>
+		</absEntity>
+		<absEntity type="t_finishLvl" name="finisher-1">
+			<position>
+				<horizontal>913</horizontal>
+				<vertical>485</vertical>
+			</position>
+		</absEntity>
+		<absEntity type="coin" name="coin-1">
+			<position>
+				<horizontal>38</horizontal>
+				<vertical>230</vertical>
+			</position>
+		</absEntity>
+		<absEntity type="coin" name="coin-2">
+			<position>
+				<horizontal>70</horizontal>
+				<vertical>230</vertical>
+			</position>
+		</absEntity>
+		<absEntity type="coin" name="coin-3">
+			<position>
+				<horizontal>102</horizontal>
+				<vertical>230</vertical>
+			</position>
+		</absEntity>
+		<absEntity type="coin" name="coin-4">
+			<position>
+				<horizontal>38</horizontal>
+				<vertical>262</vertical>
+			</position>
+		</absEntity>
+		<absEntity type="coin" name="coin-5">
+			<position>
+				<horizontal>70</horizontal>
+				<vertical>262</vertical>
+			</position>
+		</absEntity>
+		<absEntity type="coin" name="coin-6">
+			<position>
+				<horizontal>102</horizontal>
+				<vertical>262</vertical>
+			</position>
+		</absEntity>
+		<absEntity type="coin" name="coin-7">
+			<position>
+				<horizontal>166</horizontal>
+				<vertical>262</vertical>
+			</position>
+		</absEntity>
+		<absEntity type="coin" name="coin-8">
+			<position>
+				<horizontal>198</horizontal>
+				<vertical>262</vertical>
+			</position>
+		</absEntity>
+		<absEntity type="coin" name="coin-9">
+			<position>
+				<horizontal>232</horizontal>
+				<vertical>262</vertical>
 			</position>
 		</absEntity>
 	</entities>
