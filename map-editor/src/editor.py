@@ -20,7 +20,7 @@ class MapEditor():
         #background (wird manuell eingefuegt erstmal
         self.music = ""
         self.grid = []
-        self.entityFile = ""
+        self.entityFile = "DUMMY"
         self.nextLevel = ""
         #END map Vars
 
@@ -374,17 +374,14 @@ class MapEditor():
 
         #BackgroundLayer
         backgroundElement = doc.createElement("background")
-        for i in range(0,4):
+        for i in range(0,3):
             bgLayerElement = doc.createElement("bgLayer")
             bgLayerElement.setAttribute('index',str(i))
 
             bgLayerSpeedElement = doc.createElement("speed")
             bgLayerImageElement = doc.createElement("graphic")
 
-            if i == 0:
-                bgLayerSpeedText = doc.createTextNode('0')
-            else:
-                bgLayerSpeedText = doc.createTextNode(str(4-i))
+            bgLayerSpeedText = doc.createTextNode(str(0-i))
             bgLayerImageText = doc.createTextNode("bg_test_"+str(i)+".png")
 
             bgLayerSpeedElement.appendChild(bgLayerSpeedText)
@@ -399,7 +396,7 @@ class MapEditor():
         musicElement = doc.createElement("music")
         musicBackgroundThemeElement = doc.createElement("backgroundTheme")
         musicBackgroundThemeSoundFileElement = doc.createElement("soundFile")
-        musicBackgroundThemeSoundFileText = doc.createTextNode(self.music)
+        musicBackgroundThemeSoundFileText = doc.createTextNode('music_theme1.ogg')
         musicElement.appendChild(musicBackgroundThemeElement)
         musicBackgroundThemeElement.appendChild(musicBackgroundThemeSoundFileElement)
         musicBackgroundThemeSoundFileElement.appendChild(musicBackgroundThemeSoundFileText)        
