@@ -112,6 +112,8 @@ class Level(object):
             return trigger.TmoveRight(entityPos, self.map, entityInfoTrees['t_moveRight'], self.physics, activated, {"player" : self.player})
         elif absNode.getAttribute('type') == 't_moveStop':
             return trigger.TmoveStop(entityPos, self.map, entityInfoTrees['t_moveStop'], self.physics, activated, {"player" : self.player})
+        elif absNode.getAttribute('type') == 't_moveJump':
+            return trigger.TmoveJump(entityPos, self.map, entityInfoTrees['t_moveJump'], self.physics, activated, {"player" : self.player})
         elif absNode.getAttribute('type') == 't_printer':
             return trigger.Tprinter(entityPos, self.map, entityInfoTrees['t_printer'], self.physics, activated, {"msg" : msg})
         elif absNode.getAttribute('type') == 't_createEntity':

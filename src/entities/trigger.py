@@ -201,6 +201,14 @@ class TmoveStop(Trigger):
         
     def action(self):
         self.player.walkStop()
+
+class TmoveJump(Trigger):
+    def __init__(self, position, map, infoTree, physics, activated, argDict):
+        Trigger.__init__(self, position, map, infoTree, physics, activated)
+        self.player = argDict["player"]
+        
+    def action(self):
+        self.player.jump()
         
 class TcreateEntity(Trigger):
     def __init__(self, position, map, infoTree, physics, activated, argDict):

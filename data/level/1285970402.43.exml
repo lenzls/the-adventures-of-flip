@@ -1,0 +1,459 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entityFile>
+	<entitiySpecification>
+		<entitySpec type="player">
+			<points>0</points>
+			<life>100</life>
+			<movespeed>3</movespeed>
+			<jumpspeed>-13</jumpspeed>
+			<jumpSound>
+				<soundFile>jump.wav</soundFile>
+			</jumpSound>
+			<sprite>
+				<animation index="0">
+					<type>idle</type>
+					<image index="0">
+						<graphic>hero_normal_idle.png</graphic>
+					</image>
+				</animation>
+				<animation index="1">
+					<type>walkLeft</type>
+					<image index="0">
+						<graphic>hero_normal_left1.png</graphic>
+					</image>
+					<image index="1">
+						<graphic>hero_normal_left2.png</graphic>
+					</image>
+					<image index="2">
+						<graphic>hero_normal_left3.png</graphic>
+					</image>
+					<image index="3">
+						<graphic>hero_normal_left4.png</graphic>
+					</image>
+				</animation>
+				<animation index="2">
+					<type>walkRight</type>
+					<image index="0">
+						<graphic>hero_normal_right1.png</graphic>
+					</image>
+					<image index="1">
+						<graphic>hero_normal_right2.png</graphic>
+					</image>
+					<image index="2">
+						<graphic>hero_normal_right3.png</graphic>
+					</image>
+					<image index="3">
+						<graphic>hero_normal_right4.png</graphic>
+					</image>
+				</animation>
+			</sprite>
+			<colShape>
+				<colRect index="0">
+					<posUpperLeft>
+						<horizontal>2</horizontal>
+						<vertical>25</vertical>
+					</posUpperLeft>
+					<dimensions>
+						<horizontal>14</horizontal>
+						<vertical>6</vertical>
+					</dimensions>
+					<isBody>False</isBody>
+					<isSpike>True</isSpike>
+				</colRect>
+				<colRect index="1">
+					<posUpperLeft>
+						<horizontal>0</horizontal>
+						<vertical>0</vertical>
+					</posUpperLeft>
+					<dimensions>
+						<horizontal>18</horizontal>
+						<vertical>24</vertical>
+					</dimensions>
+					<isBody>True</isBody>
+					<isSpike>False</isSpike>
+				</colRect>
+			</colShape>
+		</entitySpec>
+		<entitySpec type="grob">
+			<points>100</points>
+			<life>10</life>
+			<movespeed>3</movespeed>
+			<jumpspeed>-13</jumpspeed>
+			<jumpSound>
+				<soundFile>jump.wav</soundFile>
+			</jumpSound>
+			<sprite>
+				<animation index="0">
+					<type>idle</type>
+					<image index="0">
+						<graphic>enemy_grob_normal_idleRight1.png</graphic>
+					</image>
+					<image index="1">
+						<graphic>enemy_grob_normal_idleRight2.png</graphic>
+					</image>
+					<image index="2">
+						<graphic>enemy_grob_normal_idleRight3.png</graphic>
+					</image>
+					<image index="3">
+						<graphic>enemy_grob_normal_idleRight4.png</graphic>
+					</image>
+					<image index="4">
+						<graphic>enemy_grob_normal_idleRight5.png</graphic>
+					</image>
+					<image index="5">
+						<graphic>enemy_grob_normal_idleRight6.png</graphic>
+					</image>
+					<image index="6">
+						<graphic>enemy_grob_normal_idleRight7.png</graphic>
+					</image>
+					<image index="7">
+						<graphic>enemy_grob_normal_idleRight8.png</graphic>
+					</image>
+				</animation>
+				<animation index="1">
+					<type>walkLeft</type>
+					<image index="0">
+						<graphic>enemy_grob_normal_left1.png</graphic>
+					</image>
+					<image index="1">
+						<graphic>enemy_grob_normal_left2.png</graphic>
+					</image>
+					<image index="2">
+						<graphic>enemy_grob_normal_left3.png</graphic>
+					</image>
+					<image index="3">
+						<graphic>enemy_grob_normal_left4.png</graphic>
+					</image>
+					<image index="4">
+						<graphic>enemy_grob_normal_left5.png</graphic>
+					</image>
+					<image index="5">
+						<graphic>enemy_grob_normal_left6.png</graphic>
+					</image>
+					<image index="6">
+						<graphic>enemy_grob_normal_left7.png</graphic>
+					</image>
+					<image index="7">
+						<graphic>enemy_grob_normal_left8.png</graphic>
+					</image>
+				</animation>
+				<animation index="2">
+					<type>walkRight</type>
+					<image index="0">
+						<graphic>enemy_grob_normal_right1.png</graphic>
+					</image>
+					<image index="1">
+						<graphic>enemy_grob_normal_right2.png</graphic>
+					</image>
+					<image index="2">
+						<graphic>enemy_grob_normal_right3.png</graphic>
+					</image>
+					<image index="3">
+						<graphic>enemy_grob_normal_right4.png</graphic>
+					</image>
+					<image index="4">
+						<graphic>enemy_grob_normal_right5.png</graphic>
+					</image>
+					<image index="5">
+						<graphic>enemy_grob_normal_right6.png</graphic>
+					</image>
+					<image index="6">
+						<graphic>enemy_grob_normal_right7.png</graphic>
+					</image>
+					<image index="7">
+						<graphic>enemy_grob_normal_right8.png</graphic>
+					</image>
+				</animation>
+			</sprite>
+			<colShape>
+				<colRect index="0">
+					<posUpperLeft>
+						<horizontal>6</horizontal>
+						<vertical>2</vertical>
+					</posUpperLeft>
+					<dimensions>
+						<horizontal>13</horizontal>
+						<vertical>13</vertical>
+					</dimensions>
+					<isBody>True</isBody>
+					<isSpike>False</isSpike>
+				</colRect>
+				<colRect index="1">
+					<posUpperLeft>
+						<horizontal>0</horizontal>
+						<vertical>15</vertical>
+					</posUpperLeft>
+					<dimensions>
+						<horizontal>24</horizontal>
+						<vertical>14</vertical>
+					</dimensions>
+					<isBody>False</isBody>
+					<isSpike>True</isSpike>
+				</colRect>
+			</colShape>
+		</entitySpec>
+		<entitySpec type="t_moveLeft">
+			<points>22</points>
+			<life>10</life>
+			<movespeed>0</movespeed>
+			<jumpspeed>0</jumpspeed>
+			<colShape>
+				<colRect index="0">
+					<posUpperLeft>
+						<horizontal>0</horizontal>
+						<vertical>0</vertical>
+					</posUpperLeft>
+					<dimensions>
+						<horizontal>13</horizontal>
+						<vertical>13</vertical>
+					</dimensions>
+					<isBody>True</isBody>
+					<isSpike>False</isSpike>
+				</colRect>
+			</colShape>
+		</entitySpec>
+		<entitySpec type="t_moveRight">
+			<points>22</points>
+			<life>10</life>
+			<movespeed>0</movespeed>
+			<jumpspeed>0</jumpspeed>
+			<colShape>
+				<colRect index="0">
+					<posUpperLeft>
+						<horizontal>0</horizontal>
+						<vertical>0</vertical>
+					</posUpperLeft>
+					<dimensions>
+						<horizontal>13</horizontal>
+						<vertical>40</vertical>
+					</dimensions>
+					<isBody>True</isBody>
+					<isSpike>False</isSpike>
+				</colRect>
+			</colShape>
+		</entitySpec>
+		<entitySpec type="t_printer">
+			<points>33</points>
+			<life>10</life>
+			<movespeed>0</movespeed>
+			<jumpspeed>0</jumpspeed>
+			<colShape>
+				<colRect index="0">
+					<posUpperLeft>
+						<horizontal>0</horizontal>
+						<vertical>0</vertical>
+					</posUpperLeft>
+					<dimensions>
+						<horizontal>13</horizontal>
+						<vertical>40</vertical>
+					</dimensions>
+					<isBody>True</isBody>
+					<isSpike>False</isSpike>
+				</colRect>
+			</colShape>
+		</entitySpec>
+		<entitySpec type="t_createEntity">
+			<points>44</points>
+			<life>10</life>
+			<movespeed>0</movespeed>
+			<jumpspeed>0</jumpspeed>
+			<colShape>
+				<colRect index="0">
+					<posUpperLeft>
+						<horizontal>0</horizontal>
+						<vertical>0</vertical>
+					</posUpperLeft>
+					<dimensions>
+						<horizontal>13</horizontal>
+						<vertical>13</vertical>
+					</dimensions>
+					<isBody>True</isBody>
+					<isSpike>False</isSpike>
+				</colRect>
+			</colShape>
+		</entitySpec>
+		<entitySpec type="t_cutSceneStart">
+			<points>44</points>
+			<life>10</life>
+			<movespeed>0</movespeed>
+			<jumpspeed>0</jumpspeed>
+			<colShape>
+				<colRect index="0">
+					<posUpperLeft>
+						<horizontal>0</horizontal>
+						<vertical>0</vertical>
+					</posUpperLeft>
+					<dimensions>
+						<horizontal>13</horizontal>
+						<vertical>40</vertical>
+					</dimensions>
+					<isBody>True</isBody>
+					<isSpike>False</isSpike>
+				</colRect>
+			</colShape>
+		</entitySpec>
+		<entitySpec type="t_cutSceneEnd">
+			<points>44</points>
+			<life>10</life>
+			<movespeed>0</movespeed>
+			<jumpspeed>0</jumpspeed>
+			<colShape>
+				<colRect index="0">
+					<posUpperLeft>
+						<horizontal>0</horizontal>
+						<vertical>0</vertical>
+					</posUpperLeft>
+					<dimensions>
+						<horizontal>13</horizontal>
+						<vertical>40</vertical>
+					</dimensions>
+					<isBody>True</isBody>
+					<isSpike>False</isSpike>
+				</colRect>
+			</colShape>
+		</entitySpec>
+		<entitySpec type="t_moveStop">
+			<points>5</points>
+			<life>10</life>
+			<movespeed>0</movespeed>
+			<jumpspeed>0</jumpspeed>
+			<colShape>
+				<colRect index="0">
+					<posUpperLeft>
+						<horizontal>0</horizontal>
+						<vertical>0</vertical>
+					</posUpperLeft>
+					<dimensions>
+						<horizontal>13</horizontal>
+						<vertical>40</vertical>
+					</dimensions>
+					<isBody>True</isBody>
+					<isSpike>False</isSpike>
+				</colRect>
+			</colShape>
+		</entitySpec>
+		<entitySpec type="t_moveJump">
+			<points>5</points>
+			<life>10</life>
+			<movespeed>0</movespeed>
+			<jumpspeed>0</jumpspeed>
+			<colShape>
+				<colRect index="0">
+					<posUpperLeft>
+						<horizontal>0</horizontal>
+						<vertical>0</vertical>
+					</posUpperLeft>
+					<dimensions>
+						<horizontal>13</horizontal>
+						<vertical>40</vertical>
+					</dimensions>
+					<isBody>True</isBody>
+					<isSpike>False</isSpike>
+				</colRect>
+			</colShape>
+		</entitySpec>
+		<entitySpec type="t_createBubble">
+			<points>5</points>
+			<life>10</life>
+			<movespeed>0</movespeed>
+			<jumpspeed>0</jumpspeed>
+			<colShape>
+				<colRect index="0">
+					<posUpperLeft>
+						<horizontal>0</horizontal>
+						<vertical>0</vertical>
+					</posUpperLeft>
+					<dimensions>
+						<horizontal>13</horizontal>
+						<vertical>40</vertical>
+					</dimensions>
+					<isBody>True</isBody>
+					<isSpike>False</isSpike>
+				</colRect>
+			</colShape>
+		</entitySpec>
+		<entitySpec type="t_finishLvl">
+			<points>1000</points>
+			<life>10</life>
+			<movespeed>0</movespeed>
+			<jumpspeed>0</jumpspeed>
+			<colShape>
+				<colRect index="0">
+					<posUpperLeft>
+						<horizontal>0</horizontal>
+						<vertical>0</vertical>
+					</posUpperLeft>
+					<dimensions>
+						<horizontal>13</horizontal>
+						<vertical>13</vertical>
+					</dimensions>
+					<isBody>True</isBody>
+					<isSpike>False</isSpike>
+				</colRect>
+			</colShape>
+		</entitySpec>
+	</entitiySpecification>
+	<entities>
+		<absEntity type="player" name="player">
+			<position>
+				<horizontal>70</horizontal>
+				<vertical>362</vertical>
+			</position>
+		</absEntity>
+		<absEntity type="t_cutSceneStart" name="starter-1">
+			<position>
+				<horizontal>232</horizontal>
+				<vertical>475</vertical>
+			</position>
+		</absEntity>
+		<absEntity type="t_createBubble" name="bubble-1">
+			<position>
+				<horizontal>232</horizontal>
+				<vertical>475</vertical>
+			</position>
+			<msg>Galaxy News Radio: Breaking News!!        Breaking News!!|Invasion... our planet is under at.z.z..tack..grfzz..zzfd..|grfz.gerrfvr..zzfzd...  *harrumph* Inhabitants of Feralia I! This is General Grumpel  Leader of the G.R.O.B.!!11eleven11!|Capitulate, capitulate or our ships are going to darken the sky! -- Resistance is futile !!|Flip: What the..?!?"</msg>
+		</absEntity>
+		<absEntity type="t_moveRight" name="righter-1">
+			<position>
+				<horizontal>232</horizontal>
+				<vertical>475</vertical>
+			</position>
+		</absEntity>
+		<absEntity type="t_moveStop" name="stopper1">
+			<position>
+				<horizontal>292</horizontal>
+				<vertical>487</vertical>
+			</position>
+		</absEntity>
+		<absEntity type="t_moveJump" name="jumper-1">
+			<position>
+				<horizontal>292</horizontal>
+				<vertical>487</vertical>
+			</position>
+		</absEntity>
+		<absEntity type="t_moveRight" name="righter-2">
+			<position>
+				<horizontal>292</horizontal>
+				<vertical>487</vertical>
+			</position>
+		</absEntity>
+		<absEntity type="t_moveJump" name="jumper-2">
+			<position>
+				<horizontal>686</horizontal>
+				<vertical>489</vertical>
+			</position>
+		</absEntity>
+		<absEntity type="t_cutSceneEnd" name="ender-1">
+			<position>
+				<horizontal>787</horizontal>
+				<vertical>490</vertical>
+			</position>
+		</absEntity>
+		<absEntity type="t_moveStop" name="stopper-2">
+			<position>
+				<horizontal>787</horizontal>
+				<vertical>490</vertical>
+			</position>
+		</absEntity>
+	</entities>
+</entityFile>

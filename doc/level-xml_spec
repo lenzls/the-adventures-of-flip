@@ -1,7 +1,9 @@
 file ending level-file:  *.lxml
 file ending entity-file: *.exml
 
-elemt centric!
+-elemet centric!
+-min-width = 25
+-min-height = 15
 
 Map
 	name
