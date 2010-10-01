@@ -80,10 +80,9 @@ class MapEditor():
         self.Inp_map_entityFile = gui.Input(size=8)
         self.Inp_map_nextLvl = gui.Input(size=8)
 
-        self.Se_Tile_Select = gui.Select(value=1)
-        #Selectbos Tilelabels
+        self.Li_Tile_select = gui.List(width=100, height=300)
         for i in range(len(self.tiles)):
-            self.Se_Tile_Select.add(gui.Label(self.tiles[i][0]),value=i)
+            self.Li_Tile_select.add(self.tiles[i][0],value=i)
 
         self.Sw_layer1_vis = gui.Switch(True)
         self.Sw_layer2_vis = gui.Switch(True)
@@ -104,6 +103,12 @@ class MapEditor():
         self.initNewMap()
         
         self.transpColor = () # layer1: (255,0,255)   layer2: (0,255,0)
+
+    def cut2LongTileNames(self, input):
+        if len(input) > 8:
+            return input[0:8]
+        else:
+            return input
 
     def loadMap(self, mapPath):
         ''' parses the map file '''
@@ -198,11 +203,9 @@ class MapEditor():
             elif node.nodeName == 'entityFile':
                 self.entityFile = node.firstChild.data.strip()      #entityFile Path
 
-        self.Se_Tile_Select.clear()
-        self.Se_Tile_Select = gui.Select(value=1)
-
+        self.Li_Tile_select.clear()
         for i in range(len(self.tiles)):
-            self.Se_Tile_Select.add(gui.Label(self.tiles[i][0]),value=i)
+            self.Li_Tile_select.add(self.cut2LongTileNames(self.tiles[i][0]),value=i)
 
         self.Inp_map_name = gui.Input(value=self.name,size=8)    
         self.Inp_map_dimH = gui.Input(value=self.dimensions[0],size=8)
@@ -263,11 +266,11 @@ class MapEditor():
         self.entityFile = ""
         self.nextLevel = ""
 
-        self.Se_Tile_Select.clear()
-        self.Se_Tile_Select = gui.Select(value=1)
+        self.Li_Tile_select.clear()
 
         for i in range(len(self.tiles)):
-            self.Se_Tile_Select.add(gui.Label(self.tiles[i][0]),value=i)
+            self.Li_Tile_select.add(self.cut2LongTileNames(self.tiles[i][0]),value=i)
+            
 
         self.Inp_map_name = gui.Input(value=self.name,size=8)    
         self.Inp_map_dimH = gui.Input(value=self.dimensions[0],size=8)
@@ -494,7 +497,10 @@ class MapEditor():
             #update
             self.editApp.update(self.screen)
 
-            self.cur_Tile = self.Se_Tile_Select.value
+            if self.Li_Tile_select.value:
+                self.cur_Tile = self.Li_Tile_select.value
+            else:
+                self.cur_Tile = 0
 
             self.layerVis = [self.Sw_layer1_vis.value, self.Sw_layer2_vis.value]
 
@@ -524,7 +530,7 @@ class MapEditor():
             self.tilesTable.td(gui.Label(self.tiles[self.cur_Tile][4]),1,6)
             self.tilesTable.td(self.Lb_Tiles,0,7)
 
-            self.tilesTable.td(self.Se_Tile_Select,1,7)
+            self.tilesTable.td(self.Li_Tile_select,1,7)
             #------
 
             #update oben
