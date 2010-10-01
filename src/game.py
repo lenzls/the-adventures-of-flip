@@ -98,7 +98,7 @@ class GameState(State):
         self.levelManager = levelManager.LevelManager(self.physicManager, self.gameRenderer)
         self.interface = interface.Interface()
         
-        self.levelManager.loadLevel(1)
+        self.levelManager.loadLevel(self.levelManager.curLevelC)
 
     def handleInput(self):
         for event in pygame.event.get():

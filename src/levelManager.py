@@ -10,6 +10,8 @@ from entities.player import Player
 import map
 import xml.dom.minidom as dom
 from entities import trigger
+from util.events import Event
+import pygame
 
 class LevelManager(object):
 
@@ -22,6 +24,7 @@ class LevelManager(object):
         self.physics = physics
         self.renderer = renderer
         self.levelPathList = []
+        self.curLevelC = 0
         self.curLevel = None
         self._addLevelPath('1284743568.37.lxml')
         self._addLevelPath('1285970402.43.lxml')
@@ -32,10 +35,19 @@ class LevelManager(object):
     def loadLevel(self, levelIndex):
         self.curLevel = Level(self.physics, self.renderer, self.levelPathList[levelIndex])
 
+    def next_lvl(self):
+        if self.curLevelC+1 < len(self.levelPathList):
+            self.curLevelC += 1
+            self.loadLevel(self.curLevelC)
+        else: 
+            #TODO: show screen
+            print "Game finished You Win!:)"
+            Event().raiseCstmEvent(pygame.QUIT, {})
+
     def update(self):
         self.updateEntities()
         if self.curLevel.isFinished():
-            self.loadLevel(1)
+            self.next_lvl()
 
     def updateEntities(self):
         self.curLevel.updateEntities()
