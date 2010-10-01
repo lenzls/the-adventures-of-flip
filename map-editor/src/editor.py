@@ -12,7 +12,7 @@ from pgu import tilevid
 
 class MapEditor():
 
-    def __init__(self):                      
+    def __init__(self):
         #map Vars
         self.name = ""
         self.dimensions = [0,0]
@@ -102,6 +102,8 @@ class MapEditor():
         self.running = True
 
         self.initNewMap()
+        
+        self.transpColor = () # layer1: (255,0,255)   layer2: (0,255,0)
 
     def loadMap(self, mapPath):
         ''' parses the map file '''
@@ -277,7 +279,7 @@ class MapEditor():
         print "init new map"
     
     def BUTTONloadMap(self,arg):
-        self.loadMap('../data/newspec.lxml')
+        self.loadMap('../data/'+ constants.LOADPATH)
 
     def BUTTONapplyOpt(self,arg):
         '''sollte alles gehn bis auf zuerst x erhoehen und dann y verringern'''
@@ -459,7 +461,18 @@ class MapEditor():
                         self.mapSurface.blit(util.load_tile(self.tiles[self.grid[1][x][y]][2]), (x*constants.TILESIZE-self.camera[0], y*constants.TILESIZE-self.camera[1]))
 
     def renderMapBg(self):
-        pygame.draw.rect(self.mapSurface, (255,0,255) , pygame.Rect(-self.camera[0],-self.camera[1],self.dimensions[0]*constants.TILESIZE,self.dimensions[1]*constants.TILESIZE))    
+        pygame.draw.rect(self.mapSurface, self.transpColor  , pygame.Rect(-self.camera[0],-self.camera[1],self.dimensions[0]*constants.TILESIZE,self.dimensions[1]*constants.TILESIZE))    
+
+    def calcTopLayer(self):
+        if self.layerVis[0] and self.layerVis[1]:
+            topLayer = 1
+        elif self.layerVis[0] and not self.layerVis[1]:
+            topLayer = 0
+        elif not self.layerVis[0] and self.layerVis[1]:
+            topLayer = 1
+        elif not self.layerVis[0] and not self.layerVis[1]:
+            return -1
+        return topLayer
 
     def replaceTile(self, screenPos):
         if screenPos[0] > 150 and screenPos[0] < 1080:
@@ -468,15 +481,9 @@ class MapEditor():
                 if mapSurfacePos[0] > 0 and mapSurfacePos[0] < self.dimensions[0]*constants.TILESIZE:
                     if mapSurfacePos[1] > 0 and mapSurfacePos[1] < self.dimensions[1]*constants.TILESIZE:
                         tilePosition = self.getCurTilePos(mapSurfacePos)
-                        if self.layerVis[0] and self.layerVis[1]:
-                            topLayer = 1
-                        elif self.layerVis[0] and not self.layerVis[1]:
-                            topLayer = 0
-                        elif not self.layerVis[0] and self.layerVis[1]:
-                            topLayer = 1
-                        elif not self.layerVis[0] and not self.layerVis[1]:
-                            return
-                        self.grid[topLayer][tilePosition[0]][tilePosition[1]] = self.cur_Tile
+                        topLayer = self.calcTopLayer()
+                        if topLayer != -1:
+                            self.grid[topLayer][tilePosition[0]][tilePosition[1]] = self.cur_Tile
 
     def getCurTilePos(self, surfacePos):    #returns Tile on pos: surfacePos 
         curTilePos = (surfacePos[0]//constants.TILESIZE,surfacePos[1]//constants.TILESIZE)
@@ -542,6 +549,12 @@ class MapEditor():
             #-----------
 
             #render
+            if self.calcTopLayer() == 0:
+                self.transpColor = (255,0,255)
+            elif self.calcTopLayer() == 1:
+                self.transpColor = (125,255,125)
+            else:
+                self.transpColor = (255,255,255)
             self.mapSurface.fill((0,0,0))
             self.renderMapBg()
             self.renderMap()
