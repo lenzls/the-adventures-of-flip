@@ -123,6 +123,8 @@ class GameState(State):
                 self.levelManager.curLevel.triggerManager.addTrigger(event.tObject)
             elif event.type == Event().NEWDIALOG:
                 self.interface.dialogManager.addDialog(event.msg, self)
+            elif event.type == Event().LEVELFINISHED:
+                self.levelManager.curLevel.setFinished()
 
         #Trigger input:
         if self.levelManager.curLevel.triggerManager.isNewEvents():

@@ -352,6 +352,26 @@
 				</colRect>
 			</colShape>
 		</entitySpec>
+		<entitySpec type="t_finishLvl">
+			<points>1000</points>
+			<life>10</life>
+			<movespeed>0</movespeed>
+			<jumpspeed>0</jumpspeed>
+			<colShape>
+				<colRect index="0">
+					<posUpperLeft>
+						<horizontal>0</horizontal>
+						<vertical>0</vertical>
+					</posUpperLeft>
+					<dimensions>
+						<horizontal>13</horizontal>
+						<vertical>13</vertical>
+					</dimensions>
+					<isBody>True</isBody>
+					<isSpike>False</isSpike>
+				</colRect>
+			</colShape>
+		</entitySpec>
 	</entitiySpecification>
 	<entities>
 		<absEntity type="player" name="player">
@@ -419,6 +439,12 @@
 		<absEntity type="t_cutSceneEnd" name="cutE-1">
 			<position>
 				<horizontal>450</horizontal>
+				<vertical>1235</vertical>
+			</position>
+		</absEntity>
+		<absEntity type="t_finishLvl" name="finisher">
+			<position>
+				<horizontal>600</horizontal>
 				<vertical>1235</vertical>
 			</position>
 		</absEntity>

@@ -12,6 +12,7 @@ class Event(object):
     NEWGAME = 24
     NEWTRIGGER = 25
     NEWDIALOG = 26
+    LEVELFINISHED = 27
 
     def raiseNewGameEvent(self, argDict={}):
         pygame.event.post(pygame.event.Event(self.NEWGAME, argDict))

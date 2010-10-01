@@ -23,6 +23,7 @@ class LevelManager(object):
         self.levelPathList = []
         self.curLevel = None
         self._addLevelPath('1284743568.37.lxml')
+        self._addLevelPath('1285919675.78.lxml')
 
     def _addLevelPath(self, mapPath):
         self.levelPathList.append(mapPath)
@@ -32,6 +33,8 @@ class LevelManager(object):
 
     def update(self):
         self.updateEntities()
+        if self.curLevel.isFinished():
+            self.loadLevel(1)
 
     def updateEntities(self):
         self.curLevel.updateEntities()
@@ -44,6 +47,7 @@ class Level(object):
         self.triggerManager = trigger.TriggerManager()
         self.levelFilePath = levelFilePath
         self.player = None
+        self.finished = False
 
         self.map = map.Map(self.levelFilePath).getMapInstance()
 
@@ -118,6 +122,8 @@ class Level(object):
             return trigger.TcutSceneEnd(entityPos, self.map, entityInfoTrees['t_cutSceneEnd'], self.physics, activated, {"level" : self})
         elif absNode.getAttribute('type') == 't_createBubble':
             return trigger.TcreateBubble(entityPos, self.map, entityInfoTrees['t_createBubble'], self.physics, activated, {"msg" : msg})
+        elif absNode.getAttribute('type') == 't_finishLvl':
+            return trigger.TfinishLvl(entityPos, self.map, entityInfoTrees['t_finishLvl'], self.physics, activated, {})
         
     def updateEntities(self):
         for entity in self.entities:
@@ -125,3 +131,9 @@ class Level(object):
     
     def getPlayer(self):
         return self.player
+    
+    def setFinished(self):
+        self.finished = True
+        
+    def isFinished(self):
+        return self.finished
