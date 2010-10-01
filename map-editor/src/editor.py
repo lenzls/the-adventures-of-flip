@@ -374,7 +374,7 @@ class MapEditor():
 
         #BackgroundLayer
         backgroundElement = doc.createElement("background")
-        for i in range(0,len(self.tiles)):
+        for i in range(0,4):
             bgLayerElement = doc.createElement("bgLayer")
             bgLayerElement.setAttribute('index',str(i))
 
