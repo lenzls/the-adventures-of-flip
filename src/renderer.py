@@ -107,15 +107,23 @@ class GameRenderer(Renderer):
         self.screen.fill((0,0,0));
         for bgLayer in map.bgLayers.values():
 
-            # scrolling offset
+            # offset left
             self.screen.blit(bgLayer.getGraphic(), 
                              (0, ((map.getDimensions()[1]*constants.TILESIZE) - bgLayer.getDimensions()[1]) - self.camera[1]), 
                              area=pygame.Rect(bgLayer.getDimensions()[0]-bgLayer.getScrollPosition()[0],0,bgLayer.getDimensions()[0],bgLayer.getDimensions()[1]))
 
-            for i in range(bgLayer.getNeededGraphics()):
+            for i in range(bgLayer.getNeededGraphics()+1):
                 self.screen.blit(bgLayer.getGraphic(), 
                              (bgLayer.getScrollPosition()[0] + i*bgLayer.getDimensions()[0], ((map.getDimensions()[1]*constants.TILESIZE) - bgLayer.getDimensions()[1]) - self.camera[1]), 
                              area=pygame.Rect(0,0,bgLayer.getDimensions()[0],bgLayer.getDimensions()[1]))
+            
+            #TODO add offset right instead of drawing one 'too much' in the previous loop
+            #following doesn't work correct
+#            # offset right
+#            self.screen.blit(bgLayer.getGraphic(), 
+#                             (lastPosX+bgLayer.getDimensions()[0], ((map.getDimensions()[1]*constants.TILESIZE) - bgLayer.getDimensions()[1]) - self.camera[1]), 
+#                             area=pygame.Rect(0,0,(bgLayer.getDimensions()[0]-lastPosX-self.camera[0]),bgLayer.getDimensions()[1]))
+
 
     def updateBg(self, level):
         '''update method for paralax scrolling'''

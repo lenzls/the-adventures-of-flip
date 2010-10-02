@@ -487,7 +487,7 @@
         0
       </speed>
       <graphic>
-        bg_test_0.png
+        bg_anc_0.png
       </graphic>
     </bgLayer>
     <bgLayer index="1">
@@ -495,15 +495,7 @@
         -1
       </speed>
       <graphic>
-        bg_test_1.png
-      </graphic>
-    </bgLayer>
-    <bgLayer index="2">
-      <speed>
-        -2
-      </speed>
-      <graphic>
-        bg_test_2.png
+        bg_anc_1.png
       </graphic>
     </bgLayer>
   </background>

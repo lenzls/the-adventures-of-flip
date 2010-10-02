@@ -27,6 +27,7 @@ class LevelManager(object):
         self.curLevelC = 0
         self.curLevel = None
         self._addLevelPath('1285970402.43.lxml')
+        self._addLevelPath('1286014149.83.lxml')
         self._addLevelPath('1284743568.37.lxml')
 
     def _addLevelPath(self, mapPath):
