@@ -123,6 +123,8 @@ class GameState(State):
                     if not self.levelManager.curLevel.cutSceneState: self.levelManager.curLevel.player.walkLeft()
                 elif event.key == pygame.K_RIGHT:
                     if not self.levelManager.curLevel.cutSceneState: self.levelManager.curLevel.player.walkRight()
+                elif event.key == pygame.K_p:
+                    Event().raiseCstmEvent(Event.SWITCHSTATE, argDict={"state" : StateManager.PAUSESTATE})
             elif event.type == pygame.KEYUP:
                 if event.key == pygame.K_LEFT:
                     if not self.levelManager.curLevel.cutSceneState: self.levelManager.curLevel.player.walkStop()
@@ -209,6 +211,9 @@ class PauseState(State):
 
     def __init__(self, stateManager):
         State.__init__(self, stateManager)
+        
+        self.pauseRenderer = renderer.PauseRenderer(self.stateManager.screen)
+        
 
     def handleInput(self):
 
@@ -218,9 +223,12 @@ class PauseState(State):
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     self.stateManager.endGame()
+                elif event.key == pygame.K_p:
+                    self.stateManager.switchState(self.stateManager.GAMESTATE)
 
     def update(self):
         pass
 
     def render(self):
-        pass
+        self.stateManager.getGameState().render()
+        self.pauseRenderer.renderOverlay()

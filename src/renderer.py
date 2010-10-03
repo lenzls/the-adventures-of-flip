@@ -205,3 +205,19 @@ class MenuRenderer(Renderer):
         for mItem in menu.getMenuItems():
             self.screen.blit(self.itemFont.render(mItem.getCaption(),1,mItem.getColor()),((constants.RESOLUTION[0]//2)-100, y))
             y += 50
+
+class PauseRenderer(Renderer):
+    def __init__(self, screen):
+        Renderer.__init__(self, screen)
+        
+        self.pauseOverlay = pygame.Surface(constants.RESOLUTION, pygame.RLEACCEL)
+        self.pauseOverlay.fill((0,0,0))
+        self.pauseOverlay.set_alpha(175)
+        
+        self.pauseFont = pygame.font.Font(os.path.join('..','data','courier_new.ttf'),50)
+        self.fontSurface = self.pauseFont.render("Pause!", 1,(175,175,175))
+        self.pauseOverlay.blit(self.fontSurface, ((constants.RESOLUTION[0]//2)-(self.fontSurface.get_width()//2), (constants.RESOLUTION[1]//2)-(self.fontSurface.get_height()//2)))
+        
+    def renderOverlay(self):
+        self.screen.blit(self.pauseOverlay,(0,0))
+
