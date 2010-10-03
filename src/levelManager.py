@@ -14,6 +14,8 @@ from util.events import Event
 import pygame
 
 class LevelManager(object):
+    
+    FIRSTLEVEL = 0
 
     def __init__(self, physics, renderer):
         '''
@@ -27,8 +29,8 @@ class LevelManager(object):
         self.curLevelC = 0
         self.curLevel = None
         self._addLevelPath('1285970402.43.lxml')
-        self._addLevelPath('1286014149.83.lxml')
-        self._addLevelPath('1284743568.37.lxml')
+        #self._addLevelPath('1286014149.83.lxml')
+        #self._addLevelPath('1284743568.37.lxml')
 
     def _addLevelPath(self, mapPath):
         self.levelPathList.append(mapPath)
@@ -40,10 +42,12 @@ class LevelManager(object):
         if self.curLevelC+1 < len(self.levelPathList):
             self.curLevelC += 1
             self.loadLevel(self.curLevelC)
-        else: 
-            #TODO: show screen
+        else:
+            #TODO: show screen | and move maybe to game class
             print "Game finished You Win!:)"
-            Event().raiseCstmEvent(pygame.QUIT, {})
+            #Event().raiseCstmEvent(pygame.QUIT, {})
+            from game import StateManager
+            Event().raiseCstmEvent(Event().SWITCHSTATE, {"state" : StateManager.MENUSTATE})
 
     def update(self):
         self.updateEntities()

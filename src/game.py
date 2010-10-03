@@ -7,6 +7,7 @@ import os
 import interface.interface as interface
 import intro
 import levelManager
+from menu import menuManager
 import physic
 import pygame
 import renderer
@@ -15,10 +16,15 @@ import util.constants as constants
 from util.events import Event
 
 from util.vector import Vector
+from butterfly.util.decorator import deprecated
 
 pygame.init()
 
 class StateManager(object):
+    
+    GAMESTATE = 0
+    MENUSTATE = 1
+    PAUSESTATE = 2
 
     def __init__(self, resolution):
         '''
@@ -40,22 +46,25 @@ class StateManager(object):
         self.stateList.append(MenuState(self))
         self.stateList.append(PauseState(self))
 
-        self.switchToMenuState()
+        self.switchState(self.MENUSTATE)
 
         self.run = True
 
         self.clock = pygame.time.Clock()
         
         intro.Opening().play()
+        
+    def getGameState(self):
+        return self.stateList[self.GAMESTATE]
 
-    def switchToGameState(self):
-        self.curState = self.stateList[0]
-        
-    def switchToMenuState(self):
-        self.curState = self.stateList[1]
-        
-    def switchToPauseState(self):
-        self.curState = self.stateList[2]
+    def getMenuState(self):
+        return self.stateList[self.MENUSTATE]
+    
+    def getPauseState(self):
+        return self.stateList[self.PAUSESTATE]
+    
+    def switchState(self, stateI):
+        self.curState = self.stateList[stateI]
 
     def endGame(self):
         '''
@@ -98,7 +107,7 @@ class GameState(State):
         self.levelManager = levelManager.LevelManager(self.physicManager, self.gameRenderer)
         self.interface = interface.Interface()
         
-        self.levelManager.loadLevel(self.levelManager.curLevelC)
+        self.levelManager.loadLevel(self.levelManager.FIRSTLEVEL)
 
     def handleInput(self):
         for event in pygame.event.get():
@@ -124,12 +133,14 @@ class GameState(State):
                 if constants.DEBUG: print "The current cursor position is: ", Vector(event.pos[0],event.pos[1])+self.gameRenderer.getCamera()
 
             #custom events:
-            elif event.type == Event().NEWTRIGGER:
+            elif event.type == Event().ACTIVATETRIGGER:
                 self.levelManager.curLevel.triggerManager.addTrigger(event.tObject)
             elif event.type == Event().NEWDIALOG:
                 self.interface.dialogManager.addDialog(event.msg, self)
             elif event.type == Event().LEVELFINISHED:
                 self.levelManager.curLevel.setFinished()
+            elif event.type == Event().SWITCHSTATE:
+                self.stateManager.switchState(event.state)
 
         #Trigger input:
         if self.levelManager.curLevel.triggerManager.isNewEvents():
@@ -164,10 +175,7 @@ class MenuState(State):
 
         self.menuRenderer = renderer.MenuRenderer(self.stateManager.screen)
 
-        self.menuList = []
-        self.menuList.append(menu.MainMenu())
-        
-        self.curMenu = self.menuList[0]
+        self.menuManager = menuManager.MenuManager()
 
     def handleInput(self):
         for event in pygame.event.get():
@@ -177,21 +185,25 @@ class MenuState(State):
                 if event.key == pygame.K_ESCAPE:
                     self.stateManager.endGame()
                 elif event.key == pygame.K_UP:
-                    self.curMenu.moveUp()
+                    self.menuManager.curMenu.moveUp()
                 elif event.key == pygame.K_DOWN:
-                    self.curMenu.moveDown()
+                    self.menuManager.curMenu.moveDown()
                 elif event.key == pygame.K_RETURN:
-                    self.curMenu.execute()
+                    self.menuManager.curMenu.execute()
             
             #custom events
             elif event.type == Event().NEWGAME:
-                self.stateManager.switchToGameState()
+                self.stateManager.switchState(self.stateManager.GAMESTATE)
+                gameState = self.stateManager.getGameState()
+                gameState.levelManager.loadLevel(gameState.levelManager.FIRSTLEVEL)
+            elif event.type == Event().SWITCHMENU:
+                self.menuManager.loadMenu(event.mIndex)
 
     def update(self):
-        self.curMenu.update()
+        self.menuManager.curMenu.update()
 
     def render(self):
-        self.menuRenderer.renderMenu(self.curMenu)
+        self.menuRenderer.renderMenu(self.menuManager.curMenu)
 
 class PauseState(State):
 

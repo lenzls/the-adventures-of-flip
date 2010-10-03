@@ -10,13 +10,13 @@ class Event(object):
     classdocs
     '''
     NEWGAME = 24
-    NEWTRIGGER = 25
+    ACTIVATETRIGGER = 25
     NEWDIALOG = 26
     LEVELFINISHED = 27
+    SWITCHLEVEL = 28
+    SWITCHMENU = 29
+    SWITCHSTATE = 30
 
-    def raiseNewGameEvent(self, argDict={}):
-        pygame.event.post(pygame.event.Event(self.NEWGAME, argDict))
-        
     def raiseCstmEvent(self, type, argDict={}):
         pygame.event.post(pygame.event.Event(type, argDict))
         

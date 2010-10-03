@@ -13,7 +13,6 @@ class TriggerManager(object):
         self.triggerQueue = []
         
     def addTrigger(self, trigger):
-        print "add trigger: ", trigger
         self.triggerQueue.append(trigger)
 
     def isNewEvents(self):
@@ -159,7 +158,7 @@ class Trigger(object):
 
     def colLose(self, enemy):
         print "Enemy loses against:", enemy.type
-        events.Event().raiseCstmEvent(events.Event.NEWTRIGGER, {"tObject":self})
+        events.Event().raiseCstmEvent(events.Event.ACTIVATETRIGGER, {"tObject":self})
         self.setDead()
 
     def setDead(self):

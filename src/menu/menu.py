@@ -9,6 +9,7 @@ import menuItems as menuItems
 from util.events import Event
 import pygame
 
+
 class Menu(object):
     '''
     classdocs
@@ -53,12 +54,33 @@ class Menu(object):
 class MainMenu(Menu):
     
     def __init__(self):
+        #TODO: works but i don't know why i cannot move this line to top of this file:/
+        from menuManager import MenuManager
+
         Menu.__init__(self)
         self.background = RessourceLoader().load_graphic("menu_bg_mainMenu.png")
         self.menuItems = []
         self.heading = "main menu"
 
         self.menuItems.append(menuItems.ButtonItem("> start game", Event.NEWGAME))
+        self.menuItems.append(menuItems.ButtonItem("> switchToTestMenu", Event.SWITCHMENU, argDict={'mIndex' : MenuManager.TESTMENU}))
+        self.menuItems.append(menuItems.ButtonItem("> Quit Application", pygame.QUIT))
+        self.curIndex = 0
+        self.curItem = self.menuItems[self.curIndex]
+        
+class TestMenu(Menu):
+    
+    def __init__(self):
+        #TODO: see line 57
+        from menuManager import MenuManager
+
+
+        Menu.__init__(self)
+        self.background = RessourceLoader().load_graphic("menu_bg_mainMenu.png")
+        self.menuItems = []
+        self.heading = "test menu"
+
+        self.menuItems.append(menuItems.ButtonItem("> switchToMainMenu", Event.SWITCHMENU, argDict={'mIndex' : MenuManager.MAINMENU}))
         self.menuItems.append(menuItems.ButtonItem("> Quit Application", pygame.QUIT))
         self.curIndex = 0
         self.curItem = self.menuItems[self.curIndex]

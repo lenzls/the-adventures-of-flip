@@ -31,8 +31,11 @@ TODO:
 - add new mob ki
 - ideas for background size (vertical scrolling?)
 - add sounds
+- add pause state
 
 changelog:
+### ####
+
 ### 0.5.8 ###
 - added items class
 - added further triggers
