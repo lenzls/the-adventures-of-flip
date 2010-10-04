@@ -16,7 +16,56 @@ class Renderer(object):
         self.screen = screen
         
         self.gridFont = pygame.font.Font(os.path.join('..','data','courier_new.ttf'),15)
+        
+        self.fades = self.Fades(self.screen)
 
+    class Fades(object):
+        
+        def __init__(self, screen):
+            self.screen = screen
+        
+        def renderFade1(self, string):
+            '''
+                kind of "pulsing"
+            '''
+
+            bg = pygame.Surface(constants.RESOLUTION)
+            bg.fill((0,0,0))
+
+            font = pygame.font.Font(os.path.join('..','data','courier_new.ttf'),50)
+            writing = font.render(string,1,(255,255,255),(0,0,0))
+
+            for i in range(0,255,5):
+                self.screen.blit(bg, (0,0))
+                writing.set_alpha(i)
+                self.screen.blit(writing,((constants.RESOLUTION[0]//2 - writing.get_width()//2), (constants.RESOLUTION[1]//2 - writing.get_height()//2)))
+                pygame.display.update()
+                pygame.time.wait(30)
+            for i in range(255,0,-5):
+                self.screen.blit(bg, (0,0))
+                writing.set_alpha(i)
+                self.screen.blit(writing,((constants.RESOLUTION[0]//2 - writing.get_width()//2), (constants.RESOLUTION[1]//2 - writing.get_height()//2)))
+                pygame.display.update()
+                pygame.time.wait(20)
+    
+        def renderFadeNewLvl(self, levelName):
+            self.renderFade1(levelName)
+
+            # have fun thing:
+            bg = pygame.Surface(constants.RESOLUTION)
+            bg.fill((0,0,0))
+
+            font = pygame.font.Font(os.path.join('..','data','courier_new.ttf'),50)
+            writing = font.render("Have Fun!",1,(255,255,255),(0,0,0))
+            writingRes = (writing.get_width(), writing.get_height())
+
+            for i in range(1,4,1):
+                self.screen.blit(bg, (0,0))
+                writing = pygame.transform.scale(writing, (writingRes[0]*i, writingRes[1]*i))
+                self.screen.blit(writing,((constants.RESOLUTION[0]//2 - writing.get_width()//2), (constants.RESOLUTION[1]//2 - writing.get_height()//2)))
+                pygame.display.update()
+                pygame.time.wait(100)
+            pygame.time.wait(2000)
     
 
 class GameRenderer(Renderer):
@@ -123,7 +172,6 @@ class GameRenderer(Renderer):
 #            self.screen.blit(bgLayer.getGraphic(), 
 #                             (lastPosX+bgLayer.getDimensions()[0], ((map.getDimensions()[1]*constants.TILESIZE) - bgLayer.getDimensions()[1]) - self.camera[1]), 
 #                             area=pygame.Rect(0,0,(bgLayer.getDimensions()[0]-lastPosX-self.camera[0]),bgLayer.getDimensions()[1]))
-
 
     def updateBg(self, level):
         '''update method for paralax scrolling'''

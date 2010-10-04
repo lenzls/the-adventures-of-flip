@@ -158,3 +158,6 @@ class Map(object):
 
     def getMapInstance(self):
         return self
+
+    def getTitle(self):
+        return self.mapTitle

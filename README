@@ -31,10 +31,12 @@ TODO:
 - add new mob ki
 - ideas for background size (vertical scrolling?)
 - add sounds
+- implement new story (new intro lvl)
 
 changelog:
 ### ####
 - added pause screen
+- added fades
 ### 0.5.8 ###
 - added items class
 - added further triggers

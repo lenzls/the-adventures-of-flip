@@ -106,8 +106,6 @@ class GameState(State):
         self.physicManager = physic.PhysicManager()
         self.levelManager = levelManager.LevelManager(self.physicManager, self.gameRenderer)
         self.interface = interface.Interface()
-        
-        self.levelManager.loadLevel(self.levelManager.FIRSTLEVEL)
 
     def handleInput(self):
         for event in pygame.event.get():

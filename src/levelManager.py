@@ -30,13 +30,14 @@ class LevelManager(object):
         self.curLevel = None
         self._addLevelPath('1285970402.43.lxml')
         #self._addLevelPath('1286014149.83.lxml')
-        #self._addLevelPath('1284743568.37.lxml')
+        self._addLevelPath('1284743568.37.lxml')
 
     def _addLevelPath(self, mapPath):
         self.levelPathList.append(mapPath)
 
     def loadLevel(self, levelIndex):
         self.curLevel = Level(self.physics, self.renderer, self.levelPathList[levelIndex])
+        self.renderer.fades.renderFadeNewLvl(self.curLevel.map.getTitle())
 
     def next_lvl(self):
         if self.curLevelC+1 < len(self.levelPathList):
