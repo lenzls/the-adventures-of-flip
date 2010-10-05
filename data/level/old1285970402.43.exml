@@ -392,6 +392,26 @@
 				</colRect>
 			</colShape>
 		</entitySpec>
+		<entitySpec type="t_createFade">
+			<points>50</points>
+			<life>10</life>
+			<movespeed>0</movespeed>
+			<jumpspeed>0</jumpspeed>
+			<colShape>
+				<colRect index="0">
+					<posUpperLeft>
+						<horizontal>0</horizontal>
+						<vertical>0</vertical>
+					</posUpperLeft>
+					<dimensions>
+						<horizontal>13</horizontal>
+						<vertical>40</vertical>
+					</dimensions>
+					<isBody>True</isBody>
+					<isSpike>False</isSpike>
+				</colRect>
+			</colShape>
+		</entitySpec>
 		<entitySpec type="coin">
 			<points>25</points>
 			<life>10</life>
@@ -488,6 +508,15 @@
 				<horizontal>913</horizontal>
 				<vertical>485</vertical>
 			</position>
+		</absEntity>
+		<absEntity type="t_createFade" name="fader-1">
+			<position>
+				<horizontal>190</horizontal>
+				<vertical>363</vertical>
+			</position>
+			<msg>
+				seven years lator
+			</msg>
 		</absEntity>
 		<absEntity type="coin" name="coin-1">
 			<position>
