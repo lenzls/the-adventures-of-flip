@@ -250,10 +250,19 @@ class TcreateBubble(Trigger):
         
     def action(self):
         events.Event().raiseCstmEvent(events.Event.NEWDIALOG, {"msg" : self.msg})
-        
+
 class TfinishLvl(Trigger):
     def __init__(self, position, map, infoTree, physics, activated, argDict):
         Trigger.__init__(self, position, map, infoTree, physics, activated)
         
     def action(self):
         events.Event().raiseCstmEvent(events.Event.LEVELFINISHED, {})
+        
+class TcreateFade(Trigger):
+    def __init__(self, position, map, infoTree, physics, activated, argDict):
+        Trigger.__init__(self, position, map, infoTree, physics, activated)
+        self.msg = argDict["msg"]
+        self.fades = argDict["fades"]
+        
+    def action(self):
+        self.fades.renderFade1(self.msg)

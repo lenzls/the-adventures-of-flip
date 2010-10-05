@@ -28,7 +28,7 @@ class LevelManager(object):
         self.levelPathList = []
         self.curLevelC = 0
         self.curLevel = None
-        self._addLevelPath('1285970402.43.lxml')
+        self._addLevelPath('old1285970402.43.lxml')
         #self._addLevelPath('1286014149.83.lxml')
         self._addLevelPath('1284743568.37.lxml')
 
@@ -153,6 +153,8 @@ class Level(object):
             return trigger.TcreateBubble(entityPos, self.map, entityInfoTrees['t_createBubble'], self.physics, activated, {"msg" : msg})
         elif absNode.getAttribute('type') == 't_finishLvl':
             return trigger.TfinishLvl(entityPos, self.map, entityInfoTrees['t_finishLvl'], self.physics, activated, {})
+        elif absNode.getAttribute('type') == 't_createFade':
+            return trigger.TcreateFade(entityPos, self.map, entityInfoTrees['t_createFade'], self.physics, activated, {"msg" : msg, "fades" : self.renderer.fades})
         
     def updateEntities(self):
         for entity in self.entities:
