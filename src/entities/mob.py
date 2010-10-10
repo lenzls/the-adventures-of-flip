@@ -8,6 +8,7 @@ from util.vector import Vector
 import util.util as util
 import util.constants as constants
 from util import ressourceLoader
+from util.options import Options
 
 class Mob(object):
     '''
@@ -150,7 +151,7 @@ class Mob(object):
 
     def jump(self):
         if not self.jumplock:
-            self.jumpSound.play()
+            if Options().getOption("RESOLUTION"): self.jumpSound.play()
             self.jumplock = True
             self.velocity += self.jumpspeed
 

@@ -8,13 +8,14 @@ import os
 import pygame
 import util.constants as constants
 from dialog import SpeechBubble 
+from util.options import Options
 
 class Interface(object):
 
     def __init__(self):
         self.dialogManager = self.DialogManager()
         self.schriftart = pygame.font.Font(os.path.join('..','data','courier_new.ttf'),15)
-        self.bar = pygame.Surface((constants.RESOLUTION[0],17))
+        self.bar = pygame.Surface((Options().getOption("RESOLUTION")[0],17))
         self.bar.fill((130,130,130))
         
         self.score = 0
@@ -27,7 +28,7 @@ class Interface(object):
     def render(self, screen):
         screen.blit(self.bar,(0,0))
         screen.blit(self.schriftart.render('Score:' + str(self.score),1,[0,0,0]),(0+20,0))
-        screen.blit(self.schriftart.render('FPS:' + str(round(self.fps,2)),1,[0,0,0]),(constants.RESOLUTION[0]-100,0))
+        screen.blit(self.schriftart.render('FPS:' + str(round(self.fps,2)),1,[0,0,0]),(Options().getOption("RESOLUTION")[0]-100,0))
 
     class DialogManager(object):
         def __init__(self):

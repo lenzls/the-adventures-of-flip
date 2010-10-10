@@ -4,14 +4,7 @@ Created on 08.07.2009
 @author: CaptnLenz
 '''
 
-VERSION    = '0.5.8'
-RESOLUTION = (800,480)
-#deprecated
-RENDER_FPS = 100
-#deprecated
-LOGIC_FPS  = 100
+VERSION    = '0.5.9'
 FPS        = 50
+#TODO: calc tilesize in the map loading process 
 TILESIZE   = 32
-FULLSCREEN = False
-ISSOUND    = False
-DEBUG      = True

@@ -9,5 +9,5 @@ import util.constants as constants
 
 if __name__ == '__main__':
 
-    curGame = game.StateManager(constants.RESOLUTION)
+    curGame = game.StateManager()
     curGame.startGame()

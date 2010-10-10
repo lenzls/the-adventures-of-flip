@@ -1,5 +1,5 @@
 ---- The Adventures of Flip! ----
-Verison: 0.5.8
+Version: 0.5.9
 
 [German/Deutsch]:
 
@@ -22,7 +22,6 @@ Fortsetzung folgt...
 
 
 TODO:
-- split game state events and menu state events
 - new main loop concept
 - package renaming (dataStorage)
 - add pyDoc
@@ -31,12 +30,14 @@ TODO:
 - add new mob ki
 - ideas for background size (vertical scrolling?)
 - add sounds
-- implement new story (new intro lvl)
+- new story
+- consistent update routines in whole program for option changes (eg: Fullscr or sound)
 
 changelog:
-### ####
+### 0.5.9 ###
 - added pause screen
 - added fades
+- added options menu
 ### 0.5.8 ###
 - added items class
 - added further triggers

@@ -8,6 +8,7 @@ import util.constants as constants
 from util.vector import Vector
 import util.util as util
 from util import ressourceLoader
+from util.options import Options
 
 class Player():
 
@@ -28,7 +29,7 @@ class Player():
         self.jumpspeed = None   #util.Vector(0,-13)
 
         self.jumplock = False
-        self.jumpSound = None   #util.load_sound('jump.wav')
+        self.jumpSound = None
 
         self.sprite     = self.renderer.createSprite(self)
         self.colShape   = self.physics.createColShape(self)
@@ -148,7 +149,7 @@ class Player():
 
     def jump(self):
         if not self.jumplock:
-            if constants.ISSOUND: self.jumpSound.play()
+            if Options().getOption("RESOLUTION"): self.jumpSound.play()
             self.jumplock = True
             self.velocity += self.jumpspeed
 

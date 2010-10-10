@@ -6,6 +6,7 @@ Created on 27.09.2010
 from util.vector import Vector
 from util import ressourceLoader, events
 import util.util as util
+from util.options import Options
 
 class TriggerManager(object):
     # TODO:maybe move to another module
@@ -137,7 +138,7 @@ class Trigger(object):
 
     def jump(self):
         if not self.jumplock:
-            self.jumpSound.play()
+            if Options().getOption("RESOLUTION"): self.jumpSound.play()
             self.jumplock = True
             self.velocity += self.jumpspeed
 

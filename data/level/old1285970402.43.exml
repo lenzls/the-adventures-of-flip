@@ -514,9 +514,7 @@
 				<horizontal>190</horizontal>
 				<vertical>363</vertical>
 			</position>
-			<msg>
-				seven years lator
-			</msg>
+			<msg>testing fade trigger...</msg>
 		</absEntity>
 		<absEntity type="coin" name="coin-1">
 			<position>

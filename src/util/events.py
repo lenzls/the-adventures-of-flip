@@ -16,6 +16,7 @@ class Event(object):
     SWITCHLEVEL = 28
     SWITCHMENU = 29
     SWITCHSTATE = 30
+    OPTIONSWITCH = 31
 
     def raiseCstmEvent(self, type, argDict={}):
         pygame.event.post(pygame.event.Event(type, argDict))

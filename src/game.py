@@ -11,12 +11,11 @@ from menu import menuManager
 import physic
 import pygame
 import renderer
-import menu.menu as menu
 import util.constants as constants
 from util.events import Event
+from util.options import Options
 
 from util.vector import Vector
-from butterfly.util.decorator import deprecated
 
 pygame.init()
 
@@ -26,20 +25,20 @@ class StateManager(object):
     MENUSTATE = 1
     PAUSESTATE = 2
 
-    def __init__(self, resolution):
+    def __init__(self):
         '''
 
         @param resolution: screen resolution
         '''
-
-        self.resolution = resolution
+        Options.options={"RESOLUTION":(800,480), "ISSOUND":True, "ISFULLSCR":False, "ISDEBUG":False}
 
         pygame.display.set_caption("The Adventures of Flip")
         pygame.display.set_icon(pygame.image.load(os.path.join('..','data','icon.png')))
-        if constants.FULLSCREEN:
-            self.screen = pygame.display.set_mode(self.resolution, pygame.FULLSCREEN)
+
+        if Options().getOption("ISFULLSCR"):
+            self.screen = pygame.display.set_mode(Options().getOption("RESOLUTION"), pygame.FULLSCREEN)
         else:
-            self.screen = pygame.display.set_mode(self.resolution)
+            self.screen = pygame.display.set_mode(Options().getOption("RESOLUTION"))
 
         self.stateList = []
         self.stateList.append(GameState(self))
@@ -123,6 +122,9 @@ class GameState(State):
                     if not self.levelManager.curLevel.cutSceneState: self.levelManager.curLevel.player.walkRight()
                 elif event.key == pygame.K_p:
                     Event().raiseCstmEvent(Event.SWITCHSTATE, argDict={"state" : StateManager.PAUSESTATE})
+                elif event.key == pygame.K_m:
+                    Event().raiseCstmEvent(Event.SWITCHSTATE, argDict={"state" : StateManager.MENUSTATE})
+
             elif event.type == pygame.KEYUP:
                 if event.key == pygame.K_LEFT:
                     if not self.levelManager.curLevel.cutSceneState: self.levelManager.curLevel.player.walkStop()
@@ -130,7 +132,7 @@ class GameState(State):
                     if not self.levelManager.curLevel.cutSceneState: self.levelManager.curLevel.player.walkStop()
 
             elif event.type == pygame.MOUSEBUTTONDOWN:
-                if constants.DEBUG: print "The current cursor position is: ", Vector(event.pos[0],event.pos[1])+self.gameRenderer.getCamera()
+                if Options().getOption("ISDEBUG"): print "The current cursor position is: ", Vector(event.pos[0],event.pos[1])+self.gameRenderer.getCamera()
 
             #custom events:
             elif event.type == Event().ACTIVATETRIGGER:
@@ -161,7 +163,7 @@ class GameState(State):
         self.gameRenderer.renderMapLayer(0, self.levelManager.curLevel.map)
         self.gameRenderer.renderSprites()
         self.gameRenderer.renderMapLayer(1, self.levelManager.curLevel.map)
-        if constants.DEBUG: 
+        if Options().getOption("ISDEBUG"): 
             self.gameRenderer.renderGrid(self.levelManager.curLevel.map)
             self.gameRenderer.renderBoundingBoxes(self.physicManager.colShapeList)
         self.gameRenderer.renderInterface(self.interface)
@@ -175,7 +177,7 @@ class MenuState(State):
 
         self.menuRenderer = renderer.MenuRenderer(self.stateManager.screen)
 
-        self.menuManager = menuManager.MenuManager()
+        self.menuManager = menuManager.MenuManager(self.stateManager)
 
     def handleInput(self):
         for event in pygame.event.get():
@@ -190,6 +192,11 @@ class MenuState(State):
                     self.menuManager.curMenu.moveDown()
                 elif event.key == pygame.K_RETURN:
                     self.menuManager.curMenu.execute()
+                
+                elif event.key == pygame.K_m:
+                    # only change if there is a level loaded
+                    if self.stateManager.stateList[StateManager.GAMESTATE].levelManager.curLevel != None:
+                        Event().raiseCstmEvent(Event.SWITCHSTATE, argDict={"state" : StateManager.GAMESTATE})
             
             #custom events
             elif event.type == Event().NEWGAME:
@@ -198,9 +205,27 @@ class MenuState(State):
                 gameState.levelManager.loadLevel(gameState.levelManager.FIRSTLEVEL)
             elif event.type == Event().SWITCHMENU:
                 self.menuManager.loadMenu(event.mIndex)
+            elif event.type == Event().SWITCHSTATE:
+                self.stateManager.switchState(event.state)
+            elif event.type == Event().OPTIONSWITCH:
+                itemChanged = False
+
+                if Options().getOption(event.option) == False:
+                    Options().setOption(event.option, True)
+                    itemChanged = True
+                elif Options().getOption(event.option) == True:
+                    Options().setOption(event.option, False)
+                    itemChanged = True
+                if itemChanged:
+                    if event.option == "ISFULLSCR":
+                        if Options().getOption("ISFULLSCR"):
+                            self.screen = pygame.display.set_mode(Options().getOption("RESOLUTION"), pygame.FULLSCREEN)
+                        else:
+                            self.screen = pygame.display.set_mode(Options().getOption("RESOLUTION"))
 
     def update(self):
         self.menuManager.curMenu.update()
+        self.menuRenderer.update()
 
     def render(self):
         self.menuRenderer.renderMenu(self.menuManager.curMenu)
@@ -225,7 +250,7 @@ class PauseState(State):
                     self.stateManager.switchState(self.stateManager.GAMESTATE)
 
     def update(self):
-        pass
+        self.pauseRenderer.update()
 
     def render(self):
         self.stateManager.getGameState().render()

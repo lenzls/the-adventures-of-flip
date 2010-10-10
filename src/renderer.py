@@ -6,6 +6,7 @@ Created on 07.07.2009
 
 from util.vector import Vector
 from util.dataStorage.rendering import Sprite
+from util.options import Options 
 import util.constants as constants
 import pygame
 import os
@@ -18,18 +19,26 @@ class Renderer(object):
         self.gridFont = pygame.font.Font(os.path.join('..','data','courier_new.ttf'),15)
         
         self.fades = self.Fades(self.screen)
+        
+        self.resolution = Options().getOption("RESOLUTION")
 
     class Fades(object):
         
         def __init__(self, screen):
             self.screen = screen
+            
+            self.resolution = Options().getOption("RESOLUTION")
+        
+        def update(self):
+            if self.resolution != Options().getOption("RESOLUTION"):
+                self.resolution = Options().getOption("RESOLUTION")
         
         def renderFade1(self, string):
             '''
                 kind of "pulsing"
             '''
-
-            bg = pygame.Surface(constants.RESOLUTION)
+            
+            bg = pygame.Surface(self.resolution)
             bg.fill((0,0,0))
 
             font = pygame.font.Font(os.path.join('..','data','courier_new.ttf'),50)
@@ -38,13 +47,13 @@ class Renderer(object):
             for i in range(0,255,5):
                 self.screen.blit(bg, (0,0))
                 writing.set_alpha(i)
-                self.screen.blit(writing,((constants.RESOLUTION[0]//2 - writing.get_width()//2), (constants.RESOLUTION[1]//2 - writing.get_height()//2)))
+                self.screen.blit(writing,((self.resolution[0]//2 - writing.get_width()//2), (self.resolution[1]//2 - writing.get_height()//2)))
                 pygame.display.update()
                 pygame.time.wait(30)
             for i in range(255,0,-5):
                 self.screen.blit(bg, (0,0))
                 writing.set_alpha(i)
-                self.screen.blit(writing,((constants.RESOLUTION[0]//2 - writing.get_width()//2), (constants.RESOLUTION[1]//2 - writing.get_height()//2)))
+                self.screen.blit(writing,((self.resolution[0]//2 - writing.get_width()//2), (self.resolution[1]//2 - writing.get_height()//2)))
                 pygame.display.update()
                 pygame.time.wait(20)
     
@@ -52,7 +61,7 @@ class Renderer(object):
             self.renderFade1(levelName)
 
             # have fun thing:
-            bg = pygame.Surface(constants.RESOLUTION)
+            bg = pygame.Surface(self.resolution)
             bg.fill((0,0,0))
 
             font = pygame.font.Font(os.path.join('..','data','courier_new.ttf'),50)
@@ -62,7 +71,7 @@ class Renderer(object):
             for i in range(1,4,1):
                 self.screen.blit(bg, (0,0))
                 writing = pygame.transform.scale(writing, (writingRes[0]*i, writingRes[1]*i))
-                self.screen.blit(writing,((constants.RESOLUTION[0]//2 - writing.get_width()//2), (constants.RESOLUTION[1]//2 - writing.get_height()//2)))
+                self.screen.blit(writing,((self.resolution[0]//2 - writing.get_width()//2), (self.resolution[1]//2 - writing.get_height()//2)))
                 pygame.display.update()
                 pygame.time.wait(100)
             pygame.time.wait(2000)
@@ -77,8 +86,8 @@ class GameRenderer(Renderer):
         self.dialogFont = pygame.font.Font(os.path.join('..','data','courier_new.ttf'),15)
         self.dialogBackground =  pygame.Surface((400, 100))
         self.dialogBackground.fill((155,155,155))
-        
-        self.blackBar = pygame.Surface((constants.RESOLUTION[0], 25))
+
+        self.blackBar = pygame.Surface((self.resolution[0], 25))
 
     def reset(self):
         self.resetSpriteList()
@@ -99,6 +108,9 @@ class GameRenderer(Renderer):
         self.spriteList = [sprite for sprite in self.spriteList if sprite.entity.isAlive()]
         
     def update(self, level):
+        if self.resolution != Options().getOption("RESOLUTION"):
+            self.resolution = Options().getOption("RESOLUTION")
+        self.fades.update()
         self.updateCamera(level.player)
         self.updateSpriteList()
         self.updateBg(level)
@@ -122,7 +134,7 @@ class GameRenderer(Renderer):
     def renderBlackBars(self):
         '''black bars for cutscenes'''
         self.screen.blit(self.blackBar, (0,0))
-        self.screen.blit(self.blackBar, (0, constants.RESOLUTION[1]- self.blackBar.get_height()))
+        self.screen.blit(self.blackBar, (0, self.resolution[1]- self.blackBar.get_height()))
 
     def renderSprites(self):
         for sprite in self.spriteList:
@@ -131,12 +143,12 @@ class GameRenderer(Renderer):
     def renderGrid(self, map):
         # To show the "tilegrid" change the step to 32
         for x in range(0, map.getDimensions()[0]*constants.TILESIZE,32):
-            pygame.draw.line(self.screen,[255,0,255],(x-self.camera[0],0),(x-self.camera[0],constants.RESOLUTION[1]))
+            pygame.draw.line(self.screen,[255,0,255],(x-self.camera[0],0),(x-self.camera[0],self.resolution[1]))
             surface = self.gridFont.render(str(x),1,[255,0,255])
             self.screen.blit(surface,((x+2)-self.camera[0],20))
         
         for y in range(0, map.getDimensions()[1]*constants.TILESIZE,32):
-            pygame.draw.line(self.screen,[255,0,255],(0,y-self.camera[1]),(constants.RESOLUTION[0],y-self.camera[1]))
+            pygame.draw.line(self.screen,[255,0,255],(0,y-self.camera[1]),(self.resolution[0],y-self.camera[1]))
             surface = self.gridFont.render(str(y),1,[255,0,255])
             self.screen.blit(surface,(20,(y+2)-self.camera[1]))
 
@@ -146,9 +158,9 @@ class GameRenderer(Renderer):
                              : 1 => Layer2
         '''
         for y in range(max(self.camera[1] // constants.TILESIZE, 0), 
-                       min(map.getDimensions()[1], (self.camera[1] + constants.RESOLUTION[1]) // constants.TILESIZE + 1)):
+                       min(map.getDimensions()[1], (self.camera[1] + self.resolution[1]) // constants.TILESIZE + 1)):
             for x in range(max(self.camera[0] // constants.TILESIZE, 0), 
-                           min(map.getDimensions()[0], (self.camera[0] + constants.RESOLUTION[0]) // constants.TILESIZE + 1)):
+                           min(map.getDimensions()[0], (self.camera[0] + self.resolution[0]) // constants.TILESIZE + 1)):
                 if map.getMapGrid()[layerIndex][x][y] != 0:
                     self.screen.blit(map.getTileGraphic(layerIndex,Vector(x,y)), (x*constants.TILESIZE - self.camera[0],y*constants.TILESIZE - self.camera[1]))
 
@@ -161,7 +173,7 @@ class GameRenderer(Renderer):
                              (0, ((map.getDimensions()[1]*constants.TILESIZE) - bgLayer.getDimensions()[1]) - self.camera[1]), 
                              area=pygame.Rect(bgLayer.getDimensions()[0]-bgLayer.getScrollPosition()[0],0,bgLayer.getDimensions()[0],bgLayer.getDimensions()[1]))
 
-            for i in range(bgLayer.getNeededGraphics()+1):
+            for i in range(bgLayer.getNeededGraphics()+2):
                 self.screen.blit(bgLayer.getGraphic(), 
                              (bgLayer.getScrollPosition()[0] + i*bgLayer.getDimensions()[0], ((map.getDimensions()[1]*constants.TILESIZE) - bgLayer.getDimensions()[1]) - self.camera[1]), 
                              area=pygame.Rect(0,0,bgLayer.getDimensions()[0],bgLayer.getDimensions()[1]))
@@ -189,31 +201,31 @@ class GameRenderer(Renderer):
 
         cameraOffset = Vector(0,0)
 
-        horiBorder = constants.RESOLUTION[0] // 5
-        vertiBorder = constants.RESOLUTION[1] // 5
+        horiBorder = self.resolution[0] // 5
+        vertiBorder = self.resolution[1] // 5
 
         playerPos = playerInstance.getPosition()
 
-        if (playerPos[0] - self.camera[0]) > (constants.RESOLUTION[0] - horiBorder):
-            cameraOffset +=  Vector((playerPos[0] - self.camera[0]) - (constants.RESOLUTION[0] - horiBorder),cameraOffset[1])
+        if (playerPos[0] - self.camera[0]) > (self.resolution[0] - horiBorder):
+            cameraOffset +=  Vector((playerPos[0] - self.camera[0]) - (self.resolution[0] - horiBorder),cameraOffset[1])
         elif (playerPos[0] - self.camera[0]) < (horiBorder):
             cameraOffset -=  Vector((horiBorder) - (playerPos[0] - self.camera[0]),cameraOffset[1])
 
         if (playerPos[1] - self.camera[1]) < (vertiBorder):
             cameraOffset -=  Vector(cameraOffset[0],(horiBorder) - (playerPos[1] - self.camera[1]))
-        elif (playerPos[1] - self.camera[1]) > (constants.RESOLUTION[1] - vertiBorder):
-            cameraOffset +=  Vector(cameraOffset[0],(playerPos[1] - self.camera[1]) - (constants.RESOLUTION[1] - vertiBorder))
+        elif (playerPos[1] - self.camera[1]) > (self.resolution[1] - vertiBorder):
+            cameraOffset +=  Vector(cameraOffset[0],(playerPos[1] - self.camera[1]) - (self.resolution[1] - vertiBorder))
         self.camera += cameraOffset
 
         if playerPos[0] < horiBorder:
             self.camera = Vector(0, self.camera[1])
         elif playerPos[0] > playerInstance.map.getDimensions()[0]*constants.TILESIZE-horiBorder:
-            self.camera = Vector(playerInstance.map.getDimensions()[0]*constants.TILESIZE-constants.RESOLUTION[0], self.camera[1])
+            self.camera = Vector(playerInstance.map.getDimensions()[0]*constants.TILESIZE-self.resolution[0], self.camera[1])
 
         if playerPos[1] < vertiBorder:
             self.camera = Vector(self.camera[0], 0)
         elif playerPos[1] > playerInstance.map.getDimensions()[1]*constants.TILESIZE-vertiBorder:
-            self.camera = Vector(self.camera[0], playerInstance.map.getDimensions()[1]*constants.TILESIZE-constants.RESOLUTION[1])
+            self.camera = Vector(self.camera[0], playerInstance.map.getDimensions()[1]*constants.TILESIZE-self.resolution[1])
 
     def checkGraphicSizes(self):
         for sprite in self.spriteList:
@@ -223,7 +235,7 @@ class GameRenderer(Renderer):
         interface.render(self.screen)
         
     def renderBubble(self, bubble):
-        bgRect = pygame.Rect( (constants.RESOLUTION[0]-self.dialogBackground.get_width())//2 , (constants.RESOLUTION[1]-self.dialogBackground.get_height())//2 , self.dialogBackground.get_width()  , self.dialogBackground.get_height() )
+        bgRect = pygame.Rect( (self.resolution[0]-self.dialogBackground.get_width())//2 , (self.resolution[1]-self.dialogBackground.get_height())//2 , self.dialogBackground.get_width()  , self.dialogBackground.get_height() )
         padding = [10,5]
         
         self.screen.blit(self.dialogBackground,(bgRect.topleft[0], bgRect.topleft[1]))
@@ -240,32 +252,43 @@ class MenuRenderer(Renderer):
 
         self.itemFont = pygame.font.Font(os.path.join('..','data','courier_new.ttf'),20)
         self.headingFont = pygame.font.Font(os.path.join('..','data','courier_new.ttf'),20)
+        self.headingFont.set_bold(True)
+        self.headingFont.set_underline(True)
 
     def renderMenu(self, menu):
+        self.screen.fill((0,0,0))
         # render background
         self.screen.blit(menu.getBackground(),(0,0))
 
         #render heading
-        self.screen.blit(self.headingFont.render(menu.getHeading(),1,[255,255,255]),(((constants.RESOLUTION[0]//2)-100),100))
+        self.screen.blit(self.headingFont.render(menu.getHeading(),1,[150,255,150]),(((self.resolution[0]//2)-100),100))
 
         # render Items
         y = 150
         for mItem in menu.getMenuItems():
-            self.screen.blit(self.itemFont.render(mItem.getCaption(),1,mItem.getColor()),((constants.RESOLUTION[0]//2)-100, y))
+            self.screen.blit(self.itemFont.render(mItem.getCaption(),1,mItem.getColor()),((self.resolution[0]//2)-100, y))
             y += 50
+            
+    def update(self):
+        if self.resolution != Options().getOption("RESOLUTION"):
+            self.resolution = Options().getOption("RESOLUTION")
 
 class PauseRenderer(Renderer):
     def __init__(self, screen):
         Renderer.__init__(self, screen)
         
-        self.pauseOverlay = pygame.Surface(constants.RESOLUTION, pygame.RLEACCEL)
+        self.pauseOverlay = pygame.Surface(self.resolution, pygame.RLEACCEL)
         self.pauseOverlay.fill((0,0,0))
         self.pauseOverlay.set_alpha(175)
         
         self.pauseFont = pygame.font.Font(os.path.join('..','data','courier_new.ttf'),50)
         self.fontSurface = self.pauseFont.render("Pause!", 1,(175,175,175))
-        self.pauseOverlay.blit(self.fontSurface, ((constants.RESOLUTION[0]//2)-(self.fontSurface.get_width()//2), (constants.RESOLUTION[1]//2)-(self.fontSurface.get_height()//2)))
+        self.pauseOverlay.blit(self.fontSurface, ((self.resolution[0]//2)-(self.fontSurface.get_width()//2), (self.resolution[1]//2)-(self.fontSurface.get_height()//2)))
         
     def renderOverlay(self):
         self.screen.blit(self.pauseOverlay,(0,0))
+    
+    def update(self):
+        if self.resolution != ().getOption("RESOLUTION"):
+            self.resolution = ().getOption("RESOLUTION")
 

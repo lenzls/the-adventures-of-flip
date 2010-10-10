@@ -5,6 +5,8 @@ Created on 26.09.2010
 '''
 from util.events import Event
 import pygame
+import util.constants as constants
+from util.options import Options
 
 class MenuItem():
     def __init__(self, caption, eventType, argDict={}):
@@ -12,16 +14,17 @@ class MenuItem():
         self.eventType = eventType
         self.eventArgs = argDict
        
-        self.color = [0,0,255]
+        self.color = []
+        self.markUnSelected()
         
     def onClick(self):
         Event().raiseCstmEvent(self.eventType, argDict=self.eventArgs)
         
     def markSelected(self):
-        self.color = [255,0,0]
+        self.color = [255,255,255]
         
     def markUnSelected(self):
-        self.color = [0,0,255]
+        self.color = [0,0,0]
         
     def getColor(self):
         return self.color
@@ -50,3 +53,6 @@ class SwitchItem(MenuItem):
     '''
     def __init__(self, caption, eventType, argDict={}):
         MenuItem.__init__(self, caption, eventType, argDict=argDict)
+
+    def getCaption(self):
+        return self.caption + str(Options().getOption(self.eventArgs["option"]))

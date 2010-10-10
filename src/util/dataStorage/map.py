@@ -7,6 +7,7 @@ Created on 13.09.2010
 from util.vector import Vector
 from util.dataStorage.rendering import Image
 import util.constants as constants
+from util.options import Options
 
 class Tile(object):
     def __init__(self, name, type, graphicName, access, dangerous):
@@ -63,7 +64,7 @@ class BgLayer(object):
         self.oldPos = Vector(playerPos[0],playerPos[1])
 
     def _calcGraphicCount(self):
-        self.neededGraphics = constants.RESOLUTION[0] // self.getDimensions()[0]
+        self.neededGraphics = Options().getOption("RESOLUTION")[1] // self.getDimensions()[0]
 
     def getNeededGraphics(self):
         return self.neededGraphics
