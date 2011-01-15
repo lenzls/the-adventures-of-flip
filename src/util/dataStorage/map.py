@@ -64,7 +64,7 @@ class BgLayer(object):
         self.oldPos = Vector(playerPos[0],playerPos[1])
 
     def _calcGraphicCount(self):
-        self.neededGraphics = Options().getOption("RESOLUTION")[1] // self.getDimensions()[0]
+        self.neededGraphics = Options.getOption("RESOLUTION")[1] // self.getDimensions()[0]
 
     def getNeededGraphics(self):
         return self.neededGraphics

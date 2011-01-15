@@ -55,4 +55,4 @@ class SwitchItem(MenuItem):
         MenuItem.__init__(self, caption, eventType, argDict=argDict)
 
     def getCaption(self):
-        return self.caption + str(Options().getOption(self.eventArgs["option"]))
+        return self.caption + str(Options.getOption(self.eventArgs["option"]))

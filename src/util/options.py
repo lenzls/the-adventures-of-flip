@@ -17,8 +17,10 @@ class Options(object):
 #        self.isSound = kwargs["ISSOUND"]
 #        self.isDebug = kwargs["ISDEBUG"]
 
-    def getOption(self, keyString):
+    @classmethod
+    def getOption(Options, keyString):
         return Options.options[keyString]
     
-    def setOption(self, keyString, newVal):
+    @classmethod
+    def setOption(Options, keyString, newVal):
         Options.options[keyString] = newVal

@@ -59,7 +59,7 @@ class Item(object):
             elif infoNode.nodeName == 'jumpSound':
                 for cNode in infoNode.childNodes:
                     if cNode.nodeName == "soundFile":
-                        self.jumpSound = ressourceLoader.RessourceLoader().load_sound(str(cNode.firstChild.data))
+                        self.jumpSound = ressourceLoader.RessourceLoader.load_sound(str(cNode.firstChild.data))
 
             elif infoNode.nodeName == 'sprite':
                 for animationNode in infoNode.childNodes:

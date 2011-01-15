@@ -7,7 +7,8 @@ class RessourceLoader():
 	def __init__(self):
 		pass
 
-	def load_graphic(self, filename):
+	@classmethod
+	def load_graphic(RessourceLoader, filename):
 
 		path = os.path.join('..', 'data', 'gfx',  filename)
 		try:
@@ -18,7 +19,8 @@ class RessourceLoader():
 
 		return RessourceLoader.graphicDict[filename]
 
-	def load_sound(self, filename):
+	@classmethod
+	def load_sound(RessourceLoader, filename):
 		path = os.path.join('..', 'data', 'sfx', filename)
 		try:
 			sound_object = pygame.mixer.Sound(path)

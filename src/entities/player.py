@@ -63,7 +63,7 @@ class Player():
             elif infoNode.nodeName == 'jumpSound':
                 for cNode in infoNode.childNodes:
                     if cNode.nodeName == "soundFile":
-                        self.jumpSound = ressourceLoader.RessourceLoader().load_sound(str(cNode.firstChild.data))
+                        self.jumpSound = ressourceLoader.RessourceLoader.load_sound(str(cNode.firstChild.data))
 
             elif infoNode.nodeName == 'sprite':
                 for animationNode in infoNode.childNodes:
@@ -149,7 +149,7 @@ class Player():
 
     def jump(self):
         if not self.jumplock:
-            if Options().getOption("RESOLUTION"): self.jumpSound.play()
+            if Options.getOption("RESOLUTION"): self.jumpSound.play()
             self.jumplock = True
             self.velocity += self.jumpspeed
 

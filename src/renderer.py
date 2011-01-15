@@ -20,18 +20,18 @@ class Renderer(object):
         
         self.fades = self.Fades(self.screen)
         
-        self.resolution = Options().getOption("RESOLUTION")
+        self.resolution = Options.getOption("RESOLUTION")
 
     class Fades(object):
         
         def __init__(self, screen):
             self.screen = screen
             
-            self.resolution = Options().getOption("RESOLUTION")
+            self.resolution = Options.getOption("RESOLUTION")
         
         def update(self):
-            if self.resolution != Options().getOption("RESOLUTION"):
-                self.resolution = Options().getOption("RESOLUTION")
+            if self.resolution != Options.getOption("RESOLUTION"):
+                self.resolution = Options.getOption("RESOLUTION")
         
         def renderFade1(self, string):
             '''
@@ -108,8 +108,8 @@ class GameRenderer(Renderer):
         self.spriteList = [sprite for sprite in self.spriteList if sprite.entity.isAlive()]
         
     def update(self, level):
-        if self.resolution != Options().getOption("RESOLUTION"):
-            self.resolution = Options().getOption("RESOLUTION")
+        if self.resolution != Options.getOption("RESOLUTION"):
+            self.resolution = Options.getOption("RESOLUTION")
         self.fades.update()
         self.updateCamera(level.player)
         self.updateSpriteList()
@@ -270,8 +270,8 @@ class MenuRenderer(Renderer):
             y += 50
             
     def update(self):
-        if self.resolution != Options().getOption("RESOLUTION"):
-            self.resolution = Options().getOption("RESOLUTION")
+        if self.resolution != Options.getOption("RESOLUTION"):
+            self.resolution = Options.getOption("RESOLUTION")
 
 class PauseRenderer(Renderer):
     def __init__(self, screen):
@@ -289,6 +289,6 @@ class PauseRenderer(Renderer):
         self.screen.blit(self.pauseOverlay,(0,0))
     
     def update(self):
-        if self.resolution != ().getOption("RESOLUTION"):
-            self.resolution = ().getOption("RESOLUTION")
+        if self.resolution != Options.getOption("RESOLUTION"):
+            self.resolution = Options.getOption("RESOLUTION")
 

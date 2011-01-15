@@ -12,7 +12,7 @@ class Opening(object):
 
         pygame.mixer.init()
 
-        letterPlop = ressourceLoader.RessourceLoader().load_sound('letter-plop.wav')
+        letterPlop = ressourceLoader.RessourceLoader.load_sound('letter-plop.wav')
 
     def play(self):
         pass

@@ -78,7 +78,7 @@ class Map(object):
                     if cNode.nodeName == 'backgroundTheme':
                         for ccNode in cNode.childNodes:
                             if ccNode.nodeName == 'soundFile':
-                                self.bgMusic = ressourceLoader.RessourceLoader().load_sound(str(ccNode.firstChild.data.strip()))
+                                self.bgMusic = ressourceLoader.RessourceLoader.load_sound(str(ccNode.firstChild.data.strip()))
 
             #--------mapGrid--------
             elif node.nodeName == 'grid':

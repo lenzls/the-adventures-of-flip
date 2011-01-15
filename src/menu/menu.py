@@ -59,7 +59,7 @@ class MainMenu(Menu):
         from menuManager import MenuManager
 
         Menu.__init__(self)
-        self.background = RessourceLoader().load_graphic("menu_bg_gradient.png")
+        self.background = RessourceLoader.load_graphic("menu_bg_gradient.png")
         self.menuItems = []
         self.heading = "Main menu"
 
@@ -79,7 +79,7 @@ class OptionsMenu(Menu):
 
 
         Menu.__init__(self)
-        self.background = RessourceLoader().load_graphic("menu_bg_gradient.png")
+        self.background = RessourceLoader.load_graphic("menu_bg_gradient.png")
         self.menuItems = []
         self.heading = "options menu"
 
@@ -99,7 +99,7 @@ class TestMenu(Menu):
 
 
         Menu.__init__(self)
-        self.background = RessourceLoader().load_graphic("menu_bg_gradient.png")
+        self.background = RessourceLoader.load_graphic("menu_bg_gradient.png")
         self.menuItems = []
         self.heading = "test menu"
 

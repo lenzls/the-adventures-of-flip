@@ -98,7 +98,7 @@ class Image():
 
         self.dimensions = [0,0];
 
-        self.graphic = ressourceLoader.RessourceLoader().load_graphic(filename)
+        self.graphic = ressourceLoader.RessourceLoader.load_graphic(filename)
 
         self._calcDimensions()
 

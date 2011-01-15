@@ -36,9 +36,9 @@ class StateManager(object):
         pygame.display.set_icon(pygame.image.load(os.path.join('..','data','icon.png')))
 
         if Options().getOption("ISFULLSCR"):
-            self.screen = pygame.display.set_mode(Options().getOption("RESOLUTION"), pygame.FULLSCREEN)
+            self.screen = pygame.display.set_mode(Options.getOption("RESOLUTION"), pygame.FULLSCREEN)
         else:
-            self.screen = pygame.display.set_mode(Options().getOption("RESOLUTION"))
+            self.screen = pygame.display.set_mode(Options.getOption("RESOLUTION"))
 
         self.stateList = []
         self.stateList.append(GameState(self))
@@ -132,7 +132,7 @@ class GameState(State):
                     if not self.levelManager.curLevel.cutSceneState: self.levelManager.curLevel.player.walkStop()
 
             elif event.type == pygame.MOUSEBUTTONDOWN:
-                if Options().getOption("ISDEBUG"): print "The current cursor position is: ", Vector(event.pos[0],event.pos[1])+self.gameRenderer.getCamera()
+                if Options.getOption("ISDEBUG"): print "The current cursor position is: ", Vector(event.pos[0],event.pos[1])+self.gameRenderer.getCamera()
 
             #custom events:
             elif event.type == Event().ACTIVATETRIGGER:
@@ -163,7 +163,7 @@ class GameState(State):
         self.gameRenderer.renderMapLayer(0, self.levelManager.curLevel.map)
         self.gameRenderer.renderSprites()
         self.gameRenderer.renderMapLayer(1, self.levelManager.curLevel.map)
-        if Options().getOption("ISDEBUG"): 
+        if Options.getOption("ISDEBUG"): 
             self.gameRenderer.renderGrid(self.levelManager.curLevel.map)
             self.gameRenderer.renderBoundingBoxes(self.physicManager.colShapeList)
         self.gameRenderer.renderInterface(self.interface)
@@ -210,18 +210,18 @@ class MenuState(State):
             elif event.type == Event().OPTIONSWITCH:
                 itemChanged = False
 
-                if Options().getOption(event.option) == False:
-                    Options().setOption(event.option, True)
+                if Options.getOption(event.option) == False:
+                    Options.setOption(event.option, True)
                     itemChanged = True
-                elif Options().getOption(event.option) == True:
-                    Options().setOption(event.option, False)
+                elif Options.getOption(event.option) == True:
+                    Options.setOption(event.option, False)
                     itemChanged = True
                 if itemChanged:
                     if event.option == "ISFULLSCR":
-                        if Options().getOption("ISFULLSCR"):
-                            self.screen = pygame.display.set_mode(Options().getOption("RESOLUTION"), pygame.FULLSCREEN)
+                        if Options.getOption("ISFULLSCR"):
+                            self.screen = pygame.display.set_mode(Options.getOption("RESOLUTION"), pygame.FULLSCREEN)
                         else:
-                            self.screen = pygame.display.set_mode(Options().getOption("RESOLUTION"))
+                            self.screen = pygame.display.set_mode(Options.getOption("RESOLUTION"))
 
     def update(self):
         self.menuManager.curMenu.update()
