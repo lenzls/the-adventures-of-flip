@@ -19,30 +19,34 @@ class SpeechBubble(object):
     def calcStringList(self):
         #[page[line,line],page[line]]
         stringList = []
-        stringList.append([""]) #add first page
         iRow = 0
         iRowChar = 0
+        iPage = -1
+        
 
-        for char in self.msg:
-            if char == "|":
-                # new Page
-                iRow = 0
-                iRowChar = 0
-                stringList.append([""])
-            else:
-                if iRowChar >= 42:
-                    # new Row
-                    stringList[-1].append("")
-                    iRow += 1
-                    iRowChar = 0
-                    if iRow >= 4:
-                        # new page
+        for item in self.msg.split("|"):
+            #new Page
+            iPage += 1
+            iRow = 0
+            iRowChar = 0
+            stringList.append([""])
+
+            words = item.split()
+            for word in words:
+                if iRowChar + len(word) > 42:
+                    if iRow+1 >= 4:
+                        #new Page
+                        iPage += 1
                         iRow = 0
                         iRowChar = 0
-                        stringList.append([""])      
+                        stringList.append([""])
+                    else:
+                        iRowChar = 0
+                        iRow += 1
+                        stringList[iPage].append("")
+                iRowChar += len(word)+1
+                stringList[iPage][iRow] += word +" "        
 
-                iRowChar +=1
-                stringList[-1][-1] += char
         return stringList
 
     #TODO improve name

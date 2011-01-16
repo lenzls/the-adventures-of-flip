@@ -15,7 +15,7 @@ class ColShape(object):
         self.innerRectsDict = {}
         self.colRectList = []
 
-    def calcOuterRect(self):
+    def _calcOuterRect(self):
         width = 0
         height = 0
         for colRect in self.colRectList:
@@ -27,10 +27,10 @@ class ColShape(object):
 
     def addRect(self, posUpperLeft, dimensions, isBody, isSpike):
         self.colRectList.append(self.ColRect(self, posUpperLeft, dimensions, isBody, isSpike))
-        self.calcOuterRect()
+        self._calcOuterRect()
 
     def getAbsoluteColRectList(self):
-        return [colRect for colRect in self.colRectList]
+        return self.colRectList[:]
 
     def getEntity(self):
         return self.entity
