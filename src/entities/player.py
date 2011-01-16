@@ -149,7 +149,7 @@ class Player():
 
     def jump(self):
         if not self.jumplock:
-            if Options.getOption("RESOLUTION"): self.jumpSound.play()
+            if Options.getOption("ISSOUND"): self.jumpSound.play()
             self.jumplock = True
             self.velocity += self.jumpspeed
 
