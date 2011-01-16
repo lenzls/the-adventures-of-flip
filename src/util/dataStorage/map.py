@@ -45,9 +45,8 @@ class BgLayer(object):
 
         self.oldPos = Vector(0,0)
 
-    def update(self, playerPos):
-
-        deltaPos = playerPos - self.oldPos
+    def update(self, cameraPos):
+        deltaPos = cameraPos - self.oldPos
 
         if deltaPos[0] < 0:
             self.scrollPosition -= self.speed
@@ -57,14 +56,15 @@ class BgLayer(object):
             pass
 
         if self.scrollPosition[0] < 0:
-            self.scrollPosition = Vector(self.getDimensions()[0], 0)
+            self.scrollPosition = Vector(self.scrollPosition[0]+self.getDimensions()[0], 0)
         elif self.scrollPosition[0] > self.getDimensions()[0]:
-            self.scrollPosition = Vector(0, 0)
+            self.scrollPosition = Vector(self.scrollPosition[0]-self.getDimensions()[0], 0)
 
-        self.oldPos = Vector(playerPos[0],playerPos[1])
+        self.oldPos = Vector(cameraPos[0],cameraPos[1])
+
 
     def _calcGraphicCount(self):
-        self.neededGraphics = Options.getOption("RESOLUTION")[1] // self.getDimensions()[0]
+        self.neededGraphics = Options.getOption("RESOLUTION")[0] // self.getDimensions()[0]
 
     def getNeededGraphics(self):
         return self.neededGraphics

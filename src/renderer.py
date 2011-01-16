@@ -189,7 +189,7 @@ class GameRenderer(Renderer):
         '''update method for paralax scrolling'''
 
         for bgLayer in level.map.bgLayers.values():
-            bgLayer.update(level.player.getPosition())
+            bgLayer.update(self.camera)#level.player.getPosition())
 
     def getCamera(self):
         return self.camera
