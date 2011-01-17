@@ -34,6 +34,9 @@ TODO:
 - consistent update routines in whole program for option changes (eg: Fullscr or sound)
 
 changelog:
+### 0.6.0 ###
+- added start script
+- some smaller bugfixes
 ### 0.5.9 ###
 - added pause screen
 - added fades
