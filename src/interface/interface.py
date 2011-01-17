@@ -9,12 +9,13 @@ import pygame
 import util.constants as constants
 from dialog import SpeechBubble 
 from util.options import Options
+from util.ressourceLoader import RessourceLoader
 
 class Interface(object):
 
     def __init__(self):
         self.dialogManager = self.DialogManager()
-        self.schriftart = pygame.font.Font(os.path.join('..','data','courier_new.ttf'),15)
+        self.schriftart = RessourceLoader.load_font("courier_new.ttf", 15)
         self.bar = pygame.Surface((Options.getOption("RESOLUTION")[0],17))
         self.bar.fill((130,130,130))
         

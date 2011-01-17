@@ -14,6 +14,7 @@ import renderer
 import util.constants as constants
 from util.events import Event
 from util.options import Options
+from util.ressourceLoader import RessourceLoader
 
 from util.vector import Vector
 
@@ -33,7 +34,7 @@ class StateManager(object):
         Options.options={"RESOLUTION":(800,480), "ISSOUND":True, "ISFULLSCR":False, "ISDEBUG":False}
 
         pygame.display.set_caption("The Adventures of Flip")
-        pygame.display.set_icon(pygame.image.load(os.path.join('..','data','icon.png')))
+        pygame.display.set_icon(pygame.image.load(os.path.join(RessourceLoader.basepath,"data","icon.png")))
 
         if Options().getOption("ISFULLSCR"):
             self.screen = pygame.display.set_mode(Options.getOption("RESOLUTION"), pygame.FULLSCREEN)

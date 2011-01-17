@@ -13,6 +13,7 @@ from pgu import tilevid
 class MapEditor():
 
     def __init__(self):
+        self.basepath = os.path.join(os.path.dirname(__file__), "..")
         #map Vars
         self.name = ""
         self.dimensions = [0,0]
@@ -112,8 +113,8 @@ class MapEditor():
 
     def loadMap(self, mapPath):
         ''' parses the map file '''
-
-        xmlMap = dom.parse(mapPath)
+        basepath = os.path.join(os.path.dirname(__file__), "..","data")
+        xmlMap = dom.parse(os.path.join(basepath,mapPath))
         for node in xmlMap.firstChild.childNodes:
             #--------mapName--------
             if node.nodeName == 'name':
@@ -216,7 +217,8 @@ class MapEditor():
 
     def initNewMap(self):
         self.tiles.clear()
-        file = open('../data/tiles.ini',"r")
+        basepath = os.path.join(os.path.dirname(__file__), "..","data")
+        file = open(os.path.join(basepath,'tiles.ini'),"r")
 
         tileIndex = 0
         tileName = ""
@@ -282,7 +284,7 @@ class MapEditor():
         print "init new map"
     
     def BUTTONloadMap(self,arg):
-        self.loadMap('../data/'+ constants.LOADPATH)
+        self.loadMap(constants.LOADPATH)
 
     def BUTTONapplyOpt(self,arg):
         '''sollte alles gehn bis auf zuerst x erhoehen und dann y verringern'''
@@ -440,7 +442,7 @@ class MapEditor():
         doc.documentElement.appendChild(entityFileElement)
 
         # Ausgeben
-        datei = open(os.path.join('..','data',str(time())+".lxml"), "w")
+        datei = open(os.path.join(self.basepath, 'data',str(time())+".lxml"), "w")
         doc.writexml(datei, "\n", "  ")
         datei.close()
         print "save successfully"
@@ -520,7 +522,7 @@ class MapEditor():
             self.tilesTable.td(self.Lb_curT_type,0,3)
             self.tilesTable.td(gui.Label(self.tiles[self.cur_Tile][1]),1,3)
             self.tilesTable.td(self.Lb_curT_image,0,4)
-            self.tilesTable.td(gui.Image(os.path.join('..', 'data', 'tiles', self.tiles[self.cur_Tile][2])),1,4)
+            self.tilesTable.td(gui.Image(os.path.join(self.basepath, 'data', 'tiles', self.tiles[self.cur_Tile][2])),1,4)
             self.tilesTable.td(self.Lb_curT_access,0,5)
             self.tilesTable.td(gui.Label(self.tiles[self.cur_Tile][3]),1,5)
             self.tilesTable.td(self.Lb_curT_danger,0,6)

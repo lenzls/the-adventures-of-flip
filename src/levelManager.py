@@ -12,6 +12,7 @@ import xml.dom.minidom as dom
 from entities import trigger
 from util.events import Event
 import pygame
+from util.ressourceLoader import RessourceLoader
 
 class LevelManager(object):
     
@@ -87,7 +88,7 @@ class Level(object):
 
     def _loadEntityFile(self, entityFile):
         #durchsucht nur den "Entities"-teil der xml und gibt dann an die entity klasse den "entities-info" baum als parameter mit
-        xmlEntityMap = dom.parse('../data/level/'+entityFile)
+        xmlEntityMap = dom.parse(RessourceLoader.getCorrectLevelPath(entityFile))
         entityInfoTrees = {}    #{name, infoTreeNode}
         for node in xmlEntityMap.firstChild.childNodes:
             if node.nodeName == 'entitiySpecification':

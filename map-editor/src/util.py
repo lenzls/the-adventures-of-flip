@@ -8,7 +8,8 @@ import pygame
 import os
 
 def load_tile(filename):
-    path = os.path.join('..', 'data', 'tiles',  filename)
+    basepath = os.path.join(os.path.dirname(__file__), "..")
+    path = os.path.join(basepath, 'data', 'tiles',  filename)
     try:
         surface = pygame.image.load(path)
     except:
@@ -17,7 +18,8 @@ def load_tile(filename):
     return surface.convert_alpha()
 
 def load_sound(filename):
-    path = os.path.join('..', 'data', 'sfx', filename)
+    basepath = os.path.join(os.path.dirname(__file__), "..")
+    path = os.path.join(basepath, 'data', 'sfx', filename)
     try:
         sound_object = pygame.mixer.Sound(path)
     except:

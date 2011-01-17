@@ -6,7 +6,8 @@ Created on 07.07.2009
 
 from util.dataStorage.map import Tile, BgLayer
 import xml.dom.minidom as minidom
-from util import ressourceLoader
+
+from util.ressourceLoader import RessourceLoader
 
 class Map(object):
 
@@ -25,7 +26,7 @@ class Map(object):
         self._loadMapFile(self.mapFilePath)
 
     def _loadMapFile(self, mapFile):
-        xmlMapTree = minidom.parse('../data/level/'+mapFile)
+        xmlMapTree = minidom.parse(RessourceLoader.getCorrectLevelPath(mapFile))
         docRoot = xmlMapTree.firstChild
 
         for node in docRoot.childNodes:
@@ -78,7 +79,7 @@ class Map(object):
                     if cNode.nodeName == 'backgroundTheme':
                         for ccNode in cNode.childNodes:
                             if ccNode.nodeName == 'soundFile':
-                                self.bgMusic = ressourceLoader.RessourceLoader.load_sound(str(ccNode.firstChild.data.strip()))
+                                self.bgMusic = RessourceLoader.load_sound(str(ccNode.firstChild.data.strip()))
 
             #--------mapGrid--------
             elif node.nodeName == 'grid':

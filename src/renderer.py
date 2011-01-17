@@ -10,13 +10,14 @@ from util.options import Options
 import util.constants as constants
 import pygame
 import os
+from util.ressourceLoader import RessourceLoader
 
 class Renderer(object):
 
     def __init__(self, screen):
         self.screen = screen
         
-        self.gridFont = pygame.font.Font(os.path.join('..','data','courier_new.ttf'),15)
+        self.gridFont = RessourceLoader.load_font('courier_new.ttf',15)
         
         self.fades = self.Fades(self.screen)
         
@@ -41,7 +42,7 @@ class Renderer(object):
             bg = pygame.Surface(self.resolution)
             bg.fill((0,0,0))
 
-            font = pygame.font.Font(os.path.join('..','data','courier_new.ttf'),50)
+            font = RessourceLoader.load_font('courier_new.ttf',50)
             writing = font.render(string,1,(255,255,255),(0,0,0))
 
             for i in range(0,255,5):
@@ -64,7 +65,7 @@ class Renderer(object):
             bg = pygame.Surface(self.resolution)
             bg.fill((0,0,0))
 
-            font = pygame.font.Font(os.path.join('..','data','courier_new.ttf'),50)
+            font = RessourceLoader.load_font('courier_new.ttf',50)
             writing = font.render("Have Fun!",1,(255,255,255),(0,0,0))
             writingRes = (writing.get_width(), writing.get_height())
 
@@ -83,7 +84,7 @@ class GameRenderer(Renderer):
         self.spriteList = []
         self.camera = Vector(0,0)
         
-        self.dialogFont = pygame.font.Font(os.path.join('..','data','courier_new.ttf'),15)
+        self.dialogFont = RessourceLoader.load_font('courier_new.ttf',15)
         self.dialogBackground =  pygame.Surface((400, 100))
         self.dialogBackground.fill((155,155,155))
 
@@ -250,8 +251,8 @@ class MenuRenderer(Renderer):
     def __init__(self, screen):
         Renderer.__init__(self, screen)
 
-        self.itemFont = pygame.font.Font(os.path.join('..','data','courier_new.ttf'),20)
-        self.headingFont = pygame.font.Font(os.path.join('..','data','courier_new.ttf'),20)
+        self.itemFont = RessourceLoader.load_font('courier_new.ttf',20)
+        self.headingFont = RessourceLoader.load_font('courier_new.ttf',20)
         self.headingFont.set_bold(True)
         self.headingFont.set_underline(True)
 
@@ -281,7 +282,7 @@ class PauseRenderer(Renderer):
         self.pauseOverlay.fill((0,0,0))
         self.pauseOverlay.set_alpha(175)
         
-        self.pauseFont = pygame.font.Font(os.path.join('..','data','courier_new.ttf'),50)
+        self.pauseFont = RessourceLoader.load_font('courier_new.ttf',50)
         self.fontSurface = self.pauseFont.render("Pause!", 1,(175,175,175))
         self.pauseOverlay.blit(self.fontSurface, ((self.resolution[0]//2)-(self.fontSurface.get_width()//2), (self.resolution[1]//2)-(self.fontSurface.get_height()//2)))
         
