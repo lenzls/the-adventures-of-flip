@@ -46,7 +46,7 @@
         door
       </type>
       <graphic>
-        tile_tab.png
+        tile_marblebeigedoor.png
       </graphic>
       <accessibility>
         false
@@ -6633,6 +6633,6 @@
     </gridLayer>
   </grid>
   <entityFile>
-    1285970402.43.exml
+    00_intro.exml
   </entityFile>
 </Map>

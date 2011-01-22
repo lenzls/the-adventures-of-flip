@@ -51,11 +51,11 @@
 				<colRect index="0">
 					<posUpperLeft>
 						<horizontal>2</horizontal>
-						<vertical>23</vertical>
+						<vertical>25</vertical>
 					</posUpperLeft>
 					<dimensions>
 						<horizontal>14</horizontal>
-						<vertical>8</vertical>
+						<vertical>6</vertical>
 					</dimensions>
 					<isBody>False</isBody>
 					<isSpike>True</isSpike>
@@ -225,7 +225,7 @@
 					</posUpperLeft>
 					<dimensions>
 						<horizontal>13</horizontal>
-						<vertical>40</vertical>
+						<vertical>13</vertical>
 					</dimensions>
 					<isBody>True</isBody>
 					<isSpike>False</isSpike>
@@ -245,7 +245,7 @@
 					</posUpperLeft>
 					<dimensions>
 						<horizontal>13</horizontal>
-						<vertical>40</vertical>
+						<vertical>13</vertical>
 					</dimensions>
 					<isBody>True</isBody>
 					<isSpike>False</isSpike>
@@ -285,7 +285,7 @@
 					</posUpperLeft>
 					<dimensions>
 						<horizontal>13</horizontal>
-						<vertical>40</vertical>
+						<vertical>13</vertical>
 					</dimensions>
 					<isBody>True</isBody>
 					<isSpike>False</isSpike>
@@ -305,7 +305,7 @@
 					</posUpperLeft>
 					<dimensions>
 						<horizontal>13</horizontal>
-						<vertical>40</vertical>
+						<vertical>13</vertical>
 					</dimensions>
 					<isBody>True</isBody>
 					<isSpike>False</isSpike>
@@ -325,27 +325,7 @@
 					</posUpperLeft>
 					<dimensions>
 						<horizontal>13</horizontal>
-						<vertical>40</vertical>
-					</dimensions>
-					<isBody>True</isBody>
-					<isSpike>False</isSpike>
-				</colRect>
-			</colShape>
-		</entitySpec>
-		<entitySpec type="t_moveJump">
-			<points>5</points>
-			<life>10</life>
-			<movespeed>0</movespeed>
-			<jumpspeed>0</jumpspeed>
-			<colShape>
-				<colRect index="0">
-					<posUpperLeft>
-						<horizontal>0</horizontal>
-						<vertical>0</vertical>
-					</posUpperLeft>
-					<dimensions>
-						<horizontal>13</horizontal>
-						<vertical>40</vertical>
+						<vertical>13</vertical>
 					</dimensions>
 					<isBody>True</isBody>
 					<isSpike>False</isSpike>
@@ -365,7 +345,7 @@
 					</posUpperLeft>
 					<dimensions>
 						<horizontal>13</horizontal>
-						<vertical>40</vertical>
+						<vertical>13</vertical>
 					</dimensions>
 					<isBody>True</isBody>
 					<isSpike>False</isSpike>
@@ -384,36 +364,8 @@
 						<vertical>0</vertical>
 					</posUpperLeft>
 					<dimensions>
-						<horizontal>13</horizontal>
-						<vertical>40</vertical>
-					</dimensions>
-					<isBody>True</isBody>
-					<isSpike>False</isSpike>
-				</colRect>
-			</colShape>
-		</entitySpec>
-		<entitySpec type="coin">
-			<points>25</points>
-			<life>10</life>
-			<movespeed>0</movespeed>
-			<jumpspeed>0</jumpspeed>
-			<sprite>
-				<animation index="0">
-					<type>idle</type>
-					<image index="0">
-						<graphic>item_coin.png</graphic>
-					</image>
-				</animation>
-			</sprite>
-			<colShape>
-				<colRect index="0">
-					<posUpperLeft>
-						<horizontal>0</horizontal>
-						<vertical>0</vertical>
-					</posUpperLeft>
-					<dimensions>
-						<horizontal>20</horizontal>
-						<vertical>20</vertical>
+						<horizontal>32</horizontal>
+						<vertical>32</vertical>
 					</dimensions>
 					<isBody>True</isBody>
 					<isSpike>False</isSpike>
@@ -424,8 +376,14 @@
 	<entities>
 		<absEntity type="player" name="player">
 			<position>
-				<horizontal>10</horizontal>
+				<horizontal>60</horizontal>
 				<vertical>50</vertical>
+			</position>
+		</absEntity>
+		<absEntity type="t_finishLvl" name="finisher">
+			<position>
+				<horizontal>2272</horizontal>
+				<vertical>416</vertical>
 			</position>
 		</absEntity>
 	</entities>

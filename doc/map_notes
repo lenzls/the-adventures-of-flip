@@ -1,0 +1,5 @@
+background:
+	groesse der hintergrundbilder sind vollkommen egal. 
+		horizontal <800px werden einfach mehrfach ausgegeben ("multipliziert")
+		horizontal >800px werden korrekt gescrollt
+		vertikal fangen immer am unteren rand des levels an, egal wie hoch sie sind. (=> kann sein das oben ein schwarzer raum entsteht, weil die bilder nicht hoch genug sind)

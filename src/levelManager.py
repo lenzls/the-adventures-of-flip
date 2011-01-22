@@ -29,9 +29,9 @@ class LevelManager(object):
         self.levelPathList = []
         self.curLevelC = 0
         self.curLevel = None
-        self._addLevelPath('old1285970402.43.lxml')
-        self._addLevelPath('1284743568.37.lxml')
-        self._addLevelPath('1286014149.83.lxml')
+        self._addLevelPath('00_intro.lxml')
+        self._addLevelPath('02_backgroundTest2.lxml')
+        self._addLevelPath('03_newspec.lxml')
 
     def _addLevelPath(self, mapPath):
         self.levelPathList.append(mapPath)
@@ -76,7 +76,6 @@ class Level(object):
         self.entities = []
 
         self.cutSceneState = False
-
         self._loadEntityFile(self.map.entityFilePath)
         
     def startCutScene(self):
@@ -88,6 +87,7 @@ class Level(object):
 
     def _loadEntityFile(self, entityFile):
         #durchsucht nur den "Entities"-teil der xml und gibt dann an die entity klasse den "entities-info" baum als parameter mit
+        print entityFile
         xmlEntityMap = dom.parse(RessourceLoader.getCorrectLevelPath(entityFile))
         entityInfoTrees = {}    #{name, infoTreeNode}
         for node in xmlEntityMap.firstChild.childNodes:
