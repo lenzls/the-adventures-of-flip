@@ -21,14 +21,17 @@ class Interface(object):
         
         self.score = 0
         self.fps = 0
+        self.playLife = 0
 
-    def update(self, score, fps):
+    def update(self, score, fps, life):
         self.score = score
         self.fps = fps
+        self.playLife = life
 
     def render(self, screen):
         screen.blit(self.bar,(0,0))
         screen.blit(self.schriftart.render('Score:' + str(self.score),1,[0,0,0]),(0+20,0))
+        screen.blit(self.schriftart.render('Life:' + str(self.playLife),1,[0,0,0]),(0+120,0))
         screen.blit(self.schriftart.render('FPS:' + str(round(self.fps,2)),1,[0,0,0]),(Options.getOption("RESOLUTION")[0]-100,0))
 
     class DialogManager(object):

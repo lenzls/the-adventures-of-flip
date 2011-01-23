@@ -152,7 +152,7 @@ class GameState(State):
     def update(self):
         self.physicManager.update(self.levelManager.curLevel)
         self.gameRenderer.update(self.levelManager.curLevel)
-        self.interface.update(self.levelManager.curLevel.getPlayer().getScore(), self.stateManager.clock.get_fps())
+        self.interface.update(self.levelManager.curLevel.getPlayer().getScore(), self.stateManager.clock.get_fps(), self.levelManager.curLevel.getPlayer().getLife())
         self.levelManager.update()
 
     def render(self):

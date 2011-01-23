@@ -227,3 +227,6 @@ class Player():
     
     def getScore(self):
         return self.score
+    
+    def getLife(self):
+        return self.life
