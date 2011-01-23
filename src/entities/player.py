@@ -22,7 +22,7 @@ class Player():
         self.map = map
         self.activated = activated
         self.type = 'player'
-        self.life = 0   # 0-100?!
+        self.life = 0 #0-100
         self.score = 0
         self.alive = True
         self.position = Vector(position[0],position[1])
@@ -43,6 +43,9 @@ class Player():
         self._loadInfo(infoTree)
 
         self.sprite.setAni('idle')
+        
+        #includes all objects, that collides at the moment with the player
+        self.collideBusyList = []
 
     def getPosition(self):
         return self.position
@@ -187,7 +190,9 @@ class Player():
 
     def colLose(self, enemy):
         print "Player loses against:", enemy.type
-        self.setDead()
+        self.life -= 10
+        if self.life <= 0:
+            self.setDead()
 
     def setDead(self):
         print 'TooooooooooooooooooooooooooooT'

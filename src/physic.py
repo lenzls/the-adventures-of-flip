@@ -85,30 +85,47 @@ class PhysicManager(object):
                     colShape.entity.mapColWhileMoveLeft(midLeftSide)
 
     def checkPlayerEntityCollision(self):
-        for shapeA in self.colShapeList:
-            if shapeA.entity.type == 'player':
-                for shapeB in self.colShapeList:
-                    if shapeB.entity.type != 'player':
-                        if shapeA.getOuterRect().colliderect(shapeB.getOuterRect()):
-                            #TODO: translate
-                            # both outer rects overlap -> check "genauer"
-                            self.collisionBetween2ColShapes(shapeA, shapeB)
-                return
 
-    def collisionBetween2ColShapes(self, a ,b): #a=player b=enemy        
+        collisionList = []
+        playerShapeLst = [shape for shape in self.colShapeList if shape.entity.type == 'player']
+        if len(playerShapeLst) == 1:
+            playerShape = playerShapeLst[0]
+        else:
+            print"more than one player defined!"
+
+        if playerShape.entity.type == 'player':
+            for shapeB in self.colShapeList:
+                if shapeB.entity.type != 'player':
+                    if playerShape.getOuterRect().colliderect(shapeB.getOuterRect()):
+                        #TODO: translate
+                        # both outer rects overlap -> check "genauer"
+                        self.collisionBetween2ColShapes(playerShape, shapeB)
+                        collisionList.append(shapeB.entity)
+
+        #removes items from players collide list that were not hitten this run
+        for item in playerShape.entity.collideBusyList:
+            if not item in collisionList:
+                playerShape.entity.collideBusyList.remove(item)
+
+    def collisionBetween2ColShapes(self, a ,b): #a=player b=enemy
         for absColRectA in a.getAbsoluteColRectList():
             for absColRectB in b.getAbsoluteColRectList():
                 eventCode = self.collisionBetween2ColRects(absColRectA, absColRectB)
                 if eventCode == 0:
                     continue
-                #player win
-                elif eventCode == 1:
-                    a.entity.colWin(b.entity)
-                    b.entity.colLose(a.entity)
-                #enemy win
-                elif eventCode == 2:
-                    a.entity.colLose(b.entity)
-                    b.entity.colWin(a.entity)
+                else:
+                    if not b.entity in a.entity.collideBusyList:
+                        a.entity.collideBusyList.append(b.entity)
+
+                        #player win
+                        if eventCode == 1:
+                            a.entity.colWin(b.entity)
+                            b.entity.colLose(a.entity)
+                        #enemy win
+                        elif eventCode == 2:
+                            a.entity.colLose(b.entity)
+                            b.entity.colWin(a.entity)
+
 
     def collisionBetween2ColRects(self, a, b):
         if not a.getRect().colliderect(b.getRect()):
