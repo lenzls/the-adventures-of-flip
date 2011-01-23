@@ -8,4 +8,4 @@ RESOLUTION = (930,570)
 RENDER_FPS = 100
 LOGIC_FPS  = 40
 TILESIZE   = 32
-LOADPATH   = "backgroundTest2.lxml"
+LOADPATH   = "02_backgroundTest2.lxml"

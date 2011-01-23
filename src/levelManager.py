@@ -30,8 +30,9 @@ class LevelManager(object):
         self.curLevelC = 0
         self.curLevel = None
         self._addLevelPath('00_intro.lxml')
-        self._addLevelPath('02_backgroundTest2.lxml')
         self._addLevelPath('03_newspec.lxml')
+        self._addLevelPath('04_backgroundTest2MID.lxml')
+        self._addLevelPath('verticalScrollTest.lxml')
 
     def _addLevelPath(self, mapPath):
         self.levelPathList.append(mapPath)

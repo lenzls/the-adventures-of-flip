@@ -170,7 +170,7 @@ class GameState(State):
         self.gameRenderer.renderInterface(self.interface)
         
         if self.levelManager.curLevel.cutSceneState: self.gameRenderer.renderBlackBars()
-
+        
 class MenuState(State):
 
     def __init__(self, stateManager):

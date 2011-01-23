@@ -89,6 +89,10 @@ class GameRenderer(Renderer):
         self.dialogBackground.fill((155,155,155))
 
         self.blackBar = pygame.Surface((self.resolution[0], 25))
+        
+        self.horiBorder = self.resolution[0] // 5
+        self.vertiBorder = self.resolution[1] // 5
+
 
     def reset(self):
         self.resetSpriteList()
@@ -202,32 +206,31 @@ class GameRenderer(Renderer):
 
         cameraOffset = Vector(0,0)
 
-        horiBorder = self.resolution[0] // 5
-        vertiBorder = self.resolution[1] // 5
-
         playerPos = playerInstance.getPosition()
 
-        if (playerPos[0] - self.camera[0]) > (self.resolution[0] - horiBorder):
-            cameraOffset +=  Vector((playerPos[0] - self.camera[0]) - (self.resolution[0] - horiBorder),cameraOffset[1])
-        elif (playerPos[0] - self.camera[0]) < (horiBorder):
-            cameraOffset -=  Vector((horiBorder) - (playerPos[0] - self.camera[0]),cameraOffset[1])
+        if (playerPos[0] - self.camera[0]) > (self.resolution[0] - self.horiBorder):
+            cameraOffset +=  Vector((playerPos[0] - self.camera[0]) - (self.resolution[0] - self.horiBorder),0)
+        elif (playerPos[0] - self.camera[0]) < (self.horiBorder):
+            cameraOffset -=  Vector((self.horiBorder) - (playerPos[0] - self.camera[0]),0)
 
-        if (playerPos[1] - self.camera[1]) < (vertiBorder):
-            cameraOffset -=  Vector(cameraOffset[0],(horiBorder) - (playerPos[1] - self.camera[1]))
-        elif (playerPos[1] - self.camera[1]) > (self.resolution[1] - vertiBorder):
-            cameraOffset +=  Vector(cameraOffset[0],(playerPos[1] - self.camera[1]) - (self.resolution[1] - vertiBorder))
+        if (playerPos[1] - self.camera[1]) < (self.vertiBorder):
+            cameraOffset -=  Vector(0,(self.vertiBorder) - (playerPos[1] - self.camera[1]))
+
+        elif (playerPos[1] - self.camera[1]) > (self.resolution[1] - self.vertiBorder):
+            cameraOffset +=  Vector(0,(playerPos[1] - self.camera[1]) - (self.resolution[1] - self.vertiBorder))
+
         self.camera += cameraOffset
 
-        if playerPos[0] < horiBorder:
+        if playerPos[0] < self.horiBorder:
             self.camera = Vector(0, self.camera[1])
-        elif playerPos[0] > playerInstance.map.getDimensions()[0]*constants.TILESIZE-horiBorder:
+        elif playerPos[0] > playerInstance.map.getDimensions()[0]*constants.TILESIZE-self.horiBorder:
             self.camera = Vector(playerInstance.map.getDimensions()[0]*constants.TILESIZE-self.resolution[0], self.camera[1])
 
-        if playerPos[1] < vertiBorder:
+        if playerPos[1] < self.vertiBorder:
             self.camera = Vector(self.camera[0], 0)
-        elif playerPos[1] > playerInstance.map.getDimensions()[1]*constants.TILESIZE-vertiBorder:
+        elif playerPos[1] > playerInstance.map.getDimensions()[1]*constants.TILESIZE-self.vertiBorder:
             self.camera = Vector(self.camera[0], playerInstance.map.getDimensions()[1]*constants.TILESIZE-self.resolution[1])
-
+    
     def checkGraphicSizes(self):
         for sprite in self.spriteList:
             sprite.checkimageSizes()

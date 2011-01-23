@@ -122,12 +122,12 @@ class Player():
             self.dimensions = self.colShape.getOuterDimensions()
     
     def update(self):
+        
         if self.velocity[1] < 15:
             self.velocity += self.physics.gravity
         self.position += self.velocity
         #check if better here or in renderer class
 #        self.sprite.update()
-        self.renderer.updateCamera(self)
 
     def isAlive(self):
         return self.alive
