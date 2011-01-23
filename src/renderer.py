@@ -75,7 +75,7 @@ class Renderer(object):
                 self.screen.blit(writing,((self.resolution[0]//2 - writing.get_width()//2), (self.resolution[1]//2 - writing.get_height()//2)))
                 pygame.display.update()
                 pygame.time.wait(100)
-            pygame.time.wait(2000)
+            pygame.time.wait(1000)
     
 
 class GameRenderer(Renderer):

@@ -16,7 +16,7 @@ from util.ressourceLoader import RessourceLoader
 
 class LevelManager(object):
     
-    FIRSTLEVEL = 0
+    FIRSTLEVEL = 1
 
     def __init__(self, physics, renderer):
         '''
@@ -30,6 +30,7 @@ class LevelManager(object):
         self.curLevelC = 0
         self.curLevel = None
         self._addLevelPath('00_intro.lxml')
+        self._addLevelPath('01_enemyTest.lxml')
         self._addLevelPath('03_newspec.lxml')
         self._addLevelPath('04_backgroundTest2MID.lxml')
         self._addLevelPath('verticalScrollTest.lxml')

@@ -9,6 +9,9 @@ from util.vector import Vector
 import util.util as util
 from util import ressourceLoader
 from util.options import Options
+import pygame
+from util.ressourceLoader import RessourceLoader
+from util.events import Event
 
 class Player():
 
@@ -147,8 +150,8 @@ class Player():
     def getVelocity(self):
         return self.velocity
 
-    def jump(self):
-        if not self.jumplock:
+    def jump(self, ignoreJumpLock = False):
+        if not self.jumplock or ignoreJumpLock:
             if Options.getOption("ISSOUND"): self.jumpSound.play()
             self.jumplock = True
             self.velocity += self.jumpspeed
@@ -178,13 +181,44 @@ class Player():
     def colWin(self, enemy):
         print "Player win against:", enemy.type
         self.score += enemy.getPoints()
+        # no jumping after colliding with triggers!
+        if not enemy.type.startswith("t_"):
+            self.jump(ignoreJumpLock = True)
 
     def colLose(self, enemy):
         print "Player loses against:", enemy.type
+        self.setDead()
 
     def setDead(self):
-        print 'TOoooooooooooooooooooooooooooT'
+        print 'TooooooooooooooooooooooooooooT'
         self.alive = False
+        self.deathAnimation()
+        from game import StateManager
+        Event().raiseCstmEvent(Event.SWITCHSTATE, argDict={"state" : StateManager.MENUSTATE})
+    
+    def deathAnimation(self):
+        olscreen = self.renderer.screen.copy()
         
+        resolution = self.renderer.resolution
+        halfX = resolution[0]/2
+        halfY = resolution[1]/2
+        for i in range(0,halfX,5):
+            font = RessourceLoader.load_font('courier_new.ttf',i)
+            writing = font.render("-1",1,(255,0,0),(0,0,0))
+            
+            areal00 = (0,0,halfX,halfY)
+            areal01 = (0,halfY,halfX,halfY)
+            areal10 = (halfX,0,halfX,halfY)
+            areal11 = (halfX,halfY,halfX,halfY)
+            self.renderer.screen.fill((0,0,0))
+            self.renderer.screen.blit(olscreen, (-i,-i), area=areal00)
+            self.renderer.screen.blit(olscreen, (-i,halfY+i), area=areal01)
+            self.renderer.screen.blit(olscreen, (halfX+i,0-i), area=areal10)
+            self.renderer.screen.blit(olscreen, (halfX+i,halfY+i), area=areal11)
+            self.renderer.screen.blit(writing, (halfX-(writing.get_width()/2),halfY-(writing.get_height()/2)))
+            pygame.display.update()
+            pygame.time.wait(30)
+        pygame.time.wait(1000)
+    
     def getScore(self):
         return self.score
