@@ -208,8 +208,8 @@ class Player():
         halfX = resolution[0]/2
         halfY = resolution[1]/2
         for i in range(0,halfX,5):
-            font = RessourceLoader.load_font('courier_new.ttf',i)
-            writing = font.render("-1",1,(255,0,0),(0,0,0))
+            font = RessourceLoader.load_font('courier_new.ttf',i/2)
+            writing = font.render("Game over!",1,(255,0,0),(0,0,0))
             
             areal00 = (0,0,halfX,halfY)
             areal01 = (0,halfY,halfX,halfY)
