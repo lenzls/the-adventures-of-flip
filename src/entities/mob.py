@@ -209,3 +209,20 @@ class Grob(Mob):
     def mapColWhileMoveLeft(self, tilePos):
         self.walkStop()
         self.walkRight()
+
+class Blob(Mob):
+    def __init__(self, position, map, infoTree, physics, renderer, activated):   #infoTree = xmlBaum
+        Mob.__init__(self, position, map, infoTree, physics, renderer, activated)
+
+        self.walkLeft()
+
+    def ki(self):
+        pass
+
+    def mapColWhileMoveRight(self, tilePos):
+        self.walkStop()
+        self.walkLeft()
+
+    def mapColWhileMoveLeft(self, tilePos):
+        self.walkStop()
+        self.walkRight()

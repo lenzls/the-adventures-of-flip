@@ -132,6 +132,8 @@ class Level(object):
         #Enemies:
         elif absNode.getAttribute('type') == 'grob':
             return mob.Grob(entityPos, self.map, entityInfoTrees['grob'], self.physics, self.renderer, activated)
+        elif absNode.getAttribute('type') == 'blob':
+            return mob.Blob(entityPos, self.map, entityInfoTrees['blob'], self.physics, self.renderer, activated)
         #Items:
         elif absNode.getAttribute('type') == 'coin':
             return item.Coin(entityPos, self.map, entityInfoTrees['coin'], self.physics, self.renderer, activated)

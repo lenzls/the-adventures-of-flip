@@ -192,6 +192,127 @@
 				</colRect>
 			</colShape>
 		</entitySpec>
+		<entitySpec type="blob">
+			<points>100</points>
+			<life>10</life>
+			<movespeed>3</movespeed>
+			<jumpspeed>-13</jumpspeed>
+			<jumpSound>
+				<soundFile>jump.wav</soundFile>
+			</jumpSound>
+			<sprite>
+				<animation index="0">
+					<type>idle</type>
+					<image index="0">
+						<graphic>enemy_blob_normal_right1.png</graphic>
+					</image>
+				</animation>
+				<animation index="1">
+					<type>walkLeft</type>
+					<image index="0">
+						<graphic>enemy_blob_normal_left1.png</graphic>
+					</image>
+					<image index="1">
+						<graphic>enemy_blob_normal_left2.png</graphic>
+					</image>
+					<image index="2">
+						<graphic>enemy_blob_normal_left3.png</graphic>
+					</image>
+					<image index="3">
+						<graphic>enemy_blob_normal_left4.png</graphic>
+					</image>
+					<image index="4">
+						<graphic>enemy_blob_normal_left5.png</graphic>
+					</image>
+					<image index="5">
+						<graphic>enemy_blob_normal_left6.png</graphic>
+					</image>
+					<image index="6">
+						<graphic>enemy_blob_normal_left7.png</graphic>
+					</image>
+					<image index="7">
+						<graphic>enemy_blob_normal_left8.png</graphic>
+					</image>
+					<image index="8">
+						<graphic>enemy_blob_normal_left9.png</graphic>
+					</image>
+					<image index="9">
+						<graphic>enemy_blob_normal_left10.png</graphic>
+					</image>
+					<image index="10">
+						<graphic>enemy_blob_normal_left11.png</graphic>
+					</image>
+					<image index="11">
+						<graphic>enemy_blob_normal_left12.png</graphic>
+					</image>
+					<image index="12">
+						<graphic>enemy_blob_normal_left13.png</graphic>
+					</image>
+					<image index="13">
+						<graphic>enemy_blob_normal_left14.png</graphic>
+					</image>
+				</animation>
+				<animation index="2">
+					<type>walkRight</type>
+					<image index="0">
+						<graphic>enemy_blob_normal_right1.png</graphic>
+					</image>
+					<image index="1">
+						<graphic>enemy_blob_normal_right2.png</graphic>
+					</image>
+					<image index="2">
+						<graphic>enemy_blob_normal_right3.png</graphic>
+					</image>
+					<image index="3">
+						<graphic>enemy_blob_normal_right4.png</graphic>
+					</image>
+					<image index="4">
+						<graphic>enemy_blob_normal_right5.png</graphic>
+					</image>
+					<image index="5">
+						<graphic>enemy_blob_normal_right6.png</graphic>
+					</image>
+					<image index="6">
+						<graphic>enemy_blob_normal_right7.png</graphic>
+					</image>
+					<image index="7">
+						<graphic>enemy_blob_normal_right8.png</graphic>
+					</image>
+					<image index="8">
+						<graphic>enemy_blob_normal_right9.png</graphic>
+					</image>
+					<image index="9">
+						<graphic>enemy_blob_normal_right10.png</graphic>
+					</image>
+					<image index="10">
+						<graphic>enemy_blob_normal_right11.png</graphic>
+					</image>
+					<image index="11">
+						<graphic>enemy_blob_normal_right12.png</graphic>
+					</image>
+					<image index="12">
+						<graphic>enemy_blob_normal_right13.png</graphic>
+					</image>
+					<image index="13">
+						<graphic>enemy_blob_normal_right14.png</graphic>
+					</image>
+				</animation>
+			</sprite>
+			<colShape>
+				<colRect index="0">
+					<posUpperLeft>
+						<horizontal>0</horizontal>
+						<vertical>0</vertical>
+					</posUpperLeft>
+					<dimensions>
+						<horizontal>32</horizontal>
+						<vertical>37</vertical>
+					</dimensions>
+					<isBody>True</isBody>
+					<isSpike>False</isSpike>
+				</colRect>
+			</colShape>
+		</entitySpec>
 		<entitySpec type="t_moveLeft">
 			<points>22</points>
 			<life>10</life>
@@ -391,7 +512,7 @@
 				<horizontal>513</horizontal>
 				<vertical>66</vertical>
 			</position>
-			<newEntity type="grob" name="grob-2">
+			<newEntity type="blob" name="blob-1">
 				<position>
 					<horizontal>354</horizontal>
 					<vertical>68</vertical>
