@@ -31,6 +31,8 @@ class Player():
         self.movespeed = None   #util.Vector(3,0)
         self.jumpspeed = None   #util.Vector(0,-13)
 
+        self.woundingLock = False
+        self.woundTimer = 0
         self.jumplock = False
         self.jumpSound = None
 
@@ -135,6 +137,12 @@ class Player():
         #check if better here or in renderer class
 #        self.sprite.update()
 
+        if self.woundingLock:
+            self.woundTimer += 1
+        if self.woundTimer >= 10:
+            self.woundingLock = False
+            self.woundTimer = 0
+
     def isAlive(self):
         return self.alive
 
@@ -192,9 +200,25 @@ class Player():
 
     def colLose(self, enemy):
         print "Player loses against:", enemy.type
-        self.life -= 10
-        if self.life <= 0:
-            self.setDead()
+        if not self.woundingLock:
+            #player wounded -> recoll
+            self.woundingLock = True
+            if enemy.velocity.x > 0:
+                self.position.x += 10
+            elif enemy.velocity.x < 0:
+                self.position.x -= 10
+            else:   
+                if self.velocity.x > 0:
+                    self.position.x -= 10
+                elif self.velocity.x < 0:
+                    self.position.x += 10
+                else:
+                    self.position.x += 0
+            self.velocity.y = -5
+
+            self.life -= 10
+            if self.life <= 0:
+                self.setDead()
 
     def setDead(self):
         print 'TooooooooooooooooooooooooooooT'
