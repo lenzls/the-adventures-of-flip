@@ -4,8 +4,8 @@
 		<entitySpec type="player">
 			<points>0</points>
 			<life>100</life>
-			<movespeed>3</movespeed>
-			<jumpspeed>-13</jumpspeed>
+			<movespeed>4</movespeed>
+			<jumpspeed>-14</jumpspeed>
 			<jumpSound>
 				<soundFile>jump.wav</soundFile>
 			</jumpSound>
