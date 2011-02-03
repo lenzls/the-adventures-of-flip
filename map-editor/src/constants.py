@@ -8,4 +8,4 @@ RESOLUTION = (930,570)
 RENDER_FPS = 100
 LOGIC_FPS  = 40
 TILESIZE   = 32
-LOADPATH   = "verticalScrollTest.lxml"
+LOADPATH   = "05_jumpTutorial.lxml"

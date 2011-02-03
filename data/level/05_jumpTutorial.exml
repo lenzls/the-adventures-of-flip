@@ -1,0 +1,990 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entityFile>
+	<entitiySpecification>
+		<entitySpec type="player">
+			<points>0</points>
+			<life>100</life>
+			<movespeed>4</movespeed>
+			<jumpspeed>-14</jumpspeed>
+			<jumpSound>
+				<soundFile>jump.wav</soundFile>
+			</jumpSound>
+			<sprite>
+				<animation index="0">
+					<type>idle</type>
+					<image index="0">
+						<graphic>hero_normal_idle.png</graphic>
+					</image>
+				</animation>
+				<animation index="1">
+					<type>walkLeft</type>
+					<image index="0">
+						<graphic>hero_normal_left1.png</graphic>
+					</image>
+					<image index="1">
+						<graphic>hero_normal_left2.png</graphic>
+					</image>
+					<image index="2">
+						<graphic>hero_normal_left3.png</graphic>
+					</image>
+					<image index="3">
+						<graphic>hero_normal_left4.png</graphic>
+					</image>
+				</animation>
+				<animation index="2">
+					<type>walkRight</type>
+					<image index="0">
+						<graphic>hero_normal_right1.png</graphic>
+					</image>
+					<image index="1">
+						<graphic>hero_normal_right2.png</graphic>
+					</image>
+					<image index="2">
+						<graphic>hero_normal_right3.png</graphic>
+					</image>
+					<image index="3">
+						<graphic>hero_normal_right4.png</graphic>
+					</image>
+				</animation>
+			</sprite>
+			<colShape>
+				<colRect index="0">
+					<posUpperLeft>
+						<horizontal>2</horizontal>
+						<vertical>25</vertical>
+					</posUpperLeft>
+					<dimensions>
+						<horizontal>14</horizontal>
+						<vertical>6</vertical>
+					</dimensions>
+					<isBody>False</isBody>
+					<isSpike>True</isSpike>
+				</colRect>
+				<colRect index="1">
+					<posUpperLeft>
+						<horizontal>0</horizontal>
+						<vertical>0</vertical>
+					</posUpperLeft>
+					<dimensions>
+						<horizontal>18</horizontal>
+						<vertical>24</vertical>
+					</dimensions>
+					<isBody>True</isBody>
+					<isSpike>False</isSpike>
+				</colRect>
+			</colShape>
+		</entitySpec>
+		<entitySpec type="grob">
+			<points>100</points>
+			<life>10</life>
+			<movespeed>2</movespeed>
+			<jumpspeed>-13</jumpspeed>
+			<jumpSound>
+				<soundFile>jump.wav</soundFile>
+			</jumpSound>
+			<sprite>
+				<animation index="0">
+					<type>idle</type>
+					<image index="0">
+						<graphic>enemy_grob_normal_idleRight1.png</graphic>
+					</image>
+					<image index="1">
+						<graphic>enemy_grob_normal_idleRight2.png</graphic>
+					</image>
+					<image index="2">
+						<graphic>enemy_grob_normal_idleRight3.png</graphic>
+					</image>
+					<image index="3">
+						<graphic>enemy_grob_normal_idleRight4.png</graphic>
+					</image>
+					<image index="4">
+						<graphic>enemy_grob_normal_idleRight5.png</graphic>
+					</image>
+					<image index="5">
+						<graphic>enemy_grob_normal_idleRight6.png</graphic>
+					</image>
+					<image index="6">
+						<graphic>enemy_grob_normal_idleRight7.png</graphic>
+					</image>
+					<image index="7">
+						<graphic>enemy_grob_normal_idleRight8.png</graphic>
+					</image>
+				</animation>
+				<animation index="1">
+					<type>walkLeft</type>
+					<image index="0">
+						<graphic>enemy_grob_normal_left1.png</graphic>
+					</image>
+					<image index="1">
+						<graphic>enemy_grob_normal_left2.png</graphic>
+					</image>
+					<image index="2">
+						<graphic>enemy_grob_normal_left3.png</graphic>
+					</image>
+					<image index="3">
+						<graphic>enemy_grob_normal_left4.png</graphic>
+					</image>
+					<image index="4">
+						<graphic>enemy_grob_normal_left5.png</graphic>
+					</image>
+					<image index="5">
+						<graphic>enemy_grob_normal_left6.png</graphic>
+					</image>
+					<image index="6">
+						<graphic>enemy_grob_normal_left7.png</graphic>
+					</image>
+					<image index="7">
+						<graphic>enemy_grob_normal_left8.png</graphic>
+					</image>
+				</animation>
+				<animation index="2">
+					<type>walkRight</type>
+					<image index="0">
+						<graphic>enemy_grob_normal_right1.png</graphic>
+					</image>
+					<image index="1">
+						<graphic>enemy_grob_normal_right2.png</graphic>
+					</image>
+					<image index="2">
+						<graphic>enemy_grob_normal_right3.png</graphic>
+					</image>
+					<image index="3">
+						<graphic>enemy_grob_normal_right4.png</graphic>
+					</image>
+					<image index="4">
+						<graphic>enemy_grob_normal_right5.png</graphic>
+					</image>
+					<image index="5">
+						<graphic>enemy_grob_normal_right6.png</graphic>
+					</image>
+					<image index="6">
+						<graphic>enemy_grob_normal_right7.png</graphic>
+					</image>
+					<image index="7">
+						<graphic>enemy_grob_normal_right8.png</graphic>
+					</image>
+				</animation>
+			</sprite>
+			<colShape>
+				<colRect index="0">
+					<posUpperLeft>
+						<horizontal>6</horizontal>
+						<vertical>2</vertical>
+					</posUpperLeft>
+					<dimensions>
+						<horizontal>13</horizontal>
+						<vertical>13</vertical>
+					</dimensions>
+					<isBody>True</isBody>
+					<isSpike>False</isSpike>
+				</colRect>
+				<colRect index="1">
+					<posUpperLeft>
+						<horizontal>0</horizontal>
+						<vertical>15</vertical>
+					</posUpperLeft>
+					<dimensions>
+						<horizontal>24</horizontal>
+						<vertical>14</vertical>
+					</dimensions>
+					<isBody>False</isBody>
+					<isSpike>True</isSpike>
+				</colRect>
+			</colShape>
+		</entitySpec>
+		<entitySpec type="blob">
+			<points>100</points>
+			<life>10</life>
+			<movespeed>2</movespeed>
+			<jumpspeed>-13</jumpspeed>
+			<jumpSound>
+				<soundFile>jump.wav</soundFile>
+			</jumpSound>
+			<sprite>
+				<animation index="0">
+					<type>idle</type>
+					<image index="0">
+						<graphic>enemy_blob_normal_right1.png</graphic>
+					</image>
+				</animation>
+				<animation index="1">
+					<type>walkLeft</type>
+					<image index="0">
+						<graphic>enemy_blob_normal_left1.png</graphic>
+					</image>
+					<image index="1">
+						<graphic>enemy_blob_normal_left2.png</graphic>
+					</image>
+					<image index="2">
+						<graphic>enemy_blob_normal_left3.png</graphic>
+					</image>
+					<image index="3">
+						<graphic>enemy_blob_normal_left4.png</graphic>
+					</image>
+					<image index="4">
+						<graphic>enemy_blob_normal_left5.png</graphic>
+					</image>
+					<image index="5">
+						<graphic>enemy_blob_normal_left6.png</graphic>
+					</image>
+					<image index="6">
+						<graphic>enemy_blob_normal_left7.png</graphic>
+					</image>
+					<image index="7">
+						<graphic>enemy_blob_normal_left8.png</graphic>
+					</image>
+					<image index="8">
+						<graphic>enemy_blob_normal_left9.png</graphic>
+					</image>
+					<image index="9">
+						<graphic>enemy_blob_normal_left10.png</graphic>
+					</image>
+					<image index="10">
+						<graphic>enemy_blob_normal_left11.png</graphic>
+					</image>
+					<image index="11">
+						<graphic>enemy_blob_normal_left12.png</graphic>
+					</image>
+					<image index="12">
+						<graphic>enemy_blob_normal_left13.png</graphic>
+					</image>
+					<image index="13">
+						<graphic>enemy_blob_normal_left14.png</graphic>
+					</image>
+				</animation>
+				<animation index="2">
+					<type>walkRight</type>
+					<image index="0">
+						<graphic>enemy_blob_normal_right1.png</graphic>
+					</image>
+					<image index="1">
+						<graphic>enemy_blob_normal_right2.png</graphic>
+					</image>
+					<image index="2">
+						<graphic>enemy_blob_normal_right3.png</graphic>
+					</image>
+					<image index="3">
+						<graphic>enemy_blob_normal_right4.png</graphic>
+					</image>
+					<image index="4">
+						<graphic>enemy_blob_normal_right5.png</graphic>
+					</image>
+					<image index="5">
+						<graphic>enemy_blob_normal_right6.png</graphic>
+					</image>
+					<image index="6">
+						<graphic>enemy_blob_normal_right7.png</graphic>
+					</image>
+					<image index="7">
+						<graphic>enemy_blob_normal_right8.png</graphic>
+					</image>
+					<image index="8">
+						<graphic>enemy_blob_normal_right9.png</graphic>
+					</image>
+					<image index="9">
+						<graphic>enemy_blob_normal_right10.png</graphic>
+					</image>
+					<image index="10">
+						<graphic>enemy_blob_normal_right11.png</graphic>
+					</image>
+					<image index="11">
+						<graphic>enemy_blob_normal_right12.png</graphic>
+					</image>
+					<image index="12">
+						<graphic>enemy_blob_normal_right13.png</graphic>
+					</image>
+					<image index="13">
+						<graphic>enemy_blob_normal_right14.png</graphic>
+					</image>
+				</animation>
+			</sprite>
+			<colShape>
+				<colRect index="0">
+					<posUpperLeft>
+						<horizontal>3</horizontal>
+						<vertical>3</vertical>
+					</posUpperLeft>
+					<dimensions>
+						<horizontal>26</horizontal>
+						<vertical>17</vertical>
+					</dimensions>
+					<isBody>True</isBody>
+					<isSpike>False</isSpike>
+				</colRect>
+				<colRect index="1">
+					<posUpperLeft>
+						<horizontal>0</horizontal>
+						<vertical>20</vertical>
+					</posUpperLeft>
+					<dimensions>
+						<horizontal>32</horizontal>
+						<vertical>17</vertical>
+					</dimensions>
+					<isBody>False</isBody>
+					<isSpike>True</isSpike>
+				</colRect>
+			</colShape>
+		</entitySpec>
+		<entitySpec type="bug">
+			<points>100</points>
+			<life>10</life>
+			<movespeed>4</movespeed>
+			<jumpspeed>-13</jumpspeed>
+			<jumpSound>
+				<soundFile>jump.wav</soundFile>
+			</jumpSound>
+			<sprite>
+				<animation index="0">
+					<type>idle</type>
+					<image index="0">
+						<graphic>enemy_bugBlue_normal_left1.png</graphic>
+					</image>
+				</animation>
+				<animation index="1">
+					<type>walkLeft</type>
+					<image index="0">
+						<graphic>enemy_bugBlue_normal_left1.png</graphic>
+					</image>
+					<image index="1">
+						<graphic>enemy_bugBlue_normal_left2.png</graphic>
+					</image>
+					<image index="2">
+						<graphic>enemy_bugBlue_normal_left3.png</graphic>
+					</image>
+					<image index="3">
+						<graphic>enemy_bugBlue_normal_left4.png</graphic>
+					</image>
+				</animation>
+				<animation index="2">
+					<type>walkRight</type>
+					<image index="0">
+						<graphic>enemy_bugBlue_normal_right1.png</graphic>
+					</image>
+					<image index="1">
+						<graphic>enemy_bugBlue_normal_right2.png</graphic>
+					</image>
+					<image index="2">
+						<graphic>enemy_bugBlue_normal_right3.png</graphic>
+					</image>
+					<image index="3">
+						<graphic>enemy_bugBlue_normal_right4.png</graphic>
+					</image>
+				</animation>
+			</sprite>
+			<colShape>
+				<colRect index="0">
+					<posUpperLeft>
+						<horizontal>0</horizontal>
+						<vertical>0</vertical>
+					</posUpperLeft>
+					<dimensions>
+						<horizontal>16</horizontal>
+						<vertical>7</vertical>
+					</dimensions>
+					<isBody>True</isBody>
+					<isSpike>False</isSpike>
+				</colRect>
+			</colShape>
+		</entitySpec>
+		<entitySpec type="ant">
+			<points>100</points>
+			<life>10</life>
+			<movespeed>4</movespeed>
+			<jumpspeed>-13</jumpspeed>
+			<jumpSound>
+				<soundFile>jump.wav</soundFile>
+			</jumpSound>
+			<sprite>
+				<animation index="0">
+					<type>idle</type>
+					<image index="0">
+						<graphic>enemy_ant_normal_left1.png</graphic>
+					</image>
+				</animation>
+				<animation index="1">
+					<type>walkLeft</type>
+					<image index="0">
+						<graphic>enemy_ant_normal_left1.png</graphic>
+					</image>
+					<image index="1">
+						<graphic>enemy_ant_normal_left2.png</graphic>
+					</image>
+					<image index="2">
+						<graphic>enemy_ant_normal_left3.png</graphic>
+					</image>
+					<image index="3">
+						<graphic>enemy_ant_normal_left4.png</graphic>
+					</image>
+				</animation>
+				<animation index="2">
+					<type>walkRight</type>
+					<image index="0">
+						<graphic>enemy_ant_normal_right1.png</graphic>
+					</image>
+					<image index="1">
+						<graphic>enemy_ant_normal_right2.png</graphic>
+					</image>
+					<image index="2">
+						<graphic>enemy_ant_normal_right3.png</graphic>
+					</image>
+					<image index="3">
+						<graphic>enemy_ant_normal_right4.png</graphic>
+					</image>
+				</animation>
+			</sprite>
+			<colShape>
+				<colRect index="0">
+					<posUpperLeft>
+						<horizontal>0</horizontal>
+						<vertical>0</vertical>
+					</posUpperLeft>
+					<dimensions>
+						<horizontal>15</horizontal>
+						<vertical>10</vertical>
+					</dimensions>
+					<isBody>True</isBody>
+					<isSpike>False</isSpike>
+				</colRect>
+			</colShape>
+		</entitySpec>
+		<entitySpec type="bat">
+			<points>100</points>
+			<life>10</life>
+			<movespeed>2</movespeed>
+			<jumpspeed>-13</jumpspeed>
+			<jumpSound>
+				<soundFile>jump.wav</soundFile>
+			</jumpSound>
+			<sprite>
+				<animation index="0">
+					<type>idle</type>
+					<image index="0">
+						<graphic>enemy_bat_normal_left1.png</graphic>
+					</image>
+				</animation>
+				<animation index="1">
+					<type>walkLeft</type>
+					<image index="0">
+						<graphic>enemy_bat_normal_left1.png</graphic>
+					</image>
+					<image index="1">
+						<graphic>enemy_bat_normal_left2.png</graphic>
+					</image>
+					<image index="2">
+						<graphic>enemy_bat_normal_left3.png</graphic>
+					</image>
+					<image index="3">
+						<graphic>enemy_bat_normal_left4.png</graphic>
+					</image>
+				</animation>
+				<animation index="2">
+					<type>walkRight</type>
+					<image index="0">
+						<graphic>enemy_bat_normal_right1.png</graphic>
+					</image>
+					<image index="1">
+						<graphic>enemy_bat_normal_right2.png</graphic>
+					</image>
+					<image index="2">
+						<graphic>enemy_bat_normal_right3.png</graphic>
+					</image>
+					<image index="3">
+						<graphic>enemy_bat_normal_right4.png</graphic>
+					</image>
+				</animation>
+			</sprite>
+			<colShape>
+				<colRect index="0">
+					<posUpperLeft>
+						<horizontal>0</horizontal>
+						<vertical>17</vertical>
+					</posUpperLeft>
+					<dimensions>
+						<horizontal>68</horizontal>
+						<vertical>19</vertical>
+					</dimensions>
+					<isBody>True</isBody>
+					<isSpike>False</isSpike>
+				</colRect>
+				<colRect index="1">
+					<posUpperLeft>
+						<horizontal>0</horizontal>
+						<vertical>36</vertical>
+					</posUpperLeft>
+					<dimensions>
+						<horizontal>68</horizontal>
+						<vertical>8</vertical>
+					</dimensions>
+					<isBody>False</isBody>
+					<isSpike>True</isSpike>
+				</colRect>
+				<colRect index="2">
+					<posUpperLeft>
+						<horizontal>0</horizontal>
+						<vertical>44</vertical>
+					</posUpperLeft>
+					<dimensions>
+						<horizontal>68</horizontal>
+						<vertical>7</vertical>
+					</dimensions>
+					<isBody>False</isBody>
+					<isSpike>False</isSpike>
+				</colRect>
+			</colShape>
+		</entitySpec>
+		<entitySpec type="mosquito">
+			<points>100</points>
+			<life>10</life>
+			<movespeed>2</movespeed>
+			<jumpspeed>-13</jumpspeed>
+			<jumpSound>
+				<soundFile>jump.wav</soundFile>
+			</jumpSound>
+			<sprite>
+				<animation index="0">
+					<type>idle</type>
+					<image index="0">
+						<graphic>enemy_mosquito_normal_left1.png</graphic>
+					</image>
+					<image index="1">
+						<graphic>enemy_mosquito_normal_left2.png</graphic>
+					</image>
+					<image index="2">
+						<graphic>enemy_mosquito_normal_left3.png</graphic>
+					</image>
+					<image index="3">
+						<graphic>enemy_mosquito_normal_left4.png</graphic>
+					</image>
+					<image index="4">
+						<graphic>enemy_mosquito_normal_left5.png</graphic>
+					</image>
+					<image index="5">
+						<graphic>enemy_mosquito_normal_left6.png</graphic>
+					</image>
+				</animation>
+				<animation index="1">
+					<type>walkLeft</type>
+					<image index="0">
+						<graphic>enemy_mosquito_normal_left1.png</graphic>
+					</image>
+					<image index="1">
+						<graphic>enemy_mosquito_normal_left2.png</graphic>
+					</image>
+					<image index="2">
+						<graphic>enemy_mosquito_normal_left3.png</graphic>
+					</image>
+					<image index="3">
+						<graphic>enemy_mosquito_normal_left4.png</graphic>
+					</image>
+					<image index="4">
+						<graphic>enemy_mosquito_normal_left5.png</graphic>
+					</image>
+					<image index="5">
+						<graphic>enemy_mosquito_normal_left6.png</graphic>
+					</image>
+				</animation>
+				<animation index="2">
+					<type>walkRight</type>
+					<image index="0">
+						<graphic>enemy_mosquito_normal_left1.png</graphic>
+					</image>
+					<image index="1">
+						<graphic>enemy_mosquito_normal_left2.png</graphic>
+					</image>
+					<image index="2">
+						<graphic>enemy_mosquito_normal_left3.png</graphic>
+					</image>
+					<image index="3">
+						<graphic>enemy_mosquito_normal_left4.png</graphic>
+					</image>
+					<image index="4">
+						<graphic>enemy_mosquito_normal_left5.png</graphic>
+					</image>
+					<image index="5">
+						<graphic>enemy_mosquito_normal_left6.png</graphic>
+					</image>
+				</animation>
+			</sprite>
+			<colShape>
+				<colRect index="0">
+					<posUpperLeft>
+						<horizontal>4</horizontal>
+						<vertical>7</vertical>
+					</posUpperLeft>
+					<dimensions>
+						<horizontal>28</horizontal>
+						<vertical>12</vertical>
+					</dimensions>
+					<isBody>True</isBody>
+					<isSpike>False</isSpike>
+				</colRect>
+				<colRect index="1">
+					<posUpperLeft>
+						<horizontal>0</horizontal>
+						<vertical>19</vertical>
+					</posUpperLeft>
+					<dimensions>
+						<horizontal>36</horizontal>
+						<vertical>7</vertical>
+					</dimensions>
+					<isBody>False</isBody>
+					<isSpike>True</isSpike>
+				</colRect>
+			</colShape>
+		</entitySpec>
+		<entitySpec type="snake">
+			<points>100</points>
+			<life>10</life>
+			<movespeed>2</movespeed>
+			<jumpspeed>-13</jumpspeed>
+			<jumpSound>
+				<soundFile>jump.wav</soundFile>
+			</jumpSound>
+			<sprite>
+				<animation index="0">
+					<type>idle</type>
+					<image index="0">
+						<graphic>enemy_snake_normal_left1.png</graphic>
+					</image>
+				</animation>
+				<animation index="1">
+					<type>walkLeft</type>
+					<image index="0">
+						<graphic>enemy_snake_normal_left1.png</graphic>
+					</image>
+					<image index="1">
+						<graphic>enemy_snake_normal_left2.png</graphic>
+					</image>
+					<image index="2">
+						<graphic>enemy_snake_normal_left3.png</graphic>
+					</image>
+					<image index="3">
+						<graphic>enemy_snake_normal_left4.png</graphic>
+					</image>
+				</animation>
+				<animation index="2">
+					<type>walkRight</type>
+					<image index="0">
+						<graphic>enemy_snake_normal_right1.png</graphic>
+					</image>
+					<image index="1">
+						<graphic>enemy_snake_normal_right2.png</graphic>
+					</image>
+					<image index="2">
+						<graphic>enemy_snake_normal_right3.png</graphic>
+					</image>
+					<image index="3">
+						<graphic>enemy_snake_normal_right4.png</graphic>
+					</image>
+				</animation>
+			</sprite>
+			<colShape>
+				<colRect index="0">
+					<posUpperLeft>
+						<horizontal>0</horizontal>
+						<vertical>0</vertical>
+					</posUpperLeft>
+					<dimensions>
+						<horizontal>23</horizontal>
+						<vertical>36</vertical>
+					</dimensions>
+					<isBody>False</isBody>
+					<isSpike>True</isSpike>
+				</colRect>
+				<colRect index="1">
+					<posUpperLeft>
+						<horizontal>8</horizontal>
+						<vertical>36</vertical>
+					</posUpperLeft>
+					<dimensions>
+						<horizontal>78</horizontal>
+						<vertical>8</vertical>
+					</dimensions>
+					<isBody>True</isBody>
+					<isSpike>False</isSpike>
+				</colRect>
+			</colShape>
+		</entitySpec>
+		<entitySpec type="t_moveLeft">
+			<points>0</points>
+			<life>10</life>
+			<movespeed>0</movespeed>
+			<jumpspeed>0</jumpspeed>
+			<colShape>
+				<colRect index="0">
+					<posUpperLeft>
+						<horizontal>0</horizontal>
+						<vertical>0</vertical>
+					</posUpperLeft>
+					<dimensions>
+						<horizontal>32</horizontal>
+						<vertical>80</vertical>
+					</dimensions>
+					<isBody>True</isBody>
+					<isSpike>False</isSpike>
+				</colRect>
+			</colShape>
+		</entitySpec>
+		<entitySpec type="t_moveRight">
+			<points>0</points>
+			<life>10</life>
+			<movespeed>0</movespeed>
+			<jumpspeed>0</jumpspeed>
+			<colShape>
+				<colRect index="0">
+					<posUpperLeft>
+						<horizontal>0</horizontal>
+						<vertical>0</vertical>
+					</posUpperLeft>
+					<dimensions>
+						<horizontal>32</horizontal>
+						<vertical>80</vertical>
+					</dimensions>
+					<isBody>True</isBody>
+					<isSpike>False</isSpike>
+				</colRect>
+			</colShape>
+		</entitySpec>
+		<entitySpec type="t_printer">
+			<points>33</points>
+			<life>10</life>
+			<movespeed>0</movespeed>
+			<jumpspeed>0</jumpspeed>
+			<colShape>
+				<colRect index="0">
+					<posUpperLeft>
+						<horizontal>0</horizontal>
+						<vertical>0</vertical>
+					</posUpperLeft>
+					<dimensions>
+						<horizontal>13</horizontal>
+						<vertical>13</vertical>
+					</dimensions>
+					<isBody>True</isBody>
+					<isSpike>False</isSpike>
+				</colRect>
+			</colShape>
+		</entitySpec>
+		<entitySpec type="t_createEntity">
+			<points>44</points>
+			<life>10</life>
+			<movespeed>0</movespeed>
+			<jumpspeed>0</jumpspeed>
+			<colShape>
+				<colRect index="0">
+					<posUpperLeft>
+						<horizontal>0</horizontal>
+						<vertical>0</vertical>
+					</posUpperLeft>
+					<dimensions>
+						<horizontal>13</horizontal>
+						<vertical>13</vertical>
+					</dimensions>
+					<isBody>True</isBody>
+					<isSpike>False</isSpike>
+				</colRect>
+			</colShape>
+		</entitySpec>
+		<entitySpec type="t_cutSceneStart">
+			<points>0</points>
+			<life>10</life>
+			<movespeed>0</movespeed>
+			<jumpspeed>0</jumpspeed>
+			<colShape>
+				<colRect index="0">
+					<posUpperLeft>
+						<horizontal>0</horizontal>
+						<vertical>0</vertical>
+					</posUpperLeft>
+					<dimensions>
+						<horizontal>32</horizontal>
+						<vertical>80</vertical>
+					</dimensions>
+					<isBody>True</isBody>
+					<isSpike>False</isSpike>
+				</colRect>
+			</colShape>
+		</entitySpec>
+		<entitySpec type="t_cutSceneEnd">
+			<points>0</points>
+			<life>10</life>
+			<movespeed>0</movespeed>
+			<jumpspeed>0</jumpspeed>
+			<colShape>
+				<colRect index="0">
+					<posUpperLeft>
+						<horizontal>0</horizontal>
+						<vertical>0</vertical>
+					</posUpperLeft>
+					<dimensions>
+						<horizontal>32</horizontal>
+						<vertical>80</vertical>
+					</dimensions>
+					<isBody>True</isBody>
+					<isSpike>False</isSpike>
+				</colRect>
+			</colShape>
+		</entitySpec>
+		<entitySpec type="t_moveStop">
+			<points>0</points>
+			<life>10</life>
+			<movespeed>0</movespeed>
+			<jumpspeed>0</jumpspeed>
+			<colShape>
+				<colRect index="0">
+					<posUpperLeft>
+						<horizontal>0</horizontal>
+						<vertical>0</vertical>
+					</posUpperLeft>
+					<dimensions>
+						<horizontal>32</horizontal>
+						<vertical>80</vertical>
+					</dimensions>
+					<isBody>True</isBody>
+					<isSpike>False</isSpike>
+				</colRect>
+			</colShape>
+		</entitySpec>
+		<entitySpec type="t_createBubble">
+			<points>0</points>
+			<life>10</life>
+			<movespeed>0</movespeed>
+			<jumpspeed>0</jumpspeed>
+			<colShape>
+				<colRect index="0">
+					<posUpperLeft>
+						<horizontal>0</horizontal>
+						<vertical>0</vertical>
+					</posUpperLeft>
+					<dimensions>
+						<horizontal>32</horizontal>
+						<vertical>80</vertical>
+					</dimensions>
+					<isBody>True</isBody>
+					<isSpike>False</isSpike>
+				</colRect>
+			</colShape>
+		</entitySpec>
+		<entitySpec type="t_finishLvl">
+			<points>1000</points>
+			<life>10</life>
+			<movespeed>0</movespeed>
+			<jumpspeed>0</jumpspeed>
+			<colShape>
+				<colRect index="0">
+					<posUpperLeft>
+						<horizontal>0</horizontal>
+						<vertical>0</vertical>
+					</posUpperLeft>
+					<dimensions>
+						<horizontal>32</horizontal>
+						<vertical>32</vertical>
+					</dimensions>
+					<isBody>True</isBody>
+					<isSpike>False</isSpike>
+				</colRect>
+			</colShape>
+		</entitySpec>
+	</entitiySpecification>
+	<entities>
+		<absEntity type="player" name="player">
+			<position>
+				<horizontal>32</horizontal>
+				<vertical>320</vertical>
+			</position>
+		</absEntity>
+		<absEntity type="t_cutSceneStart" name="starter-1">
+			<position>
+				<horizontal>96</horizontal>
+				<vertical>331</vertical>
+			</position>
+		</absEntity>
+		<absEntity type="t_createBubble" name="bubble-1">
+			<position>
+				<horizontal>96</horizontal>
+				<vertical>331</vertical>
+			</position>
+			<msg>Hallo! | Dies ist das erste Tutorial-Level von "The Adventures of Flip". Hier geht es vor allem um das Thema Springen.| Zum Springen benutzt Du bitte die -Leertaste-. Die ersten zwei Hindernisse sollten kein Problem für dich sein. Viel Spaß!</msg>
+		</absEntity>
+		<absEntity type="t_moveRight" name="righter-1">
+			<position>
+				<horizontal>96</horizontal>
+				<vertical>331</vertical>
+			</position>
+		</absEntity>
+		<absEntity type="t_cutSceneEnd" name="ender-1">
+			<position>
+				<horizontal>105</horizontal>
+				<vertical>331</vertical>
+			</position>
+		</absEntity>
+		<absEntity type="t_moveStop" name="stopper-1">
+			<position>
+				<horizontal>105</horizontal>
+				<vertical>331</vertical>
+			</position>
+		</absEntity>
+				<absEntity type="t_cutSceneStart" name="starter-2">
+			<position>
+				<horizontal>640</horizontal>
+				<vertical>130</vertical>
+			</position>
+		</absEntity>
+		<absEntity type="t_createBubble" name="bubble-2">
+			<position>
+				<horizontal>640</horizontal>
+				<vertical>130</vertical>
+			</position>
+			<msg>Sehr Gut! Die vertikale Richtung klappt ja schonmal ganz gut. Nun schauen wir mal wie weit du springen kannst...</msg>
+		</absEntity>
+		<absEntity type="t_moveRight" name="righter-2">
+			<position>
+				<horizontal>640</horizontal>
+				<vertical>130</vertical>
+			</position>
+		</absEntity>
+		<absEntity type="t_cutSceneEnd" name="ender-2">
+			<position>
+				<horizontal>650</horizontal>
+				<vertical>130</vertical>
+			</position>
+		</absEntity>
+		<absEntity type="t_moveStop" name="stopper-2">
+			<position>
+				<horizontal>650</horizontal>
+				<vertical>130</vertical>
+			</position>
+		</absEntity>
+		<absEntity type="t_cutSceneStart" name="starter-3">
+			<position>
+				<horizontal>672</horizontal>
+				<vertical>10</vertical>
+			</position>
+		</absEntity>
+		<absEntity type="t_createBubble" name="bubble-3">
+			<position>
+				<horizontal>672</horizontal>
+				<vertical>10</vertical>
+			</position>
+			<msg>Gute Leistung. Nun kommen wir zum letzten und gleichzeitig auch schwierigsten Sprung dieses Levels. Mit einem normalen Sprung kannst du diese Distanz nicht überwinden.| Hierfür musst du eine neue Technik erlernen: Flip kann im Fallen 1x springen. Versuche es aus: Laufe weiter nach links in den Abgrund hinein. Mitten im Fallen drückst du die -Leertaste- und Flip wird einen Sprung machen. Wichtig heirbei ist, dass Flip nur in der Luft springen kann, wenn er über den Abgrund gelaufen ist. Jedoch nicht, wenn er gesprungen ist. Hört sich kompliziert an, aber Du wirst sehen, mit etwas Übung hast du das schnell gelernt.</msg>
+		</absEntity>
+		<absEntity type="t_moveLeft" name="lefter-1">
+			<position>
+				<horizontal>672</horizontal>
+				<vertical>10</vertical>
+			</position>
+		</absEntity>
+		<absEntity type="t_cutSceneEnd" name="ender-3">
+			<position>
+				<horizontal>665</horizontal>
+				<vertical>10</vertical>
+			</position>
+		</absEntity>
+		<absEntity type="t_moveStop" name="stopper-3">
+			<position>
+				<horizontal>665</horizontal>
+				<vertical>10</vertical>
+			</position>
+		</absEntity>
+	</entities>
+</entityFile>
