@@ -128,9 +128,9 @@ class GameState(State):
 
             elif event.type == pygame.KEYUP:
                 if event.key == pygame.K_LEFT:
-                    if not self.levelManager.curLevel.cutSceneState: self.levelManager.curLevel.player.walkStop()
+                    if not self.levelManager.curLevel.cutSceneState: self.levelManager.curLevel.player.walkStop(dir=-1)
                 elif event.key == pygame.K_RIGHT:
-                    if not self.levelManager.curLevel.cutSceneState: self.levelManager.curLevel.player.walkStop()
+                    if not self.levelManager.curLevel.cutSceneState: self.levelManager.curLevel.player.walkStop(dir=1)
 
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 if Options.getOption("ISDEBUG"): print "The current cursor position is: ", Vector(event.pos[0],event.pos[1])+self.gameRenderer.getCamera()

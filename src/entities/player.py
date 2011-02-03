@@ -36,6 +36,9 @@ class Player():
         self.jumplock = False
         self.jumpSound = None
 
+        self.wLeft = False
+        self.wRight = False
+
         self.sprite     = self.renderer.createSprite(self)
         self.colShape   = self.physics.createColShape(self)
 
@@ -146,17 +149,34 @@ class Player():
     def isAlive(self):
         return self.alive
 
-    def walkRight(self):
-        self.velocity += self.movespeed
+    def walkRight(self, useWflag = True):
+        if useWflag:
+            self.wRight = True
+
+        self.velocity.x = self.movespeed.x
         self.sprite.setAni('walkRight')
 
-    def walkLeft(self):
-        self.velocity -= self.movespeed
+    def walkLeft(self, useWflag = True):
+        if useWflag:
+            self.wLeft = True
+        
+        self.velocity.x = -self.movespeed.x
         self.sprite.setAni('walkLeft')
 
-    def walkStop(self):
+    def walkStop(self, dir = 0):
         self.velocity.x = 0
         self.sprite.setAni('idle')
+        if dir == 0:
+            self.wLeft = False
+            self.wRight = False
+        elif dir > 0:
+            self.wRight = False
+            if self.wLeft:
+                self.walkLeft(useWflag = False)
+        elif dir < 0:
+            self.wLeft = False
+            if self.wRight:
+                self.walkRight(useWflag = False)
 
     def getVelocity(self):
         return self.velocity
