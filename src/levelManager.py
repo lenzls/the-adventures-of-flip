@@ -16,7 +16,7 @@ from util.ressourceLoader import RessourceLoader
 
 class LevelManager(object):
     
-    FIRSTLEVEL = 1
+    FIRSTLEVEL = 4
 
     def __init__(self, physics, renderer):
         '''
@@ -27,7 +27,7 @@ class LevelManager(object):
         self.physics = physics
         self.renderer = renderer
         self.levelPathList = []
-        self.curLevelC = 0
+        self.curLevelC = LevelManager.FIRSTLEVEL
         self.curLevel = None
         self._addLevelPath('00_intro.lxml')
         self._addLevelPath('01_enemyTest.lxml')
