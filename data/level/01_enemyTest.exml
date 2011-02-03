@@ -4,7 +4,7 @@
 		<entitySpec type="player">
 			<points>0</points>
 			<life>100</life>
-			<movespeed>3</movespeed>
+			<movespeed>4</movespeed>
 			<jumpspeed>-14</jumpspeed>
 			<jumpSound>
 				<soundFile>jump.wav</soundFile>
@@ -497,18 +497,6 @@
 				<colRect index="0">
 					<posUpperLeft>
 						<horizontal>0</horizontal>
-						<vertical>0</vertical>
-					</posUpperLeft>
-					<dimensions>
-						<horizontal>68</horizontal>
-						<vertical>17</vertical>
-					</dimensions>
-					<isBody>False</isBody>
-					<isSpike>False</isSpike>
-				</colRect>
-				<colRect index="1">
-					<posUpperLeft>
-						<horizontal>0</horizontal>
 						<vertical>17</vertical>
 					</posUpperLeft>
 					<dimensions>
@@ -518,7 +506,7 @@
 					<isBody>True</isBody>
 					<isSpike>False</isSpike>
 				</colRect>
-				<colRect index="2">
+				<colRect index="1">
 					<posUpperLeft>
 						<horizontal>0</horizontal>
 						<vertical>36</vertical>
@@ -530,7 +518,7 @@
 					<isBody>False</isBody>
 					<isSpike>True</isSpike>
 				</colRect>
-				<colRect index="3">
+				<colRect index="2">
 					<posUpperLeft>
 						<horizontal>0</horizontal>
 						<vertical>44</vertical>
