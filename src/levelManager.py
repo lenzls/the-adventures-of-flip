@@ -138,6 +138,12 @@ class Level(object):
             return mob.Bug(entityPos, self.map, entityInfoTrees['bug'], self.physics, self.renderer, activated)
         elif absNode.getAttribute('type') == 'ant':
             return mob.Ant(entityPos, self.map, entityInfoTrees['ant'], self.physics, self.renderer, activated)
+        elif absNode.getAttribute('type') == 'snake':
+            return mob.Snake(entityPos, self.map, entityInfoTrees['snake'], self.physics, self.renderer, activated)
+        elif absNode.getAttribute('type') == 'bat':
+            return mob.Bat(entityPos, self.map, entityInfoTrees['bat'], self.physics, self.renderer, activated)
+        elif absNode.getAttribute('type') == 'mosquito':
+            return mob.Mosquito(entityPos, self.map, entityInfoTrees['mosquito'], self.physics, self.renderer, activated)
         #Items:
         elif absNode.getAttribute('type') == 'coin':
             return item.Coin(entityPos, self.map, entityInfoTrees['coin'], self.physics, self.renderer, activated)

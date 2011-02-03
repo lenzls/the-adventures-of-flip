@@ -358,7 +358,16 @@
 				<animation index="2">
 					<type>walkRight</type>
 					<image index="0">
-						<graphic>enemy_bugBlue_normal_left1.png</graphic>
+						<graphic>enemy_bugBlue_normal_right1.png</graphic>
+					</image>
+					<image index="1">
+						<graphic>enemy_bugBlue_normal_right2.png</graphic>
+					</image>
+					<image index="2">
+						<graphic>enemy_bugBlue_normal_right3.png</graphic>
+					</image>
+					<image index="3">
+						<graphic>enemy_bugBlue_normal_right4.png</graphic>
 					</image>
 				</animation>
 			</sprite>
@@ -410,7 +419,16 @@
 				<animation index="2">
 					<type>walkRight</type>
 					<image index="0">
-						<graphic>enemy_ant_normal_left1.png</graphic>
+						<graphic>enemy_ant_normal_right1.png</graphic>
+					</image>
+					<image index="1">
+						<graphic>enemy_ant_normal_right2.png</graphic>
+					</image>
+					<image index="2">
+						<graphic>enemy_ant_normal_right3.png</graphic>
+					</image>
+					<image index="3">
+						<graphic>enemy_ant_normal_right4.png</graphic>
 					</image>
 				</animation>
 			</sprite>
@@ -423,6 +441,276 @@
 					<dimensions>
 						<horizontal>15</horizontal>
 						<vertical>10</vertical>
+					</dimensions>
+					<isBody>True</isBody>
+					<isSpike>False</isSpike>
+				</colRect>
+			</colShape>
+		</entitySpec>
+		<entitySpec type="bat">
+			<points>100</points>
+			<life>10</life>
+			<movespeed>3</movespeed>
+			<jumpspeed>-13</jumpspeed>
+			<jumpSound>
+				<soundFile>jump.wav</soundFile>
+			</jumpSound>
+			<sprite>
+				<animation index="0">
+					<type>idle</type>
+					<image index="0">
+						<graphic>enemy_bat_normal_left1.png</graphic>
+					</image>
+				</animation>
+				<animation index="1">
+					<type>walkLeft</type>
+					<image index="0">
+						<graphic>enemy_bat_normal_left1.png</graphic>
+					</image>
+					<image index="1">
+						<graphic>enemy_bat_normal_left2.png</graphic>
+					</image>
+					<image index="2">
+						<graphic>enemy_bat_normal_left3.png</graphic>
+					</image>
+					<image index="3">
+						<graphic>enemy_bat_normal_left4.png</graphic>
+					</image>
+				</animation>
+				<animation index="2">
+					<type>walkRight</type>
+					<image index="0">
+						<graphic>enemy_bat_normal_right1.png</graphic>
+					</image>
+					<image index="1">
+						<graphic>enemy_bat_normal_right2.png</graphic>
+					</image>
+					<image index="2">
+						<graphic>enemy_bat_normal_right3.png</graphic>
+					</image>
+					<image index="3">
+						<graphic>enemy_bat_normal_right4.png</graphic>
+					</image>
+				</animation>
+			</sprite>
+			<colShape>
+				<colRect index="0">
+					<posUpperLeft>
+						<horizontal>0</horizontal>
+						<vertical>0</vertical>
+					</posUpperLeft>
+					<dimensions>
+						<horizontal>68</horizontal>
+						<vertical>17</vertical>
+					</dimensions>
+					<isBody>False</isBody>
+					<isSpike>False</isSpike>
+				</colRect>
+				<colRect index="1">
+					<posUpperLeft>
+						<horizontal>0</horizontal>
+						<vertical>17</vertical>
+					</posUpperLeft>
+					<dimensions>
+						<horizontal>68</horizontal>
+						<vertical>19</vertical>
+					</dimensions>
+					<isBody>True</isBody>
+					<isSpike>False</isSpike>
+				</colRect>
+				<colRect index="2">
+					<posUpperLeft>
+						<horizontal>0</horizontal>
+						<vertical>36</vertical>
+					</posUpperLeft>
+					<dimensions>
+						<horizontal>68</horizontal>
+						<vertical>8</vertical>
+					</dimensions>
+					<isBody>False</isBody>
+					<isSpike>True</isSpike>
+				</colRect>
+				<colRect index="3">
+					<posUpperLeft>
+						<horizontal>0</horizontal>
+						<vertical>44</vertical>
+					</posUpperLeft>
+					<dimensions>
+						<horizontal>68</horizontal>
+						<vertical>7</vertical>
+					</dimensions>
+					<isBody>False</isBody>
+					<isSpike>False</isSpike>
+				</colRect>
+			</colShape>
+		</entitySpec>
+		<entitySpec type="mosquito">
+			<points>100</points>
+			<life>10</life>
+			<movespeed>3</movespeed>
+			<jumpspeed>-13</jumpspeed>
+			<jumpSound>
+				<soundFile>jump.wav</soundFile>
+			</jumpSound>
+			<sprite>
+				<animation index="0">
+					<type>idle</type>
+					<image index="0">
+						<graphic>enemy_mosquito_normal_left1.png</graphic>
+					</image>
+					<image index="1">
+						<graphic>enemy_mosquito_normal_left2.png</graphic>
+					</image>
+					<image index="2">
+						<graphic>enemy_mosquito_normal_left3.png</graphic>
+					</image>
+					<image index="3">
+						<graphic>enemy_mosquito_normal_left4.png</graphic>
+					</image>
+					<image index="4">
+						<graphic>enemy_mosquito_normal_left5.png</graphic>
+					</image>
+					<image index="5">
+						<graphic>enemy_mosquito_normal_left6.png</graphic>
+					</image>
+				</animation>
+				<animation index="1">
+					<type>walkLeft</type>
+					<image index="0">
+						<graphic>enemy_mosquito_normal_left1.png</graphic>
+					</image>
+					<image index="1">
+						<graphic>enemy_mosquito_normal_left2.png</graphic>
+					</image>
+					<image index="2">
+						<graphic>enemy_mosquito_normal_left3.png</graphic>
+					</image>
+					<image index="3">
+						<graphic>enemy_mosquito_normal_left4.png</graphic>
+					</image>
+					<image index="4">
+						<graphic>enemy_mosquito_normal_left5.png</graphic>
+					</image>
+					<image index="5">
+						<graphic>enemy_mosquito_normal_left6.png</graphic>
+					</image>
+				</animation>
+				<animation index="2">
+					<type>walkRight</type>
+					<image index="0">
+						<graphic>enemy_mosquito_normal_left1.png</graphic>
+					</image>
+					<image index="1">
+						<graphic>enemy_mosquito_normal_left2.png</graphic>
+					</image>
+					<image index="2">
+						<graphic>enemy_mosquito_normal_left3.png</graphic>
+					</image>
+					<image index="3">
+						<graphic>enemy_mosquito_normal_left4.png</graphic>
+					</image>
+					<image index="4">
+						<graphic>enemy_mosquito_normal_left5.png</graphic>
+					</image>
+					<image index="5">
+						<graphic>enemy_mosquito_normal_left6.png</graphic>
+					</image>
+				</animation>
+			</sprite>
+			<colShape>
+				<colRect index="0">
+					<posUpperLeft>
+						<horizontal>4</horizontal>
+						<vertical>7</vertical>
+					</posUpperLeft>
+					<dimensions>
+						<horizontal>28</horizontal>
+						<vertical>12</vertical>
+					</dimensions>
+					<isBody>True</isBody>
+					<isSpike>False</isSpike>
+				</colRect>
+				<colRect index="1">
+					<posUpperLeft>
+						<horizontal>0</horizontal>
+						<vertical>19</vertical>
+					</posUpperLeft>
+					<dimensions>
+						<horizontal>36</horizontal>
+						<vertical>7</vertical>
+					</dimensions>
+					<isBody>False</isBody>
+					<isSpike>True</isSpike>
+				</colRect>
+			</colShape>
+		</entitySpec>
+		<entitySpec type="snake">
+			<points>100</points>
+			<life>10</life>
+			<movespeed>3</movespeed>
+			<jumpspeed>-13</jumpspeed>
+			<jumpSound>
+				<soundFile>jump.wav</soundFile>
+			</jumpSound>
+			<sprite>
+				<animation index="0">
+					<type>idle</type>
+					<image index="0">
+						<graphic>enemy_snake_normal_left1.png</graphic>
+					</image>
+				</animation>
+				<animation index="1">
+					<type>walkLeft</type>
+					<image index="0">
+						<graphic>enemy_snake_normal_left1.png</graphic>
+					</image>
+					<image index="1">
+						<graphic>enemy_snake_normal_left2.png</graphic>
+					</image>
+					<image index="2">
+						<graphic>enemy_snake_normal_left3.png</graphic>
+					</image>
+					<image index="3">
+						<graphic>enemy_snake_normal_left4.png</graphic>
+					</image>
+				</animation>
+				<animation index="2">
+					<type>walkRight</type>
+					<image index="0">
+						<graphic>enemy_snake_normal_right1.png</graphic>
+					</image>
+					<image index="1">
+						<graphic>enemy_snake_normal_right2.png</graphic>
+					</image>
+					<image index="2">
+						<graphic>enemy_snake_normal_right3.png</graphic>
+					</image>
+					<image index="3">
+						<graphic>enemy_snake_normal_right4.png</graphic>
+					</image>
+				</animation>
+			</sprite>
+			<colShape>
+				<colRect index="0">
+					<posUpperLeft>
+						<horizontal>0</horizontal>
+						<vertical>0</vertical>
+					</posUpperLeft>
+					<dimensions>
+						<horizontal>23</horizontal>
+						<vertical>36</vertical>
+					</dimensions>
+					<isBody>False</isBody>
+					<isSpike>True</isSpike>
+				</colRect>
+				<colRect index="1">
+					<posUpperLeft>
+						<horizontal>8</horizontal>
+						<vertical>36</vertical>
+					</posUpperLeft>
+					<dimensions>
+						<horizontal>78</horizontal>
+						<vertical>8</vertical>
 					</dimensions>
 					<isBody>True</isBody>
 					<isSpike>False</isSpike>
@@ -639,6 +927,30 @@
 			<position>
 				<horizontal>49</horizontal>
 				<vertical>100</vertical>
+			</position>
+		</absEntity>
+		<absEntity type="snake" name="snake-1">
+			<position>
+				<horizontal>256</horizontal>
+				<vertical>410</vertical>
+			</position>
+		</absEntity>
+		<absEntity type="bat" name="bat-1">
+			<position>
+				<horizontal>292</horizontal>
+				<vertical>365</vertical>
+			</position>
+		</absEntity>
+		<absEntity type="mosquito" name="mosquito-1">
+			<position>
+				<horizontal>336</horizontal>
+				<vertical>250</vertical>
+			</position>
+		</absEntity>
+		<absEntity type="mosquito" name="mosquito-2">
+			<position>
+				<horizontal>402</horizontal>
+				<vertical>225</vertical>
 			</position>
 		</absEntity>
 	</entities>

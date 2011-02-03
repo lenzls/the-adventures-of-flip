@@ -28,6 +28,7 @@ class Mob(object):
         self.position = Vector(position[0],position[1])
         self.dimensions = [0,0]
         self.velocity = Vector(0,0)
+        self.antigrav = False
         self.movespeed = None   #util.Vector(3,0)
         self.jumpspeed = None   #util.Vector(0,-13)
 
@@ -125,7 +126,7 @@ class Mob(object):
 
     def update(self):
 
-        if self.velocity[1] < 15:
+        if self.velocity[1] < 15 and not self.antigrav:
             self.velocity += self.physics.gravity
         self.position += self.velocity
         
@@ -260,3 +261,56 @@ class Ant(Mob):
     def mapColWhileMoveLeft(self, tilePos):
         self.walkStop()
         self.walkRight()
+
+class Snake(Mob):
+    def __init__(self, position, map, infoTree, physics, renderer, activated):   #infoTree = xmlBaum
+        Mob.__init__(self, position, map, infoTree, physics, renderer, activated)
+
+        self.walkLeft()
+
+    def ki(self):
+        pass
+
+    def mapColWhileMoveRight(self, tilePos):
+        self.walkStop()
+        self.walkLeft()
+
+    def mapColWhileMoveLeft(self, tilePos):
+        self.walkStop()
+        self.walkRight()
+
+class Bat(Mob):
+    def __init__(self, position, map, infoTree, physics, renderer, activated):   #infoTree = xmlBaum
+        Mob.__init__(self, position, map, infoTree, physics, renderer, activated)
+
+        self.walkLeft()
+        self.antigrav = True
+
+    def ki(self):
+        pass
+
+    def mapColWhileMoveRight(self, tilePos):
+        self.walkStop()
+        self.walkLeft()
+
+    def mapColWhileMoveLeft(self, tilePos):
+        self.walkStop()
+        self.walkRight()
+
+class Mosquito(Mob):
+    def __init__(self, position, map, infoTree, physics, renderer, activated):   #infoTree = xmlBaum
+        Mob.__init__(self, position, map, infoTree, physics, renderer, activated)
+
+        self.antigrav = True
+
+    def ki(self):
+        pass
+
+    def mapColWhileMoveRight(self, tilePos):
+        self.walkStop()
+        self.walkLeft()
+
+    def mapColWhileMoveLeft(self, tilePos):
+        self.walkStop()
+        self.walkRight()
+
