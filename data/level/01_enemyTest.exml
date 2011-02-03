@@ -301,12 +301,128 @@
 			<colShape>
 				<colRect index="0">
 					<posUpperLeft>
+						<horizontal>3</horizontal>
+						<vertical>3</vertical>
+					</posUpperLeft>
+					<dimensions>
+						<horizontal>26</horizontal>
+						<vertical>17</vertical>
+					</dimensions>
+					<isBody>True</isBody>
+					<isSpike>False</isSpike>
+				</colRect>
+				<colRect index="1">
+					<posUpperLeft>
+						<horizontal>0</horizontal>
+						<vertical>20</vertical>
+					</posUpperLeft>
+					<dimensions>
+						<horizontal>32</horizontal>
+						<vertical>17</vertical>
+					</dimensions>
+					<isBody>False</isBody>
+					<isSpike>True</isSpike>
+				</colRect>
+			</colShape>
+		</entitySpec>
+		<entitySpec type="bug">
+			<points>100</points>
+			<life>10</life>
+			<movespeed>3</movespeed>
+			<jumpspeed>-13</jumpspeed>
+			<jumpSound>
+				<soundFile>jump.wav</soundFile>
+			</jumpSound>
+			<sprite>
+				<animation index="0">
+					<type>idle</type>
+					<image index="0">
+						<graphic>enemy_bugBlue_normal_left1.png</graphic>
+					</image>
+				</animation>
+				<animation index="1">
+					<type>walkLeft</type>
+					<image index="0">
+						<graphic>enemy_bugBlue_normal_left1.png</graphic>
+					</image>
+					<image index="1">
+						<graphic>enemy_bugBlue_normal_left2.png</graphic>
+					</image>
+					<image index="2">
+						<graphic>enemy_bugBlue_normal_left3.png</graphic>
+					</image>
+					<image index="3">
+						<graphic>enemy_bugBlue_normal_left4.png</graphic>
+					</image>
+				</animation>
+				<animation index="2">
+					<type>walkRight</type>
+					<image index="0">
+						<graphic>enemy_bugBlue_normal_left1.png</graphic>
+					</image>
+				</animation>
+			</sprite>
+			<colShape>
+				<colRect index="0">
+					<posUpperLeft>
 						<horizontal>0</horizontal>
 						<vertical>0</vertical>
 					</posUpperLeft>
 					<dimensions>
-						<horizontal>32</horizontal>
-						<vertical>37</vertical>
+						<horizontal>16</horizontal>
+						<vertical>7</vertical>
+					</dimensions>
+					<isBody>True</isBody>
+					<isSpike>False</isSpike>
+				</colRect>
+			</colShape>
+		</entitySpec>
+		<entitySpec type="ant">
+			<points>100</points>
+			<life>10</life>
+			<movespeed>3</movespeed>
+			<jumpspeed>-13</jumpspeed>
+			<jumpSound>
+				<soundFile>jump.wav</soundFile>
+			</jumpSound>
+			<sprite>
+				<animation index="0">
+					<type>idle</type>
+					<image index="0">
+						<graphic>enemy_ant_normal_left1.png</graphic>
+					</image>
+				</animation>
+				<animation index="1">
+					<type>walkLeft</type>
+					<image index="0">
+						<graphic>enemy_ant_normal_left1.png</graphic>
+					</image>
+					<image index="1">
+						<graphic>enemy_ant_normal_left2.png</graphic>
+					</image>
+					<image index="2">
+						<graphic>enemy_ant_normal_left3.png</graphic>
+					</image>
+					<image index="3">
+						<graphic>enemy_ant_normal_left4.png</graphic>
+					</image>
+				</animation>
+				<animation index="2">
+					<type>walkRight</type>
+					<image index="0">
+						<graphic>enemy_ant_normal_left1.png</graphic>
+					</image>
+				</animation>
+			</sprite>
+			<colShape>
+				<colRect index="0">
+					<posUpperLeft>
+						<horizontal>0</horizontal>
+						<vertical>0</vertical>
+					</posUpperLeft>
+					<dimensions>
+						<horizontal>15</horizontal>
+						<vertical>10</vertical>
 					</dimensions>
 					<isBody>True</isBody>
 					<isSpike>False</isSpike>
@@ -497,32 +613,32 @@
 	<entities>
 		<absEntity type="player" name="player">
 			<position>
-				<horizontal>60</horizontal>
-				<vertical>50</vertical>
+				<horizontal>22</horizontal>
+				<vertical>287</vertical>
 			</position>
 		</absEntity>
 		<absEntity type="grob" name="grob-1">
 			<position>
-				<horizontal>449</horizontal>
-				<vertical>257</vertical>
+				<horizontal>516</horizontal>
+				<vertical>292</vertical>
 			</position>
 		</absEntity>
-		<absEntity type="t_createEntity" name="grobCreater">
+		<absEntity type="blob" name="blob-1">
 			<position>
-				<horizontal>513</horizontal>
-				<vertical>66</vertical>
-			</position>
-			<newEntity type="blob" name="blob-1">
-				<position>
-					<horizontal>354</horizontal>
-					<vertical>68</vertical>
-				</position>
-			</newEntity>
-		</absEntity>
-		<absEntity type="t_finishLvl" name="finisher">
-			<position>
-				<horizontal>737</horizontal>
+				<horizontal>475</horizontal>
 				<vertical>418</vertical>
+			</position>
+		</absEntity>
+		<absEntity type="bug" name="bug-1">
+			<position>
+				<horizontal>294</horizontal>
+				<vertical>101</vertical>
+			</position>
+		</absEntity>
+		<absEntity type="ant" name="ant-1">
+			<position>
+				<horizontal>49</horizontal>
+				<vertical>100</vertical>
 			</position>
 		</absEntity>
 	</entities>
