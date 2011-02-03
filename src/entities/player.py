@@ -157,12 +157,14 @@ class Player():
         if not self.jumplock or ignoreJumpLock:
             if Options.getOption("ISSOUND"): self.jumpSound.play()
             self.jumplock = True
-            self.velocity += self.jumpspeed
+            self.velocity.y = self.jumpspeed.y
 
     def mapColWhileMoveUp(self, tilePos):
         oldPosition = self.position
         oldVelocity = self.velocity
         self.position = Vector(oldPosition[0],((tilePos.y + 1) * constants.TILESIZE) + 1)
+        #when reaching the roof, instantly move downwards
+        self.velocity.y = 0
 
     def mapColWhileMoveDown(self, tilePos):
         oldPosition = self.position

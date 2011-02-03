@@ -77,7 +77,7 @@
 		<entitySpec type="grob">
 			<points>100</points>
 			<life>10</life>
-			<movespeed>3</movespeed>
+			<movespeed>2</movespeed>
 			<jumpspeed>-13</jumpspeed>
 			<jumpSound>
 				<soundFile>jump.wav</soundFile>
@@ -195,7 +195,7 @@
 		<entitySpec type="blob">
 			<points>100</points>
 			<life>10</life>
-			<movespeed>3</movespeed>
+			<movespeed>2</movespeed>
 			<jumpspeed>-13</jumpspeed>
 			<jumpSound>
 				<soundFile>jump.wav</soundFile>
@@ -328,7 +328,7 @@
 		<entitySpec type="bug">
 			<points>100</points>
 			<life>10</life>
-			<movespeed>3</movespeed>
+			<movespeed>4</movespeed>
 			<jumpspeed>-13</jumpspeed>
 			<jumpSound>
 				<soundFile>jump.wav</soundFile>
@@ -389,7 +389,7 @@
 		<entitySpec type="ant">
 			<points>100</points>
 			<life>10</life>
-			<movespeed>3</movespeed>
+			<movespeed>4</movespeed>
 			<jumpspeed>-13</jumpspeed>
 			<jumpSound>
 				<soundFile>jump.wav</soundFile>
@@ -450,7 +450,7 @@
 		<entitySpec type="bat">
 			<points>100</points>
 			<life>10</life>
-			<movespeed>3</movespeed>
+			<movespeed>2</movespeed>
 			<jumpspeed>-13</jumpspeed>
 			<jumpSound>
 				<soundFile>jump.wav</soundFile>
@@ -547,7 +547,7 @@
 		<entitySpec type="mosquito">
 			<points>100</points>
 			<life>10</life>
-			<movespeed>3</movespeed>
+			<movespeed>2</movespeed>
 			<jumpspeed>-13</jumpspeed>
 			<jumpSound>
 				<soundFile>jump.wav</soundFile>
@@ -647,7 +647,7 @@
 		<entitySpec type="snake">
 			<points>100</points>
 			<life>10</life>
-			<movespeed>3</movespeed>
+			<movespeed>2</movespeed>
 			<jumpspeed>-13</jumpspeed>
 			<jumpSound>
 				<soundFile>jump.wav</soundFile>
