@@ -59,6 +59,7 @@ class MapEditor():
         self.Lb_Layer_Topic = gui.Label("Layer-Menu")
         self.Lb_layer1 = gui.Label("Layer 1 visible?: ")
         self.Lb_layer2 = gui.Label("Layer 2 visible?: ")
+        self.Lb_layer3 = gui.Label("Layer 3 visible?: ")
         self.Lb_Tiles_Topic = gui.Label("Tiles-Menu")
         self.Lb_Tiles = gui.Label("Tiles: ")
         self.Lb_curT_index = gui.Label("Index: ")
@@ -87,6 +88,7 @@ class MapEditor():
 
         self.Sw_layer1_vis = gui.Switch(True)
         self.Sw_layer2_vis = gui.Switch(True)
+        self.Sw_layer3_vis = gui.Switch(True)
 
         self.container = gui.Container(width=1150, height=630)
 
@@ -230,8 +232,9 @@ class MapEditor():
         self.tiles[0] = ["blank","blank","blank.png","false","false"]
         for line in file:
             if line.strip().startswith('index') == True:
-                (category,ind) = line.strip().split('=')
-                tileIndex = int(ind)
+                
+                #(category,ind) = line.strip().split('=')
+                tileIndex += 1
                 self.tiles[tileIndex] = [tileName,tileType,tileImage,tileAccessibility,tileDangerousness]
             elif line.strip().startswith('name') == True:
                 (category,nam) = line.strip().split('=')
@@ -263,6 +266,7 @@ class MapEditor():
         #background (wird manuell eingefuegt erstmal
         self.music = ""
         self.grid = []
+        self.grid.append([])
         self.grid.append([])
         self.grid.append([])
         self.entityFile = ""
@@ -301,11 +305,13 @@ class MapEditor():
 
                 self.grid[0].append(standardCol[:])
                 self.grid[1].append(standardCol[:])
+                self.grid[2].append(standardCol[:])
 
         elif newDimensions[0] < self.dimensions[0]:
             for i in range(self.dimensions[0]-1, newDimensions[0]-1,-1):
                 self.grid[0].pop()
                 self.grid[1].pop()
+                self.grid[2].pop()
 
         self.dimensions[0] = newDimensions[0]
 
@@ -315,11 +321,13 @@ class MapEditor():
                 for i in range(self.dimensions[1], newDimensions[1]):
                     self.grid[0][x].append(0)
                     self.grid[1][x].append(0)
+                    self.grid[2][x].append(0)
         elif newDimensions[1] < self.dimensions[1]:
             for x in range(0, self.dimensions[0]):
                 for i in range(newDimensions[1], self.dimensions[1]):
                     self.grid[0][x].pop()
                     self.grid[1][x].pop()
+                    self.grid[2].pop()
 
         self.dimensions[1] = newDimensions[1]
 
@@ -461,18 +469,32 @@ class MapEditor():
                 for x in range( 0, self.dimensions[0]):
                     if self.grid[1][x][y] != 0:
                         self.mapSurface.blit(util.load_tile(self.tiles[self.grid[1][x][y]][2]), (x*constants.TILESIZE-self.camera[0], y*constants.TILESIZE-self.camera[1]))
+        if self.layerVis[2] == True:
+            for y in range( 0, self.dimensions[1]):
+                for x in range( 0, self.dimensions[0]):
+                    if self.grid[2][x][y] != 0:
+                        self.mapSurface.blit(util.load_tile(self.tiles[self.grid[2][x][y]][2]), (x*constants.TILESIZE-self.camera[0], y*constants.TILESIZE-self.camera[1]))
+
 
     def renderMapBg(self):
         pygame.draw.rect(self.mapSurface, self.transpColor  , pygame.Rect(-self.camera[0],-self.camera[1],self.dimensions[0]*constants.TILESIZE,self.dimensions[1]*constants.TILESIZE))    
 
     def calcTopLayer(self):
-        if self.layerVis[0] and self.layerVis[1]:
+        if self.layerVis[0] and self.layerVis[1] and self.layerVis[2]:
+            topLayer = 2
+        elif self.layerVis[0] and self.layerVis[1] and not self.layerVis[2]:
             topLayer = 1
-        elif self.layerVis[0] and not self.layerVis[1]:
+        elif self.layerVis[0] and not self.layerVis[1] and self.layerVis[2]:
+            topLayer = 2
+        elif self.layerVis[0] and not self.layerVis[1] and not self.layerVis[2]:
             topLayer = 0
-        elif not self.layerVis[0] and self.layerVis[1]:
+        elif not self.layerVis[0] and self.layerVis[1] and self.layerVis[2]:
+            topLayer = 2
+        elif not self.layerVis[0] and self.layerVis[1] and not self.layerVis[2]:
             topLayer = 1
-        elif not self.layerVis[0] and not self.layerVis[1]:
+        elif not self.layerVis[0] and not self.layerVis[1] and self.layerVis[2]:
+            topLayer = 2
+        elif not self.layerVis[0] and not self.layerVis[1] and not self.layerVis[2]:
             return -1
         return topLayer
 
@@ -501,7 +523,7 @@ class MapEditor():
             else:
                 self.cur_Tile = 0
 
-            self.layerVis = [self.Sw_layer1_vis.value, self.Sw_layer2_vis.value]
+            self.layerVis = [self.Sw_layer1_vis.value, self.Sw_layer2_vis.value, self.Sw_layer3_vis.value]
 
             #update linke Seite
             self.layerTable.clear()
@@ -510,6 +532,8 @@ class MapEditor():
             self.layerTable.td(self.Sw_layer1_vis, 1, 1)
             self.layerTable.td(self.Lb_layer2,0,2)
             self.layerTable.td(self.Sw_layer2_vis, 1, 2)
+            self.layerTable.td(self.Lb_layer3,0,3)
+            self.layerTable.td(self.Sw_layer3_vis, 1, 3)
             #---------
 
             #update rechte Seite (wg. TileBild
@@ -558,6 +582,8 @@ class MapEditor():
                 self.transpColor = (255,0,255)
             elif self.calcTopLayer() == 1:
                 self.transpColor = (125,255,125)
+            elif self.calcTopLayer() == 2:
+                self.transpColor = (125,125,255)
             else:
                 self.transpColor = (255,255,255)
             self.mapSurface.fill((0,0,0))
