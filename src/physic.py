@@ -129,9 +129,10 @@ class PhysicManager(object):
 
     def collisionBetween2ColRects(self, a, b):
         if not a.getRect().colliderect(b.getRect()):
-            return 0 
-
-        if a.isSpike and b.isBody:      #collides the player-weapon with the enemy-body: player wins
+            return 0
+        if not b.isBody and not b.isSpike:
+            return 0
+        elif a.isSpike and b.isBody:      #collides the player-weapon with the enemy-body: player wins
             return 1
         elif a.isSpike and b.isSpike:   #collides the player-weapon with the enemy-weapon: player loses
             return 2
@@ -139,5 +140,6 @@ class PhysicManager(object):
             return 2
         elif a.isBody and b.isBody:     #collides the player-body with the enemy-body: nothing happens 
             return 0
+        
 
         #codes: 0= nothing happens| 1= enemy is dead| 2= player is dead
