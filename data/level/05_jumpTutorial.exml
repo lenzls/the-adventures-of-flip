@@ -889,101 +889,101 @@
 	<entities>
 		<absEntity type="player" name="player">
 			<position>
-				<horizontal>32</horizontal>
-				<vertical>320</vertical>
+				<horizontal>37</horizontal>
+				<vertical>420</vertical>
 			</position>
 		</absEntity>
 		<absEntity type="t_cutSceneStart" name="starter-1">
 			<position>
-				<horizontal>96</horizontal>
-				<vertical>331</vertical>
+				<horizontal>98</horizontal>
+				<vertical>408</vertical>
 			</position>
 		</absEntity>
 		<absEntity type="t_createBubble" name="bubble-1">
 			<position>
-				<horizontal>96</horizontal>
-				<vertical>331</vertical>
+				<horizontal>98</horizontal>
+				<vertical>408</vertical>
 			</position>
 			<msg>Hallo! | Dies ist das erste Tutorial-Level von "The Adventures of Flip". Hier geht es vor allem um das Thema Springen.| Zum Springen benutzt Du bitte die -Leertaste-. Die ersten zwei Hindernisse sollten kein Problem für dich sein. Viel Spaß!</msg>
 		</absEntity>
 		<absEntity type="t_moveRight" name="righter-1">
 			<position>
-				<horizontal>96</horizontal>
-				<vertical>331</vertical>
+				<horizontal>98</horizontal>
+				<vertical>408</vertical>
 			</position>
 		</absEntity>
 		<absEntity type="t_cutSceneEnd" name="ender-1">
 			<position>
-				<horizontal>105</horizontal>
-				<vertical>331</vertical>
+				<horizontal>107</horizontal>
+				<vertical>408</vertical>
 			</position>
 		</absEntity>
 		<absEntity type="t_moveStop" name="stopper-1">
 			<position>
-				<horizontal>105</horizontal>
-				<vertical>331</vertical>
+				<horizontal>107</horizontal>
+				<vertical>408</vertical>
 			</position>
 		</absEntity>
 				<absEntity type="t_cutSceneStart" name="starter-2">
 			<position>
-				<horizontal>640</horizontal>
-				<vertical>130</vertical>
+				<horizontal>553</horizontal>
+				<vertical>225</vertical>
 			</position>
 		</absEntity>
 		<absEntity type="t_createBubble" name="bubble-2">
 			<position>
-				<horizontal>640</horizontal>
-				<vertical>130</vertical>
+				<horizontal>553</horizontal>
+				<vertical>225</vertical>
 			</position>
 			<msg>Sehr Gut! Die vertikale Richtung klappt ja schonmal ganz gut. Nun schauen wir mal wie weit du springen kannst...</msg>
 		</absEntity>
 		<absEntity type="t_moveRight" name="righter-2">
 			<position>
-				<horizontal>640</horizontal>
-				<vertical>130</vertical>
+				<horizontal>553</horizontal>
+				<vertical>225</vertical>
 			</position>
 		</absEntity>
 		<absEntity type="t_cutSceneEnd" name="ender-2">
 			<position>
-				<horizontal>650</horizontal>
-				<vertical>130</vertical>
+				<horizontal>560</horizontal>
+				<vertical>225</vertical>
 			</position>
 		</absEntity>
 		<absEntity type="t_moveStop" name="stopper-2">
 			<position>
-				<horizontal>650</horizontal>
-				<vertical>130</vertical>
+				<horizontal>560</horizontal>
+				<vertical>225</vertical>
 			</position>
 		</absEntity>
 		<absEntity type="t_cutSceneStart" name="starter-3">
 			<position>
-				<horizontal>672</horizontal>
-				<vertical>10</vertical>
+				<horizontal>669</horizontal>
+				<vertical>35</vertical>
 			</position>
 		</absEntity>
 		<absEntity type="t_createBubble" name="bubble-3">
 			<position>
-				<horizontal>672</horizontal>
-				<vertical>10</vertical>
+				<horizontal>669</horizontal>
+				<vertical>35</vertical>
 			</position>
 			<msg>Gute Leistung. Nun kommen wir zum letzten und gleichzeitig auch schwierigsten Sprung dieses Levels. Mit einem normalen Sprung kannst du diese Distanz nicht überwinden.| Hierfür musst du eine neue Technik erlernen: Flip kann im Fallen 1x springen. Versuche es aus: Laufe weiter nach links in den Abgrund hinein. Mitten im Fallen drückst du die -Leertaste- und Flip wird einen Sprung machen. Wichtig heirbei ist, dass Flip nur in der Luft springen kann, wenn er über den Abgrund gelaufen ist. Jedoch nicht, wenn er gesprungen ist. Hört sich kompliziert an, aber Du wirst sehen, mit etwas Übung hast du das schnell gelernt.</msg>
 		</absEntity>
 		<absEntity type="t_moveLeft" name="lefter-1">
 			<position>
-				<horizontal>672</horizontal>
-				<vertical>10</vertical>
+				<horizontal>669</horizontal>
+				<vertical>35</vertical>
 			</position>
 		</absEntity>
 		<absEntity type="t_cutSceneEnd" name="ender-3">
 			<position>
-				<horizontal>665</horizontal>
-				<vertical>10</vertical>
+				<horizontal>660</horizontal>
+				<vertical>35</vertical>
 			</position>
 		</absEntity>
 		<absEntity type="t_moveStop" name="stopper-3">
 			<position>
-				<horizontal>665</horizontal>
-				<vertical>10</vertical>
+				<horizontal>660</horizontal>
+				<vertical>35</vertical>
 			</position>
 		</absEntity>
 	</entities>
