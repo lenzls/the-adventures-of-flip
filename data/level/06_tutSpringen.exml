@@ -878,7 +878,7 @@
 					</posUpperLeft>
 					<dimensions>
 						<horizontal>32</horizontal>
-						<vertical>32</vertical>
+						<vertical>80</vertical>
 					</dimensions>
 					<isBody>True</isBody>
 					<isSpike>False</isSpike>
@@ -984,6 +984,12 @@
 			<position>
 				<horizontal>660</horizontal>
 				<vertical>35</vertical>
+			</position>
+		</absEntity>
+		<absEntity type="t_finishLvl" name="ender-1">
+			<position>
+				<horizontal>161</horizontal>
+				<vertical>67</vertical>
 			</position>
 		</absEntity>
 	</entities>

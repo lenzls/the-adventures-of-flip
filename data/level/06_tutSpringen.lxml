@@ -1671,7 +1671,7 @@
       </dangerousness>
     </tile>
   </tiles>
- <background>
+  <background>
     <bgLayer index="0">
       <speed>
         0
@@ -4669,7 +4669,7 @@
         </row>
         <row index="2">
           <tileIndex>
-            0
+            50
           </tileIndex>
         </row>
         <row index="3">
@@ -4771,7 +4771,7 @@
         </row>
         <row index="2">
           <tileIndex>
-            0
+            53
           </tileIndex>
         </row>
         <row index="3">
@@ -7990,7 +7990,7 @@
         </row>
         <row index="13">
           <tileIndex>
-            0
+            69
           </tileIndex>
         </row>
         <row index="14">
@@ -8679,7 +8679,7 @@
         </row>
         <row index="8">
           <tileIndex>
-            0
+            99
           </tileIndex>
         </row>
         <row index="9">
@@ -9306,7 +9306,7 @@
         </row>
         <row index="11">
           <tileIndex>
-            0
+            54
           </tileIndex>
         </row>
         <row index="12">
@@ -9316,7 +9316,7 @@
         </row>
         <row index="13">
           <tileIndex>
-            0
+            66
           </tileIndex>
         </row>
         <row index="14">
@@ -9398,27 +9398,27 @@
         </row>
         <row index="9">
           <tileIndex>
-            0
+            46
           </tileIndex>
         </row>
         <row index="10">
           <tileIndex>
-            0
+            48
           </tileIndex>
         </row>
         <row index="11">
           <tileIndex>
-            0
+            55
           </tileIndex>
         </row>
         <row index="12">
           <tileIndex>
-            0
+            62
           </tileIndex>
         </row>
         <row index="13">
           <tileIndex>
-            0
+            67
           </tileIndex>
         </row>
         <row index="14">
@@ -9500,27 +9500,27 @@
         </row>
         <row index="9">
           <tileIndex>
-            0
+            47
           </tileIndex>
         </row>
         <row index="10">
           <tileIndex>
-            0
+            51
           </tileIndex>
         </row>
         <row index="11">
           <tileIndex>
-            0
+            58
           </tileIndex>
         </row>
         <row index="12">
           <tileIndex>
-            0
+            64
           </tileIndex>
         </row>
         <row index="13">
           <tileIndex>
-            0
+            68
           </tileIndex>
         </row>
         <row index="14">
@@ -9612,7 +9612,7 @@
         </row>
         <row index="11">
           <tileIndex>
-            0
+            61
           </tileIndex>
         </row>
         <row index="12">
@@ -9622,7 +9622,7 @@
         </row>
         <row index="13">
           <tileIndex>
-            0
+            69
           </tileIndex>
         </row>
         <row index="14">
@@ -9669,7 +9669,7 @@
         </row>
         <row index="2">
           <tileIndex>
-            0
+            34
           </tileIndex>
         </row>
         <row index="3">
@@ -9771,7 +9771,7 @@
         </row>
         <row index="2">
           <tileIndex>
-            0
+            36
           </tileIndex>
         </row>
         <row index="3">
@@ -9873,7 +9873,7 @@
         </row>
         <row index="2">
           <tileIndex>
-            0
+            36
           </tileIndex>
         </row>
         <row index="3">
@@ -9975,7 +9975,7 @@
         </row>
         <row index="2">
           <tileIndex>
-            0
+            35
           </tileIndex>
         </row>
         <row index="3">
@@ -10709,7 +10709,7 @@
         </row>
         <row index="6">
           <tileIndex>
-            26
+            28
           </tileIndex>
         </row>
         <row index="7">
@@ -10801,7 +10801,7 @@
         </row>
         <row index="4">
           <tileIndex>
-            0
+            99
           </tileIndex>
         </row>
         <row index="5">
@@ -11050,7 +11050,7 @@
         </row>
         <row index="13">
           <tileIndex>
-            0
+            69
           </tileIndex>
         </row>
         <row index="14">
@@ -12328,7 +12328,7 @@
         </row>
         <row index="3">
           <tileIndex>
-            0
+            99
           </tileIndex>
         </row>
         <row index="4">
@@ -12537,7 +12537,7 @@
         </row>
         <row index="4">
           <tileIndex>
-            0
+            13
           </tileIndex>
         </row>
         <row index="5">
@@ -12689,7 +12689,7 @@
         </row>
         <row index="14">
           <tileIndex>
-            0
+            99
           </tileIndex>
         </row>
         <row index="15">
@@ -13552,7 +13552,7 @@
         </row>
         <row index="3">
           <tileIndex>
-            0
+            99
           </tileIndex>
         </row>
         <row index="4">
@@ -14057,7 +14057,7 @@
         </row>
         <row index="2">
           <tileIndex>
-            0
+            69
           </tileIndex>
         </row>
         <row index="3">
@@ -14878,12 +14878,12 @@
         </row>
         <row index="3">
           <tileIndex>
-            0
+            57
           </tileIndex>
         </row>
         <row index="4">
           <tileIndex>
-            0
+            63
           </tileIndex>
         </row>
         <row index="5">
@@ -14980,12 +14980,12 @@
         </row>
         <row index="3">
           <tileIndex>
-            0
+            60
           </tileIndex>
         </row>
         <row index="4">
           <tileIndex>
-            0
+            65
           </tileIndex>
         </row>
         <row index="5">
@@ -15438,7 +15438,7 @@
         </row>
         <row index="13">
           <tileIndex>
-            0
+            99
           </tileIndex>
         </row>
         <row index="14">
@@ -15811,7 +15811,7 @@
         </row>
         <row index="6">
           <tileIndex>
-            0
+            26
           </tileIndex>
         </row>
         <row index="7">
@@ -16254,7 +16254,7 @@
         </row>
         <row index="13">
           <tileIndex>
-            0
+            99
           </tileIndex>
         </row>
         <row index="14">
@@ -16418,7 +16418,7 @@
         </row>
         <row index="5">
           <tileIndex>
-            0
+            69
           </tileIndex>
         </row>
         <row index="6">
@@ -16836,7 +16836,7 @@
         </row>
         <row index="7">
           <tileIndex>
-            0
+            99
           </tileIndex>
         </row>
         <row index="8">
@@ -17005,6 +17005,6 @@
     </gridLayer>
   </grid>
   <entityFile>
-    05_jumpTutorial.exml
+    06_tutSpringen.exml
   </entityFile>
 </Map>

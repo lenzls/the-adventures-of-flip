@@ -889,56 +889,38 @@
 	<entities>
 		<absEntity type="player" name="player">
 			<position>
-				<horizontal>22</horizontal>
-				<vertical>287</vertical>
-			</position>
-		</absEntity>
-		<absEntity type="grob" name="grob-1">
-			<position>
-				<horizontal>516</horizontal>
-				<vertical>292</vertical>
-			</position>
-		</absEntity>
-		<absEntity type="blob" name="blob-1">
-			<position>
-				<horizontal>475</horizontal>
-				<vertical>418</vertical>
+				<horizontal>43</horizontal>
+				<vertical>256</vertical>
 			</position>
 		</absEntity>
 		<absEntity type="bug" name="bug-1">
 			<position>
-				<horizontal>294</horizontal>
-				<vertical>101</vertical>
+				<horizontal>438</horizontal>
+				<vertical>403</vertical>
 			</position>
 		</absEntity>
-		<absEntity type="ant" name="ant-1">
+		<absEntity type="bug" name="bug-2">
 			<position>
-				<horizontal>49</horizontal>
-				<vertical>100</vertical>
+				<horizontal>468</horizontal>
+				<vertical>400</vertical>
 			</position>
 		</absEntity>
-		<absEntity type="snake" name="snake-1">
+		<absEntity type="bug" name="bug-3">
 			<position>
-				<horizontal>256</horizontal>
+				<horizontal>417</horizontal>
 				<vertical>410</vertical>
 			</position>
 		</absEntity>
 		<absEntity type="bat" name="bat-1">
 			<position>
-				<horizontal>292</horizontal>
-				<vertical>365</vertical>
+				<horizontal>413</horizontal>
+				<vertical>59</vertical>
 			</position>
 		</absEntity>
-		<absEntity type="mosquito" name="mosquito-1">
+		<absEntity type="bat" name="bat-2">
 			<position>
-				<horizontal>336</horizontal>
-				<vertical>250</vertical>
-			</position>
-		</absEntity>
-		<absEntity type="mosquito" name="mosquito-2">
-			<position>
-				<horizontal>402</horizontal>
-				<vertical>225</vertical>
+				<horizontal>674</horizontal>
+				<vertical>55</vertical>
 			</position>
 		</absEntity>
 	</entities>
