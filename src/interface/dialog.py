@@ -56,7 +56,7 @@ class SpeechBubble(object):
             self.curGameState.gameRenderer.renderBubble(self)
             
             event = pygame.event.poll()
-            if event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN:
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
                 self.next_Page()
             elif event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
                 self.isFinished = True
