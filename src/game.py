@@ -162,8 +162,9 @@ class GameState(State):
 
         self.gameRenderer.renderBg(self.levelManager.curLevel.map)
         self.gameRenderer.renderMapLayer(0, self.levelManager.curLevel.map)
-        self.gameRenderer.renderSprites()
         self.gameRenderer.renderMapLayer(1, self.levelManager.curLevel.map)
+        self.gameRenderer.renderSprites()
+        self.gameRenderer.renderMapLayer(2, self.levelManager.curLevel.map)
         if Options.getOption("ISDEBUG"): 
             self.gameRenderer.renderGrid(self.levelManager.curLevel.map)
             self.gameRenderer.renderBoundingBoxes(self.physicManager.colShapeList)

@@ -166,7 +166,7 @@ class GameRenderer(Renderer):
                        min(map.getDimensions()[1], (self.camera[1] + self.resolution[1]) // constants.TILESIZE + 1)):
             for x in range(max(self.camera[0] // constants.TILESIZE, 0), 
                            min(map.getDimensions()[0], (self.camera[0] + self.resolution[0]) // constants.TILESIZE + 1)):
-                if map.getMapGrid()[layerIndex][x][y] != 0:
+                if not map.getMapGrid()[layerIndex][x][y] in [0,1]:
                     self.screen.blit(map.getTileGraphic(layerIndex,Vector(x,y)), (x*constants.TILESIZE - self.camera[0],y*constants.TILESIZE - self.camera[1]))
 
     def renderBg(self, map):

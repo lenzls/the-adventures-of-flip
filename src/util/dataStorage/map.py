@@ -13,7 +13,10 @@ class Tile(object):
     def __init__(self, name, type, graphicName, access, dangerous):
         self.name = name
         self.type = type
-        self.image = Image(graphicName)
+        if graphicName == None:
+            self.image = None
+        else:
+            self.image = Image(graphicName)
         self.accessibility = access
         self.dangerousness = dangerous
 

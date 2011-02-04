@@ -58,30 +58,30 @@ class PhysicManager(object):
 
             #bewegt sich nach oben
             if colShape.entity.velocity[1] < 0:
-                if map.getTileDangerousness(0, midTop) == True:
+                if map.getTileDangerousness(1, midTop) == True:
                     colShape.entity.setDead()
-                if map.getTileAccessibility(0, midTop) == True:
+                if map.getTileAccessibility(1, midTop) == True:
                     colShape.entity.mapColWhileMoveUp(midTop)
 
             #bewegt sich nach unten
             elif colShape.entity.velocity[1] > 0:
-                if map.getTileDangerousness(0, midBottom) == True:
+                if map.getTileDangerousness(1, midBottom) == True:
                     colShape.entity.setDead()
-                if map.getTileAccessibility(0, midBottom) == True:
+                if map.getTileAccessibility(1, midBottom) == True:
                     colShape.entity.mapColWhileMoveDown(midBottom)
 
             #Bewegung nach rechts
             if colShape.entity.velocity[0] > 0:
-                if map.getTileDangerousness(0, midRightSide) == True:
+                if map.getTileDangerousness(1, midRightSide) == True:
                     colShape.entity.setDead()
-                if map.getTileAccessibility(0, midRightSide) == True:
+                if map.getTileAccessibility(1, midRightSide) == True:
                     colShape.entity.mapColWhileMoveRight(midRightSide)                      
         
             #Bewegung nach links
             elif colShape.entity.velocity[0] < 0:
-                if map.getTileDangerousness(0, midLeftSide) == True:
+                if map.getTileDangerousness(1, midLeftSide) == True:
                     colShape.entity.setDead()
-                if map.getTileAccessibility(0, midLeftSide) == True:
+                if map.getTileAccessibility(1, midLeftSide) == True:
                     colShape.entity.mapColWhileMoveLeft(midLeftSide)
 
     def checkPlayerEntityCollision(self):

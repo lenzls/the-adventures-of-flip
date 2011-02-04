@@ -125,6 +125,7 @@ class MapEditor():
             elif node.nodeName == 'tiles':
                 self.tiles.clear()
                 self.tiles[0] = ["blank","blank","blank.png","false","false"]
+                self.tiles[1] = ["blocker","block","blocker.png","true","false"]
                 for childNode in node.childNodes:
                     if childNode.nodeName == 'tile':
                         tileIndex   =   int(childNode.getAttribute('index'))
@@ -222,7 +223,7 @@ class MapEditor():
         basepath = os.path.join(os.path.dirname(__file__), "..","data")
         file = open(os.path.join(basepath,'tiles.ini'),"r")
 
-        tileIndex = 0
+        tileIndex = 1
         tileName = ""
         tileType = ""
         tileImage = ""
@@ -230,6 +231,7 @@ class MapEditor():
         tileDangerousness = True
 
         self.tiles[0] = ["blank","blank","blank.png","false","false"]
+        self.tiles[1] = ["blocker","block","blocker.png","true","false"]
         for line in file:
             if line.strip().startswith('index') == True:
                 
@@ -352,7 +354,7 @@ class MapEditor():
 
         #Tiles
         tilesElement = doc.createElement("tiles")
-        for i in range(1,len(self.tiles)):
+        for i in range(2,len(self.tiles)):
             tileElement = doc.createElement("tile")
             tileElement.setAttribute('index',str(i))
 
