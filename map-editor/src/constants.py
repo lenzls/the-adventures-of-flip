@@ -8,4 +8,4 @@ RESOLUTION = (930,570)
 RENDER_FPS = 100
 LOGIC_FPS  = 40
 TILESIZE   = 32
-LOADPATH   = "06_tutSpringen.lxml"
+LOADPATH   = "07_tutMuenzen.lxml"
