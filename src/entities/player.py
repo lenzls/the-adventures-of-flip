@@ -215,7 +215,7 @@ class Player():
         print "Player win against:", enemy.type
         self.score += enemy.getPoints()
         # no jumping after colliding with triggers!
-        if not enemy.type.startswith("t_"):
+        if not enemy.type.startswith("t_") and not enemy.type.startswith("coin"):
             self.jump(ignoreJumpLock = True)
 
     def colLose(self, enemy):
