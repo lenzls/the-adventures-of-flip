@@ -90,8 +90,8 @@ class GameRenderer(Renderer):
 
         self.blackBar = pygame.Surface((self.resolution[0], 25))
         
-        self.horiBorder = self.resolution[0] // 5
-        self.vertiBorder = self.resolution[1] // 5
+        self.horiBorder = self.resolution[0] // 3
+        self.vertiBorder = self.resolution[1] // 3
 
 
     def reset(self):
