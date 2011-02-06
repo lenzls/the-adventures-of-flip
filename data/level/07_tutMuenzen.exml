@@ -920,7 +920,7 @@
 						<horizontal>20</horizontal>
 						<vertical>20</vertical>
 					</dimensions>
-					<isBody>True</isBody>
+					<isBody>False</isBody>
 					<isSpike>False</isSpike>
 				</colRect>
 			</colShape>
@@ -973,170 +973,176 @@
 		<absEntity type="coin" name="coin-1">
 			<position>
 				<horizontal>484</horizontal>
-				<vertical>70</vertical>
+				<vertical>76</vertical>
 			</position>
 		</absEntity>
 		<absEntity type="coin" name="coinBox-21">
 			<position>
 				<horizontal>710</horizontal>
-				<vertical>128</vertical>
+				<vertical>136</vertical>
 			</position>
 		</absEntity>
 		<absEntity type="coin" name="coinBox-22">
 			<position>
 				<horizontal>742</horizontal>
-				<vertical>128</vertical>
+				<vertical>136</vertical>
 			</position>
 		</absEntity>
 		<absEntity type="coin" name="coinBox-23">
 			<position>
 				<horizontal>774</horizontal>
-				<vertical>128</vertical>
+				<vertical>136</vertical>
 			</position>
 		</absEntity>
 		<absEntity type="coin" name="coinBox-24">
 			<position>
 				<horizontal>806</horizontal>
-				<vertical>128</vertical>
+				<vertical>136</vertical>
 			</position>
 		</absEntity>
 		<absEntity type="coin" name="coinBox-25">
 			<position>
 				<horizontal>838</horizontal>
-				<vertical>128</vertical>
+				<vertical>136</vertical>
 			</position>
 		</absEntity>
 		<absEntity type="coin" name="coinBox-26">
 			<position>
 				<horizontal>870</horizontal>
-				<vertical>128</vertical>
+				<vertical>136</vertical>
 			</position>
 		</absEntity>
 		<absEntity type="coin" name="coinBox-27">
 			<position>
 				<horizontal>902</horizontal>
-				<vertical>128</vertical>
+				<vertical>136</vertical>
 			</position>
 		</absEntity>
 		<absEntity type="coin" name="coinBox-31">
 			<position>
 				<horizontal>710</horizontal>
-				<vertical>160</vertical>
+				<vertical>168</vertical>
 			</position>
 		</absEntity>
 		<absEntity type="coin" name="coinBox-32">
 			<position>
 				<horizontal>742</horizontal>
-				<vertical>160</vertical>
+				<vertical>168</vertical>
 			</position>
 		</absEntity>
 		<absEntity type="coin" name="coinBox-33">
 			<position>
 				<horizontal>774</horizontal>
-				<vertical>160</vertical>
+				<vertical>168</vertical>
 			</position>
 		</absEntity>
 
 		<absEntity type="coin" name="coinBox-35">
 			<position>
 				<horizontal>838</horizontal>
-				<vertical>160</vertical>
+				<vertical>168</vertical>
 			</position>
 		</absEntity>
 		<absEntity type="coin" name="coinBox-36">
 			<position>
 				<horizontal>870</horizontal>
-				<vertical>160</vertical>
+				<vertical>168</vertical>
 			</position>
 		</absEntity>
 		<absEntity type="coin" name="coinBox-37">
 			<position>
 				<horizontal>902</horizontal>
-				<vertical>160</vertical>
+				<vertical>168</vertical>
 			</position>
 		</absEntity>
 		<absEntity type="coin" name="coinBox-41">
 			<position>
 				<horizontal>710</horizontal>
-				<vertical>192</vertical>
+				<vertical>198</vertical>
 			</position>
 		</absEntity>
 		<absEntity type="coin" name="coinBox-42">
 			<position>
 				<horizontal>742</horizontal>
-				<vertical>192</vertical>
+				<vertical>198</vertical>
 			</position>
 		</absEntity>
 		<absEntity type="coin" name="coinBox-43">
 			<position>
 				<horizontal>774</horizontal>
-				<vertical>192</vertical>
+				<vertical>198</vertical>
 			</position>
 		</absEntity>
 		<absEntity type="coin" name="coinBox-45">
 			<position>
 				<horizontal>838</horizontal>
-				<vertical>192</vertical>
+				<vertical>198</vertical>
 			</position>
 		</absEntity>
 		<absEntity type="coin" name="coinBox-46">
 			<position>
 				<horizontal>870</horizontal>
-				<vertical>192</vertical>
+				<vertical>198</vertical>
 			</position>
 		</absEntity>
 		<absEntity type="coin" name="coinBox-47">
 			<position>
 				<horizontal>902</horizontal>
-				<vertical>192</vertical>
+				<vertical>198</vertical>
 			</position>
 		</absEntity>
 		<absEntity type="coin" name="coinBox-51">
 			<position>
 				<horizontal>710</horizontal>
-				<vertical>224</vertical>
+				<vertical>232</vertical>
 			</position>
 		</absEntity>
 		<absEntity type="coin" name="coinBox-52">
 			<position>
 				<horizontal>742</horizontal>
-				<vertical>224</vertical>
+				<vertical>232</vertical>
 			</position>
 		</absEntity>
 		<absEntity type="coin" name="coinBox-53">
 			<position>
 				<horizontal>774</horizontal>
-				<vertical>224</vertical>
+				<vertical>232</vertical>
 			</position>
 		</absEntity>
 		<absEntity type="coin" name="coinBox-54">
 			<position>
 				<horizontal>806</horizontal>
-				<vertical>224</vertical>
+				<vertical>232</vertical>
 			</position>
 		</absEntity>
 		<absEntity type="coin" name="coinBox-55">
 			<position>
 				<horizontal>838</horizontal>
-				<vertical>224</vertical>
+				<vertical>232</vertical>
 			</position>
 		</absEntity>
 		<absEntity type="coin" name="coinBox-56">
 			<position>
 				<horizontal>870</horizontal>
-				<vertical>224</vertical>
+				<vertical>232</vertical>
 			</position>
 		</absEntity>
 		<absEntity type="coin" name="coinBox-57">
 			<position>
 				<horizontal>902</horizontal>
-				<vertical>224</vertical>
+				<vertical>232</vertical>
 			</position>
 		</absEntity>
 		<absEntity type="coin" name="coinBox-62">
 			<position>
 				<horizontal>742</horizontal>
-				<vertical>256</vertical>
+				<vertical>262</vertical>
+			</position>
+		</absEntity>
+		<absEntity type="t_finishLvl" name="finisher-1">
+			<position>
+				<horizontal>897</horizontal>
+				<vertical>268</vertical>
 			</position>
 		</absEntity>
 	</entities>

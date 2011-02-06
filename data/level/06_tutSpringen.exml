@@ -885,6 +885,46 @@
 				</colRect>
 			</colShape>
 		</entitySpec>
+		<entitySpec type="coin">
+			<points>10</points>
+			<life>10</life>
+			<movespeed>0</movespeed>
+			<jumpspeed>0</jumpspeed>
+			<sprite>
+				<animation index="0">
+					<type>idle</type>
+					<image index="0">
+						<graphic>item_coin.png</graphic>
+					</image>
+				</animation>
+				<animation index="1">
+					<type>walkLeft</type>
+					<image index="0">
+						<graphic>item_coin.png</graphic>
+					</image>
+				</animation>
+				<animation index="2">
+					<type>walkRight</type>
+					<image index="0">
+						<graphic>item_coin.png</graphic>
+					</image>
+				</animation>
+			</sprite>
+			<colShape>
+				<colRect index="0">
+					<posUpperLeft>
+						<horizontal>0</horizontal>
+						<vertical>0</vertical>
+					</posUpperLeft>
+					<dimensions>
+						<horizontal>20</horizontal>
+						<vertical>20</vertical>
+					</dimensions>
+					<isBody>True</isBody>
+					<isSpike>False</isSpike>
+				</colRect>
+			</colShape>
+		</entitySpec>
 	</entitiySpecification>
 	<entities>
 		<absEntity type="player" name="player">
@@ -959,6 +999,12 @@
 			<position>
 				<horizontal>669</horizontal>
 				<vertical>35</vertical>
+			</position>
+		</absEntity>
+		<absEntity type="coin" name="coin-1">
+			<position>
+				<horizontal>1542</horizontal>
+				<vertical>326</vertical>
 			</position>
 		</absEntity>
 		<absEntity type="t_createBubble" name="bubble-3">

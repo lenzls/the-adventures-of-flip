@@ -920,7 +920,7 @@
 						<horizontal>20</horizontal>
 						<vertical>20</vertical>
 					</dimensions>
-					<isBody>True</isBody>
+					<isBody>False</isBody>
 					<isSpike>False</isSpike>
 				</colRect>
 			</colShape>
