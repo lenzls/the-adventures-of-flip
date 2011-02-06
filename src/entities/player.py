@@ -241,6 +241,7 @@ class Player():
                 self.setDead()
 
     def setDead(self):
+        pygame.time.wait(500)
         print 'TooooooooooooooooooooooooooooT'
         self.alive = False
         self.deathAnimation()
