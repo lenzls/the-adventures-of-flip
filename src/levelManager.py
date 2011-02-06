@@ -29,10 +29,10 @@ class LevelManager(object):
         self.levelPathList = []
         self.curLevelC = LevelManager.FIRSTLEVEL
         self.curLevel = None
-        self._addLevelPath('01_enemyTest.lxml')
-        self._addLevelPath('06_tutSpringen.lxml')
         self._addLevelPath('07_tutMuenzen.lxml')
+        self._addLevelPath('06_tutSpringen.lxml')
         self._addLevelPath('08_neuesLevel.lxml')
+        self._addLevelPath('01_enemyTest.lxml')
 
     def _addLevelPath(self, mapPath):
         self.levelPathList.append(mapPath)
