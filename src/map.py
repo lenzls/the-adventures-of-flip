@@ -8,6 +8,8 @@ from util.dataStorage.map import Tile, BgLayer
 import xml.dom.minidom as minidom
 
 from util.ressourceLoader import RessourceLoader
+import pygame
+from util.options import Options
 
 class Map(object):
 
@@ -20,10 +22,11 @@ class Map(object):
         self.tiles = {}
         #{index, bglayer}
         self.bgLayers = {}
-        self.bgMusic = None
         self.mapGrid = []
 
         self._loadMapFile(self.mapFilePath)
+        pygame.mixer.music.set_volume(Options.getOption("VOLUME"))
+        pygame.mixer.music.play()
 
     def _loadMapFile(self, mapFile):
         xmlMapTree = minidom.parse(RessourceLoader.getCorrectLevelPath(mapFile))
@@ -81,7 +84,7 @@ class Map(object):
                     if cNode.nodeName == 'backgroundTheme':
                         for ccNode in cNode.childNodes:
                             if ccNode.nodeName == 'soundFile':
-                                self.bgMusic = RessourceLoader.load_sound(str(ccNode.firstChild.data.strip()))
+                                RessourceLoader.load_music(str(ccNode.firstChild.data.strip()))
 
             #--------mapGrid--------
             elif node.nodeName == 'grid':

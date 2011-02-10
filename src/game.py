@@ -31,7 +31,7 @@ class StateManager(object):
 
         @param resolution: screen resolution
         '''
-        Options.options={"RESOLUTION":(800,480), "ISSOUND":False, "ISFULLSCR":False, "ISDEBUG":False}
+        Options.options={"RESOLUTION":(800,480), "ISSOUND":True, "ISFULLSCR":False, "ISDEBUG":False, "VOLUME":0.18}
 
         pygame.display.set_caption("The Adventures of Flip")
         pygame.display.set_icon(pygame.image.load(os.path.join(RessourceLoader.basepath,"data","icon.png")))
@@ -122,6 +122,7 @@ class GameState(State):
                 elif event.key == pygame.K_RIGHT:
                     if not self.levelManager.curLevel.cutSceneState: self.levelManager.curLevel.player.walkRight()
                 elif event.key == pygame.K_p:
+                    pygame.mixer.music.fadeout(1500)
                     Event().raiseCstmEvent(Event.SWITCHSTATE, argDict={"state" : StateManager.PAUSESTATE})
                 elif event.key == pygame.K_m:
                     Event().raiseCstmEvent(Event.SWITCHSTATE, argDict={"state" : StateManager.MENUSTATE})
@@ -224,6 +225,9 @@ class MenuState(State):
                             self.screen = pygame.display.set_mode(Options.getOption("RESOLUTION"), pygame.FULLSCREEN)
                         else:
                             self.screen = pygame.display.set_mode(Options.getOption("RESOLUTION"))
+                    elif event.option == "VOLUME":
+                        pygame.mixer.music.set_volume(Options.getOption("VOLUME"))
+
 
     def update(self):
         self.menuManager.curMenu.update()
@@ -250,6 +254,7 @@ class PauseState(State):
                     self.stateManager.endGame()
                 elif event.key == pygame.K_p:
                     self.stateManager.switchState(self.stateManager.GAMESTATE)
+                    pygame.mixer.music.play()
 
     def update(self):
         self.pauseRenderer.update()
