@@ -31,7 +31,7 @@ class StateManager(object):
 
         @param resolution: screen resolution
         '''
-        Options.options={"RESOLUTION":Options.resolutionList[1], "ISSOUND":True, "ISFULLSCR":False, "ISDEBUG":False, "VOLUME":Options.volumeList[5]}
+        Options.options={"RESOLUTION":Options.resolutionList[1], "ISFULLSCR":False, "ISDEBUG":False, "VOLUME":Options.volumeList[5]}
 
         pygame.display.set_caption("The Adventures of Flip")
         pygame.display.set_icon(pygame.image.load(os.path.join(RessourceLoader.basepath,"data","icon.png")))
