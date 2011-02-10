@@ -258,8 +258,20 @@ class MenuRenderer(Renderer):
         self.headingFont = RessourceLoader.load_font('courier_new.ttf',20)
         self.headingFont.set_bold(True)
         self.headingFont.set_underline(True)
+        
+    def calcTopEntry(self, menu, itemsPerPage):
+        index = menu.curIndex
+        if index < itemsPerPage:
+            return 0
+        else:
+            return index-itemsPerPage
+    
+    def calcItemsPerPage(self, menu):
+        return (Options.getOption("RESOLUTION")[1]-150)//50
 
     def renderMenu(self, menu):
+        itemsPPage = self.calcItemsPerPage(menu)
+        entryC = self.calcTopEntry(menu, itemsPPage)
         self.screen.fill((0,0,0))
         # render background
         self.screen.blit(menu.getBackground(),(0,0))
@@ -269,7 +281,8 @@ class MenuRenderer(Renderer):
 
         # render Items
         y = 150
-        for mItem in menu.getMenuItems():
+        for i in range(entryC,min(len(menu.getMenuItems()),entryC+itemsPPage+1)):
+            mItem = menu.getMenuItems()[i]
             self.screen.blit(self.itemFont.render(mItem.getCaption(),1,mItem.getColor()),((self.resolution[0]//2)-100, y))
             y += 50
             

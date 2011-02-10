@@ -44,7 +44,7 @@ class LevelManager(object):
 
     def next_lvl(self):
         if self.curLevelC+1 < len(self.levelPathList):
-            self.loadLevel(self.curLevelC)
+            self.loadLevel(self.curLevelC+1)
         else:
             #TODO: show screen | and move maybe to game class
             print "Game finished You Win!:)"

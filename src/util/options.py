@@ -18,7 +18,7 @@ class Options(object):
 #        self.isDebug = kwargs["ISDEBUG"]
 
     volumeList = [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1,0]
-    resolutionList =[(800,480),(800,600),(1024,615),(1024,768)]
+    resolutionList =[(400,240),(800,480),(800,600),(1024,615),(1024,768)]
 
     @classmethod
     def getOption(Options, keyString):
