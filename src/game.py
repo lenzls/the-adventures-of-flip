@@ -125,6 +125,7 @@ class GameState(State):
                     pygame.mixer.music.fadeout(1500)
                     Event().raiseCstmEvent(Event.SWITCHSTATE, argDict={"state" : StateManager.PAUSESTATE})
                 elif event.key == pygame.K_m:
+                    pygame.mixer.music.fadeout(1500)
                     Event().raiseCstmEvent(Event.SWITCHSTATE, argDict={"state" : StateManager.MENUSTATE})
 
             elif event.type == pygame.KEYUP:
@@ -200,7 +201,7 @@ class MenuState(State):
                     # only change if there is a level loaded
                     if self.stateManager.stateList[StateManager.GAMESTATE].levelManager.curLevel != None:
                         Event().raiseCstmEvent(Event.SWITCHSTATE, argDict={"state" : StateManager.GAMESTATE})
-            
+                        pygame.mixer.music.play()
             #custom events
             elif event.type == Event().NEWGAME:
                 self.stateManager.switchState(self.stateManager.GAMESTATE)
