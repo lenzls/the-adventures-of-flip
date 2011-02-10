@@ -22,16 +22,7 @@ Fortsetzung folgt...
 
 
 TODO:
-- new main loop concept
-- package renaming (dataStorage)
-- add pyDoc
-- create xsd schema files
-- map editor needs further improvement
-- add new mob ki
-- ideas for background size (vertical scrolling?)
-- add sounds
-- new story
-- consistent update routines in whole program for option changes (eg: Fullscr or sound)
+see https://github.com/CaptnLenz/The-Adventures-of-Flip/issues
 
 changelog:
 ### 0.7.0 ###
