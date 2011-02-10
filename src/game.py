@@ -31,7 +31,7 @@ class StateManager(object):
 
         @param resolution: screen resolution
         '''
-        Options.options={"RESOLUTION":(800,480), "ISSOUND":True, "ISFULLSCR":False, "ISDEBUG":False, "VOLUME":0.18}
+        Options.options={"RESOLUTION":Options.resolutionList[0], "ISSOUND":True, "ISFULLSCR":False, "ISDEBUG":False, "VOLUME":Options.volumeList[5]}
 
         pygame.display.set_caption("The Adventures of Flip")
         pygame.display.set_icon(pygame.image.load(os.path.join(RessourceLoader.basepath,"data","icon.png")))
@@ -212,15 +212,30 @@ class MenuState(State):
                 self.stateManager.switchState(event.state)
             elif event.type == Event().OPTIONSWITCH:
                 itemChanged = False
-
-                if Options.getOption(event.option) == False:
-                    Options.setOption(event.option, True)
-                    itemChanged = True
-                elif Options.getOption(event.option) == True:
-                    Options.setOption(event.option, False)
-                    itemChanged = True
+                if event.option == "ISFULLSCR" or event.option == "ISDEBUG" or event.option == "ISSOUND":
+                    if Options.getOption(event.option) == False:
+                        Options.setOption(event.option, True)
+                        itemChanged = True
+                    elif Options.getOption(event.option) == True:
+                        Options.setOption(event.option, False)
+                        itemChanged = True
+                elif event.option == "VOLUME" or event.option == "RESOLUTION":
+                    list = []
+                    if event.option == "VOLUME": list = Options.volumeList
+                    elif event.option == "RESOLUTION": list = Options.resolutionList
+                    valFound = False
+                    for i in range(0,len(list)-1):
+                        if list[i] == Options.getOption(event.option):
+                            valFound = True
+                            Options.setOption(event.option, list[i+1%len(list)])
+                            itemChanged = True
+                            break
+                    if not valFound:
+                        Options.setOption(event.option, list[0])
+                        itemChanged = True
+                
                 if itemChanged:
-                    if event.option == "ISFULLSCR":
+                    if event.option == "ISFULLSCR" or event.option == "RESOLUTION":
                         if Options.getOption("ISFULLSCR"):
                             self.screen = pygame.display.set_mode(Options.getOption("RESOLUTION"), pygame.FULLSCREEN)
                         else:

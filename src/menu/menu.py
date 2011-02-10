@@ -84,9 +84,11 @@ class OptionsMenu(Menu):
         self.heading = "options menu"
 
         self.menuItems.append(menuItems.ButtonItem("> switchToMainMenu", Event.SWITCHMENU, argDict={'mIndex' : MenuManager.MAINMENU}))
-        self.menuItems.append(menuItems.SwitchItem("> switchDebugMode: ", Event.OPTIONSWITCH, argDict={'option' : "ISDEBUG"}))
-        self.menuItems.append(menuItems.SwitchItem("> switchSound: ", Event.OPTIONSWITCH, argDict={'option' : "ISSOUND"}))
         self.menuItems.append(menuItems.SwitchItem("> switchFullscreen: ", Event.OPTIONSWITCH, argDict={'option' : "ISFULLSCR"}))
+        self.menuItems.append(menuItems.SwitchItem("> switchResolution: ", Event.OPTIONSWITCH, argDict={'option' : "RESOLUTION"}))
+        self.menuItems.append(menuItems.SwitchItem("> switchSound: ", Event.OPTIONSWITCH, argDict={'option' : "ISSOUND"}))
+        self.menuItems.append(menuItems.SwitchItem("> switchVolume: ", Event.OPTIONSWITCH, argDict={'option' : "VOLUME"}))
+        self.menuItems.append(menuItems.SwitchItem("> switchDebugMode: ", Event.OPTIONSWITCH, argDict={'option' : "ISDEBUG"}))
         self.menuItems.append(menuItems.ButtonItem("> Quit Application", pygame.QUIT))
         self.curIndex = 0
         self.curItem = self.menuItems[self.curIndex]
