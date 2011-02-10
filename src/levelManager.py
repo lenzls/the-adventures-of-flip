@@ -38,12 +38,12 @@ class LevelManager(object):
         self.levelPathList.append(mapPath)
 
     def loadLevel(self, levelIndex):
+        self.curLevelC = levelIndex
         self.curLevel = Level(self.physics, self.renderer, self.levelPathList[levelIndex])
         self.renderer.fades.renderFadeNewLvl(self.curLevel.map.getTitle())
 
     def next_lvl(self):
         if self.curLevelC+1 < len(self.levelPathList):
-            self.curLevelC += 1
             self.loadLevel(self.curLevelC)
         else:
             #TODO: show screen | and move maybe to game class

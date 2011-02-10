@@ -210,6 +210,9 @@ class MenuState(State):
                 self.menuManager.loadMenu(event.mIndex)
             elif event.type == Event().SWITCHSTATE:
                 self.stateManager.switchState(event.state)
+            elif event.type == Event().SWITCHLEVEL:
+                self.stateManager.getGameState().levelManager.loadLevel(event.levelIndex)
+                Event().raiseCstmEvent(Event().SWITCHSTATE, {"state":0})
             elif event.type == Event().OPTIONSWITCH:
                 itemChanged = False
                 if event.option == "ISFULLSCR" or event.option == "ISDEBUG" or event.option == "ISSOUND":

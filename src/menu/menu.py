@@ -64,7 +64,7 @@ class MainMenu(Menu):
         self.heading = "Main menu"
 
         self.menuItems.append(menuItems.ButtonItem("> start game", Event.NEWGAME))
-        self.menuItems.append(menuItems.ButtonItem("> switchToTestMenu", Event.SWITCHMENU, argDict={'mIndex' : MenuManager.TESTMENU}))
+        self.menuItems.append(menuItems.ButtonItem("> switchToLevelMenu", Event.SWITCHMENU, argDict={'mIndex' : MenuManager.LEVELMENU}))
         self.menuItems.append(menuItems.ButtonItem("> switchToOptionsMenu", Event.SWITCHMENU, argDict={'mIndex' : MenuManager.OPTIONSMENU}))
 
         self.menuItems.append(menuItems.ButtonItem("> Quit Application", pygame.QUIT))
@@ -93,9 +93,9 @@ class OptionsMenu(Menu):
         self.curIndex = 0
         self.curItem = self.menuItems[self.curIndex]
         
-class TestMenu(Menu):
+class LevelMenu(Menu):
     
-    def __init__(self):
+    def __init__(self, stateManager):
         #TODO: see line 58
         from menuManager import MenuManager
 
@@ -103,9 +103,12 @@ class TestMenu(Menu):
         Menu.__init__(self)
         self.background = RessourceLoader.load_graphic("menu_bg_gradient.png")
         self.menuItems = []
-        self.heading = "test menu"
-
+        self.heading = "level menu"
         self.menuItems.append(menuItems.ButtonItem("> switchToMainMenu", Event.SWITCHMENU, argDict={'mIndex' : MenuManager.MAINMENU}))
+        i = 0
+        for level in stateManager.getGameState().levelManager.levelPathList:
+            self.menuItems.append(menuItems.ButtonItem("> "+level, Event.SWITCHLEVEL, argDict={'levelIndex' : i}))
+            i += 1
         self.menuItems.append(menuItems.ButtonItem("> Quit Application", pygame.QUIT))
         self.curIndex = 0
         self.curItem = self.menuItems[self.curIndex]
