@@ -1,5 +1,5 @@
 ---- The Adventures of Flip! ----
-Version: 0.6.0
+Version: 0.7.0
 
 [German/Deutsch]:
 
@@ -34,6 +34,13 @@ TODO:
 - consistent update routines in whole program for option changes (eg: Fullscr or sound)
 
 changelog:
+### 0.7.0 ###
+- everything is smoother now (scrolling and moving)
+- improved collision
+- added new mobs and coin
+- added new levels and tiles
+- added third layer to map spec
+- added player recoll if hitted
 ### 0.6.0 ###
 - added start script
 - some smaller bugfixes
