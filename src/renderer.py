@@ -61,6 +61,30 @@ class Renderer(object):
         def renderFadeNewLvl(self, levelName):
             self.renderFade1(levelName)
             pygame.time.wait(1000)
+            
+        def renderDeathAnimation(self):
+            olscreen = self.screen.copy()
+        
+            resolution = self.resolution
+            halfX = resolution[0]/2
+            halfY = resolution[1]/2
+            for i in range(0,halfX,5):
+                font = RessourceLoader.load_font('courier_new.ttf',i/2)
+                writing = font.render("Game over!",1,(255,0,0),(0,0,0))
+            
+                areal00 = (0,0,halfX,halfY)
+                areal01 = (0,halfY,halfX,halfY)
+                areal10 = (halfX,0,halfX,halfY)
+                areal11 = (halfX,halfY,halfX,halfY)
+                self.screen.fill((0,0,0))
+                self.screen.blit(olscreen, (-i,-i), area=areal00)
+                self.screen.blit(olscreen, (-i,halfY+i), area=areal01)
+                self.screen.blit(olscreen, (halfX+i,0-i), area=areal10)
+                self.screen.blit(olscreen, (halfX+i,halfY+i), area=areal11)
+                self.screen.blit(writing, (halfX-(writing.get_width()/2),halfY-(writing.get_height()/2)))
+                pygame.display.update()
+                pygame.time.wait(30)
+            pygame.time.wait(1000)
     
 
 class GameRenderer(Renderer):
