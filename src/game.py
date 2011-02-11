@@ -35,6 +35,7 @@ class StateManager(object):
 
         pygame.display.set_caption("The Adventures of Flip")
         pygame.display.set_icon(pygame.image.load(os.path.join(RessourceLoader.basepath,"data","icon.png")))
+        pygame.mouse.set_visible(False)
 
         if Options().getOption("ISFULLSCR"):
             self.screen = pygame.display.set_mode(Options.getOption("RESOLUTION"), pygame.FULLSCREEN)
