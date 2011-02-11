@@ -29,14 +29,6 @@ class RessourceLoader():
 		return sound_object
 	
 	@classmethod
-	def load_music(RessourceLoader, filename):
-		path = os.path.join(RessourceLoader.basepath, 'data', 'sfx', filename)
-		try:
-			pygame.mixer.music.load(path)
-		except:
-			print "Error while loading sound: ", filename, " in: ", path
-	
-	@classmethod
 	def load_font(RessourceLoader, filename, size):
 		path = os.path.join(RessourceLoader.basepath,'data',filename)
 		try:

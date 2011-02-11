@@ -12,6 +12,7 @@ from util.options import Options
 import pygame
 from util.ressourceLoader import RessourceLoader
 from util.events import Event
+from sound import SoundManager
 
 class Player():
 
@@ -34,7 +35,6 @@ class Player():
         self.woundingLock = False
         self.woundTimer = 0
         self.jumplock = False
-        self.jumpSound = None
 
         self.wLeft = False
         self.wRight = False
@@ -74,7 +74,7 @@ class Player():
             elif infoNode.nodeName == 'jumpSound':
                 for cNode in infoNode.childNodes:
                     if cNode.nodeName == "soundFile":
-                        self.jumpSound = ressourceLoader.RessourceLoader.load_sound(str(cNode.firstChild.data))
+                        SoundManager.addSound("player_jump",str(cNode.firstChild.data))
 
             elif infoNode.nodeName == 'sprite':
                 for animationNode in infoNode.childNodes:
@@ -183,7 +183,7 @@ class Player():
 
     def jump(self, ignoreJumpLock = False):
         if not self.jumplock or ignoreJumpLock:
-            util.playSound(self.jumpSound)
+            SoundManager.playSound("player_jump")
             self.jumplock = True
             self.velocity.y = self.jumpspeed.y
 

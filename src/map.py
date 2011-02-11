@@ -25,8 +25,6 @@ class Map(object):
         self.mapGrid = []
 
         self._loadMapFile(self.mapFilePath)
-        pygame.mixer.music.set_volume(Options.getOption("VOLUME"))
-        pygame.mixer.music.play()
 
     def _loadMapFile(self, mapFile):
         xmlMapTree = minidom.parse(RessourceLoader.getCorrectLevelPath(mapFile))
@@ -84,7 +82,7 @@ class Map(object):
                     if cNode.nodeName == 'backgroundTheme':
                         for ccNode in cNode.childNodes:
                             if ccNode.nodeName == 'soundFile':
-                                RessourceLoader.load_music(str(ccNode.firstChild.data.strip()))
+                                SoundManager.addSound("background_theme",str(ccNode.firstChild.data.strip()))
 
             #--------mapGrid--------
             elif node.nodeName == 'grid':

@@ -15,6 +15,7 @@ import util.constants as constants
 from util.events import Event
 from util.options import Options
 from util.ressourceLoader import RessourceLoader
+from sound import SoundManager
 
 from util.vector import Vector
 
@@ -65,6 +66,13 @@ class StateManager(object):
         return self.stateList[self.PAUSESTATE]
     
     def switchState(self, stateI):
+	if stateI == 0:
+		SoundManager.playSound("background_theme", loops=-1)
+	else:
+		print SoundManager.stopSound
+		print SoundManager.stopSound.__doc__
+		print type(SoundManager.stopSound)
+		SoundManager.stopSound("background_theme",fadeOut=True)
         self.curState = self.stateList[stateI]
 
     def endGame(self):
@@ -123,10 +131,8 @@ class GameState(State):
                 elif event.key == pygame.K_RIGHT:
                     if not self.levelManager.curLevel.cutSceneState: self.levelManager.curLevel.player.walkRight()
                 elif event.key == pygame.K_p:
-                    pygame.mixer.music.fadeout(1500)
                     Event().raiseCstmEvent(Event.SWITCHSTATE, argDict={"state" : StateManager.PAUSESTATE})
                 elif event.key == pygame.K_m:
-                    pygame.mixer.music.fadeout(1500)
                     Event().raiseCstmEvent(Event.SWITCHSTATE, argDict={"state" : StateManager.MENUSTATE})
 
             elif event.type == pygame.KEYUP:
@@ -202,7 +208,6 @@ class MenuState(State):
                     # only change if there is a level loaded
                     if self.stateManager.stateList[StateManager.GAMESTATE].levelManager.curLevel != None:
                         Event().raiseCstmEvent(Event.SWITCHSTATE, argDict={"state" : StateManager.GAMESTATE})
-                        pygame.mixer.music.play()
             #custom events
             elif event.type == Event().NEWGAME:
                 self.stateManager.switchState(self.stateManager.GAMESTATE)
@@ -274,7 +279,6 @@ class PauseState(State):
                     self.stateManager.endGame()
                 elif event.key == pygame.K_p:
                     self.stateManager.switchState(self.stateManager.GAMESTATE)
-                    pygame.mixer.music.play()
 
     def update(self):
         self.pauseRenderer.update()
