@@ -60,21 +60,6 @@ class Renderer(object):
     
         def renderFadeNewLvl(self, levelName):
             self.renderFade1(levelName)
-
-            # have fun thing:
-            bg = pygame.Surface(self.resolution)
-            bg.fill((0,0,0))
-
-            font = RessourceLoader.load_font('courier_new.ttf',50)
-            writing = font.render("Have Fun!",1,(255,255,255),(0,0,0))
-            writingRes = (writing.get_width(), writing.get_height())
-
-            for i in range(1,4,1):
-                self.screen.blit(bg, (0,0))
-                writing = pygame.transform.scale(writing, (writingRes[0]*i, writingRes[1]*i))
-                self.screen.blit(writing,((self.resolution[0]//2 - writing.get_width()//2), (self.resolution[1]//2 - writing.get_height()//2)))
-                pygame.display.update()
-                pygame.time.wait(100)
             pygame.time.wait(1000)
     
 
