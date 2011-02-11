@@ -13,6 +13,7 @@ from entities import trigger
 from util.events import Event
 import pygame
 from util.ressourceLoader import RessourceLoader
+from sound import SoundManager
 
 class LevelManager(object):
     
@@ -78,6 +79,8 @@ class Level(object):
 
         self.cutSceneState = False
         self._loadEntityFile(self.map.entityFilePath)
+
+        SoundManager.playSound("background_theme", -1, 1500)
         
     def startCutScene(self):
 

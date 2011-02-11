@@ -66,13 +66,10 @@ class StateManager(object):
         return self.stateList[self.PAUSESTATE]
     
     def switchState(self, stateI):
-	if stateI == 0:
-		SoundManager.playSound("background_theme", loops=-1)
-	else:
-		print SoundManager.stopSound
-		print SoundManager.stopSound.__doc__
-		print type(SoundManager.stopSound)
-		SoundManager.stopSound("background_theme",fadeOut=True)
+        if stateI == StateManager.GAMESTATE:
+            SoundManager.playSound("background_theme", loops=-1, fade_ms=1500)
+        else:
+            SoundManager.stopSound("background_theme", fade_ms=1500)
         self.curState = self.stateList[stateI]
 
     def endGame(self):
@@ -251,7 +248,7 @@ class MenuState(State):
                         else:
                             self.screen = pygame.display.set_mode(Options.getOption("RESOLUTION"))
                     elif event.option == "VOLUME":
-                        pygame.mixer.music.set_volume(Options.getOption("VOLUME"))
+                        SoundManager.updateVolumes()
 
 
     def update(self):

@@ -9,7 +9,6 @@ import util.util as util
 import util.constants as constants
 from util import ressourceLoader
 from util.options import Options
-from sound import SoundManager
 
 class Mob(object):
     '''

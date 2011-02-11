@@ -1,4 +1,4 @@
-import pygame.mixer
+
 from util.ressourceLoader import RessourceLoader
 from util.options import Options
 
@@ -7,39 +7,61 @@ class SoundManager():
 	sounds = {}
 
 	@classmethod
-	def addSound(name, filename):
+	def addSound(SoundManager, name, filename):
+		if SoundManager.sounds.__contains__(name):
+			SoundManager.stopSound(name, fade_ms=100)
 		newObj = RessourceLoader.load_sound(filename)
-		sounds[name] = newObj
+		SoundManager.sounds[name] = newObj
+		print SoundManager.sounds
 
 	@classmethod
-	def playSound(name, loops=0,fade_ms=0):
-		sounds[name].play(loops=loops,fade_ms=fade_ms)	#TODO: check if fade_ms == fadein
+	def playSound(SoundManager, name, loops=0,fade_ms=0):
+		try:
+			SoundManager.sounds[name].play(loops=loops,fade_ms=fade_ms)
+		except KeyError:
+			print "Sound: %s not Found" %name
 
 	@classmethod
-	def stopSound(name, fadeOut=False):
-		print "asu",fadeOut
-		if fadeOut:
-			sounds[name].fadeout(1500)
-		else:
-			sounds[name].stop()
+	def stopSound(SoundManager, name, fade_ms=0):
+		try:
+			SoundManager.sounds[name].fadeout(fade_ms)
+		except KeyError:
+			print "Sound: %s not Found" %name
 
 	@classmethod
-	def pauseSound(name):
-		sounds[name].pause()
+	def pauseSound(SoundManager, name):
+		try:
+			SoundManager.sounds[name].pause()
+		except KeyError:
+			print "Sound: %s not Found" %name
+
 
 	@classmethod
-	def resumeSound(name):
-		sounds[name].unpause()
+	def resumeSound(SoundManager, name):
+		try:
+			SoundManager.sounds[name].unpause()
+		except KeyError:
+			print "Sound: %s not Found" %name
+
 
 	@classmethod
-	def getVolSound(name):
-		return sounds[name].get_volume()
+	def getVolSound(SoundManager, name):
+		try:
+			return SoundManager.sounds[name].get_volume()
+		except KeyError:
+			print "Sound: %s not Found" %name
+
 
 	@classmethod
-	def setVolSound(name, newValue):
-		sounds[name].set_volume(newValue)
+	def setVolSound(SoundManager, name, newValue):
+		try:
+			SoundManager.sounds[name].set_volume(newValue)
+		except KeyError:
+			print "Sound: %s not Found" %name
+
 
 	@classmethod
-	def updateVolumes():
-		for sound in sounds:
-			sound.set_volume(Options.getOption("VOLUME"))
+	def updateVolumes(SoundManager):
+		for sound in SoundManager.sounds:
+			print sound
+			SoundManager.setVolSound(sound, Options.getOption("VOLUME"))

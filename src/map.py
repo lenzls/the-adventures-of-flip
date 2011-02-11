@@ -10,6 +10,7 @@ import xml.dom.minidom as minidom
 from util.ressourceLoader import RessourceLoader
 import pygame
 from util.options import Options
+from sound import SoundManager
 
 class Map(object):
 
