@@ -59,15 +59,15 @@ class MainMenu(Menu):
         from menuManager import MenuManager
 
         Menu.__init__(self)
-        self.background = RessourceLoader.load_graphic("menu_bg_gradient.png")
+        self.background = RessourceLoader.load_graphic("menu_bg_flip.png")
         self.menuItems = []
-        self.heading = "Main menu"
+        self.heading = "main menu"
 
         self.menuItems.append(menuItems.ButtonItem("> start game", Event.NEWGAME))
-        self.menuItems.append(menuItems.ButtonItem("> switchToLevelMenu", Event.SWITCHMENU, argDict={'mIndex' : MenuManager.LEVELMENU}))
-        self.menuItems.append(menuItems.ButtonItem("> switchToOptionsMenu", Event.SWITCHMENU, argDict={'mIndex' : MenuManager.OPTIONSMENU}))
+        self.menuItems.append(menuItems.ButtonItem("> select level", Event.SWITCHMENU, argDict={'mIndex' : MenuManager.LEVELMENU}))
+        self.menuItems.append(menuItems.ButtonItem("> options", Event.SWITCHMENU, argDict={'mIndex' : MenuManager.OPTIONSMENU}))
 
-        self.menuItems.append(menuItems.ButtonItem("> Quit Application", pygame.QUIT))
+        self.menuItems.append(menuItems.ButtonItem("> quit", pygame.QUIT))
         self.curIndex = 0
         self.curItem = self.menuItems[self.curIndex]
         
@@ -79,16 +79,16 @@ class OptionsMenu(Menu):
 
 
         Menu.__init__(self)
-        self.background = RessourceLoader.load_graphic("menu_bg_gradient.png")
+        self.background = RessourceLoader.load_graphic("menu_bg_flip.png")
         self.menuItems = []
         self.heading = "options menu"
 
-        self.menuItems.append(menuItems.ButtonItem("> switchToMainMenu", Event.SWITCHMENU, argDict={'mIndex' : MenuManager.MAINMENU}))
-        self.menuItems.append(menuItems.SwitchItem("> switchFullscreen: ", Event.OPTIONSWITCH, argDict={'option' : "ISFULLSCR"}))
-        self.menuItems.append(menuItems.SwitchItem("> switchResolution: ", Event.OPTIONSWITCH, argDict={'option' : "RESOLUTION"}))
-        self.menuItems.append(menuItems.SwitchItem("> switchVolume: ", Event.OPTIONSWITCH, argDict={'option' : "VOLUME"}))
-        self.menuItems.append(menuItems.SwitchItem("> switchDebugMode: ", Event.OPTIONSWITCH, argDict={'option' : "ISDEBUG"}))
-        self.menuItems.append(menuItems.ButtonItem("> Quit Application", pygame.QUIT))
+        self.menuItems.append(menuItems.ButtonItem("> main menu", Event.SWITCHMENU, argDict={'mIndex' : MenuManager.MAINMENU}))
+        self.menuItems.append(menuItems.SwitchItem("> fullscreen: ", Event.OPTIONSWITCH, argDict={'option' : "ISFULLSCR"}))
+        self.menuItems.append(menuItems.SwitchItem("> resolution: ", Event.OPTIONSWITCH, argDict={'option' : "RESOLUTION"}))
+        self.menuItems.append(menuItems.SwitchItem("> volume: ", Event.OPTIONSWITCH, argDict={'option' : "VOLUME"}))
+        self.menuItems.append(menuItems.SwitchItem("> debug-mode: ", Event.OPTIONSWITCH, argDict={'option' : "ISDEBUG"}))
+        self.menuItems.append(menuItems.ButtonItem("> quit", pygame.QUIT))
         self.curIndex = 0
         self.curItem = self.menuItems[self.curIndex]
         
@@ -100,15 +100,15 @@ class LevelMenu(Menu):
 
 
         Menu.__init__(self)
-        self.background = RessourceLoader.load_graphic("menu_bg_gradient.png")
+        self.background = RessourceLoader.load_graphic("menu_bg_flip.png")
         self.menuItems = []
         self.heading = "level menu"
-        self.menuItems.append(menuItems.ButtonItem("> switchToMainMenu", Event.SWITCHMENU, argDict={'mIndex' : MenuManager.MAINMENU}))
+        self.menuItems.append(menuItems.ButtonItem("> main menu", Event.SWITCHMENU, argDict={'mIndex' : MenuManager.MAINMENU}))
         i = 0
         for level in stateManager.getGameState().levelManager.levelPathList:
             self.menuItems.append(menuItems.ButtonItem("> "+level, Event.SWITCHLEVEL, argDict={'levelIndex' : i}))
             i += 1
-        self.menuItems.append(menuItems.ButtonItem("> Quit Application", pygame.QUIT))
+        self.menuItems.append(menuItems.ButtonItem("> quit", pygame.QUIT))
         self.curIndex = 0
         self.curItem = self.menuItems[self.curIndex]
     

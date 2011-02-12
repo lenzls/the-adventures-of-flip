@@ -263,10 +263,16 @@ class MenuRenderer(Renderer):
     def __init__(self, screen):
         Renderer.__init__(self, screen)
 
-        self.itemFont = RessourceLoader.load_font('courier_new.ttf',20)
-        self.headingFont = RessourceLoader.load_font('courier_new.ttf',20)
+        self.selectedFont = RessourceLoader.load_font('courier_new.ttf',27)
+        self.unselectedFont = RessourceLoader.load_font('courier_new.ttf',20)
+        self.headingFont = RessourceLoader.load_font('courier_new.ttf',30)
         self.headingFont.set_bold(True)
         self.headingFont.set_underline(True)
+        
+        self.selectedFont.set_bold(True)
+        
+        self.unselectedColor = [0,0,0]
+        self.selectedColor = [213,213,213]
         
     def calcTopEntry(self, menu, itemsPerPage):
         index = menu.curIndex
@@ -292,7 +298,10 @@ class MenuRenderer(Renderer):
         y = 150
         for i in range(entryC,min(len(menu.getMenuItems()),entryC+itemsPPage+1)):
             mItem = menu.getMenuItems()[i]
-            self.screen.blit(self.itemFont.render(mItem.getCaption(),1,mItem.getColor()),((self.resolution[0]//2)-100, y))
+            if mItem.getSelect():
+                self.screen.blit(self.selectedFont.render(mItem.getCaption(),1,self.selectedColor),((self.resolution[0]//2)-100, y))
+            else:
+                self.screen.blit(self.unselectedFont.render(mItem.getCaption(),1,self.unselectedColor),((self.resolution[0]//2)-100, y))
             y += 50
             
     def update(self):
