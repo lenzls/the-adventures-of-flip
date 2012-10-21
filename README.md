@@ -20,7 +20,7 @@ Older releases also possible
 2. run `python src/main.py`
 
 ## TODO:
-/
+see [doc](https://github.com/Graslandpinguin/the-adventures-of-flip/tree/unstable/doc) folder
 
 ## changelog:
 ### 0.7.0
